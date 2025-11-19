@@ -1,0 +1,30 @@
+[
+  {
+    "question_id": "Q1",
+    "question_type": "总结类",
+    "question": "请总结2015年德国议会关于难民政策的主要讨论内容",
+    "status": "failed",
+    "error": "'NoneType' object is not iterable"
+  },
+  {
+    "question_id": "Q2",
+    "question_type": "对比类",
+    "question": "CDU/CSU和SPD在2015年对难民政策的立场有什么不同？",
+    "status": "failed",
+    "error": "'NoneType' object is not iterable"
+  },
+  {
+    "question_id": "Q3",
+    "question_type": "观点类",
+    "question": "2015年德国议会议员对欧盟一体化的主要观点是什么？",
+    "status": "failed",
+    "error": "'NoneType' object is not iterable"
+  },
+  {
+    "question_id": "Q4",
+    "question_type": "事实查询",
+    "question": "2015年德国议会有哪些重要法案被讨论？",
+    "status": "failed",
+    "error": "'NoneType' object is not iterable"
+  }
+]

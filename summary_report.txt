@@ -1,0 +1,1351 @@
+================================================================================
+德国联邦议院议会记录 Metadata 分析报告
+================================================================================
+
+一、党派(GROUP)分布统计
+--------------------------------------------------------------------------------
+总计发现 53 个不同的党派
+
+None                                    :  443,291 次 ( 54.78%)
+CDU/CSU                                 :  123,903 次 ( 15.31%)
+SPD                                     :  117,196 次 ( 14.48%)
+FDP                                     :   50,415 次 (  6.23%)
+Grüne/Bündnis 90                        :   24,317 次 (  3.01%)
+DIE LINKE                               :   15,932 次 (  1.97%)
+GRÜNE                                   :    7,857 次 (  0.97%)
+AfD                                     :    4,928 次 (  0.61%)
+PDS                                     :    4,915 次 (  0.61%)
+BÜNDNIS 90/DIE GRÜNEN                   :    2,496 次 (  0.31%)
+BÜNDNIS 90/DIE GRÜNEN                   :    2,421 次 (  0.30%)
+KPD                                     :    2,192 次 (  0.27%)
+Fraktionslos                            :    2,115 次 (  0.26%)
+PDS/Linke Liste                         :    2,034 次 (  0.25%)
+DP                                      :    1,769 次 (  0.22%)
+GB/BHE                                  :      655 次 (  0.08%)
+Zentrum                                 :      475 次 (  0.06%)
+BP                                      :      471 次 (  0.06%)
+FU                                      :      437 次 (  0.05%)
+WAV                                     :      299 次 (  0.04%)
+DRP                                     :      200 次 (  0.02%)
+DP [FVP]                                :      175 次 (  0.02%)
+fraktionslos                            :      131 次 (  0.02%)
+FPD                                     :       85 次 (  0.01%)
+FVP                                     :       81 次 (  0.01%)
+SDP                                     :       49 次 (  0.01%)
+NR                                      :       42 次 (  0.01%)
+SRP                                     :       41 次 (  0.01%)
+BHE-DG                                  :       35 次 (  0.00%)
+DA                                      :       33 次 (  0.00%)
+Parteilos                               :       30 次 (  0.00%)
+SSW                                     :       18 次 (  0.00%)
+FDP-Gast                                :       17 次 (  0.00%)
+DRP-Hosp.                               :       14 次 (  0.00%)
+FDP-Hosp.                               :       13 次 (  0.00%)
+SPD-Gast                                :       11 次 (  0.00%)
+CDU/CSU-Gast                            :        9 次 (  0.00%)
+Unabhängig                              :        8 次 (  0.00%)
+BHE                                     :        7 次 (  0.00%)
+DP/DPB                                  :        6 次 (  0.00%)
+FU-Gast                                 :        6 次 (  0.00%)
+DP-Gast                                 :        4 次 (  0.00%)
+MP                                      :        4 次 (  0.00%)
+EDP                                     :        4 次 (  0.00%)
+CDU/CSU-Hosp.                           :        2 次 (  0.00%)
+DRP-Gast                                :        2 次 (  0.00%)
+DPB                                     :        1 次 (  0.00%)
+FPD-Gast                                :        1 次 (  0.00%)
+Wuppertal                               :        1 次 (  0.00%)
+NDP                                     :        1 次 (  0.00%)
+Bündnis 90/Die Grünen                   :        1 次 (  0.00%)
+Bremen                                  :        1 次 (  0.00%)
+BÜNDNIS 90/DIE GRÜNE N                  :        1 次 (  0.00%)
+
+
+二、发言人(SPEAKER)分布统计
+--------------------------------------------------------------------------------
+总计发现 9289 个不同的发言人
+
+发言次数前50的议员:
+  1. Vizepräsident Westphal                  : 17,182 次
+  2. Vizepräsident Dr. Jaeger                : 17,026 次
+  3. Vizepräsident Dr. Schmitt-Vockenhausen  : 15,807 次
+  4. Vizepräsidentin Petra Pau               : 15,404 次
+  5. Vizepräsident Dr. Schmid                : 14,440 次
+  6. Vizepräsident Frau Renger               : 13,437 次
+  7. Vizepräsident Stücklen                  : 11,958 次
+  8. Präsident D. Dr. Gerstenmaier           : 11,856 次
+  9. Vizepräsident Frau Funcke               : 10,527 次
+ 10. Präsident Dr. Norbert Lammert           : 10,433 次
+ 11. Vizepräsidentin Dr. Antje Vollmer       :  9,909 次
+ 12. Vizepräsidentin Claudia Roth            :  9,228 次
+ 13. Vizepräsident Hans Klein                :  8,910 次
+ 14. Vizepräsidentin Katrin Göring-Eckardt   :  8,643 次
+ 15. Vizepräsident Dr. Dehler                :  8,270 次
+ 16. Vizepräsident Schoettle                 :  7,756 次
+ 17. Vizepräsident Cronenberg                :  7,432 次
+ 18. Vizepräsidentin Dr. h. c. Susanne Kastner:  7,427 次
+ 19. Präsidentin Dr. Rita Süssmuth           :  6,537 次
+ 20. Vizepräsident Wolfgang Kubicki          :  6,514 次
+ 21. Präsident Dr. Wolfgang Schäuble         :  6,350 次
+ 22. Präsident Dr. Ehlers                    :  6,173 次
+ 23. Vizepräsident Dieter-Julius Cronenberg  :  5,985 次
+ 24. Vizepräsident Dr. Burkhard Hirsch       :  5,519 次
+ 25. Vizepräsident Hans-Ulrich Klose         :  5,362 次
+ 26. Präsident Stücklen                      :  5,327 次
+ 27. Vizepräsidentin Gerda Hasselfeldt       :  5,100 次
+ 28. Vizepräsident von Hassel                :  4,974 次
+ 29. Präsident von Hassel                    :  4,968 次
+ 30. Vizepräsident Dr. Hans-Peter Friedrich  :  4,927 次
+ 31. Präsident Wolfgang Thierse              :  4,365 次
+ 32. Vizepräsidentin Renate Schmidt          :  4,301 次
+ 33. Vizepräsidentin Anke Fuchs              :  4,281 次
+ 34. Vizepräsident Helmuth Becker            :  4,254 次
+ 35. Vizepräsident Wurbs                     :  4,114 次
+ 36. Präsident Frau Renger                   :  4,066 次
+ 37. Vizepräsidentin Ulla Schmidt            :  3,856 次
+ 38. Vizepräsident Dr. Norbert Lammert       :  3,731 次
+ 39. Vizepräsident Thomas Oppermann          :  3,417 次
+ 40. Vizepräsident Eduard Oswald             :  3,400 次
+ 41. Präsident Dr. Jenninger                 :  3,375 次
+ 42. Vizepräsident Dr. Schäfer               :  3,362 次
+ 43. Vizepräsident Dr. Mommer                :  3,146 次
+ 44. Vizepräsident Peter Hintze              :  2,761 次
+ 45. Vizepräsidentin Renger                  :  2,751 次
+ 46. Vizepräsident Scheel                    :  2,609 次
+ 47. Präsident Carstens                      :  2,523 次
+ 48. Grüner, Parl. Staatssekretär            :  2,423 次
+ 49. Vizepräsidentin Edelgard Bulmahn        :  2,421 次
+ 50. Vizepräsident Dr. Schneider             :  2,310 次
+
+
+三、各年份党派分布详情
+--------------------------------------------------------------------------------
+
+1949年:
+  None                               :  1,070 次 ( 58.31%)
+  CDU/CSU                            :    163 次 (  8.88%)
+  SPD                                :    141 次 (  7.68%)
+  KPD                                :    139 次 (  7.57%)
+  FDP                                :     80 次 (  4.36%)
+  Zentrum                            :     62 次 (  3.38%)
+  BP                                 :     60 次 (  3.27%)
+  DP                                 :     39 次 (  2.13%)
+  NR                                 :     38 次 (  2.07%)
+  WAV                                :     35 次 (  1.91%)
+  Parteilos                          :      5 次 (  0.27%)
+  SSW                                :      2 次 (  0.11%)
+  FPD                                :      1 次 (  0.05%)
+
+1950年:
+  None                               :  4,616 次 ( 56.91%)
+  CDU/CSU                            :    772 次 (  9.52%)
+  SPD                                :    727 次 (  8.96%)
+  KPD                                :    498 次 (  6.14%)
+  FDP                                :    431 次 (  5.31%)
+  BP                                 :    239 次 (  2.95%)
+  Zentrum                            :    230 次 (  2.84%)
+  DP                                 :    220 次 (  2.71%)
+  WAV                                :    168 次 (  2.07%)
+  DRP                                :    146 次 (  1.80%)
+  Parteilos                          :     25 次 (  0.31%)
+  SSW                                :     13 次 (  0.16%)
+  DRP-Hosp.                          :      8 次 (  0.10%)
+  BHE                                :      7 次 (  0.09%)
+  NR                                 :      4 次 (  0.05%)
+  FDP-Hosp.                          :      3 次 (  0.04%)
+  SRP                                :      2 次 (  0.02%)
+  CDU/CSU-Hosp.                      :      2 次 (  0.02%)
+
+1951年:
+  None                               :  4,704 次 ( 56.34%)
+  CDU/CSU                            :    894 次 ( 10.71%)
+  SPD                                :    860 次 ( 10.30%)
+  KPD                                :    543 次 (  6.50%)
+  FDP                                :    492 次 (  5.89%)
+  DP                                 :    221 次 (  2.65%)
+  Zentrum                            :    183 次 (  2.19%)
+  BP                                 :    172 次 (  2.06%)
+  WAV                                :     83 次 (  0.99%)
+  DRP                                :     54 次 (  0.65%)
+  SRP                                :     39 次 (  0.47%)
+  Fraktionslos                       :     35 次 (  0.42%)
+  BHE-DG                             :     32 次 (  0.38%)
+  FDP-Hosp.                          :     10 次 (  0.12%)
+  Unabhängig                         :      8 次 (  0.10%)
+  DRP-Hosp.                          :      6 次 (  0.07%)
+  FPD                                :      5 次 (  0.06%)
+  SSW                                :      3 次 (  0.04%)
+  DRP-Gast                           :      2 次 (  0.02%)
+  SDP                                :      1 次 (  0.01%)
+  DPB                                :      1 次 (  0.01%)
+  FU                                 :      1 次 (  0.01%)
+
+1952年:
+  None                               :  4,570 次 ( 57.12%)
+  SPD                                :    959 次 ( 11.99%)
+  CDU/CSU                            :    739 次 (  9.24%)
+  KPD                                :    512 次 (  6.40%)
+  FDP                                :    480 次 (  6.00%)
+  FU                                 :    306 次 (  3.82%)
+  DP                                 :    206 次 (  2.57%)
+  Fraktionslos                       :    201 次 (  2.51%)
+  FDP-Gast                           :     12 次 (  0.15%)
+  DP/DPB                             :      6 次 (  0.07%)
+  DP-Gast                            :      4 次 (  0.05%)
+  BHE-DG                             :      3 次 (  0.04%)
+  CDU/CSU-Gast                       :      2 次 (  0.02%)
+  FPD-Gast                           :      1 次 (  0.01%)
+
+1953年:
+  None                               :  3,695 次 ( 57.32%)
+  SPD                                :    833 次 ( 12.92%)
+  CDU/CSU                            :    653 次 ( 10.13%)
+  KPD                                :    500 次 (  7.76%)
+  FDP                                :    374 次 (  5.80%)
+  DP                                 :    157 次 (  2.44%)
+  FU                                 :    130 次 (  2.02%)
+  Fraktionslos                       :     69 次 (  1.07%)
+  GB/BHE                             :     14 次 (  0.22%)
+  WAV                                :     13 次 (  0.20%)
+  FU-Gast                            :      6 次 (  0.09%)
+  CDU/CSU-Gast                       :      2 次 (  0.03%)
+
+1954年:
+  None                               :  3,231 次 ( 57.33%)
+  SPD                                :  1,028 次 ( 18.24%)
+  CDU/CSU                            :    799 次 ( 14.18%)
+  FDP                                :    288 次 (  5.11%)
+  GB/BHE                             :    165 次 (  2.93%)
+  DP                                 :    124 次 (  2.20%)
+  Fraktionslos                       :      1 次 (  0.02%)
+
+1955年:
+  None                               :  3,212 次 ( 56.33%)
+  SPD                                :  1,139 次 ( 19.98%)
+  CDU/CSU                            :    804 次 ( 14.10%)
+  FDP                                :    254 次 (  4.45%)
+  GB/BHE                             :    163 次 (  2.86%)
+  DP                                 :    125 次 (  2.19%)
+  Fraktionslos                       :      4 次 (  0.07%)
+  CDU/CSU-Gast                       :      1 次 (  0.02%)
+
+1956年:
+  None                               :  4,145 次 ( 55.24%)
+  SPD                                :  1,392 次 ( 18.55%)
+  CDU/CSU                            :  1,171 次 ( 15.61%)
+  FDP                                :    350 次 (  4.66%)
+  DP                                 :    193 次 (  2.57%)
+  GB/BHE                             :    174 次 (  2.32%)
+  FVP                                :     44 次 (  0.59%)
+  DA                                 :     33 次 (  0.44%)
+  SDP                                :      1 次 (  0.01%)
+  Fraktionslos                       :      1 次 (  0.01%)
+
+1957年:
+  None                               :  3,659 次 ( 53.08%)
+  SPD                                :  1,381 次 ( 20.03%)
+  CDU/CSU                            :  1,032 次 ( 14.97%)
+  FDP                                :    333 次 (  4.83%)
+  DP [FVP]                           :    175 次 (  2.54%)
+  GB/BHE                             :    139 次 (  2.02%)
+  DP                                 :    133 次 (  1.93%)
+  FVP                                :     37 次 (  0.54%)
+  FDP-Gast                           :      5 次 (  0.07%)
+
+1958年:
+  None                               :  2,378 次 ( 54.03%)
+  SPD                                :    954 次 ( 21.68%)
+  CDU/CSU                            :    649 次 ( 14.75%)
+  FDP                                :    282 次 (  6.41%)
+  DP                                 :    137 次 (  3.11%)
+  FPD                                :      1 次 (  0.02%)
+
+1959年:
+  None                               :  2,263 次 ( 53.41%)
+  SPD                                :    877 次 ( 20.70%)
+  CDU/CSU                            :    676 次 ( 15.95%)
+  FDP                                :    315 次 (  7.43%)
+  DP                                 :    101 次 (  2.38%)
+  SDP                                :      5 次 (  0.12%)
+
+1960年:
+  None                               :  3,633 次 ( 55.92%)
+  SPD                                :  1,393 次 ( 21.44%)
+  CDU/CSU                            :    933 次 ( 14.36%)
+  FDP                                :    432 次 (  6.65%)
+  DP                                 :    104 次 (  1.60%)
+  FPD                                :      1 次 (  0.02%)
+  SDP                                :      1 次 (  0.02%)
+
+1961年:
+  None                               :  3,049 次 ( 55.63%)
+  SPD                                :  1,105 次 ( 20.16%)
+  CDU/CSU                            :    855 次 ( 15.60%)
+  FDP                                :    456 次 (  8.32%)
+  DP                                 :      9 次 (  0.16%)
+  Fraktionslos                       :      4 次 (  0.07%)
+  SDP                                :      2 次 (  0.04%)
+  FPD                                :      1 次 (  0.02%)
+
+1962年:
+  None                               :  4,200 次 ( 60.46%)
+  SPD                                :  1,654 次 ( 23.81%)
+  CDU/CSU                            :    668 次 (  9.62%)
+  FDP                                :    421 次 (  6.06%)
+  SDP                                :      3 次 (  0.04%)
+  FPD                                :      1 次 (  0.01%)
+
+1963年:
+  None                               :  4,590 次 ( 60.63%)
+  SPD                                :  1,577 次 ( 20.83%)
+  CDU/CSU                            :    885 次 ( 11.69%)
+  FDP                                :    507 次 (  6.70%)
+  SDP                                :      7 次 (  0.09%)
+  FPD                                :      4 次 (  0.05%)
+
+1964年:
+  None                               :  6,267 次 ( 60.91%)
+  SPD                                :  2,176 次 ( 21.15%)
+  CDU/CSU                            :  1,184 次 ( 11.51%)
+  FDP                                :    652 次 (  6.34%)
+  FPD                                :      8 次 (  0.08%)
+  SDP                                :      1 次 (  0.01%)
+  Wuppertal                          :      1 次 (  0.01%)
+
+1965年:
+  None                               :  6,993 次 ( 58.84%)
+  SPD                                :  2,679 次 ( 22.54%)
+  CDU/CSU                            :  1,333 次 ( 11.22%)
+  FDP                                :    858 次 (  7.22%)
+  FPD                                :     12 次 (  0.10%)
+  SDP                                :     10 次 (  0.08%)
+
+1966年:
+  None                               :  6,162 次 ( 54.96%)
+  SPD                                :  2,661 次 ( 23.73%)
+  CDU/CSU                            :  1,487 次 ( 13.26%)
+  FDP                                :    882 次 (  7.87%)
+  SPD-Gast                           :     11 次 (  0.10%)
+  FPD                                :      5 次 (  0.04%)
+  MP                                 :      2 次 (  0.02%)
+  SDP                                :      2 次 (  0.02%)
+
+1967年:
+  None                               :  8,147 次 ( 59.96%)
+  FDP                                :  2,016 次 ( 14.84%)
+  CDU/CSU                            :  1,795 次 ( 13.21%)
+  SPD                                :  1,624 次 ( 11.95%)
+  FPD                                :      3 次 (  0.02%)
+  MP                                 :      2 次 (  0.01%)
+  EDP                                :      1 次 (  0.01%)
+
+1968年:
+  None                               :  8,344 次 ( 58.60%)
+  FDP                                :  2,255 次 ( 15.84%)
+  CDU/CSU                            :  1,948 次 ( 13.68%)
+  SPD                                :  1,684 次 ( 11.83%)
+  SDP                                :      6 次 (  0.04%)
+  FPD                                :      2 次 (  0.01%)
+
+1969年:
+  None                               :  8,443 次 ( 60.30%)
+  CDU/CSU                            :  2,405 次 ( 17.18%)
+  SPD                                :  1,683 次 ( 12.02%)
+  FDP                                :  1,464 次 ( 10.46%)
+  FPD                                :      4 次 (  0.03%)
+  EDP                                :      1 次 (  0.01%)
+  SDP                                :      1 次 (  0.01%)
+
+1970年:
+  None                               :  8,787 次 ( 60.80%)
+  CDU/CSU                            :  3,424 次 ( 23.69%)
+  SPD                                :  1,659 次 ( 11.48%)
+  FDP                                :    574 次 (  3.97%)
+  CDU/CSU-Gast                       :      3 次 (  0.02%)
+  SDP                                :      2 次 (  0.01%)
+  EDP                                :      2 次 (  0.01%)
+  FPD                                :      1 次 (  0.01%)
+  NDP                                :      1 次 (  0.01%)
+
+1971年:
+  None                               :  8,510 次 ( 57.38%)
+  CDU/CSU                            :  3,754 次 ( 25.31%)
+  SPD                                :  1,950 次 ( 13.15%)
+  FDP                                :    609 次 (  4.11%)
+  FPD                                :      7 次 (  0.05%)
+
+1972年:
+  None                               :  4,151 次 ( 59.01%)
+  CDU/CSU                            :  1,800 次 ( 25.59%)
+  SPD                                :    815 次 ( 11.59%)
+  FDP                                :    264 次 (  3.75%)
+  CDU/CSU-Gast                       :      1 次 (  0.01%)
+  FPD                                :      1 次 (  0.01%)
+  Fraktionslos                       :      1 次 (  0.01%)
+  PDS                                :      1 次 (  0.01%)
+
+1973年:
+  None                               :  8,861 次 ( 61.71%)
+  CDU/CSU                            :  3,263 次 ( 22.72%)
+  SPD                                :  1,604 次 ( 11.17%)
+  FDP                                :    630 次 (  4.39%)
+  FPD                                :      2 次 (  0.01%)
+
+1974年:
+  None                               :  9,219 次 ( 61.12%)
+  CDU/CSU                            :  3,510 次 ( 23.27%)
+  SPD                                :  1,664 次 ( 11.03%)
+  FDP                                :    685 次 (  4.54%)
+  FPD                                :      3 次 (  0.02%)
+  SDP                                :      3 次 (  0.02%)
+
+1975年:
+  None                               :  9,239 次 ( 62.10%)
+  CDU/CSU                            :  3,526 次 ( 23.70%)
+  SPD                                :  1,633 次 ( 10.98%)
+  FDP                                :    474 次 (  3.19%)
+  FPD                                :      4 次 (  0.03%)
+  SDP                                :      1 次 (  0.01%)
+
+1976年:
+  None                               :  6,887 次 ( 61.32%)
+  CDU/CSU                            :  2,575 次 ( 22.93%)
+  SPD                                :  1,251 次 ( 11.14%)
+  FDP                                :    513 次 (  4.57%)
+  Fraktionslos                       :      4 次 (  0.04%)
+  FPD                                :      1 次 (  0.01%)
+
+1977年:
+  None                               :  8,121 次 ( 61.78%)
+  CDU/CSU                            :  2,998 次 ( 22.81%)
+  SPD                                :  1,536 次 ( 11.69%)
+  FDP                                :    488 次 (  3.71%)
+  FPD                                :      2 次 (  0.02%)
+
+1978年:
+  None                               :  8,823 次 ( 62.17%)
+  CDU/CSU                            :  3,149 次 ( 22.19%)
+  SPD                                :  1,729 次 ( 12.18%)
+  FDP                                :    487 次 (  3.43%)
+  Fraktionslos                       :      3 次 (  0.02%)
+  FPD                                :      1 次 (  0.01%)
+
+1979年:
+  None                               :  8,029 次 ( 60.26%)
+  CDU/CSU                            :  3,000 次 ( 22.52%)
+  SPD                                :  1,669 次 ( 12.53%)
+  FDP                                :    605 次 (  4.54%)
+  Fraktionslos                       :     16 次 (  0.12%)
+  SDP                                :      3 次 (  0.02%)
+  FPD                                :      1 次 (  0.01%)
+
+1980年:
+  None                               :  4,617 次 ( 60.11%)
+  CDU/CSU                            :  1,685 次 ( 21.94%)
+  SPD                                :    984 次 ( 12.81%)
+  FDP                                :    378 次 (  4.92%)
+  Fraktionslos                       :     16 次 (  0.21%)
+  FPD                                :      1 次 (  0.01%)
+
+1981年:
+  None                               :  7,164 次 ( 59.60%)
+  CDU/CSU                            :  2,514 次 ( 20.92%)
+  SPD                                :  1,830 次 ( 15.22%)
+  FDP                                :    511 次 (  4.25%)
+  FPD                                :      1 次 (  0.01%)
+
+1982年:
+  None                               :  7,758 次 ( 59.81%)
+  SPD                                :  2,306 次 ( 17.78%)
+  CDU/CSU                            :  2,176 次 ( 16.77%)
+  FDP                                :    671 次 (  5.17%)
+  Fraktionslos                       :     61 次 (  0.47%)
+
+1983年:
+  None                               :  6,023 次 ( 61.60%)
+  SPD                                :  1,761 次 ( 18.01%)
+  CDU/CSU                            :    894 次 (  9.14%)
+  GRÜNE                              :    643 次 (  6.58%)
+  FDP                                :    451 次 (  4.61%)
+  Fraktionslos                       :      4 次 (  0.04%)
+  FPD                                :      1 次 (  0.01%)
+
+1984年:
+  None                               :  9,807 次 ( 62.40%)
+  SPD                                :  3,017 次 ( 19.20%)
+  CDU/CSU                            :  1,461 次 (  9.30%)
+  GRÜNE                              :    849 次 (  5.40%)
+  FDP                                :    563 次 (  3.58%)
+  Fraktionslos                       :     19 次 (  0.12%)
+
+1985年:
+  None                               : 11,535 次 ( 60.82%)
+  SPD                                :  3,419 次 ( 18.03%)
+  CDU/CSU                            :  1,803 次 (  9.51%)
+  GRÜNE                              :  1,331 次 (  7.02%)
+  FDP                                :    868 次 (  4.58%)
+  Fraktionslos                       :      7 次 (  0.04%)
+  FPD                                :      3 次 (  0.02%)
+
+1986年:
+  None                               : 10,115 次 ( 60.52%)
+  SPD                                :  2,994 次 ( 17.91%)
+  CDU/CSU                            :  1,711 次 ( 10.24%)
+  GRÜNE                              :  1,057 次 (  6.32%)
+  FDP                                :    817 次 (  4.89%)
+  Fraktionslos                       :     13 次 (  0.08%)
+  FPD                                :      6 次 (  0.04%)
+
+1987年:
+  None                               :  6,239 次 ( 59.65%)
+  SPD                                :  1,830 次 ( 17.50%)
+  CDU/CSU                            :    978 次 (  9.35%)
+  GRÜNE                              :    826 次 (  7.90%)
+  FDP                                :    586 次 (  5.60%)
+
+1988年:
+  None                               :  9,436 次 ( 59.17%)
+  SPD                                :  2,684 次 ( 16.83%)
+  CDU/CSU                            :  1,485 次 (  9.31%)
+  GRÜNE                              :  1,287 次 (  8.07%)
+  FDP                                :    965 次 (  6.05%)
+  Fraktionslos                       :     90 次 (  0.56%)
+
+1989年:
+  None                               :  9,349 次 ( 57.71%)
+  SPD                                :  2,805 次 ( 17.32%)
+  CDU/CSU                            :  1,668 次 ( 10.30%)
+  GRÜNE                              :  1,174 次 (  7.25%)
+  FDP                                :  1,046 次 (  6.46%)
+  Fraktionslos                       :    157 次 (  0.97%)
+
+1990年:
+  None                               :  7,051 次 ( 58.26%)
+  SPD                                :  1,908 次 ( 15.76%)
+  CDU/CSU                            :  1,178 次 (  9.73%)
+  FDP                                :    798 次 (  6.59%)
+  GRÜNE                              :    690 次 (  5.70%)
+  PDS                                :    168 次 (  1.39%)
+  Fraktionslos                       :    167 次 (  1.38%)
+  Grüne/Bündnis 90                   :    141 次 (  1.17%)
+  FPD                                :      1 次 (  0.01%)
+  PDS/Linke Liste                    :      1 次 (  0.01%)
+
+1991年:
+  None                               :  7,070 次 ( 54.16%)
+  SPD                                :  2,575 次 ( 19.72%)
+  CDU/CSU                            :  1,512 次 ( 11.58%)
+  FDP                                :    891 次 (  6.82%)
+  PDS/Linke Liste                    :    571 次 (  4.37%)
+  Grüne/Bündnis 90                   :    395 次 (  3.03%)
+  Fraktionslos                       :     40 次 (  0.31%)
+  FPD                                :      1 次 (  0.01%)
+
+1992年:
+  None                               :  6,301 次 ( 53.29%)
+  SPD                                :  2,407 次 ( 20.36%)
+  CDU/CSU                            :  1,434 次 ( 12.13%)
+  FDP                                :    802 次 (  6.78%)
+  PDS/Linke Liste                    :    480 次 (  4.06%)
+  Grüne/Bündnis 90                   :    291 次 (  2.46%)
+  Fraktionslos                       :    109 次 (  0.92%)
+
+1993年:
+  None                               :  7,523 次 ( 52.00%)
+  SPD                                :  2,757 次 ( 19.06%)
+  CDU/CSU                            :  1,880 次 ( 13.00%)
+  FDP                                :  1,100 次 (  7.60%)
+  PDS/Linke Liste                    :    621 次 (  4.29%)
+  Grüne/Bündnis 90                   :    425 次 (  2.94%)
+  Fraktionslos                       :    161 次 (  1.11%)
+
+1994年:
+  None                               :  5,324 次 ( 52.55%)
+  SPD                                :  1,827 次 ( 18.03%)
+  CDU/CSU                            :  1,272 次 ( 12.55%)
+  FDP                                :    829 次 (  8.18%)
+  PDS/Linke Liste                    :    360 次 (  3.55%)
+  Grüne/Bündnis 90                   :    359 次 (  3.54%)
+  Fraktionslos                       :    108 次 (  1.07%)
+  PDS                                :     53 次 (  0.52%)
+
+1995年:
+  None                               :  7,411 次 ( 51.18%)
+  SPD                                :  2,622 次 ( 18.11%)
+  CDU/CSU                            :  1,885 次 ( 13.02%)
+  Grüne/Bündnis 90                   :  1,028 次 (  7.10%)
+  FDP                                :    873 次 (  6.03%)
+  PDS                                :    659 次 (  4.55%)
+  PDS/Linke Liste                    :      1 次 (  0.01%)
+
+1996年:
+  None                               :  7,596 次 ( 51.73%)
+  SPD                                :  2,611 次 ( 17.78%)
+  CDU/CSU                            :  1,801 次 ( 12.27%)
+  Grüne/Bündnis 90                   :  1,192 次 (  8.12%)
+  FDP                                :    859 次 (  5.85%)
+  PDS                                :    625 次 (  4.26%)
+
+1997年:
+  None                               :  6,192 次 ( 52.55%)
+  SPD                                :  2,080 次 ( 17.65%)
+  CDU/CSU                            :  1,392 次 ( 11.81%)
+  Grüne/Bündnis 90                   :    854 次 (  7.25%)
+  FDP                                :    683 次 (  5.80%)
+  PDS                                :    583 次 (  4.95%)
+
+1998年:
+  None                               :  4,175 次 ( 51.89%)
+  SPD                                :  1,341 次 ( 16.67%)
+  CDU/CSU                            :  1,117 次 ( 13.88%)
+  Grüne/Bündnis 90                   :    478 次 (  5.94%)
+  FDP                                :    476 次 (  5.92%)
+  PDS                                :    442 次 (  5.49%)
+  Fraktionslos                       :     17 次 (  0.21%)
+
+1999年:
+  None                               :  4,134 次 ( 41.05%)
+  CDU/CSU                            :  2,232 次 ( 22.16%)
+  SPD                                :  1,337 次 ( 13.28%)
+  FDP                                :    952 次 (  9.45%)
+  Grüne/Bündnis 90                   :    722 次 (  7.17%)
+  PDS                                :    694 次 (  6.89%)
+
+2000年:
+  None                               :  3,937 次 ( 42.58%)
+  CDU/CSU                            :  2,029 次 ( 21.94%)
+  SPD                                :  1,146 次 ( 12.39%)
+  FDP                                :    855 次 (  9.25%)
+  PDS                                :    648 次 (  7.01%)
+  Grüne/Bündnis 90                   :    632 次 (  6.83%)
+
+2001年:
+  None                               :  2,727 次 ( 34.29%)
+  CDU/CSU                            :  2,032 次 ( 25.55%)
+  SPD                                :  1,129 次 ( 14.20%)
+  FDP                                :    813 次 ( 10.22%)
+  PDS                                :    629 次 (  7.91%)
+  Grüne/Bündnis 90                   :    623 次 (  7.83%)
+
+2002年:
+  None                               :  2,578 次 ( 38.80%)
+  CDU/CSU                            :  1,619 次 ( 24.37%)
+  SPD                                :    953 次 ( 14.34%)
+  FDP                                :    539 次 (  8.11%)
+  Grüne/Bündnis 90                   :    497 次 (  7.48%)
+  PDS                                :    413 次 (  6.22%)
+  Fraktionslos                       :     45 次 (  0.68%)
+
+2003年:
+  None                               :  4,455 次 ( 47.72%)
+  CDU/CSU                            :  2,346 次 ( 25.13%)
+  SPD                                :  1,052 次 ( 11.27%)
+  FDP                                :    729 次 (  7.81%)
+  Grüne/Bündnis 90                   :    558 次 (  5.98%)
+  Fraktionslos                       :    195 次 (  2.09%)
+
+2004年:
+  None                               :  5,033 次 ( 47.00%)
+  CDU/CSU                            :  2,446 次 ( 22.84%)
+  SPD                                :  1,339 次 ( 12.50%)
+  FDP                                :    939 次 (  8.77%)
+  Grüne/Bündnis 90                   :    681 次 (  6.36%)
+  Fraktionslos                       :    270 次 (  2.52%)
+
+2005年:
+  None                               :  3,238 次 ( 50.30%)
+  CDU/CSU                            :  1,354 次 ( 21.03%)
+  SPD                                :    743 次 ( 11.54%)
+  FDP                                :    478 次 (  7.43%)
+  Grüne/Bündnis 90                   :    406 次 (  6.31%)
+  Fraktionslos                       :    127 次 (  1.97%)
+  DIE LINKE                          :     91 次 (  1.41%)
+
+2006年:
+  None                               :  5,211 次 ( 47.03%)
+  CDU/CSU                            :  1,313 次 ( 11.85%)
+  SPD                                :  1,263 次 ( 11.40%)
+  Grüne/Bündnis 90                   :  1,142 次 ( 10.31%)
+  DIE LINKE                          :  1,096 次 (  9.89%)
+  FDP                                :  1,045 次 (  9.43%)
+  Fraktionslos                       :      9 次 (  0.08%)
+
+2007年:
+  None                               :  4,960 次 ( 47.16%)
+  CDU/CSU                            :  1,320 次 ( 12.55%)
+  SPD                                :  1,147 次 ( 10.91%)
+  Grüne/Bündnis 90                   :  1,133 次 ( 10.77%)
+  DIE LINKE                          :  1,072 次 ( 10.19%)
+  FDP                                :    860 次 (  8.18%)
+  Fraktionslos                       :     26 次 (  0.25%)
+
+2008年:
+  None                               :  5,144 次 ( 45.56%)
+  CDU/CSU                            :  1,404 次 ( 12.43%)
+  SPD                                :  1,332 次 ( 11.80%)
+  Grüne/Bündnis 90                   :  1,226 次 ( 10.86%)
+  DIE LINKE                          :  1,118 次 (  9.90%)
+  FDP                                :  1,033 次 (  9.15%)
+  Fraktionslos                       :     34 次 (  0.30%)
+
+2009年:
+  None                               :  3,707 次 ( 43.61%)
+  CDU/CSU                            :  1,187 次 ( 13.96%)
+  SPD                                :  1,054 次 ( 12.40%)
+  Grüne/Bündnis 90                   :    929 次 ( 10.93%)
+  DIE LINKE                          :    888 次 ( 10.45%)
+  FDP                                :    709 次 (  8.34%)
+  Fraktionslos                       :     26 次 (  0.31%)
+
+2010年:
+  None                               :  4,945 次 ( 40.34%)
+  CDU/CSU                            :  2,016 次 ( 16.45%)
+  SPD                                :  1,859 次 ( 15.17%)
+  Grüne/Bündnis 90                   :  1,373 次 ( 11.20%)
+  DIE LINKE                          :  1,036 次 (  8.45%)
+  FDP                                :  1,029 次 (  8.39%)
+
+2011年:
+  None                               :  5,620 次 ( 42.40%)
+  CDU/CSU                            :  2,069 次 ( 15.61%)
+  SPD                                :  1,950 次 ( 14.71%)
+  Grüne/Bündnis 90                   :  1,383 次 ( 10.43%)
+  DIE LINKE                          :  1,155 次 (  8.71%)
+  FDP                                :  1,079 次 (  8.14%)
+
+2012年:
+  None                               :  5,162 次 ( 41.10%)
+  CDU/CSU                            :  1,956 次 ( 15.57%)
+  SPD                                :  1,874 次 ( 14.92%)
+  Grüne/Bündnis 90                   :  1,349 次 ( 10.74%)
+  DIE LINKE                          :  1,130 次 (  9.00%)
+  FDP                                :  1,090 次 (  8.68%)
+
+2013年:
+  None                               :  3,566 次 ( 41.09%)
+  CDU/CSU                            :  1,379 次 ( 15.89%)
+  SPD                                :  1,233 次 ( 14.21%)
+  Grüne/Bündnis 90                   :    997 次 ( 11.49%)
+  DIE LINKE                          :    785 次 (  9.05%)
+  FDP                                :    718 次 (  8.27%)
+
+2014年:
+  None                               :  6,403 次 ( 50.27%)
+  CDU/CSU                            :  2,012 次 ( 15.80%)
+  Grüne/Bündnis 90                   :  1,628 次 ( 12.78%)
+  SPD                                :  1,473 次 ( 11.57%)
+  DIE LINKE                          :  1,220 次 (  9.58%)
+
+2015年:
+  None                               :  6,271 次 ( 51.56%)
+  CDU/CSU                            :  1,808 次 ( 14.87%)
+  Grüne/Bündnis 90                   :  1,664 次 ( 13.68%)
+  SPD                                :  1,341 次 ( 11.03%)
+  DIE LINKE                          :  1,078 次 (  8.86%)
+
+2016年:
+  None                               :  5,276 次 ( 49.47%)
+  CDU/CSU                            :  1,709 次 ( 16.03%)
+  Grüne/Bündnis 90                   :  1,428 次 ( 13.39%)
+  SPD                                :  1,248 次 ( 11.70%)
+  DIE LINKE                          :  1,003 次 (  9.41%)
+
+2017年:
+  None                               :  2,883 次 ( 45.27%)
+  CDU/CSU                            :  1,089 次 ( 17.10%)
+  Grüne/Bündnis 90                   :    783 次 ( 12.30%)
+  SPD                                :    736 次 ( 11.56%)
+  DIE LINKE                          :    634 次 (  9.96%)
+  AfD                                :     97 次 (  1.52%)
+  BÜNDNIS 90/DIE GRÜNEN              :     72 次 (  1.13%)
+  FDP                                :     71 次 (  1.11%)
+  Fraktionslos                       :      2 次 (  0.03%)
+  fraktionslos                       :      1 次 (  0.02%)
+
+2018年:
+  None                               : 11,262 次 ( 55.95%)
+  CDU/CSU                            :  2,260 次 ( 11.23%)
+  BÜNDNIS 90/DIE GRÜNEN              :  1,512 次 (  7.51%)
+  SPD                                :  1,425 次 (  7.08%)
+  AfD                                :  1,399 次 (  6.95%)
+  FDP                                :  1,137 次 (  5.65%)
+  DIE LINKE                          :  1,050 次 (  5.22%)
+  fraktionslos                       :     83 次 (  0.41%)
+  Bündnis 90/Die Grünen              :      1 次 (  0.00%)
+  Bremen                             :      1 次 (  0.00%)
+
+2019年:
+  None                               : 11,547 次 ( 56.73%)
+  CDU/CSU                            :  2,125 次 ( 10.44%)
+  SPD                                :  1,499 次 (  7.36%)
+  AfD                                :  1,346 次 (  6.61%)
+  FDP                                :  1,333 次 (  6.55%)
+  DIE LINKE                          :  1,014 次 (  4.98%)
+  BÜNDNIS 90/DIE GRÜNEN              :    837 次 (  4.11%)
+  BÜNDNIS 90/DIE GRÜNEN              :    590 次 (  2.90%)
+  fraktionslos                       :     47 次 (  0.23%)
+  Fraktionslos                       :     16 次 (  0.08%)
+  BÜNDNIS 90/DIE GRÜNE N             :      1 次 (  0.00%)
+
+2020年:
+  None                               : 11,476 次 ( 55.87%)
+  CDU/CSU                            :  2,418 次 ( 11.77%)
+  SPD                                :  1,557 次 (  7.58%)
+  AfD                                :  1,419 次 (  6.91%)
+  BÜNDNIS 90/DIE GRÜNEN              :  1,295 次 (  6.30%)
+  FDP                                :  1,282 次 (  6.24%)
+  DIE LINKE                          :  1,059 次 (  5.16%)
+  Fraktionslos                       :     35 次 (  0.17%)
+
+2021年:
+  None                               :  5,072 次 ( 54.64%)
+  CDU/CSU                            :  1,090 次 ( 11.74%)
+  SPD                                :    711 次 (  7.66%)
+  AfD                                :    667 次 (  7.19%)
+  BÜNDNIS 90/DIE GRÜNEN              :    611 次 (  6.58%)
+  FDP                                :    606 次 (  6.53%)
+  DIE LINKE                          :    503 次 (  5.42%)
+  Fraktionslos                       :     22 次 (  0.24%)
+
+
+四、议员党派变动情况
+--------------------------------------------------------------------------------
+发现 475 位议员有党派变动记录:
+
+Agnieszka Brugger:
+  2013年: Grüne/Bündnis 90
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: BÜNDNIS 90/DIE GRÜNEN, Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Ahrens (Salzgitter):
+  1966年: SPD-Gast
+  1969年: SPD
+
+Andrea Lederer:
+  1991年: PDS/Linke Liste
+  1992年: PDS/Linke Liste
+  1993年: PDS/Linke Liste
+  1994年: PDS, PDS/Linke Liste
+  1995年: PDS
+  1996年: PDS
+
+Angela Stachowa:
+  1991年: PDS/Linke Liste
+  1992年: PDS/Linke Liste
+  1993年: PDS/Linke Liste
+  1994年: Fraktionslos, PDS/Linke Liste
+
+Anja Hajduk:
+  2002年: Grüne/Bündnis 90
+  2003年: Grüne/Bündnis 90
+  2004年: Grüne/Bündnis 90
+  2005年: Grüne/Bündnis 90
+  2006年: Grüne/Bündnis 90
+  2007年: Grüne/Bündnis 90
+  2008年: Grüne/Bündnis 90
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Annalena Baerbock:
+  2013年: Grüne/Bündnis 90
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Baltes:
+  1968年: FDP, SPD
+  1969年: SPD
+
+BastIan:
+  1983年: GRÜNE
+  1986年: Fraktionslos
+
+Bastian:
+  1983年: GRÜNE
+  1984年: Fraktionslos, GRÜNE
+  1985年: Fraktionslos
+  1986年: Fraktionslos, GRÜNE
+
+Bazille:
+  1949年: SPD
+  1950年: SPD
+  1951年: SPD
+  1952年: SPD
+  1953年: SPD
+  1956年: SPD
+  1957年: SPD
+  1958年: SPD
+  1959年: SPD
+  1962年: SPD
+  1963年: SDP, SPD
+  1964年: SPD
+  1966年: SPD
+
+Beate Müller-Gemmeke:
+  2009年: Grüne/Bündnis 90
+  2010年: Grüne/Bündnis 90
+  2011年: Grüne/Bündnis 90
+  2012年: Grüne/Bündnis 90
+  2013年: Grüne/Bündnis 90
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: BÜNDNIS 90/DIE GRÜNEN, Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Beate Walter-Rosenheimer:
+  2012年: Grüne/Bündnis 90
+  2013年: Grüne/Bündnis 90
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Behrisch:
+  1950年: SPD
+  1953年: SPD
+  1954年: SPD
+  1955年: SPD
+  1958年: SPD
+  1961年: Fraktionslos
+
+Bender:
+  1954年: GB/BHE
+  1955年: CDU/CSU-Gast, GB/BHE
+  1956年: CDU/CSU
+
+Berkhan:
+  1959年: SPD
+  1960年: SPD
+  1962年: SPD
+  1963年: SPD
+  1964年: SPD
+  1965年: SDP, SPD
+  1966年: SDP, SPD
+  1967年: SPD
+  1968年: SPD
+  1969年: SPD
+  1974年: SPD
+  1975年: SPD
+
+Bernd Henn:
+  1991年: Fraktionslos, PDS/Linke Liste
+  1992年: Fraktionslos
+  1993年: PDS/Linke Liste
+  1994年: PDS/Linke Liste
+
+Biehle:
+  1970年: CDU/CSU
+  1971年: CDU/CSU
+  1972年: CDU/CSU
+  1973年: CDU/CSU
+  1974年: CDU/CSU
+  1975年: CDU/CSU
+  1976年: CDU/CSU
+  1977年: CDU/CSU
+  1978年: CDU/CSU
+  1979年: CDU/CSU
+  1980年: CDU/CSU, SPD
+  1981年: CDU/CSU
+  1982年: CDU/CSU
+  1983年: CDU/CSU
+  1984年: CDU/CSU
+  1985年: CDU/CSU
+  1986年: CDU/CSU
+  1987年: CDU/CSU
+  1988年: CDU/CSU
+  1989年: CDU/CSU
+  1990年: CDU/CSU
+
+Blank:
+  1949年: CDU/CSU
+  1950年: CDU/CSU
+  1958年: CDU/CSU
+  1966年: CDU/CSU
+  1973年: SPD
+  1974年: SPD
+  1975年: SPD
+  1976年: SPD
+  1977年: SPD
+  1978年: SPD
+
+Bodensteiner:
+  1952年: CDU/CSU
+  1953年: Fraktionslos
+
+Borm:
+  1965年: FDP
+  1966年: FDP
+  1967年: FDP
+  1968年: FDP
+  1969年: FDP
+  1970年: EDP, FDP
+  1971年: FDP
+  1972年: FDP
+
+Brauer:
+  1987年: GRÜNE
+  1988年: GRÜNE
+  1989年: GRÜNE
+  1990年: GRÜNE, Grüne/Bündnis 90
+
+Braun:
+  1962年: SPD
+  1965年: SPD
+  1973年: CDU/CSU
+  1974年: CDU/CSU
+  1975年: CDU/CSU
+  1976年: CDU/CSU
+  1977年: CDU/CSU
+  1978年: CDU/CSU
+  1979年: CDU/CSU
+  1980年: CDU/CSU
+  1981年: CDU/CSU
+  1982年: CDU/CSU
+  1984年: CDU/CSU
+  1985年: CDU/CSU
+  1986年: CDU/CSU
+
+Britta Haßelmann:
+  2006年: Grüne/Bündnis 90
+  2007年: Grüne/Bündnis 90
+  2008年: Grüne/Bündnis 90
+  2009年: Grüne/Bündnis 90
+  2010年: Grüne/Bündnis 90
+  2011年: Grüne/Bündnis 90
+  2012年: Grüne/Bündnis 90
+  2013年: Grüne/Bündnis 90
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: BÜNDNIS 90/DIE GRÜNEN, Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Brunner:
+  1950年: SPD
+  1951年: SPD
+  1981年: CDU/CSU
+  1982年: CDU/CSU
+  1983年: CDU/CSU
+  1984年: CDU/CSU
+  1985年: CDU/CSU
+  1986年: CDU/CSU
+
+BrüCk:
+  1961年: CDU/CSU
+  1963年: CDU/CSU
+  1974年: SPD
+
+Brück:
+  1954年: CDU/CSU
+  1955年: CDU/CSU
+  1956年: CDU/CSU
+  1957年: CDU/CSU
+  1958年: CDU/CSU
+  1959年: CDU/CSU
+  1960年: CDU/CSU
+  1961年: CDU/CSU
+  1962年: CDU/CSU
+  1963年: CDU/CSU
+  1964年: CDU/CSU
+  1965年: CDU/CSU
+  1969年: SPD
+  1970年: SPD
+  1973年: SPD
+  1974年: SPD
+  1976年: SPD
+  1977年: SPD
+  1982年: SPD
+  1983年: SPD
+  1984年: SPD
+  1985年: SPD
+  1986年: SPD
+  1987年: SPD
+  1988年: SPD
+  1989年: SPD
+  1990年: SPD
+
+Brück (Holz):
+  1966年: CDU/CSU, SPD
+  1967年: SPD
+  1968年: SPD
+  1969年: SPD
+  1971年: SPD
+  1972年: SPD
+
+Burger:
+  1967年: CDU/CSU
+  1968年: CDU/CSU
+  1969年: CDU/CSU
+  1970年: CDU/CSU
+  1971年: CDU/CSU
+  1972年: CDU/CSU
+  1973年: CDU/CSU, SPD
+  1974年: CDU/CSU
+  1975年: CDU/CSU
+  1976年: CDU/CSU
+  1977年: CDU/CSU
+  1978年: CDU/CSU
+  1979年: CDU/CSU
+  1980年: CDU/CSU
+  1981年: CDU/CSU
+
+Busse:
+  1962年: FDP
+  1963年: FDP
+  1964年: FDP
+  1965年: FDP, FPD
+  1967年: FDP
+  1968年: FDP
+  1969年: FDP
+
+Böhm:
+  1949年: SPD
+  1950年: SPD
+  1951年: SPD
+  1952年: SPD
+  1953年: SPD
+  1966年: SPD
+  1967年: SPD
+  1971年: SPD
+  1977年: CDU/CSU
+
+Canan Bayram:
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Cem Özdemir:
+  1994年: Grüne/Bündnis 90
+  1995年: Grüne/Bündnis 90
+  1996年: Grüne/Bündnis 90
+  1997年: Grüne/Bündnis 90
+  1998年: Grüne/Bündnis 90
+  1999年: Grüne/Bündnis 90
+  2000年: Grüne/Bündnis 90
+  2001年: Grüne/Bündnis 90
+  2002年: Grüne/Bündnis 90
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Christa Lörcher:
+  1993年: SPD
+  1994年: SPD
+  1995年: SPD
+  1996年: SPD
+  1998年: SPD
+  1999年: SPD
+  2000年: SPD
+  2001年: SPD
+  2002年: Fraktionslos
+
+Christian Kühn (Tübingen):
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Christina Schenk:
+  1991年: Grüne/Bündnis 90
+  1992年: Grüne/Bündnis 90
+  1993年: Grüne/Bündnis 90
+  1994年: Fraktionslos, Grüne/Bündnis 90, PDS
+  1995年: PDS
+  1996年: PDS
+  1997年: PDS
+  1998年: PDS
+  1999年: PDS
+  2000年: PDS
+  2001年: PDS
+  2002年: PDS
+
+Claudia Müller:
+  2017年: BÜNDNIS 90/DIE GRÜNEN
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Claudia Roth (Augsburg):
+  1998年: Grüne/Bündnis 90
+  1999年: Grüne/Bündnis 90
+  2000年: Grüne/Bündnis 90
+  2001年: Grüne/Bündnis 90
+  2003年: Grüne/Bündnis 90
+  2004年: Grüne/Bündnis 90
+  2006年: Grüne/Bündnis 90
+  2007年: Grüne/Bündnis 90
+  2008年: Grüne/Bündnis 90
+  2009年: Grüne/Bündnis 90
+  2010年: Grüne/Bündnis 90
+  2011年: Grüne/Bündnis 90
+  2012年: Grüne/Bündnis 90
+  2013年: Grüne/Bündnis 90
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: BÜNDNIS 90/DIE GRÜNEN, Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Clausen:
+  1949年: SSW
+  1950年: SSW
+  1951年: SSW
+  1953年: FU-Gast
+
+Clemens:
+  1981年: CDU/CSU
+  1982年: CDU/CSU
+  1983年: CDU/CSU
+  1984年: CDU/CSU
+  1985年: CDU/CSU, SPD
+  1986年: CDU/CSU
+  1988年: CDU/CSU
+  1989年: CDU/CSU
+  1990年: CDU/CSU
+
+Coppik:
+  1973年: SPD
+  1974年: SPD
+  1975年: SPD
+  1976年: SPD
+  1977年: SPD
+  1978年: SPD
+  1979年: SPD
+  1980年: SPD
+  1981年: SPD
+  1982年: Fraktionslos, SPD
+
+Corinna Rüffer:
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Cramer:
+  1949年: SPD
+  1950年: SPD
+  1951年: SPD
+  1952年: SPD
+  1953年: SPD
+  1959年: SPD
+  1960年: SPD
+  1961年: SPD
+  1962年: SPD
+  1963年: SPD
+  1964年: SDP, SPD
+  1965年: SPD
+  1966年: SPD
+  1967年: SPD
+  1968年: SPD
+  1969年: SPD
+  1970年: SPD
+  1971年: SPD
+  1972年: SPD
+
+Cronenberg:
+  1977年: FDP
+  1978年: FDP
+  1979年: FDP
+  1980年: FDP
+  1981年: FDP
+  1982年: FDP, SPD
+  1983年: FDP
+  1985年: FDP
+
+Daniela Wagner:
+  2010年: Grüne/Bündnis 90
+  2011年: Grüne/Bündnis 90
+  2012年: Grüne/Bündnis 90
+  2013年: Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Deneke:
+  1964年: FDP
+  1965年: FDP, FPD
+
+Determann:
+  1950年: Zentrum
+  1951年: Zentrum
+  1952年: FU
+
+Diel:
+  1952年: SPD
+  1960年: CDU/CSU
+  1961年: CDU/CSU
+
+Dieter Janecek:
+  2014年: Grüne/Bündnis 90
+  2015年: Grüne/Bündnis 90
+  2016年: Grüne/Bündnis 90
+  2017年: Grüne/Bündnis 90
+  2018年: BÜNDNIS 90/DIE GRÜNEN
+  2019年: BÜNDNIS 90/DIE GRÜNEN, BÜNDNIS 90/DIE GRÜNEN
+  2020年: BÜNDNIS 90/DIE GRÜNEN
+  2021年: BÜNDNIS 90/DIE GRÜNEN
+
+Dietmar Schütz (Oldenburg):
+  1995年: SPD
+  1996年: CDU/CSU, SPD
+  1997年: SPD
+  1998年: SPD
+  1999年: SPD
+  2000年: SPD
+
+Donhauser:
+  1949年: BP
+  1950年: BP
+  1951年: Unabhängig
+  1952年: Fraktionslos
+  1954年: CDU/CSU
+  1955年: CDU/CSU
+  1956年: CDU/CSU
+

@@ -1,0 +1,925 @@
+[
+  {
+    "question_id": "Q1",
+    "question_type": "总结类",
+    "question": "请总结2015年德国议会关于难民政策的主要讨论内容",
+    "params": {
+      "year": "2015",
+      "topic": "refugee"
+    },
+    "chunks_before_rerank": 20,
+    "chunks_after_rerank": 10,
+    "answer": "好的，根据您提供的德国议会发言记录，以下是对2015年关于难民政策主要讨论内容的总结。\n\n---\n\n### 2015年德国议会关于难民政策的主要讨论内容总结\n\n基于所提供的发言记录，2015年德国议会关于难民政策的讨论主要围绕以下几个核心主题展开，并反映了随着年内危机加剧，讨论重点的演变：\n\n#### 1. 对现有难民政策的批评与改革呼吁\n讨论从年初就已开始，左翼党派对当时德国的难民政策提出了尖锐批评。\n\n*   **发言人**: Ulla Jelpke (DIE LINKE)\n*   **日期**: 2015年1月15日\n*   **主要内容**: Jelpke女士将当时的政策描述为一种源于80和90年代的“威慑政策”（Abschreckungspolitik），其目的是让难民的处境尽可能糟糕以促使他们尽快离开。她明确要求废除**居住地限制（Residenzpflicht）**、**工作禁令（Arbeitsverbote）**和**削减的社会福利**。她呼吁对接收政策进行“根本性转变”，以实现“有尊严的接收政策”和“快速融合”为目标，并强调需要提供高标准的住宿和咨询服务。\n\n#### 2. 聚焦人道主义危机与欧洲共同责任\n随着地中海难民悲剧的增加，讨论的焦点扩展到人道主义救援和欧洲层面的解决方案。\n\n*   **发言人**: Claudia Roth (Grüne/Bündnis 90)\n*   **日期**: 2015年5月7日\n*   **主要内容**: Roth女士强调，首要任务必须是“拯救生命”。她呼吁采取一系列具体措施，包括：\n    *   在地中海进行全面的海上救援。\n    *   建立**安全、合法的赴欧途径（sichere, legale Fluchtwege）**，而非修建边境围栏。\n    *   发放人道主义签证，并扩大重新安置计划（Resettlement-Programm）。\n    *   在接收难民方面实现**“欧洲团结”（europäische Solidarität）**。\n\n#### 3. 将接收难民视为德国的“历史性任务”\n到2015年下半年，随着大量难民抵达德国，讨论的基调转变为如何应对这一“历史性”的挑战。\n\n*   **发言人**: Luise Amtsberg (Grüne/Bündnis 90)\n*   **日期**: 2015年9月8日\n*   **主要内容**: Amtsberg女士在预算辩论中指出，德国面临的“历史性任务”不是维持预算平衡（“schwarze Null”），而是为数十万逃离战争和迫害的寻求庇护者提供安置和照料。她对德国民众表现出的巨大援助意愿表示赞赏，并认为这是希望的象征。\n\n#### 4. 从讨论转向具体立法行动\n到10月份，议会的讨论已经进入了具体的立法阶段，以应对危机。\n\n*   **发言人**: Präsident Dr. Norbert Lammert (议会议长)\n*   **日期**: 2015年10月15日\n*   **主要内容**: Lammert议长提到，议会正在审议一个与各州紧密协调制定的**“一揽子法律方案”（Gesetzespaket）**。他指出，近几周的行动速度和成果远超以往，这表明德国联邦、州和地方政府在面对重大挑战时能够快速、灵活地合作。这标志着政策讨论已经转化为具体的国内政策措施。\n\n#### 5. 将难民危机置于更广泛的政治背景中\n到年底，难民危机被视为当年德国乃至整个欧洲面临的多重严峻挑战之一。\n\n*   **发言人**: Thomas Oppermann (SPD)\n*   **日期**: 2015年12月16日\n*   **主要内容**: Oppermann先生回顾2015年时，将“难民危机”（Flüchtlingskrise）与巴黎恐怖袭击、希腊债务危机并列为欧洲面临的三大挑战，称这一年为“近几十年来最困难的一年”。这表明，难民政策的讨论已与欧洲安全、稳定和团结等宏大议题紧密相连。\n\n### 资料局限性\n需要明确指出，本次总结完全基于您提供的有限发言记录。这些记录主要来自**左翼党（DIE LINKE）**、**绿党（Grüne/Bündnis 90）**和**社民党（SPD）**的发言人。\n\n*   **缺少保守派观点**: 资料中**没有包含执政联盟中基民盟/基社盟（CDU/CSU）的实质性发言**（仅有一句表示反对的插话“Quatsch!”）。因此，无法呈现当时德国政府中保守派对难民政策的具体立场、担忧或他们提出的解决方案。\n*   **信息不完整**: 文件提到了一个“一揽子法律方案”，但并未说明其具体内容。\n\n综上所述，这些资料清晰地展示了2015年德国政坛（尤其是中左翼党派）如何从批评现有政策，到呼吁人道救援和欧洲团结，最终将接收难民视为国家责任并付诸立法行动的演变过程。但它未能全面反映德国议会内部所有党派的观点和争论。",
+    "timing": {
+      "retrieve": 4.259042024612427,
+      "rerank": 0.8836829662322998,
+      "generate": 37.436891078948975,
+      "total": 42.58042097091675
+    },
+    "chunks": [
+      {
+        "id": "2015_1762361835_247",
+        "score": 0.565753937,
+        "text": ". Wir werden im Ausschuss hauptsächlich darüber reden müssen – das ist klar –, wie der Bund hier Verantwortung übernehmen kann, aber man muss auch über eine andere, neue Flüchtlingspolitik reden; denn das, was hier passiert, entspricht noch der Abschreckungspolitik in den 80er- und 90er-Jahren, als es den Flüchtlingen möglichst schlecht gehen sollte, damit sie schnell wieder gehen. Ingbert Liebing[ CDU/CSU]: Quatsch! Deswegen müssen eben auch solche Dinge wie Residenzpflicht, Arbeitsverbote und gekürzte Sozialleistungen endlich der Vergangenheit angehören, auch wenn die Regelungen jetzt leicht verbessert worden sind. Die Linke will einen grundsätzlichen Wandel in der Aufnahmepolitik. Menschenwürdige Aufnahmepolitik und schnelle Integration müssen die Ziele dieses Wandels sein. Dazu gehören eben hohe Standards bei der Unterbringung und vor allen Dingen auch bei der Betreuung; denn auch die Beratung fehlt heute fast vollständig für Menschen, die bei uns Schutz suchen. Wir fordern deshalb...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 1924.0,
+          "date": "2015-01-15",
+          "group": "DIE LINKE",
+          "lp": "18",
+          "original_text_id": "pp_18_079_00062",
+          "session": "079",
+          "source": "german_parliament",
+          "speaker": "Ulla Jelpke",
+          "text": ". Wir werden im Ausschuss hauptsächlich darüber reden müssen – das ist klar –, wie der Bund hier Verantwortung übernehmen kann, aber man muss auch über eine andere, neue Flüchtlingspolitik reden; denn das, was hier passiert, entspricht noch der Abschreckungspolitik in den 80er- und 90er-Jahren, als es den Flüchtlingen möglichst schlecht gehen sollte, damit sie schnell wieder gehen. Ingbert Liebing[ CDU/CSU]: Quatsch! Deswegen müssen eben auch solche Dinge wie Residenzpflicht, Arbeitsverbote und gekürzte Sozialleistungen endlich der Vergangenheit angehören, auch wenn die Regelungen jetzt leicht verbessert worden sind. Die Linke will einen grundsätzlichen Wandel in der Aufnahmepolitik. Menschenwürdige Aufnahmepolitik und schnelle Integration müssen die Ziele dieses Wandels sein. Dazu gehören eben hohe Standards bei der Unterbringung und vor allen Dingen auch bei der Betreuung; denn auch die Beratung fehlt heute fast vollständig für Menschen, die bei uns Schutz suchen. Wir fordern deshalb...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.37236878
+      },
+      {
+        "id": "2015_1762417259_247",
+        "score": 0.565753937,
+        "text": ". Wir werden im Ausschuss hauptsächlich darüber reden müssen – das ist klar –, wie der Bund hier Verantwortung übernehmen kann, aber man muss auch über eine andere, neue Flüchtlingspolitik reden; denn das, was hier passiert, entspricht noch der Abschreckungspolitik in den 80er- und 90er-Jahren, als es den Flüchtlingen möglichst schlecht gehen sollte, damit sie schnell wieder gehen. Ingbert Liebing[ CDU/CSU]: Quatsch! Deswegen müssen eben auch solche Dinge wie Residenzpflicht, Arbeitsverbote und gekürzte Sozialleistungen endlich der Vergangenheit angehören, auch wenn die Regelungen jetzt leicht verbessert worden sind. Die Linke will einen grundsätzlichen Wandel in der Aufnahmepolitik. Menschenwürdige Aufnahmepolitik und schnelle Integration müssen die Ziele dieses Wandels sein. Dazu gehören eben hohe Standards bei der Unterbringung und vor allen Dingen auch bei der Betreuung; denn auch die Beratung fehlt heute fast vollständig für Menschen, die bei uns Schutz suchen. Wir fordern deshalb...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 1924.0,
+          "date": "2015-01-15",
+          "group": "DIE LINKE",
+          "lp": "18",
+          "original_text_id": "pp_18_079_00062",
+          "session": "079",
+          "source": "german_parliament",
+          "speaker": "Ulla Jelpke",
+          "text": ". Wir werden im Ausschuss hauptsächlich darüber reden müssen – das ist klar –, wie der Bund hier Verantwortung übernehmen kann, aber man muss auch über eine andere, neue Flüchtlingspolitik reden; denn das, was hier passiert, entspricht noch der Abschreckungspolitik in den 80er- und 90er-Jahren, als es den Flüchtlingen möglichst schlecht gehen sollte, damit sie schnell wieder gehen. Ingbert Liebing[ CDU/CSU]: Quatsch! Deswegen müssen eben auch solche Dinge wie Residenzpflicht, Arbeitsverbote und gekürzte Sozialleistungen endlich der Vergangenheit angehören, auch wenn die Regelungen jetzt leicht verbessert worden sind. Die Linke will einen grundsätzlichen Wandel in der Aufnahmepolitik. Menschenwürdige Aufnahmepolitik und schnelle Integration müssen die Ziele dieses Wandels sein. Dazu gehören eben hohe Standards bei der Unterbringung und vor allen Dingen auch bei der Betreuung; denn auch die Beratung fehlt heute fast vollständig für Menschen, die bei uns Schutz suchen. Wir fordern deshalb...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.37236878
+      },
+      {
+        "id": "2015_1762417259_16719",
+        "score": 0.557366431,
+        "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3945.0,
+          "date": "2015-12-16",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_145_00033",
+          "session": "145",
+          "source": "german_parliament",
+          "speaker": "Thomas Oppermann",
+          "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+          "total_chunks": 5.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.297598
+      },
+      {
+        "id": "2015_1762361835_16719",
+        "score": 0.557366431,
+        "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3945.0,
+          "date": "2015-12-16",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_145_00033",
+          "session": "145",
+          "source": "german_parliament",
+          "speaker": "Thomas Oppermann",
+          "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+          "total_chunks": 5.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.297598
+      },
+      {
+        "id": "2015_1762417259_6325",
+        "score": 0.589032054,
+        "text": ". Das Europäische Parlament, Ban Ki-moon, António Guterres, Papst Franziskus, die EKD, der Bundespräsident, Pro Asyl, Amnesty und nicht zuletzt eine klare Mehrheit der Menschen in Deutschland wissen, dass es doch zuallererst um das Leben und die Rettung von Menschen gehen muss, dass es aber auch um die Verteidigung unserer Werte geht. Sie alle fordern eine umfassende Seenotrettung im ganzen Mittelmeer. Sie fordern sichere, legale Fluchtwege nach Europa – und nicht einen neuen, 100 Kilometer langen Zaun in Bulgarien. Sie fordern humanitäre Visa. Sie fordern eine deutliche Aufstockung des Resettlement-Programms und eine unbürokratische Familienzusammenführung. Sie fordern europäische Solidarität bei der Aufnahme von mehr Flüchtlingen. Sie fordern eine Entlastung der Nachbarregionen Syriens. Sie fordern eine nachhaltige Entwicklungspolitik. Das bedeutet nicht, dass man Waffen an die Saudis schickt, die heute und in diesem Moment im Jemen Zivilisten bombardieren. Beifall beim BÜNDNIS 90 / ...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 1465.0,
+          "date": "2015-05-07",
+          "group": "Grüne/Bündnis 90",
+          "lp": "18",
+          "original_text_id": "pp_18_103_00090",
+          "session": "103",
+          "source": "german_parliament",
+          "speaker": "Claudia Roth (Augsburg)",
+          "text": ". Das Europäische Parlament, Ban Ki-moon, António Guterres, Papst Franziskus, die EKD, der Bundespräsident, Pro Asyl, Amnesty und nicht zuletzt eine klare Mehrheit der Menschen in Deutschland wissen, dass es doch zuallererst um das Leben und die Rettung von Menschen gehen muss, dass es aber auch um die Verteidigung unserer Werte geht. Sie alle fordern eine umfassende Seenotrettung im ganzen Mittelmeer. Sie fordern sichere, legale Fluchtwege nach Europa – und nicht einen neuen, 100 Kilometer langen Zaun in Bulgarien. Sie fordern humanitäre Visa. Sie fordern eine deutliche Aufstockung des Resettlement-Programms und eine unbürokratische Familienzusammenführung. Sie fordern europäische Solidarität bei der Aufnahme von mehr Flüchtlingen. Sie fordern eine Entlastung der Nachbarregionen Syriens. Sie fordern eine nachhaltige Entwicklungspolitik. Das bedeutet nicht, dass man Waffen an die Saudis schickt, die heute und in diesem Moment im Jemen Zivilisten bombardieren. Beifall beim BÜNDNIS 90 / ...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.27068636
+      },
+      {
+        "id": "2015_1762361835_6325",
+        "score": 0.589032054,
+        "text": ". Das Europäische Parlament, Ban Ki-moon, António Guterres, Papst Franziskus, die EKD, der Bundespräsident, Pro Asyl, Amnesty und nicht zuletzt eine klare Mehrheit der Menschen in Deutschland wissen, dass es doch zuallererst um das Leben und die Rettung von Menschen gehen muss, dass es aber auch um die Verteidigung unserer Werte geht. Sie alle fordern eine umfassende Seenotrettung im ganzen Mittelmeer. Sie fordern sichere, legale Fluchtwege nach Europa – und nicht einen neuen, 100 Kilometer langen Zaun in Bulgarien. Sie fordern humanitäre Visa. Sie fordern eine deutliche Aufstockung des Resettlement-Programms und eine unbürokratische Familienzusammenführung. Sie fordern europäische Solidarität bei der Aufnahme von mehr Flüchtlingen. Sie fordern eine Entlastung der Nachbarregionen Syriens. Sie fordern eine nachhaltige Entwicklungspolitik. Das bedeutet nicht, dass man Waffen an die Saudis schickt, die heute und in diesem Moment im Jemen Zivilisten bombardieren. Beifall beim BÜNDNIS 90 / ...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 1465.0,
+          "date": "2015-05-07",
+          "group": "Grüne/Bündnis 90",
+          "lp": "18",
+          "original_text_id": "pp_18_103_00090",
+          "session": "103",
+          "source": "german_parliament",
+          "speaker": "Claudia Roth (Augsburg)",
+          "text": ". Das Europäische Parlament, Ban Ki-moon, António Guterres, Papst Franziskus, die EKD, der Bundespräsident, Pro Asyl, Amnesty und nicht zuletzt eine klare Mehrheit der Menschen in Deutschland wissen, dass es doch zuallererst um das Leben und die Rettung von Menschen gehen muss, dass es aber auch um die Verteidigung unserer Werte geht. Sie alle fordern eine umfassende Seenotrettung im ganzen Mittelmeer. Sie fordern sichere, legale Fluchtwege nach Europa – und nicht einen neuen, 100 Kilometer langen Zaun in Bulgarien. Sie fordern humanitäre Visa. Sie fordern eine deutliche Aufstockung des Resettlement-Programms und eine unbürokratische Familienzusammenführung. Sie fordern europäische Solidarität bei der Aufnahme von mehr Flüchtlingen. Sie fordern eine Entlastung der Nachbarregionen Syriens. Sie fordern eine nachhaltige Entwicklungspolitik. Das bedeutet nicht, dass man Waffen an die Saudis schickt, die heute und in diesem Moment im Jemen Zivilisten bombardieren. Beifall beim BÜNDNIS 90 / ...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.27068636
+      },
+      {
+        "id": "2015_1762417259_10354",
+        "score": 0.565166414,
+        "text": "Frau Präsidentin! Liebe Kolleginnen und Kollegen! Diese Haushaltsdebatte – im Besonderen die Debatte über den Etat des Innenministeriums – ist nicht nur eine Debatte über Zahlen, und ich bin froh, dass sie auch in den vergangenen Minuten nicht so geführt wurde. Wir als Parlament müssen mit diesem Haushalt eine Antwort darauf geben, wie wir mit dieser historischen Aufgabe, dieser nationalen Verantwortung und Herausforderung umgehen. Diese historische Aufgabe ist eben nicht die schwarze Null, sondern die Versorgung und Aufnahme von Hunderttausenden Schutzbedürftigen in Deutschland, von Menschen, die vor Krieg und Verfolgung geflohen sind. Beifall beim BÜNDNIS 90 / DIE GRÜNEN sowie bei Abgeordneten der LINKEN Was wir derzeit in Deutschland erleben – das gilt insbesondere für die Bilder von den Bahnhöfen in dieser Republik –, macht Hoffnung. Mit dieser Hilfsbereitschaft, aber auch den richtigen politischen Maßnahmen wird Deutschland in den kommenden Jahren nicht nur vielen Menschen Schutz ...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3782.0,
+          "date": "2015-09-08",
+          "group": "Grüne/Bündnis 90",
+          "lp": "18",
+          "original_text_id": "pp_18_119_00091",
+          "session": "119",
+          "source": "german_parliament",
+          "speaker": "Luise Amtsberg",
+          "text": "Frau Präsidentin! Liebe Kolleginnen und Kollegen! Diese Haushaltsdebatte – im Besonderen die Debatte über den Etat des Innenministeriums – ist nicht nur eine Debatte über Zahlen, und ich bin froh, dass sie auch in den vergangenen Minuten nicht so geführt wurde. Wir als Parlament müssen mit diesem Haushalt eine Antwort darauf geben, wie wir mit dieser historischen Aufgabe, dieser nationalen Verantwortung und Herausforderung umgehen. Diese historische Aufgabe ist eben nicht die schwarze Null, sondern die Versorgung und Aufnahme von Hunderttausenden Schutzbedürftigen in Deutschland, von Menschen, die vor Krieg und Verfolgung geflohen sind. Beifall beim BÜNDNIS 90 / DIE GRÜNEN sowie bei Abgeordneten der LINKEN Was wir derzeit in Deutschland erleben – das gilt insbesondere für die Bilder von den Bahnhöfen in dieser Republik –, macht Hoffnung. Mit dieser Hilfsbereitschaft, aber auch den richtigen politischen Maßnahmen wird Deutschland in den kommenden Jahren nicht nur vielen Menschen Schutz ...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.24595375
+      },
+      {
+        "id": "2015_1762361835_10354",
+        "score": 0.565166414,
+        "text": "Frau Präsidentin! Liebe Kolleginnen und Kollegen! Diese Haushaltsdebatte – im Besonderen die Debatte über den Etat des Innenministeriums – ist nicht nur eine Debatte über Zahlen, und ich bin froh, dass sie auch in den vergangenen Minuten nicht so geführt wurde. Wir als Parlament müssen mit diesem Haushalt eine Antwort darauf geben, wie wir mit dieser historischen Aufgabe, dieser nationalen Verantwortung und Herausforderung umgehen. Diese historische Aufgabe ist eben nicht die schwarze Null, sondern die Versorgung und Aufnahme von Hunderttausenden Schutzbedürftigen in Deutschland, von Menschen, die vor Krieg und Verfolgung geflohen sind. Beifall beim BÜNDNIS 90 / DIE GRÜNEN sowie bei Abgeordneten der LINKEN Was wir derzeit in Deutschland erleben – das gilt insbesondere für die Bilder von den Bahnhöfen in dieser Republik –, macht Hoffnung. Mit dieser Hilfsbereitschaft, aber auch den richtigen politischen Maßnahmen wird Deutschland in den kommenden Jahren nicht nur vielen Menschen Schutz ...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3782.0,
+          "date": "2015-09-08",
+          "group": "Grüne/Bündnis 90",
+          "lp": "18",
+          "original_text_id": "pp_18_119_00091",
+          "session": "119",
+          "source": "german_parliament",
+          "speaker": "Luise Amtsberg",
+          "text": "Frau Präsidentin! Liebe Kolleginnen und Kollegen! Diese Haushaltsdebatte – im Besonderen die Debatte über den Etat des Innenministeriums – ist nicht nur eine Debatte über Zahlen, und ich bin froh, dass sie auch in den vergangenen Minuten nicht so geführt wurde. Wir als Parlament müssen mit diesem Haushalt eine Antwort darauf geben, wie wir mit dieser historischen Aufgabe, dieser nationalen Verantwortung und Herausforderung umgehen. Diese historische Aufgabe ist eben nicht die schwarze Null, sondern die Versorgung und Aufnahme von Hunderttausenden Schutzbedürftigen in Deutschland, von Menschen, die vor Krieg und Verfolgung geflohen sind. Beifall beim BÜNDNIS 90 / DIE GRÜNEN sowie bei Abgeordneten der LINKEN Was wir derzeit in Deutschland erleben – das gilt insbesondere für die Bilder von den Bahnhöfen in dieser Republik –, macht Hoffnung. Mit dieser Hilfsbereitschaft, aber auch den richtigen politischen Maßnahmen wird Deutschland in den kommenden Jahren nicht nur vielen Menschen Schutz ...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.24595375
+      },
+      {
+        "id": "2015_1762361835_12917",
+        "score": 0.569806,
+        "text": ". In den letzten Wochen haben wir hierbei einiges erreicht, jedenfalls viel Bundeskanzlerin Dr. Angela Merkel mehr als in vielen Monaten und Jahren zuvor. Denken wir nur an das Sondertreffen der Staats- und Regierungschefs am 23. April dieses Jahres, das keine wirklich weitreichenden Beschlüsse zustande gebracht hat. Damals gab es umfangreiche Kritik. 800 Menschen waren im Mittelmeer umgekommen. Nur wenig war als Schlussfolgerung zu sehen. National sind viele ganz zentrale innenpolitische Maßnahmen in dem jetzigen Gesetzespaket enthalten, das dem Bundestag heute zur Entscheidung vorliegt und das in enger Abstimmung mit den Ländern erarbeitet wurde. Ich möchte mich bei allen bedanken, die daran mitgewirkt haben. Es zeigt, dass unser Land nicht nur in Finanzkrisen schnell, flexibel und im Geiste des Miteinanders reagieren kann – Bund, Länder, Städte und Gemeinden –, sondern dass wir, wenn es um alles geht – auch um Kern und Inhalte unserer Grundwerte, also um unsere deutsche und europäis...",
+        "metadata": {
+          "chunk_index": 4.0,
+          "chunk_size": 3769.0,
+          "date": "2015-10-15",
+          "group": "None",
+          "lp": "18",
+          "original_text_id": "pp_18_130_00001",
+          "session": "130",
+          "source": "german_parliament",
+          "speaker": "Präsident Dr. Norbert Lammert",
+          "text": ". In den letzten Wochen haben wir hierbei einiges erreicht, jedenfalls viel Bundeskanzlerin Dr. Angela Merkel mehr als in vielen Monaten und Jahren zuvor. Denken wir nur an das Sondertreffen der Staats- und Regierungschefs am 23. April dieses Jahres, das keine wirklich weitreichenden Beschlüsse zustande gebracht hat. Damals gab es umfangreiche Kritik. 800 Menschen waren im Mittelmeer umgekommen. Nur wenig war als Schlussfolgerung zu sehen. National sind viele ganz zentrale innenpolitische Maßnahmen in dem jetzigen Gesetzespaket enthalten, das dem Bundestag heute zur Entscheidung vorliegt und das in enger Abstimmung mit den Ländern erarbeitet wurde. Ich möchte mich bei allen bedanken, die daran mitgewirkt haben. Es zeigt, dass unser Land nicht nur in Finanzkrisen schnell, flexibel und im Geiste des Miteinanders reagieren kann – Bund, Länder, Städte und Gemeinden –, sondern dass wir, wenn es um alles geht – auch um Kern und Inhalte unserer Grundwerte, also um unsere deutsche und europäis...",
+          "total_chunks": 10.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.10787861
+      },
+      {
+        "id": "2015_1762417259_12917",
+        "score": 0.569806,
+        "text": ". In den letzten Wochen haben wir hierbei einiges erreicht, jedenfalls viel Bundeskanzlerin Dr. Angela Merkel mehr als in vielen Monaten und Jahren zuvor. Denken wir nur an das Sondertreffen der Staats- und Regierungschefs am 23. April dieses Jahres, das keine wirklich weitreichenden Beschlüsse zustande gebracht hat. Damals gab es umfangreiche Kritik. 800 Menschen waren im Mittelmeer umgekommen. Nur wenig war als Schlussfolgerung zu sehen. National sind viele ganz zentrale innenpolitische Maßnahmen in dem jetzigen Gesetzespaket enthalten, das dem Bundestag heute zur Entscheidung vorliegt und das in enger Abstimmung mit den Ländern erarbeitet wurde. Ich möchte mich bei allen bedanken, die daran mitgewirkt haben. Es zeigt, dass unser Land nicht nur in Finanzkrisen schnell, flexibel und im Geiste des Miteinanders reagieren kann – Bund, Länder, Städte und Gemeinden –, sondern dass wir, wenn es um alles geht – auch um Kern und Inhalte unserer Grundwerte, also um unsere deutsche und europäis...",
+        "metadata": {
+          "chunk_index": 4.0,
+          "chunk_size": 3769.0,
+          "date": "2015-10-15",
+          "group": "None",
+          "lp": "18",
+          "original_text_id": "pp_18_130_00001",
+          "session": "130",
+          "source": "german_parliament",
+          "speaker": "Präsident Dr. Norbert Lammert",
+          "text": ". In den letzten Wochen haben wir hierbei einiges erreicht, jedenfalls viel Bundeskanzlerin Dr. Angela Merkel mehr als in vielen Monaten und Jahren zuvor. Denken wir nur an das Sondertreffen der Staats- und Regierungschefs am 23. April dieses Jahres, das keine wirklich weitreichenden Beschlüsse zustande gebracht hat. Damals gab es umfangreiche Kritik. 800 Menschen waren im Mittelmeer umgekommen. Nur wenig war als Schlussfolgerung zu sehen. National sind viele ganz zentrale innenpolitische Maßnahmen in dem jetzigen Gesetzespaket enthalten, das dem Bundestag heute zur Entscheidung vorliegt und das in enger Abstimmung mit den Ländern erarbeitet wurde. Ich möchte mich bei allen bedanken, die daran mitgewirkt haben. Es zeigt, dass unser Land nicht nur in Finanzkrisen schnell, flexibel und im Geiste des Miteinanders reagieren kann – Bund, Länder, Städte und Gemeinden –, sondern dass wir, wenn es um alles geht – auch um Kern und Inhalte unserer Grundwerte, also um unsere deutsche und europäis...",
+          "total_chunks": 10.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.10787861
+      }
+    ]
+  },
+  {
+    "question_id": "Q2",
+    "question_type": "对比类",
+    "question": "CDU/CSU和SPD在2015年对难民政策的立场有什么不同？",
+    "params": {
+      "year": "2015",
+      "parties": [
+        "CDU/CSU",
+        "SPD"
+      ],
+      "topic": "refugee"
+    },
+    "chunks_before_rerank": 20,
+    "chunks_after_rerank": 10,
+    "answer": "根据提供的德国议会发言记录，CDU/CSU和SPD在2015年对难民政策的立场存在明显的侧重点差异，同时也存在一些共识。\n\n### 立场差异\n\n**CDU/CSU**的立场更侧重于**控制和减少**难民数量，并为此提出了一系列具体措施。\n\n1.  **核心目标是“控制和减少”**：CDU/CSU发言人**Barbara Woltmann (2015-11-11)** 明确提出，其政策文件的核心目标之一是“安排和控制移民（Zuwanderung ordnen und steuern）”以及“打击偷渡根源，以减少难民数量”。\n2.  **强调限制入境**：发言人**Karl Schiewerling (2015-11-12)** 进一步强调，“必须明确限制入境（Begrenzung des Zuzugs）”，以便有能力帮助已经入境的人。\n3.  **推行限制性措施**：发言人**Gerda Hasselfeldt (2015-11-25)** 提到了具体的限制性措施，如将更多国家列为“安全来源国”以减少难民申请数量，以及通过在初级接待中心提供实物而非现金来“减少错误激励（Reduzierung von Fehlanreizen）”。\n\n**SPD**的立场则更侧重于**人道主义责任和国内的实际接纳与融合**。\n\n1.  **强调联邦责任和对地方的支持**：SPD发言人**Swen Schulz (2015-01-15)** 指出，难民政策是“一项国家任务”，联邦政府需要承担更多责任，以支持地方市镇“良好地接纳难民和寻求庇护者”。他还对关闭公共设施以安置难民可能引发的社会问题表示担忧。\n2.  **强调积极的社会氛围**：发言人**Kerstin Griese (2015-06-11)** 强烈反驳了德国社会充满敌意的说法，并强调了德国社会中前所未有的、广泛的志愿服务和对难民的积极支持。\n3.  **对CDU/CSU的限制性论点表示怀疑**：\n    *   当CDU/CSU的Barbara Woltmann声称其党派与总理在目标上完全一致时，SPD的**Rüdiger Veit (2015-11-11)** 插话道：“但也就到此为止了！（Da hört es dann aber auch auf!）”，这暗示了SPD认为双方在具体实施路径上存在重大分歧。\n    *   当CDU/CSU的Gerda Hasselfeldt谈到减少现金发放等“错误激励”时，SPD的**René Röspel (2015-11-25)** 讽刺地插话：“所以他们才都来我们这儿！”，这表明SPD对“难民是为了经济利益而来”这一论点持怀疑或批评态度。\n\n### 共同立场\n\n尽管存在上述差异，但作为执政联盟，双方在某些原则上也表现出一致：\n\n1.  **帮助真正需要帮助的人**：双方都同意有责任帮助处境危急的难民（文档1, 5）。\n2.  **认可社会志愿者的贡献**：SPD发言人Kerstin Griese在赞扬社会志愿工作时，获得了来自CDU/CSU议员的掌声（文档9）。\n3.  **区分对待难民**：CDU/CSU发言人Karl Schiewerling提出，应优先帮助那些“有居留前景”的人，而这一观点也获得了一位SPD议员（Kerstin Griese）的掌声（文档5），表明在优先处理真正受迫害的难民方面存在一定共识。\n\n### 总结\n\n基于现有资料：\n\n*   **CDU/CSU**在2015年的难民政策上，公开强调**控制、限制和减少**难民流入，并主张通过划定安全来源国、减少经济激励等具体措施来实现这一目标。\n*   **SPD**则更侧重于**人道主义责任、国内的实际安置能力和联邦政府的财政支持**。他们强调德国社会的欢迎文化，并对CDU/CSU提出的一些限制性措施的理由表示怀疑。\n\n**资料局限性说明**：这些发言记录是片段性的，虽然揭示了双方在公开辩论中的不同侧重点和一些分歧，但可能未完全展现执政联盟内部政策协商的全部复杂性。SPD的具体反提案在这些文件中体现得不如CDU/CSU的立场明确，其立场更多是通过对人道责任的强调和对CDU/CSU论点的反应来体现的。",
+    "timing": {
+      "retrieve": 0.5686385631561279,
+      "rerank": 1.1750459671020508,
+      "generate": 36.92150807380676,
+      "total": 38.66596245765686
+    },
+    "chunks": [
+      {
+        "id": "2015_1762417259_14444",
+        "score": 0.630724669,
+        "text": "Ja, Sie können sich schon darauf freuen. Matthias W. Birkwald[ DIE LINKE]: Wir sind hart im Nehmen! Frau Präsidentin! Meine sehr verehrten Damen und Herren! \" Menschen in Not helfen, Zuwanderung ordnen und steuern, Integration sichern“ – das ist der Titel des Positionspapiers von CDU/CSU vom 1. November 2015, in dem wir unsere zentralen Ziele benannt haben. Sie lauten erstens: Zuwanderung ordnen und steuern sowie Fluchtursachen bekämpfen, um so die Zahl der Flüchtlinge zu reduzieren, Zurufe von der LINKEN – und zweitens – Menschen in Not zu helfen und die Integration Schutzbedürftiger zu sichern. Hinsichtlich der Erreichung dieser dort formulierten Ziele sind wir uns mit der Bundeskanzlerin völlig einig. Rüdiger Veit[ SPD]: Da hört es dann aber auch auf! Insofern kann ich die Angriffe der Opposition nur zurückweisen. Es ist eine Mär, dass wir gegen die Bundeskanzlerin arbeiten. Das ist ganz und gar nicht so. Lachen bei Abgeordneten der LINKEN – Dr. Petra Sitte[ DIE LINKE]: Sie boykotti...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3980.0,
+          "date": "2015-11-11",
+          "group": "CDU/CSU",
+          "lp": "18",
+          "original_text_id": "pp_18_135_00236",
+          "session": "135",
+          "source": "german_parliament",
+          "speaker": "Barbara Woltmann",
+          "text": "Ja, Sie können sich schon darauf freuen. Matthias W. Birkwald[ DIE LINKE]: Wir sind hart im Nehmen! Frau Präsidentin! Meine sehr verehrten Damen und Herren! \" Menschen in Not helfen, Zuwanderung ordnen und steuern, Integration sichern“ – das ist der Titel des Positionspapiers von CDU/CSU vom 1. November 2015, in dem wir unsere zentralen Ziele benannt haben. Sie lauten erstens: Zuwanderung ordnen und steuern sowie Fluchtursachen bekämpfen, um so die Zahl der Flüchtlinge zu reduzieren, Zurufe von der LINKEN – und zweitens – Menschen in Not zu helfen und die Integration Schutzbedürftiger zu sichern. Hinsichtlich der Erreichung dieser dort formulierten Ziele sind wir uns mit der Bundeskanzlerin völlig einig. Rüdiger Veit[ SPD]: Da hört es dann aber auch auf! Insofern kann ich die Angriffe der Opposition nur zurückweisen. Es ist eine Mär, dass wir gegen die Bundeskanzlerin arbeiten. Das ist ganz und gar nicht so. Lachen bei Abgeordneten der LINKEN – Dr. Petra Sitte[ DIE LINKE]: Sie boykotti...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.78512776
+      },
+      {
+        "id": "2015_1762361835_14444",
+        "score": 0.630724669,
+        "text": "Ja, Sie können sich schon darauf freuen. Matthias W. Birkwald[ DIE LINKE]: Wir sind hart im Nehmen! Frau Präsidentin! Meine sehr verehrten Damen und Herren! \" Menschen in Not helfen, Zuwanderung ordnen und steuern, Integration sichern“ – das ist der Titel des Positionspapiers von CDU/CSU vom 1. November 2015, in dem wir unsere zentralen Ziele benannt haben. Sie lauten erstens: Zuwanderung ordnen und steuern sowie Fluchtursachen bekämpfen, um so die Zahl der Flüchtlinge zu reduzieren, Zurufe von der LINKEN – und zweitens – Menschen in Not zu helfen und die Integration Schutzbedürftiger zu sichern. Hinsichtlich der Erreichung dieser dort formulierten Ziele sind wir uns mit der Bundeskanzlerin völlig einig. Rüdiger Veit[ SPD]: Da hört es dann aber auch auf! Insofern kann ich die Angriffe der Opposition nur zurückweisen. Es ist eine Mär, dass wir gegen die Bundeskanzlerin arbeiten. Das ist ganz und gar nicht so. Lachen bei Abgeordneten der LINKEN – Dr. Petra Sitte[ DIE LINKE]: Sie boykotti...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3980.0,
+          "date": "2015-11-11",
+          "group": "CDU/CSU",
+          "lp": "18",
+          "original_text_id": "pp_18_135_00236",
+          "session": "135",
+          "source": "german_parliament",
+          "speaker": "Barbara Woltmann",
+          "text": "Ja, Sie können sich schon darauf freuen. Matthias W. Birkwald[ DIE LINKE]: Wir sind hart im Nehmen! Frau Präsidentin! Meine sehr verehrten Damen und Herren! \" Menschen in Not helfen, Zuwanderung ordnen und steuern, Integration sichern“ – das ist der Titel des Positionspapiers von CDU/CSU vom 1. November 2015, in dem wir unsere zentralen Ziele benannt haben. Sie lauten erstens: Zuwanderung ordnen und steuern sowie Fluchtursachen bekämpfen, um so die Zahl der Flüchtlinge zu reduzieren, Zurufe von der LINKEN – und zweitens – Menschen in Not zu helfen und die Integration Schutzbedürftiger zu sichern. Hinsichtlich der Erreichung dieser dort formulierten Ziele sind wir uns mit der Bundeskanzlerin völlig einig. Rüdiger Veit[ SPD]: Da hört es dann aber auch auf! Insofern kann ich die Angriffe der Opposition nur zurückweisen. Es ist eine Mär, dass wir gegen die Bundeskanzlerin arbeiten. Das ist ganz und gar nicht so. Lachen bei Abgeordneten der LINKEN – Dr. Petra Sitte[ DIE LINKE]: Sie boykotti...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.78512776
+      },
+      {
+        "id": "2015_1762361835_226",
+        "score": 0.575985312,
+        "text": ". Wir unterstützen die Kommunen und helfen ihnen, die Flüchtlinge und Asylbewerber gut aufzunehmen. Beifall bei der SPD sowie bei Abgeordneten der CDU/CSU Ich will aber nicht behaupten – damit es hier keine Missverständnisse gibt; Frau Haßelmann hat auf die Unterschiede hingewiesen –, dass damit jetzt alle Probleme gelöst sind. Die Frage, ob sich der Bund über die bisherigen Leistungen hinaus engagieren muss, ist verständlich; denn letztlich ist die Flüchtlingspolitik eine nationale Aufgabe. So müssen wir diese auch verstehen. Beifall bei Abgeordneten der SPD Ich sage das nicht nur, weil Sigmar Gabriel einen entsprechenden Vorstoß unternommen hat, sondern weil ich, wie andere Abgeordnete sicherlich auch, die Situation vor Ort sehe, die eben teilweise schwierig ist. Es ist vollkommen klar, dass wir in der Gesellschaft größere Schwierigkeiten bekommen, wenn es etwa heißen würde: Wir müssen das Schwimmbad schließen, weil wir eine Flüchtlingsunterkunft einrichten müssen. – Wir dürfen auf g...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 3568.0,
+          "date": "2015-01-15",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_079_00043",
+          "session": "079",
+          "source": "german_parliament",
+          "speaker": "Swen Schulz (Spandau)",
+          "text": ". Wir unterstützen die Kommunen und helfen ihnen, die Flüchtlinge und Asylbewerber gut aufzunehmen. Beifall bei der SPD sowie bei Abgeordneten der CDU/CSU Ich will aber nicht behaupten – damit es hier keine Missverständnisse gibt; Frau Haßelmann hat auf die Unterschiede hingewiesen –, dass damit jetzt alle Probleme gelöst sind. Die Frage, ob sich der Bund über die bisherigen Leistungen hinaus engagieren muss, ist verständlich; denn letztlich ist die Flüchtlingspolitik eine nationale Aufgabe. So müssen wir diese auch verstehen. Beifall bei Abgeordneten der SPD Ich sage das nicht nur, weil Sigmar Gabriel einen entsprechenden Vorstoß unternommen hat, sondern weil ich, wie andere Abgeordnete sicherlich auch, die Situation vor Ort sehe, die eben teilweise schwierig ist. Es ist vollkommen klar, dass wir in der Gesellschaft größere Schwierigkeiten bekommen, wenn es etwa heißen würde: Wir müssen das Schwimmbad schließen, weil wir eine Flüchtlingsunterkunft einrichten müssen. – Wir dürfen auf g...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.68420124
+      },
+      {
+        "id": "2015_1762417259_226",
+        "score": 0.575985312,
+        "text": ". Wir unterstützen die Kommunen und helfen ihnen, die Flüchtlinge und Asylbewerber gut aufzunehmen. Beifall bei der SPD sowie bei Abgeordneten der CDU/CSU Ich will aber nicht behaupten – damit es hier keine Missverständnisse gibt; Frau Haßelmann hat auf die Unterschiede hingewiesen –, dass damit jetzt alle Probleme gelöst sind. Die Frage, ob sich der Bund über die bisherigen Leistungen hinaus engagieren muss, ist verständlich; denn letztlich ist die Flüchtlingspolitik eine nationale Aufgabe. So müssen wir diese auch verstehen. Beifall bei Abgeordneten der SPD Ich sage das nicht nur, weil Sigmar Gabriel einen entsprechenden Vorstoß unternommen hat, sondern weil ich, wie andere Abgeordnete sicherlich auch, die Situation vor Ort sehe, die eben teilweise schwierig ist. Es ist vollkommen klar, dass wir in der Gesellschaft größere Schwierigkeiten bekommen, wenn es etwa heißen würde: Wir müssen das Schwimmbad schließen, weil wir eine Flüchtlingsunterkunft einrichten müssen. – Wir dürfen auf g...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 3568.0,
+          "date": "2015-01-15",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_079_00043",
+          "session": "079",
+          "source": "german_parliament",
+          "speaker": "Swen Schulz (Spandau)",
+          "text": ". Wir unterstützen die Kommunen und helfen ihnen, die Flüchtlinge und Asylbewerber gut aufzunehmen. Beifall bei der SPD sowie bei Abgeordneten der CDU/CSU Ich will aber nicht behaupten – damit es hier keine Missverständnisse gibt; Frau Haßelmann hat auf die Unterschiede hingewiesen –, dass damit jetzt alle Probleme gelöst sind. Die Frage, ob sich der Bund über die bisherigen Leistungen hinaus engagieren muss, ist verständlich; denn letztlich ist die Flüchtlingspolitik eine nationale Aufgabe. So müssen wir diese auch verstehen. Beifall bei Abgeordneten der SPD Ich sage das nicht nur, weil Sigmar Gabriel einen entsprechenden Vorstoß unternommen hat, sondern weil ich, wie andere Abgeordnete sicherlich auch, die Situation vor Ort sehe, die eben teilweise schwierig ist. Es ist vollkommen klar, dass wir in der Gesellschaft größere Schwierigkeiten bekommen, wenn es etwa heißen würde: Wir müssen das Schwimmbad schließen, weil wir eine Flüchtlingsunterkunft einrichten müssen. – Wir dürfen auf g...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.68420124
+      },
+      {
+        "id": "2015_1762417259_14492",
+        "score": 0.575248182,
+        "text": ". Mein Vertrauen gilt hier voll und ganz der Bundeskanzlerin und dem Handeln der Bundesregierung. Beifall bei der CDU/CSU Denn das Konzept ist eindeutig: Der Zustrom muss durch internationale Rahmenabkommen gestoppt werden. Wir müssen dafür sorgen, dass die Menschen in ihren Ländern bleiben können. Wir brauchen eine europäische Regelung, was die Aufnahme angeht, und wir brauchen eindeutig auch eine Begrenzung des Zuzugs, damit wir denen, die hier sind, entsprechend helfen können. Wir können nur denen helfen, die tatsächlich eine Bleibeperspektive haben. Denjenigen, die keine Bleibeperspektive haben, müssen wir sagen, dass wir Platz für die brauchen, deren Leib und Leben wirklich existenziell bedroht sind. Beifall bei der CDU/CSU sowie der Abg. Kerstin Griese[ SPD] Für die allerdings müssen wir alles tun. Ich glaube, wir sind auf einem guten Weg. Ich sage Ihnen: Die Zusammenlegung der Leitung der Bundesagentur für Arbeit und des BAMF in die Hand von Herrn Weise war eine der wichtigsten ...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 3924.0,
+          "date": "2015-11-12",
+          "group": "CDU/CSU",
+          "lp": "18",
+          "original_text_id": "pp_18_136_00023",
+          "session": "136",
+          "source": "german_parliament",
+          "speaker": "Karl Schiewerling",
+          "text": ". Mein Vertrauen gilt hier voll und ganz der Bundeskanzlerin und dem Handeln der Bundesregierung. Beifall bei der CDU/CSU Denn das Konzept ist eindeutig: Der Zustrom muss durch internationale Rahmenabkommen gestoppt werden. Wir müssen dafür sorgen, dass die Menschen in ihren Ländern bleiben können. Wir brauchen eine europäische Regelung, was die Aufnahme angeht, und wir brauchen eindeutig auch eine Begrenzung des Zuzugs, damit wir denen, die hier sind, entsprechend helfen können. Wir können nur denen helfen, die tatsächlich eine Bleibeperspektive haben. Denjenigen, die keine Bleibeperspektive haben, müssen wir sagen, dass wir Platz für die brauchen, deren Leib und Leben wirklich existenziell bedroht sind. Beifall bei der CDU/CSU sowie der Abg. Kerstin Griese[ SPD] Für die allerdings müssen wir alles tun. Ich glaube, wir sind auf einem guten Weg. Ich sage Ihnen: Die Zusammenlegung der Leitung der Bundesagentur für Arbeit und des BAMF in die Hand von Herrn Weise war eine der wichtigsten ...",
+          "total_chunks": 3.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.60133666
+      },
+      {
+        "id": "2015_1762361835_14492",
+        "score": 0.575248182,
+        "text": ". Mein Vertrauen gilt hier voll und ganz der Bundeskanzlerin und dem Handeln der Bundesregierung. Beifall bei der CDU/CSU Denn das Konzept ist eindeutig: Der Zustrom muss durch internationale Rahmenabkommen gestoppt werden. Wir müssen dafür sorgen, dass die Menschen in ihren Ländern bleiben können. Wir brauchen eine europäische Regelung, was die Aufnahme angeht, und wir brauchen eindeutig auch eine Begrenzung des Zuzugs, damit wir denen, die hier sind, entsprechend helfen können. Wir können nur denen helfen, die tatsächlich eine Bleibeperspektive haben. Denjenigen, die keine Bleibeperspektive haben, müssen wir sagen, dass wir Platz für die brauchen, deren Leib und Leben wirklich existenziell bedroht sind. Beifall bei der CDU/CSU sowie der Abg. Kerstin Griese[ SPD] Für die allerdings müssen wir alles tun. Ich glaube, wir sind auf einem guten Weg. Ich sage Ihnen: Die Zusammenlegung der Leitung der Bundesagentur für Arbeit und des BAMF in die Hand von Herrn Weise war eine der wichtigsten ...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 3924.0,
+          "date": "2015-11-12",
+          "group": "CDU/CSU",
+          "lp": "18",
+          "original_text_id": "pp_18_136_00023",
+          "session": "136",
+          "source": "german_parliament",
+          "speaker": "Karl Schiewerling",
+          "text": ". Mein Vertrauen gilt hier voll und ganz der Bundeskanzlerin und dem Handeln der Bundesregierung. Beifall bei der CDU/CSU Denn das Konzept ist eindeutig: Der Zustrom muss durch internationale Rahmenabkommen gestoppt werden. Wir müssen dafür sorgen, dass die Menschen in ihren Ländern bleiben können. Wir brauchen eine europäische Regelung, was die Aufnahme angeht, und wir brauchen eindeutig auch eine Begrenzung des Zuzugs, damit wir denen, die hier sind, entsprechend helfen können. Wir können nur denen helfen, die tatsächlich eine Bleibeperspektive haben. Denjenigen, die keine Bleibeperspektive haben, müssen wir sagen, dass wir Platz für die brauchen, deren Leib und Leben wirklich existenziell bedroht sind. Beifall bei der CDU/CSU sowie der Abg. Kerstin Griese[ SPD] Für die allerdings müssen wir alles tun. Ich glaube, wir sind auf einem guten Weg. Ich sage Ihnen: Die Zusammenlegung der Leitung der Bundesagentur für Arbeit und des BAMF in die Hand von Herrn Weise war eine der wichtigsten ...",
+          "total_chunks": 3.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.60133666
+      },
+      {
+        "id": "2015_1762361835_15318",
+        "score": 0.581271827,
+        "text": ". Wir wünschen ihr dabei viel Erfolg. Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Wir wissen, dass daneben auch nationale Maßnahmen notwendig sind. Wir haben das Asylpaket I verabschiedet, in dem es um die Einstufung weiterer Staaten als sichere Herkunftsstaaten ging. Liebe Kolleginnen und Kollegen, zur Wahrheit gehört: Wir hätten Hunderttausende von Flüchtlingen weniger im Land, wenn es uns gelungen wäre, diese Einstufung als sichere Herkunftsstaaten schon früher zu realisieren, und zwar damals, als wir das gefordert haben. Beifall bei der CDU/CSU Zur Wahrheit gehört, dass dies durch eine monatelange, fast ein Jahr lang andauernde Diskussion im Bundesrat verzögert wurde, weil wir dazu auch die Zustimmung der Grünen gebraucht haben, und diese ließ lange auf sich warten. Zu diesem Asylpaket gehört auch die Reduzierung von Fehlanreizen, zum Beispiel dadurch, dass in den Erstaufnahmeeinrichtungen nicht länger Geld-, René Röspel[ SPD]: Deswegen kommen die alle zu uns! sondern vo...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 3829.0,
+          "date": "2015-11-25",
+          "group": "CDU/CSU",
+          "lp": "18",
+          "original_text_id": "pp_18_139_00019",
+          "session": "139",
+          "source": "german_parliament",
+          "speaker": "Gerda Hasselfeldt",
+          "text": ". Wir wünschen ihr dabei viel Erfolg. Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Wir wissen, dass daneben auch nationale Maßnahmen notwendig sind. Wir haben das Asylpaket I verabschiedet, in dem es um die Einstufung weiterer Staaten als sichere Herkunftsstaaten ging. Liebe Kolleginnen und Kollegen, zur Wahrheit gehört: Wir hätten Hunderttausende von Flüchtlingen weniger im Land, wenn es uns gelungen wäre, diese Einstufung als sichere Herkunftsstaaten schon früher zu realisieren, und zwar damals, als wir das gefordert haben. Beifall bei der CDU/CSU Zur Wahrheit gehört, dass dies durch eine monatelange, fast ein Jahr lang andauernde Diskussion im Bundesrat verzögert wurde, weil wir dazu auch die Zustimmung der Grünen gebraucht haben, und diese ließ lange auf sich warten. Zu diesem Asylpaket gehört auch die Reduzierung von Fehlanreizen, zum Beispiel dadurch, dass in den Erstaufnahmeeinrichtungen nicht länger Geld-, René Röspel[ SPD]: Deswegen kommen die alle zu uns! sondern vo...",
+          "total_chunks": 3.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.5769478
+      },
+      {
+        "id": "2015_1762417259_15318",
+        "score": 0.581271827,
+        "text": ". Wir wünschen ihr dabei viel Erfolg. Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Wir wissen, dass daneben auch nationale Maßnahmen notwendig sind. Wir haben das Asylpaket I verabschiedet, in dem es um die Einstufung weiterer Staaten als sichere Herkunftsstaaten ging. Liebe Kolleginnen und Kollegen, zur Wahrheit gehört: Wir hätten Hunderttausende von Flüchtlingen weniger im Land, wenn es uns gelungen wäre, diese Einstufung als sichere Herkunftsstaaten schon früher zu realisieren, und zwar damals, als wir das gefordert haben. Beifall bei der CDU/CSU Zur Wahrheit gehört, dass dies durch eine monatelange, fast ein Jahr lang andauernde Diskussion im Bundesrat verzögert wurde, weil wir dazu auch die Zustimmung der Grünen gebraucht haben, und diese ließ lange auf sich warten. Zu diesem Asylpaket gehört auch die Reduzierung von Fehlanreizen, zum Beispiel dadurch, dass in den Erstaufnahmeeinrichtungen nicht länger Geld-, René Röspel[ SPD]: Deswegen kommen die alle zu uns! sondern vo...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 3829.0,
+          "date": "2015-11-25",
+          "group": "CDU/CSU",
+          "lp": "18",
+          "original_text_id": "pp_18_139_00019",
+          "session": "139",
+          "source": "german_parliament",
+          "speaker": "Gerda Hasselfeldt",
+          "text": ". Wir wünschen ihr dabei viel Erfolg. Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Wir wissen, dass daneben auch nationale Maßnahmen notwendig sind. Wir haben das Asylpaket I verabschiedet, in dem es um die Einstufung weiterer Staaten als sichere Herkunftsstaaten ging. Liebe Kolleginnen und Kollegen, zur Wahrheit gehört: Wir hätten Hunderttausende von Flüchtlingen weniger im Land, wenn es uns gelungen wäre, diese Einstufung als sichere Herkunftsstaaten schon früher zu realisieren, und zwar damals, als wir das gefordert haben. Beifall bei der CDU/CSU Zur Wahrheit gehört, dass dies durch eine monatelange, fast ein Jahr lang andauernde Diskussion im Bundesrat verzögert wurde, weil wir dazu auch die Zustimmung der Grünen gebraucht haben, und diese ließ lange auf sich warten. Zu diesem Asylpaket gehört auch die Reduzierung von Fehlanreizen, zum Beispiel dadurch, dass in den Erstaufnahmeeinrichtungen nicht länger Geld-, René Röspel[ SPD]: Deswegen kommen die alle zu uns! sondern vo...",
+          "total_chunks": 3.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.5769478
+      },
+      {
+        "id": "2015_1762417259_7834",
+        "score": 0.576060772,
+        "text": "Herr Präsident! Liebe Kolleginnen und Kollegen! Liebe Frau Kollegin Dağdelen, wirklich ärgerlich und auch schädlich für diese Debatte ist, Sabine Weiss[ Wesel I][ CDU/CSU]: Ja, schädlich! dass Sie so tun, als sei dieses ganze Land rassistisch und flüchtlingsfeindlich. Das stimmt nicht. Beifall bei der SPD und der CDU/CSU sowie bei Abgeordneten des BÜNDNISSES 90 / DIE GRÜNEN Wir haben so viel ehrenamtliches Engagement in den Städten, vor Ort, quer durch alle Vereine, Parteien, politische Richtungen und Kirchengemeinden. Es gibt so viel Engagement für Flüchtlinge wie noch nie. Wir haben eine komplett andere Situation als vor 20 Jahren, und ich bin sehr dankbar dafür, dass das so ist. Beifall bei der SPD und der CDU/CSU sowie bei Abgeordneten des BÜNDNISSES 90 / DIE GRÜNEN Es hilft der Sache nicht, das Gegenteil zu behaupten. Natürlich ist noch nicht alles gut. Vieles kann noch besser werden. Aber wir haben in den letzten Monaten in diesem Bereich so viel verbessert wie noch nie. Wir habe...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3840.0,
+          "date": "2015-06-11",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_109_00047",
+          "session": "109",
+          "source": "german_parliament",
+          "speaker": "Kerstin Griese",
+          "text": "Herr Präsident! Liebe Kolleginnen und Kollegen! Liebe Frau Kollegin Dağdelen, wirklich ärgerlich und auch schädlich für diese Debatte ist, Sabine Weiss[ Wesel I][ CDU/CSU]: Ja, schädlich! dass Sie so tun, als sei dieses ganze Land rassistisch und flüchtlingsfeindlich. Das stimmt nicht. Beifall bei der SPD und der CDU/CSU sowie bei Abgeordneten des BÜNDNISSES 90 / DIE GRÜNEN Wir haben so viel ehrenamtliches Engagement in den Städten, vor Ort, quer durch alle Vereine, Parteien, politische Richtungen und Kirchengemeinden. Es gibt so viel Engagement für Flüchtlinge wie noch nie. Wir haben eine komplett andere Situation als vor 20 Jahren, und ich bin sehr dankbar dafür, dass das so ist. Beifall bei der SPD und der CDU/CSU sowie bei Abgeordneten des BÜNDNISSES 90 / DIE GRÜNEN Es hilft der Sache nicht, das Gegenteil zu behaupten. Natürlich ist noch nicht alles gut. Vieles kann noch besser werden. Aber wir haben in den letzten Monaten in diesem Bereich so viel verbessert wie noch nie. Wir habe...",
+          "total_chunks": 3.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.54303354
+      },
+      {
+        "id": "2015_1762361835_7834",
+        "score": 0.576060772,
+        "text": "Herr Präsident! Liebe Kolleginnen und Kollegen! Liebe Frau Kollegin Dağdelen, wirklich ärgerlich und auch schädlich für diese Debatte ist, Sabine Weiss[ Wesel I][ CDU/CSU]: Ja, schädlich! dass Sie so tun, als sei dieses ganze Land rassistisch und flüchtlingsfeindlich. Das stimmt nicht. Beifall bei der SPD und der CDU/CSU sowie bei Abgeordneten des BÜNDNISSES 90 / DIE GRÜNEN Wir haben so viel ehrenamtliches Engagement in den Städten, vor Ort, quer durch alle Vereine, Parteien, politische Richtungen und Kirchengemeinden. Es gibt so viel Engagement für Flüchtlinge wie noch nie. Wir haben eine komplett andere Situation als vor 20 Jahren, und ich bin sehr dankbar dafür, dass das so ist. Beifall bei der SPD und der CDU/CSU sowie bei Abgeordneten des BÜNDNISSES 90 / DIE GRÜNEN Es hilft der Sache nicht, das Gegenteil zu behaupten. Natürlich ist noch nicht alles gut. Vieles kann noch besser werden. Aber wir haben in den letzten Monaten in diesem Bereich so viel verbessert wie noch nie. Wir habe...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3840.0,
+          "date": "2015-06-11",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_109_00047",
+          "session": "109",
+          "source": "german_parliament",
+          "speaker": "Kerstin Griese",
+          "text": "Herr Präsident! Liebe Kolleginnen und Kollegen! Liebe Frau Kollegin Dağdelen, wirklich ärgerlich und auch schädlich für diese Debatte ist, Sabine Weiss[ Wesel I][ CDU/CSU]: Ja, schädlich! dass Sie so tun, als sei dieses ganze Land rassistisch und flüchtlingsfeindlich. Das stimmt nicht. Beifall bei der SPD und der CDU/CSU sowie bei Abgeordneten des BÜNDNISSES 90 / DIE GRÜNEN Wir haben so viel ehrenamtliches Engagement in den Städten, vor Ort, quer durch alle Vereine, Parteien, politische Richtungen und Kirchengemeinden. Es gibt so viel Engagement für Flüchtlinge wie noch nie. Wir haben eine komplett andere Situation als vor 20 Jahren, und ich bin sehr dankbar dafür, dass das so ist. Beifall bei der SPD und der CDU/CSU sowie bei Abgeordneten des BÜNDNISSES 90 / DIE GRÜNEN Es hilft der Sache nicht, das Gegenteil zu behaupten. Natürlich ist noch nicht alles gut. Vieles kann noch besser werden. Aber wir haben in den letzten Monaten in diesem Bereich so viel verbessert wie noch nie. Wir habe...",
+          "total_chunks": 3.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.54303354
+      }
+    ]
+  },
+  {
+    "question_id": "Q3",
+    "question_type": "观点类",
+    "question": "2015年德国议会议员对欧盟一体化的主要观点是什么？",
+    "params": {
+      "year": "2015",
+      "topic": "EU"
+    },
+    "chunks_before_rerank": 20,
+    "chunks_after_rerank": 10,
+    "answer": "根据您提供的德国议会发言记录，2015年议员们对欧盟一体化的主要观点可以总结如下：\n\n总体来看，所引用的发言者普遍支持欧盟一体化，认为这是应对挑战、促进繁荣的必要路径。然而，他们关注的重点和对一体化方式的看法存在差异。\n\n### 1. 欧盟一体化是应对多重危机的必要手段\n\n2015年被视为欧盟极其困难的一年。议员们认为，面对恐怖主义、经济危机和难民潮等多重挑战，欧洲的团结与合作至关重要。\n\n*   **Thomas Oppermann (SPD, 2015-12-16)** 指出，2015年是欧盟近几十年来最困难的一年，面临着巴黎恐怖袭击、希腊债务危机和难民危机三大挑战。他强调，值得庆幸的是“欧洲在法国恐怖袭击后保持了团结”并采取了共同行动。这表明，面对外部冲击，加强欧盟内部的团结与合作被视为一种必要且成功的应对策略。\n\n### 2. 深化经济与基础设施一体化以增强竞争力\n\n议员们普遍认为，为了德国和欧洲的经济利益，需要进一步推动市场和基础设施的一体化。\n\n*   **Ronja Schmitt (CDU/CSU, 2015-05-21)** 明确提出，“欧洲内部市场的整合需要加速建设跨欧洲基础设施”，这不仅包括交通，也涵盖数字单一市场和欧洲能源网络。她以能源联盟为例，强调跨境连接对于保障能源供应安全和价格稳定至关重要，并认为这对德国这样的出口国和工业区有直接好处。\n*   **Präsident Dr. Norbert Lammert (2015-06-18)** 在发言中传达了德国和法国的共同目标，即“为了欧洲人民的福祉，尽快进一步加强竞争力、增长和就业”。他以“数字议程”为例，说明许多挑战“我们通过欧洲的方式可以比单打独斗解决得好得多”，这代表了主流执政党将欧盟一体化视为提升国家和地区竞争力的核心工具。\n\n### 3. 强调社会公平与共同责任\n\n部分议员认为，欧盟一体化不仅是经济项目，也应是一个社会项目，需要成员国之间共担责任，尤其是在经济领域。\n\n*   **Joachim Poß (SPD, 2015-01-29)** 强调，为了实现公平和财政稳定，欧洲需要在打击税收倾销和建立金融交易税等方面取得成功。他指出，“只有当问题最严重的国家重新站起来时，欧元区的经济和社会稳定才能实现”。这体现了一种观点，即欧盟的稳定依赖于内部的团结互助，富裕国家（如德国）有责任支持陷入困境的伙伴。\n\n### 4. 对一体化模式的批判与对民主化的呼吁\n\n尽管支持一体化的大方向，但也有议员对当前一体化的推进方式提出了尖锐批评，认为其缺乏民主合法性。\n\n*   **Manuel Sarrazin (Grüne/Bündnis 90, 2015-06-18)** 认为，欧盟合法性问题的“真正原因”是“没有足够的勇气将危机政策与勇敢的欧洲民主一体化议程相结合”。他批评由“德法主导的理事会”向其他国家发号施令的模式，并呼吁建立一个“不同的欧洲”，希望欧洲经济与货币联盟“由欧洲行动者为了欧洲的利益来领导”。这代表了一种要求更深化、更民主的联邦主义欧洲的观点，而不仅仅是政府间的合作。\n\n### 资料局限性说明\n\n需要明确指出，以上观点基于有限的几份发言记录，并不能完全代表2015年德国议会所有党派的完整立场。\n\n*   **代表性有限**：资料主要来自社民党（SPD）、基民盟/基社盟（CDU/CSU）和绿党（Grüne/Bündnis 90）的议员。缺少了如左翼党（Die Linke）或其他可能对欧盟持更批判态度的党派的观点。\n*   **时间点局限**：发言记录来自年内的几个特定日期，反映的是当时特定议题下的立场，而非全年的持续性观点。\n*   **发言者数量少**：仅凭几位议员的发言，难以概括整个议会的复杂图景。\n\n尽管如此，这些资料清晰地展示了2015年德国主流政党在面对危机时，普遍将“更深入的欧洲一体化”视为解决方案，但对于一体化的具体路径（经济优先、社会公平还是民主深化）则存在不同的侧重和争论。",
+    "timing": {
+      "retrieve": 0.7138736248016357,
+      "rerank": 0.951840877532959,
+      "generate": 33.45281767845154,
+      "total": 35.119300365448
+    },
+    "chunks": [
+      {
+        "id": "2015_1762417259_16719",
+        "score": 0.59709537,
+        "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3945.0,
+          "date": "2015-12-16",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_145_00033",
+          "session": "145",
+          "source": "german_parliament",
+          "speaker": "Thomas Oppermann",
+          "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+          "total_chunks": 5.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.29704714
+      },
+      {
+        "id": "2015_1762361835_16719",
+        "score": 0.59709537,
+        "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3945.0,
+          "date": "2015-12-16",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_145_00033",
+          "session": "145",
+          "source": "german_parliament",
+          "speaker": "Thomas Oppermann",
+          "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+          "total_chunks": 5.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.29704714
+      },
+      {
+        "id": "2015_1762361835_7159",
+        "score": 0.569583833,
+        "text": ". Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Die Integration des europäischen Binnenmarktes macht zudem einen forcierten Ausbau transeuropäischer Infrastruktur nötig. Das gilt nicht nur im Verkehr, sondern auch mit Blick auf den digitalen Binnenmarkt und die europäischen Energienetze. Die grenzüberschreitenden Verbindungen im Rahmen der Energieunion sind von enormer, zentraler Wichtigkeit für Versorgungssicherheit und für Preisstabilität. Beifall bei Abgeordneten der CDU/CSU Der Strom muss jetzt endlich auch dorthin fließen können, wo er gebraucht wird. Beifall bei der CDU/CSU Als Baden-Württembergerin sehe ich hier gerade im Grenzbereich zu Frankreich noch einen Nachhol- und Ausbaubedarf, zum Beispiel beim Ausbau der Grenzkuppelstellen. Dies wäre hilfreich für Deutschland als Exportnation, für meine Heimat Baden-Württemberg als zentrale Industrieregion in Europa und für meinen Wahlkreis Alb-Donau / Ulm mit einer ganzen Reihe herausragender Industriebetriebe. Der österreich...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 2148.0,
+          "date": "2015-05-21",
+          "group": "CDU/CSU",
+          "lp": "18",
+          "original_text_id": "pp_18_106_00167",
+          "session": "106",
+          "source": "german_parliament",
+          "speaker": "Ronja Schmitt (Althengstett)",
+          "text": ". Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Die Integration des europäischen Binnenmarktes macht zudem einen forcierten Ausbau transeuropäischer Infrastruktur nötig. Das gilt nicht nur im Verkehr, sondern auch mit Blick auf den digitalen Binnenmarkt und die europäischen Energienetze. Die grenzüberschreitenden Verbindungen im Rahmen der Energieunion sind von enormer, zentraler Wichtigkeit für Versorgungssicherheit und für Preisstabilität. Beifall bei Abgeordneten der CDU/CSU Der Strom muss jetzt endlich auch dorthin fließen können, wo er gebraucht wird. Beifall bei der CDU/CSU Als Baden-Württembergerin sehe ich hier gerade im Grenzbereich zu Frankreich noch einen Nachhol- und Ausbaubedarf, zum Beispiel beim Ausbau der Grenzkuppelstellen. Dies wäre hilfreich für Deutschland als Exportnation, für meine Heimat Baden-Württemberg als zentrale Industrieregion in Europa und für meinen Wahlkreis Alb-Donau / Ulm mit einer ganzen Reihe herausragender Industriebetriebe. Der österreich...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.26479107
+      },
+      {
+        "id": "2015_1762417259_7159",
+        "score": 0.569583833,
+        "text": ". Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Die Integration des europäischen Binnenmarktes macht zudem einen forcierten Ausbau transeuropäischer Infrastruktur nötig. Das gilt nicht nur im Verkehr, sondern auch mit Blick auf den digitalen Binnenmarkt und die europäischen Energienetze. Die grenzüberschreitenden Verbindungen im Rahmen der Energieunion sind von enormer, zentraler Wichtigkeit für Versorgungssicherheit und für Preisstabilität. Beifall bei Abgeordneten der CDU/CSU Der Strom muss jetzt endlich auch dorthin fließen können, wo er gebraucht wird. Beifall bei der CDU/CSU Als Baden-Württembergerin sehe ich hier gerade im Grenzbereich zu Frankreich noch einen Nachhol- und Ausbaubedarf, zum Beispiel beim Ausbau der Grenzkuppelstellen. Dies wäre hilfreich für Deutschland als Exportnation, für meine Heimat Baden-Württemberg als zentrale Industrieregion in Europa und für meinen Wahlkreis Alb-Donau / Ulm mit einer ganzen Reihe herausragender Industriebetriebe. Der österreich...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 2148.0,
+          "date": "2015-05-21",
+          "group": "CDU/CSU",
+          "lp": "18",
+          "original_text_id": "pp_18_106_00167",
+          "session": "106",
+          "source": "german_parliament",
+          "speaker": "Ronja Schmitt (Althengstett)",
+          "text": ". Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Die Integration des europäischen Binnenmarktes macht zudem einen forcierten Ausbau transeuropäischer Infrastruktur nötig. Das gilt nicht nur im Verkehr, sondern auch mit Blick auf den digitalen Binnenmarkt und die europäischen Energienetze. Die grenzüberschreitenden Verbindungen im Rahmen der Energieunion sind von enormer, zentraler Wichtigkeit für Versorgungssicherheit und für Preisstabilität. Beifall bei Abgeordneten der CDU/CSU Der Strom muss jetzt endlich auch dorthin fließen können, wo er gebraucht wird. Beifall bei der CDU/CSU Als Baden-Württembergerin sehe ich hier gerade im Grenzbereich zu Frankreich noch einen Nachhol- und Ausbaubedarf, zum Beispiel beim Ausbau der Grenzkuppelstellen. Dies wäre hilfreich für Deutschland als Exportnation, für meine Heimat Baden-Württemberg als zentrale Industrieregion in Europa und für meinen Wahlkreis Alb-Donau / Ulm mit einer ganzen Reihe herausragender Industriebetriebe. Der österreich...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.26479107
+      },
+      {
+        "id": "2015_1762417259_970",
+        "score": 0.56260103,
+        "text": ". Denn wir sehen ja die Wahlergebnisse; ich denke dabei nicht nur an Griechenland, sondern auch an andere Trends. Erfolge – zum Beispiel im Kampf gegen Steuerdumping, und zwar nicht nur in Luxemburg – brauchen wir in Europa aus Gerechtigkeitsgründen und aus finanziellen Gründen. Schließlich brauchen wir auch eine vernünftige Finanztransaktionsteuer. Das sind drei wichtige Punkte, in denen sich die Kommission, das Europaparlament und auch die nationalen Parlamente, auch wir, beweisen müssen, indem sie sagen: Das ist unser europäisches Projekt; daran arbeiten wir, und wir erreichen Fortschritte. – Diese messbaren Fortschritte müssen wir in diesem Jahr schaffen, liebe Kolleginnen und Kollegen, und zwar mit deutscher Unterstützung und einer breiten Mehrheit. Beifall bei der SPD Es muss in Deutschland auch verstanden werden: Die wirtschaftliche und die soziale Stabilität der Euro-Zone wird nur dann zu erreichen sein, wenn die Länder mit den größten Problemen wieder auf die Beine kommen. Das...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 1910.0,
+          "date": "2015-01-29",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_082_00063",
+          "session": "082",
+          "source": "german_parliament",
+          "speaker": "Joachim Poß",
+          "text": ". Denn wir sehen ja die Wahlergebnisse; ich denke dabei nicht nur an Griechenland, sondern auch an andere Trends. Erfolge – zum Beispiel im Kampf gegen Steuerdumping, und zwar nicht nur in Luxemburg – brauchen wir in Europa aus Gerechtigkeitsgründen und aus finanziellen Gründen. Schließlich brauchen wir auch eine vernünftige Finanztransaktionsteuer. Das sind drei wichtige Punkte, in denen sich die Kommission, das Europaparlament und auch die nationalen Parlamente, auch wir, beweisen müssen, indem sie sagen: Das ist unser europäisches Projekt; daran arbeiten wir, und wir erreichen Fortschritte. – Diese messbaren Fortschritte müssen wir in diesem Jahr schaffen, liebe Kolleginnen und Kollegen, und zwar mit deutscher Unterstützung und einer breiten Mehrheit. Beifall bei der SPD Es muss in Deutschland auch verstanden werden: Die wirtschaftliche und die soziale Stabilität der Euro-Zone wird nur dann zu erreichen sein, wenn die Länder mit den größten Problemen wieder auf die Beine kommen. Das...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.25809497
+      },
+      {
+        "id": "2015_1762361835_970",
+        "score": 0.56260103,
+        "text": ". Denn wir sehen ja die Wahlergebnisse; ich denke dabei nicht nur an Griechenland, sondern auch an andere Trends. Erfolge – zum Beispiel im Kampf gegen Steuerdumping, und zwar nicht nur in Luxemburg – brauchen wir in Europa aus Gerechtigkeitsgründen und aus finanziellen Gründen. Schließlich brauchen wir auch eine vernünftige Finanztransaktionsteuer. Das sind drei wichtige Punkte, in denen sich die Kommission, das Europaparlament und auch die nationalen Parlamente, auch wir, beweisen müssen, indem sie sagen: Das ist unser europäisches Projekt; daran arbeiten wir, und wir erreichen Fortschritte. – Diese messbaren Fortschritte müssen wir in diesem Jahr schaffen, liebe Kolleginnen und Kollegen, und zwar mit deutscher Unterstützung und einer breiten Mehrheit. Beifall bei der SPD Es muss in Deutschland auch verstanden werden: Die wirtschaftliche und die soziale Stabilität der Euro-Zone wird nur dann zu erreichen sein, wenn die Länder mit den größten Problemen wieder auf die Beine kommen. Das...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 1910.0,
+          "date": "2015-01-29",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_082_00063",
+          "session": "082",
+          "source": "german_parliament",
+          "speaker": "Joachim Poß",
+          "text": ". Denn wir sehen ja die Wahlergebnisse; ich denke dabei nicht nur an Griechenland, sondern auch an andere Trends. Erfolge – zum Beispiel im Kampf gegen Steuerdumping, und zwar nicht nur in Luxemburg – brauchen wir in Europa aus Gerechtigkeitsgründen und aus finanziellen Gründen. Schließlich brauchen wir auch eine vernünftige Finanztransaktionsteuer. Das sind drei wichtige Punkte, in denen sich die Kommission, das Europaparlament und auch die nationalen Parlamente, auch wir, beweisen müssen, indem sie sagen: Das ist unser europäisches Projekt; daran arbeiten wir, und wir erreichen Fortschritte. – Diese messbaren Fortschritte müssen wir in diesem Jahr schaffen, liebe Kolleginnen und Kollegen, und zwar mit deutscher Unterstützung und einer breiten Mehrheit. Beifall bei der SPD Es muss in Deutschland auch verstanden werden: Die wirtschaftliche und die soziale Stabilität der Euro-Zone wird nur dann zu erreichen sein, wenn die Länder mit den größten Problemen wieder auf die Beine kommen. Das...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.25809497
+      },
+      {
+        "id": "2015_1762417259_8521",
+        "score": 0.56943804,
+        "text": ". Wir wollen einen qualitativ neuen Prozess zwischen der europäischen Ebene und den einzelnen Mitgliedstaaten, einen Prozess, der zu konkreten und im jeweiligen Mitgliedstaat zu demokratisch legitimierten Umsetzungsmaßnahmen führt. Das übergreifende gemeinsame Ziel von Deutschland und Frankreich ist, Wettbewerbsfähigkeit, Wachstum und Beschäftigung zum Wohle der Menschen in Europa möglichst schnell weiter zur stärken. Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Dazu müssen zum einen die Strukturreformen in den Mitgliedstaaten fortgesetzt werden. Zum anderen müssen gleichzeitig nationale Anstrengungen bestmöglich durch europäische Anstrengungen begleitet und unterstützt werden. Bundeskanzlerin Dr. Angela Merkel Ein Beispiel dafür ist die Digitale Agenda. Gerade für Deutschland als Industrienation bietet die Digitalisierung enorme Chancen. Sie stellt uns aber auch vor zahlreiche Herausforderungen, die wir europäisch deutlich besser lösen können als alleine. Dazu gehören der Ne...",
+        "metadata": {
+          "chunk_index": 4.0,
+          "chunk_size": 3988.0,
+          "date": "2015-06-18",
+          "group": "None",
+          "lp": "18",
+          "original_text_id": "pp_18_112_00001",
+          "session": "112",
+          "source": "german_parliament",
+          "speaker": "Präsident Dr. Norbert Lammert",
+          "text": ". Wir wollen einen qualitativ neuen Prozess zwischen der europäischen Ebene und den einzelnen Mitgliedstaaten, einen Prozess, der zu konkreten und im jeweiligen Mitgliedstaat zu demokratisch legitimierten Umsetzungsmaßnahmen führt. Das übergreifende gemeinsame Ziel von Deutschland und Frankreich ist, Wettbewerbsfähigkeit, Wachstum und Beschäftigung zum Wohle der Menschen in Europa möglichst schnell weiter zur stärken. Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Dazu müssen zum einen die Strukturreformen in den Mitgliedstaaten fortgesetzt werden. Zum anderen müssen gleichzeitig nationale Anstrengungen bestmöglich durch europäische Anstrengungen begleitet und unterstützt werden. Bundeskanzlerin Dr. Angela Merkel Ein Beispiel dafür ist die Digitale Agenda. Gerade für Deutschland als Industrienation bietet die Digitalisierung enorme Chancen. Sie stellt uns aber auch vor zahlreiche Herausforderungen, die wir europäisch deutlich besser lösen können als alleine. Dazu gehören der Ne...",
+          "total_chunks": 8.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.16004303
+      },
+      {
+        "id": "2015_1762361835_8521",
+        "score": 0.56943804,
+        "text": ". Wir wollen einen qualitativ neuen Prozess zwischen der europäischen Ebene und den einzelnen Mitgliedstaaten, einen Prozess, der zu konkreten und im jeweiligen Mitgliedstaat zu demokratisch legitimierten Umsetzungsmaßnahmen führt. Das übergreifende gemeinsame Ziel von Deutschland und Frankreich ist, Wettbewerbsfähigkeit, Wachstum und Beschäftigung zum Wohle der Menschen in Europa möglichst schnell weiter zur stärken. Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Dazu müssen zum einen die Strukturreformen in den Mitgliedstaaten fortgesetzt werden. Zum anderen müssen gleichzeitig nationale Anstrengungen bestmöglich durch europäische Anstrengungen begleitet und unterstützt werden. Bundeskanzlerin Dr. Angela Merkel Ein Beispiel dafür ist die Digitale Agenda. Gerade für Deutschland als Industrienation bietet die Digitalisierung enorme Chancen. Sie stellt uns aber auch vor zahlreiche Herausforderungen, die wir europäisch deutlich besser lösen können als alleine. Dazu gehören der Ne...",
+        "metadata": {
+          "chunk_index": 4.0,
+          "chunk_size": 3988.0,
+          "date": "2015-06-18",
+          "group": "None",
+          "lp": "18",
+          "original_text_id": "pp_18_112_00001",
+          "session": "112",
+          "source": "german_parliament",
+          "speaker": "Präsident Dr. Norbert Lammert",
+          "text": ". Wir wollen einen qualitativ neuen Prozess zwischen der europäischen Ebene und den einzelnen Mitgliedstaaten, einen Prozess, der zu konkreten und im jeweiligen Mitgliedstaat zu demokratisch legitimierten Umsetzungsmaßnahmen führt. Das übergreifende gemeinsame Ziel von Deutschland und Frankreich ist, Wettbewerbsfähigkeit, Wachstum und Beschäftigung zum Wohle der Menschen in Europa möglichst schnell weiter zur stärken. Beifall bei der CDU/CSU sowie bei Abgeordneten der SPD Dazu müssen zum einen die Strukturreformen in den Mitgliedstaaten fortgesetzt werden. Zum anderen müssen gleichzeitig nationale Anstrengungen bestmöglich durch europäische Anstrengungen begleitet und unterstützt werden. Bundeskanzlerin Dr. Angela Merkel Ein Beispiel dafür ist die Digitale Agenda. Gerade für Deutschland als Industrienation bietet die Digitalisierung enorme Chancen. Sie stellt uns aber auch vor zahlreiche Herausforderungen, die wir europäisch deutlich besser lösen können als alleine. Dazu gehören der Ne...",
+          "total_chunks": 8.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.16004303
+      },
+      {
+        "id": "2015_1762417259_8570",
+        "score": 0.579470694,
+        "text": ". Der wahre Grund für diese Legitimationsprobleme ist aber das zentrale Versäumnis, nicht genügend Mut zu haben, die Krisenpolitik und das Management von Anfang an mit einer mutigen Agenda der demokratischen Integration Europas zu verbinden. Beifall beim BÜNDNIS 90 / DIE GRÜNEN Auf der einen Seite Europa voranzutreiben, mehr europäisches Interesse zu brauchen, auf der anderen Seite einfach seit fünf Jahren nichts zu liefern, wenn es um die demokratische Integration geht, das ist das, was die Legitimationsprobleme in Deutschland hervorruft, und nicht irgendwelche Machofinanzminister aus Athen oder sonst wo. Beifall beim BÜNDNIS 90 / DIE GRÜNEN Wir brauchen ein anderes Europa. Da haben wir Grüne unglaubliche Differenzen zu Ihrem Bild von Europa. Wir wollen nämlich, dass die Europäische Wirtschafts- und Währungsunion durch europäisch handelnde Akteure im europäischen Interesse geleitet wird, nicht durch ein deutsch-französisches Direktorium, das allen anderen sagt, wo es langgeht, und imm...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 2454.0,
+          "date": "2015-06-18",
+          "group": "Grüne/Bündnis 90",
+          "lp": "18",
+          "original_text_id": "pp_18_112_00034",
+          "session": "112",
+          "source": "german_parliament",
+          "speaker": "Manuel Sarrazin",
+          "text": ". Der wahre Grund für diese Legitimationsprobleme ist aber das zentrale Versäumnis, nicht genügend Mut zu haben, die Krisenpolitik und das Management von Anfang an mit einer mutigen Agenda der demokratischen Integration Europas zu verbinden. Beifall beim BÜNDNIS 90 / DIE GRÜNEN Auf der einen Seite Europa voranzutreiben, mehr europäisches Interesse zu brauchen, auf der anderen Seite einfach seit fünf Jahren nichts zu liefern, wenn es um die demokratische Integration geht, das ist das, was die Legitimationsprobleme in Deutschland hervorruft, und nicht irgendwelche Machofinanzminister aus Athen oder sonst wo. Beifall beim BÜNDNIS 90 / DIE GRÜNEN Wir brauchen ein anderes Europa. Da haben wir Grüne unglaubliche Differenzen zu Ihrem Bild von Europa. Wir wollen nämlich, dass die Europäische Wirtschafts- und Währungsunion durch europäisch handelnde Akteure im europäischen Interesse geleitet wird, nicht durch ein deutsch-französisches Direktorium, das allen anderen sagt, wo es langgeht, und imm...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.15722771
+      },
+      {
+        "id": "2015_1762361835_8570",
+        "score": 0.579470694,
+        "text": ". Der wahre Grund für diese Legitimationsprobleme ist aber das zentrale Versäumnis, nicht genügend Mut zu haben, die Krisenpolitik und das Management von Anfang an mit einer mutigen Agenda der demokratischen Integration Europas zu verbinden. Beifall beim BÜNDNIS 90 / DIE GRÜNEN Auf der einen Seite Europa voranzutreiben, mehr europäisches Interesse zu brauchen, auf der anderen Seite einfach seit fünf Jahren nichts zu liefern, wenn es um die demokratische Integration geht, das ist das, was die Legitimationsprobleme in Deutschland hervorruft, und nicht irgendwelche Machofinanzminister aus Athen oder sonst wo. Beifall beim BÜNDNIS 90 / DIE GRÜNEN Wir brauchen ein anderes Europa. Da haben wir Grüne unglaubliche Differenzen zu Ihrem Bild von Europa. Wir wollen nämlich, dass die Europäische Wirtschafts- und Währungsunion durch europäisch handelnde Akteure im europäischen Interesse geleitet wird, nicht durch ein deutsch-französisches Direktorium, das allen anderen sagt, wo es langgeht, und imm...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 2454.0,
+          "date": "2015-06-18",
+          "group": "Grüne/Bündnis 90",
+          "lp": "18",
+          "original_text_id": "pp_18_112_00034",
+          "session": "112",
+          "source": "german_parliament",
+          "speaker": "Manuel Sarrazin",
+          "text": ". Der wahre Grund für diese Legitimationsprobleme ist aber das zentrale Versäumnis, nicht genügend Mut zu haben, die Krisenpolitik und das Management von Anfang an mit einer mutigen Agenda der demokratischen Integration Europas zu verbinden. Beifall beim BÜNDNIS 90 / DIE GRÜNEN Auf der einen Seite Europa voranzutreiben, mehr europäisches Interesse zu brauchen, auf der anderen Seite einfach seit fünf Jahren nichts zu liefern, wenn es um die demokratische Integration geht, das ist das, was die Legitimationsprobleme in Deutschland hervorruft, und nicht irgendwelche Machofinanzminister aus Athen oder sonst wo. Beifall beim BÜNDNIS 90 / DIE GRÜNEN Wir brauchen ein anderes Europa. Da haben wir Grüne unglaubliche Differenzen zu Ihrem Bild von Europa. Wir wollen nämlich, dass die Europäische Wirtschafts- und Währungsunion durch europäisch handelnde Akteure im europäischen Interesse geleitet wird, nicht durch ein deutsch-französisches Direktorium, das allen anderen sagt, wo es langgeht, und imm...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.15722771
+      }
+    ]
+  },
+  {
+    "question_id": "Q4",
+    "question_type": "事实查询",
+    "question": "2015年德国议会有哪些重要法案被讨论？",
+    "params": {
+      "year": "2015"
+    },
+    "chunks_before_rerank": 20,
+    "chunks_after_rerank": 10,
+    "answer": "根据提供的德国议会发言记录，2015年讨论了以下几项重要法案：\n\n1.  **庇护与移民相关法案**\n    *   **《庇护程序加速法》(Asylverfahrensbeschleunigungsgesetz)**：\n        CDU/CSU党派的发言人Jana Schimke在2015年10月15日的发言中明确指出，议会当天通过了该法案，并称其为“本立法期最重要的法案之一”。（文档9, 10）\n    *   **《重新定义居留权和居留终止法》(Gesetz zur Neubestimmung des Bleiberechts und der Aufenthaltsbeendigung)**：\n        议长Dr. Norbert Lammert在2015年5月21日的发言中提到，对该法案草案进行了第一次审议，并已提交给内政委员会、法律与消费者保护委员会等多个委员会进行协商。（文档3, 4）\n\n2.  **能源与环境法案**\n    *   **《可再生能源法第二次修正案》(Zweites Gesetz zur Änderung des Erneuerbare-Energien-Gesetzes)**：\n        议长Dr. Norbert Lammert在2015年5月7日的发言中宣布，对由CDU/CSU和SPD党团提出的该法案草案进行第一次审议。（文档1, 2）\n    *   **《水和自然保护法规修正案》(Gesetz zur Änderung wasser- und naturschutzrechtlicher Vorschriften)**：\n        同样在2015年5月7日，议长Dr. Norbert Lammert宣布对该法案草案进行第一次审议，该法案旨在禁止和最小化水力压裂（Fracking）程序的风险。（文档1, 2）\n\n3.  **预算与社会法案**\n    *   **《2016年联邦预算法》(Haushaltsgesetz 2016)**：\n        议长Dr. Norbert Lammert在2015年9月8日的发言中，于讨论难民危机这一“巨大的人道主义、政治和文化挑战”的背景下，宣布对2016年联邦预算法草案进行第一次审议。（文档5, 6）\n    *   **《第十二社会法典》修正案 (Änderungen im Zwölften Sozialgesetzbuch)**：\n        CDU/CSU党派的发言人Jana Schimke在2015年10月15日的发言中提到，当天对《第十二社会法典》的审议将为德国的社会立法带来进一步的改善。（文档9, 10）\n\n4.  **其他被提及的法案**\n    *   **《会计指令实施法》(Bilanzrichtlinie-Umsetzungsgesetz)**：\n        议长Dr. Norbert Lammert在2015年5月21日宣布，该法案的最终审议被延后。（文档3, 4）\n    *   **《联邦狩猎法第一次修正案》(Erstes Gesetz zur Änderung des Bundesjagdgesetzes)**：\n        同样在2015年5月21日，议长Dr. Norbert Lammert宣布该法案的最终审议被延后。（文档3, 4）\n\n**资料局限性说明**\n\n需要注意的是，以上信息完全基于所提供的有限的议会发言记录片段。这些记录仅反映了特定日期被讨论或安排议程的部分法案，并不能构成2015年德国议会所有重要立法活动的全貌。例如，SPD党派的发言人Thomas Oppermann在2015年12月16日的发言中回顾了全年的重大挑战，如巴黎恐怖袭击、希腊欧元区危机和难民危机（文档7, 8），这些事件很可能催生了其他未在参考资料中明确提及的相关立法。",
+    "timing": {
+      "retrieve": 0.611283540725708,
+      "rerank": 1.1668438911437988,
+      "generate": 26.434787034988403,
+      "total": 28.213932275772095
+    },
+    "chunks": [
+      {
+        "id": "2015_1762417259_6188",
+        "score": 0.545963347,
+        "text": ". April 2015 101. Sitzung überwiesene nachfolgende Gesetzentwurf soll zusätzlich dem Ausschuss für Recht und Verbraucherschutz 6. Ausschuss zur Mitberatung überwiesen werden: Erste Beratung des von den Fraktionen der CDU/CSU und SPD eingebrachten Entwurfs eines Zweiten Gesetzes zur Änderung des Erneuerbare-Energien-Gesetzes Drucksache 18 / 4683 Überweisungsvorschlag: Ausschuss für Wirtschaft und Energie Ausschuss für Recht und Verbraucherschutz Finanzausschuss Ausschuss für Umwelt, Naturschutz, Bau und Reaktorsicherheit Ausschuss für die Angelegenheiten der Europäischen Union Haushaltsausschuss Ich frage Sie, ob Sie mit diesen Veränderungen einverstanden sind. – Das ist offensichtlich der Fall. Dann haben wir das so beschlossen. Ich rufe die Tagesordnungspunkte 3 a bis 3 d auf: a Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes zur Änderung wasser- und naturschutzrechtlicher Vorschriften zur Untersagung und zur Risikominimierung bei den Verfahren der Fra...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 4000.0,
+          "date": "2015-05-07",
+          "group": "None",
+          "lp": "18",
+          "original_text_id": "pp_18_103_00001",
+          "session": "103",
+          "source": "german_parliament",
+          "speaker": "Präsident Dr. Norbert Lammert",
+          "text": ". April 2015 101. Sitzung überwiesene nachfolgende Gesetzentwurf soll zusätzlich dem Ausschuss für Recht und Verbraucherschutz 6. Ausschuss zur Mitberatung überwiesen werden: Erste Beratung des von den Fraktionen der CDU/CSU und SPD eingebrachten Entwurfs eines Zweiten Gesetzes zur Änderung des Erneuerbare-Energien-Gesetzes Drucksache 18 / 4683 Überweisungsvorschlag: Ausschuss für Wirtschaft und Energie Ausschuss für Recht und Verbraucherschutz Finanzausschuss Ausschuss für Umwelt, Naturschutz, Bau und Reaktorsicherheit Ausschuss für die Angelegenheiten der Europäischen Union Haushaltsausschuss Ich frage Sie, ob Sie mit diesen Veränderungen einverstanden sind. – Das ist offensichtlich der Fall. Dann haben wir das so beschlossen. Ich rufe die Tagesordnungspunkte 3 a bis 3 d auf: a Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes zur Änderung wasser- und naturschutzrechtlicher Vorschriften zur Untersagung und zur Risikominimierung bei den Verfahren der Fra...",
+          "total_chunks": 5.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.20977746
+      },
+      {
+        "id": "2015_1762361835_6188",
+        "score": 0.545963347,
+        "text": ". April 2015 101. Sitzung überwiesene nachfolgende Gesetzentwurf soll zusätzlich dem Ausschuss für Recht und Verbraucherschutz 6. Ausschuss zur Mitberatung überwiesen werden: Erste Beratung des von den Fraktionen der CDU/CSU und SPD eingebrachten Entwurfs eines Zweiten Gesetzes zur Änderung des Erneuerbare-Energien-Gesetzes Drucksache 18 / 4683 Überweisungsvorschlag: Ausschuss für Wirtschaft und Energie Ausschuss für Recht und Verbraucherschutz Finanzausschuss Ausschuss für Umwelt, Naturschutz, Bau und Reaktorsicherheit Ausschuss für die Angelegenheiten der Europäischen Union Haushaltsausschuss Ich frage Sie, ob Sie mit diesen Veränderungen einverstanden sind. – Das ist offensichtlich der Fall. Dann haben wir das so beschlossen. Ich rufe die Tagesordnungspunkte 3 a bis 3 d auf: a Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes zur Änderung wasser- und naturschutzrechtlicher Vorschriften zur Untersagung und zur Risikominimierung bei den Verfahren der Fra...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 4000.0,
+          "date": "2015-05-07",
+          "group": "None",
+          "lp": "18",
+          "original_text_id": "pp_18_103_00001",
+          "session": "103",
+          "source": "german_parliament",
+          "speaker": "Präsident Dr. Norbert Lammert",
+          "text": ". April 2015 101. Sitzung überwiesene nachfolgende Gesetzentwurf soll zusätzlich dem Ausschuss für Recht und Verbraucherschutz 6. Ausschuss zur Mitberatung überwiesen werden: Erste Beratung des von den Fraktionen der CDU/CSU und SPD eingebrachten Entwurfs eines Zweiten Gesetzes zur Änderung des Erneuerbare-Energien-Gesetzes Drucksache 18 / 4683 Überweisungsvorschlag: Ausschuss für Wirtschaft und Energie Ausschuss für Recht und Verbraucherschutz Finanzausschuss Ausschuss für Umwelt, Naturschutz, Bau und Reaktorsicherheit Ausschuss für die Angelegenheiten der Europäischen Union Haushaltsausschuss Ich frage Sie, ob Sie mit diesen Veränderungen einverstanden sind. – Das ist offensichtlich der Fall. Dann haben wir das so beschlossen. Ich rufe die Tagesordnungspunkte 3 a bis 3 d auf: a Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes zur Änderung wasser- und naturschutzrechtlicher Vorschriften zur Untersagung und zur Risikominimierung bei den Verfahren der Fra...",
+          "total_chunks": 5.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.20977746
+      },
+      {
+        "id": "2015_1762417259_6890",
+        "score": 0.536049902,
+        "text": ". Die Tagesordnungspunkte 21 – hier geht es um die abschließende Beratung des Bilanzrichtlinie- Umsetzungsgesetzes – und 26 – abschließende Beratung eines Ersten Gesetzes zur Änderung des Bundesjagdgesetzes – sowie 33 g – hier geht es um die Beratung eines Antrags mit dem Titel\" Bußgeldumgehung bei Kartellstrafen verhindern – Gesetzeslücke schließen“ – werden abgesetzt. Schließlich mache ich noch auf zwei nachträgliche Ausschussüberweisungen im Anhang zur Zusatzpunktliste aufmerksam: Der am 6. März 2015 92. Sitzung überwiesene nachfolgende Gesetzentwurf soll zusätzlich dem Ausschuss für Arbeit und Soziales 11. Ausschuss zur Mitberatung überwiesen werden: Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes zur Neubestimmung des Bleiberechts und der Aufenthaltsbeendigung Drucksachen 18 / 4097, 18 / 4199 Überweisungsvorschlag: Innenausschuss Ausschuss für Recht und Verbraucherschutz Ausschuss für Arbeit und Soziales Ausschuss für Familie, Senioren, Frauen und ...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 3337.0,
+          "date": "2015-05-21",
+          "group": "None",
+          "lp": "18",
+          "original_text_id": "pp_18_106_00001",
+          "session": "106",
+          "source": "german_parliament",
+          "speaker": "Präsident Dr. Norbert Lammert",
+          "text": ". Die Tagesordnungspunkte 21 – hier geht es um die abschließende Beratung des Bilanzrichtlinie- Umsetzungsgesetzes – und 26 – abschließende Beratung eines Ersten Gesetzes zur Änderung des Bundesjagdgesetzes – sowie 33 g – hier geht es um die Beratung eines Antrags mit dem Titel\" Bußgeldumgehung bei Kartellstrafen verhindern – Gesetzeslücke schließen“ – werden abgesetzt. Schließlich mache ich noch auf zwei nachträgliche Ausschussüberweisungen im Anhang zur Zusatzpunktliste aufmerksam: Der am 6. März 2015 92. Sitzung überwiesene nachfolgende Gesetzentwurf soll zusätzlich dem Ausschuss für Arbeit und Soziales 11. Ausschuss zur Mitberatung überwiesen werden: Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes zur Neubestimmung des Bleiberechts und der Aufenthaltsbeendigung Drucksachen 18 / 4097, 18 / 4199 Überweisungsvorschlag: Innenausschuss Ausschuss für Recht und Verbraucherschutz Ausschuss für Arbeit und Soziales Ausschuss für Familie, Senioren, Frauen und ...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.18515061
+      },
+      {
+        "id": "2015_1762361835_6890",
+        "score": 0.536049902,
+        "text": ". Die Tagesordnungspunkte 21 – hier geht es um die abschließende Beratung des Bilanzrichtlinie- Umsetzungsgesetzes – und 26 – abschließende Beratung eines Ersten Gesetzes zur Änderung des Bundesjagdgesetzes – sowie 33 g – hier geht es um die Beratung eines Antrags mit dem Titel\" Bußgeldumgehung bei Kartellstrafen verhindern – Gesetzeslücke schließen“ – werden abgesetzt. Schließlich mache ich noch auf zwei nachträgliche Ausschussüberweisungen im Anhang zur Zusatzpunktliste aufmerksam: Der am 6. März 2015 92. Sitzung überwiesene nachfolgende Gesetzentwurf soll zusätzlich dem Ausschuss für Arbeit und Soziales 11. Ausschuss zur Mitberatung überwiesen werden: Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes zur Neubestimmung des Bleiberechts und der Aufenthaltsbeendigung Drucksachen 18 / 4097, 18 / 4199 Überweisungsvorschlag: Innenausschuss Ausschuss für Recht und Verbraucherschutz Ausschuss für Arbeit und Soziales Ausschuss für Familie, Senioren, Frauen und ...",
+        "metadata": {
+          "chunk_index": 1.0,
+          "chunk_size": 3337.0,
+          "date": "2015-05-21",
+          "group": "None",
+          "lp": "18",
+          "original_text_id": "pp_18_106_00001",
+          "session": "106",
+          "source": "german_parliament",
+          "speaker": "Präsident Dr. Norbert Lammert",
+          "text": ". Die Tagesordnungspunkte 21 – hier geht es um die abschließende Beratung des Bilanzrichtlinie- Umsetzungsgesetzes – und 26 – abschließende Beratung eines Ersten Gesetzes zur Änderung des Bundesjagdgesetzes – sowie 33 g – hier geht es um die Beratung eines Antrags mit dem Titel\" Bußgeldumgehung bei Kartellstrafen verhindern – Gesetzeslücke schließen“ – werden abgesetzt. Schließlich mache ich noch auf zwei nachträgliche Ausschussüberweisungen im Anhang zur Zusatzpunktliste aufmerksam: Der am 6. März 2015 92. Sitzung überwiesene nachfolgende Gesetzentwurf soll zusätzlich dem Ausschuss für Arbeit und Soziales 11. Ausschuss zur Mitberatung überwiesen werden: Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes zur Neubestimmung des Bleiberechts und der Aufenthaltsbeendigung Drucksachen 18 / 4097, 18 / 4199 Überweisungsvorschlag: Innenausschuss Ausschuss für Recht und Verbraucherschutz Ausschuss für Arbeit und Soziales Ausschuss für Familie, Senioren, Frauen und ...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.18515061
+      },
+      {
+        "id": "2015_1762417259_10169",
+        "score": 0.531163275,
+        "text": ". Beifall im ganzen Hause Das haben auch die europäischen Parlamentspräsidenten aus den G-7-Staaten bei ihrer Konferenz am vergangenen Samstag in Leipzig einvernehmlich festgestellt. Diese große humanitäre, politische und kulturelle Herausforderung wird Deutschland verändern. Ich bin sicher, dass dies letztlich zum Vorteil unseres Landes geschieht, wenn wir so mutig und entschlossen handeln, wie das auch bei anderen großen Herausforderungen wie zuletzt der Finanz- und Bankenkrise geschehen ist. Beifall bei Abgeordneten im ganzen Hause Dieses Bewusstsein sollte unsere Debatte in dieser Woche prägen, vor allem aber unser weiteres gemeinsames Handeln in Staat und Gesellschaft. Beifall im ganzen Hause Ich rufe nun die Tagesordnungspunkte 1 a und 1 b auf: a Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes über die Feststellung des Bundeshaushaltsplans für das Haushaltsjahr 2016 Haushaltsgesetz 2016 Drucksache 18 / 5500 Überweisungsvorschlag: Haushaltsausschus...",
+        "metadata": {
+          "chunk_index": 2.0,
+          "chunk_size": 1966.0,
+          "date": "2015-09-08",
+          "group": "None",
+          "lp": "18",
+          "original_text_id": "pp_18_119_00001",
+          "session": "119",
+          "source": "german_parliament",
+          "speaker": "Präsident Dr. Norbert Lammert",
+          "text": ". Beifall im ganzen Hause Das haben auch die europäischen Parlamentspräsidenten aus den G-7-Staaten bei ihrer Konferenz am vergangenen Samstag in Leipzig einvernehmlich festgestellt. Diese große humanitäre, politische und kulturelle Herausforderung wird Deutschland verändern. Ich bin sicher, dass dies letztlich zum Vorteil unseres Landes geschieht, wenn wir so mutig und entschlossen handeln, wie das auch bei anderen großen Herausforderungen wie zuletzt der Finanz- und Bankenkrise geschehen ist. Beifall bei Abgeordneten im ganzen Hause Dieses Bewusstsein sollte unsere Debatte in dieser Woche prägen, vor allem aber unser weiteres gemeinsames Handeln in Staat und Gesellschaft. Beifall im ganzen Hause Ich rufe nun die Tagesordnungspunkte 1 a und 1 b auf: a Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes über die Feststellung des Bundeshaushaltsplans für das Haushaltsjahr 2016 Haushaltsgesetz 2016 Drucksache 18 / 5500 Überweisungsvorschlag: Haushaltsausschus...",
+          "total_chunks": 3.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.11004026
+      },
+      {
+        "id": "2015_1762361835_10169",
+        "score": 0.531163275,
+        "text": ". Beifall im ganzen Hause Das haben auch die europäischen Parlamentspräsidenten aus den G-7-Staaten bei ihrer Konferenz am vergangenen Samstag in Leipzig einvernehmlich festgestellt. Diese große humanitäre, politische und kulturelle Herausforderung wird Deutschland verändern. Ich bin sicher, dass dies letztlich zum Vorteil unseres Landes geschieht, wenn wir so mutig und entschlossen handeln, wie das auch bei anderen großen Herausforderungen wie zuletzt der Finanz- und Bankenkrise geschehen ist. Beifall bei Abgeordneten im ganzen Hause Dieses Bewusstsein sollte unsere Debatte in dieser Woche prägen, vor allem aber unser weiteres gemeinsames Handeln in Staat und Gesellschaft. Beifall im ganzen Hause Ich rufe nun die Tagesordnungspunkte 1 a und 1 b auf: a Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes über die Feststellung des Bundeshaushaltsplans für das Haushaltsjahr 2016 Haushaltsgesetz 2016 Drucksache 18 / 5500 Überweisungsvorschlag: Haushaltsausschus...",
+        "metadata": {
+          "chunk_index": 2.0,
+          "chunk_size": 1966.0,
+          "date": "2015-09-08",
+          "group": "None",
+          "lp": "18",
+          "original_text_id": "pp_18_119_00001",
+          "session": "119",
+          "source": "german_parliament",
+          "speaker": "Präsident Dr. Norbert Lammert",
+          "text": ". Beifall im ganzen Hause Das haben auch die europäischen Parlamentspräsidenten aus den G-7-Staaten bei ihrer Konferenz am vergangenen Samstag in Leipzig einvernehmlich festgestellt. Diese große humanitäre, politische und kulturelle Herausforderung wird Deutschland verändern. Ich bin sicher, dass dies letztlich zum Vorteil unseres Landes geschieht, wenn wir so mutig und entschlossen handeln, wie das auch bei anderen großen Herausforderungen wie zuletzt der Finanz- und Bankenkrise geschehen ist. Beifall bei Abgeordneten im ganzen Hause Dieses Bewusstsein sollte unsere Debatte in dieser Woche prägen, vor allem aber unser weiteres gemeinsames Handeln in Staat und Gesellschaft. Beifall im ganzen Hause Ich rufe nun die Tagesordnungspunkte 1 a und 1 b auf: a Erste Beratung des von der Bundesregierung eingebrachten Entwurfs eines Gesetzes über die Feststellung des Bundeshaushaltsplans für das Haushaltsjahr 2016 Haushaltsgesetz 2016 Drucksache 18 / 5500 Überweisungsvorschlag: Haushaltsausschus...",
+          "total_chunks": 3.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.11004026
+      },
+      {
+        "id": "2015_1762417259_16719",
+        "score": 0.534165382,
+        "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3945.0,
+          "date": "2015-12-16",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_145_00033",
+          "session": "145",
+          "source": "german_parliament",
+          "speaker": "Thomas Oppermann",
+          "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+          "total_chunks": 5.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.1081609
+      },
+      {
+        "id": "2015_1762361835_16719",
+        "score": 0.534165382,
+        "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3945.0,
+          "date": "2015-12-16",
+          "group": "SPD",
+          "lp": "18",
+          "original_text_id": "pp_18_145_00033",
+          "session": "145",
+          "source": "german_parliament",
+          "speaker": "Thomas Oppermann",
+          "text": "Frau Präsidentin! Meine Damen und Herren! 2015 war ganz gewiss kein einfaches Jahr für uns in Deutschland. Für die Europäische Union war es sogar wohl das schwierigste Jahr der letzten Jahrzehnte. Die Terroranschläge von Paris, der Kampf um den Verbleib von Griechenland in der Euro-Zone und nicht zuletzt die Flüchtlingskrise mit Millionen Flüchtlingen sind gleich drei große Herausforderungen, auf die Europa eine Antwort geben muss. Dabei dürfen wir nicht vergessen, dass unsere osteuropäischen Partner noch immer unter dem Eindruck der russischen Aggressivität in der Ukraine stehen und sie als Gefahr für sich selbst wahrnehmen. Diese Krisen haben die Europäische Union teilweise an den Rand ihrer Möglichkeiten gebracht. Gut ist, dass Europa nach den Terroranschlägen in Frankreich zusammengeblieben ist und dass wir gemeinsam handeln, ohne dass wir uns darauf einlassen, Freiheit und Sicherheit gegeneinander auszuspielen. Ich bin froh, dass wir es im Sommer geschafft haben, Griechenland in d...",
+          "total_chunks": 5.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.1081609
+      },
+      {
+        "id": "2015_1762361835_13204",
+        "score": 0.540128708,
+        "text": "Frau Präsidentin! Meine Damen und Herren! Wir haben heute Morgen eine sehr interessante und wichtige Debatte hier im Deutschen Bundestag erlebt. Wir haben das Asylverfahrensbeschleunigungsgesetz und damit, so will ich es sagen, eines der wichtigsten Gesetze in dieser Legislaturperiode verabschiedet. Ich denke, eine ähnlich wichtige Bedeutung haben die Änderungen, die wir jetzt im Rahmen des Zwölften Sozialgesetzbuches verabschieden. Mit der heutigen Beratung zum Zwölften Sozialgesetzbuch schaffen wir weitere Verbesserungen in unserer Sozialgesetzgebung. Zur Erinnerung: Vor zehn Jahren, am 1. Januar 2005, löste das Zwölfte Sozialgesetzbuch das damalige Bundessozialhilfegesetz ab. Seitdem regelt das SGB XII die Vorschriften für die Sozialhilfe in Deutschland. Zur gleichen Zeit wurde für Arbeitsuchende, die zuvor Anspruch auf Sozial- oder Arbeitslosenhilfe hatten, das Arbeitslosengeld II eingeführt. Diese Reformen waren Teil der Agenda 2010 und brachten – dieser Auffassung sind wir noch h...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3995.0,
+          "date": "2015-10-15",
+          "group": "CDU/CSU",
+          "lp": "18",
+          "original_text_id": "pp_18_130_00173",
+          "session": "130",
+          "source": "german_parliament",
+          "speaker": "Jana Schimke",
+          "text": "Frau Präsidentin! Meine Damen und Herren! Wir haben heute Morgen eine sehr interessante und wichtige Debatte hier im Deutschen Bundestag erlebt. Wir haben das Asylverfahrensbeschleunigungsgesetz und damit, so will ich es sagen, eines der wichtigsten Gesetze in dieser Legislaturperiode verabschiedet. Ich denke, eine ähnlich wichtige Bedeutung haben die Änderungen, die wir jetzt im Rahmen des Zwölften Sozialgesetzbuches verabschieden. Mit der heutigen Beratung zum Zwölften Sozialgesetzbuch schaffen wir weitere Verbesserungen in unserer Sozialgesetzgebung. Zur Erinnerung: Vor zehn Jahren, am 1. Januar 2005, löste das Zwölfte Sozialgesetzbuch das damalige Bundessozialhilfegesetz ab. Seitdem regelt das SGB XII die Vorschriften für die Sozialhilfe in Deutschland. Zur gleichen Zeit wurde für Arbeitsuchende, die zuvor Anspruch auf Sozial- oder Arbeitslosenhilfe hatten, das Arbeitslosengeld II eingeführt. Diese Reformen waren Teil der Agenda 2010 und brachten – dieser Auffassung sind wir noch h...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762361835.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.09593248
+      },
+      {
+        "id": "2015_1762417259_13204",
+        "score": 0.540128708,
+        "text": "Frau Präsidentin! Meine Damen und Herren! Wir haben heute Morgen eine sehr interessante und wichtige Debatte hier im Deutschen Bundestag erlebt. Wir haben das Asylverfahrensbeschleunigungsgesetz und damit, so will ich es sagen, eines der wichtigsten Gesetze in dieser Legislaturperiode verabschiedet. Ich denke, eine ähnlich wichtige Bedeutung haben die Änderungen, die wir jetzt im Rahmen des Zwölften Sozialgesetzbuches verabschieden. Mit der heutigen Beratung zum Zwölften Sozialgesetzbuch schaffen wir weitere Verbesserungen in unserer Sozialgesetzgebung. Zur Erinnerung: Vor zehn Jahren, am 1. Januar 2005, löste das Zwölfte Sozialgesetzbuch das damalige Bundessozialhilfegesetz ab. Seitdem regelt das SGB XII die Vorschriften für die Sozialhilfe in Deutschland. Zur gleichen Zeit wurde für Arbeitsuchende, die zuvor Anspruch auf Sozial- oder Arbeitslosenhilfe hatten, das Arbeitslosengeld II eingeführt. Diese Reformen waren Teil der Agenda 2010 und brachten – dieser Auffassung sind wir noch h...",
+        "metadata": {
+          "chunk_index": 0.0,
+          "chunk_size": 3995.0,
+          "date": "2015-10-15",
+          "group": "CDU/CSU",
+          "lp": "18",
+          "original_text_id": "pp_18_130_00173",
+          "session": "130",
+          "source": "german_parliament",
+          "speaker": "Jana Schimke",
+          "text": "Frau Präsidentin! Meine Damen und Herren! Wir haben heute Morgen eine sehr interessante und wichtige Debatte hier im Deutschen Bundestag erlebt. Wir haben das Asylverfahrensbeschleunigungsgesetz und damit, so will ich es sagen, eines der wichtigsten Gesetze in dieser Legislaturperiode verabschiedet. Ich denke, eine ähnlich wichtige Bedeutung haben die Änderungen, die wir jetzt im Rahmen des Zwölften Sozialgesetzbuches verabschieden. Mit der heutigen Beratung zum Zwölften Sozialgesetzbuch schaffen wir weitere Verbesserungen in unserer Sozialgesetzgebung. Zur Erinnerung: Vor zehn Jahren, am 1. Januar 2005, löste das Zwölfte Sozialgesetzbuch das damalige Bundessozialhilfegesetz ab. Seitdem regelt das SGB XII die Vorschriften für die Sozialhilfe in Deutschland. Zur gleichen Zeit wurde für Arbeitsuchende, die zuvor Anspruch auf Sozial- oder Arbeitslosenhilfe hatten, das Arbeitslosengeld II eingeführt. Diese Reformen waren Teil der Agenda 2010 und brachten – dieser Auffassung sind wir noch h...",
+          "total_chunks": 2.0,
+          "upload_timestamp": 1762417259.0,
+          "year": "2015"
+        },
+        "rerank_score": 0.09593248
+      }
+    ]
+  }
+]

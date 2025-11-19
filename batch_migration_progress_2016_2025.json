@@ -1,0 +1,52 @@
+[
+  {
+    "year": 2016,
+    "status": "failed",
+    "reason": "local variable 'data' referenced before assignment"
+  },
+  {
+    "year": 2017,
+    "status": "failed",
+    "reason": "local variable 'data' referenced before assignment"
+  },
+  {
+    "year": 2018,
+    "status": "failed",
+    "reason": "local variable 'data' referenced before assignment"
+  },
+  {
+    "year": 2019,
+    "status": "failed",
+    "reason": "local variable 'data' referenced before assignment"
+  },
+  {
+    "year": 2020,
+    "status": "failed",
+    "reason": "local variable 'data' referenced before assignment"
+  },
+  {
+    "year": 2021,
+    "status": "failed",
+    "reason": "local variable 'data' referenced before assignment"
+  },
+  {
+    "year": 2022,
+    "status": "failed",
+    "reason": "local variable 'data' referenced before assignment"
+  },
+  {
+    "year": 2023,
+    "status": "failed",
+    "reason": "local variable 'data' referenced before assignment"
+  },
+  {
+    "year": 2024,
+    "status": "failed",
+    "reason": "local variable 'data' referenced before assignment"
+  },
+  {
+    "year": 2025,
+    "status": "skipped",
+    "reason": "already_exists"
+  }
+]

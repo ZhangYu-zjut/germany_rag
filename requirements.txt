@@ -1,0 +1,45 @@
+# ========== langchain ==========
+langchain==0.3.7
+langchain-openai==0.2.8
+langchain-community==0.3.5
+langgraph==0.2.45
+
+# ========== Embedding ==========
+# 本地Embedding模型（免费、离线）
+sentence-transformers>=2.2.0
+# BGE-M3 模型支持（支持GPU加速）
+FlagEmbedding>=1.2.0 # 云端embedding不需要
+torch>=2.0.0  # 用于GPU加速，云端embedding不需要
+
+
+# ========== Milvus vector database==========
+pymilvus==2.6.3  # Milvus Python client (最新版本)
+# 注意: pymilvus 2.4.2+ 已经内置了 Milvus Lite，无需单独安装 milvus-lite
+# Milvus Lite 支持（Linux Ubuntu 20.04+ 和 macOS 11.0+）
+# 如果 pymilvus 内置版本不可用，可以安装独立包: pip install milvus-lite
+# 两者不会冲突，但推荐只使用 pymilvus（已包含）
+# 注意: Milvus Lite 在 Windows 上暂不可用，请使用 Docker 模式
+
+# ========== Google Cloud Vertex AI ==========
+google-cloud-aiplatform>=1.38.0  # Vertex AI SDK
+
+
+pandas==2.2.3
+# [已删除] numpy (让 pandas 自动安装其依赖的正确版本)
+# [已删除] langgraph (重复)
+
+python-dotenv==1.0.1
+
+
+loguru==0.7.2
+
+
+pydantic==2.9.2
+pydantic-settings==2.6.0
+tqdm==4.66.6
+
+# ========== test ==========
+pytest==8.3.3
+pytest-asyncio==0.24.0
+# [已删除] python-dotenv (重复)
+# [已删除] google-cloud-aiplatform (重复)

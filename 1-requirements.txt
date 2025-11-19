@@ -1,0 +1,29 @@
+# ========== langchain ==========
+langchain==0.3.7
+langchain-openai==0.2.8
+langchain-community==0.3.5
+langgraph==0.2.45
+
+
+pymilvus==2.2.9
+milvus==2.2.9
+
+
+pandas==2.2.3
+numpy
+langgraph
+
+python-dotenv==1.0.1
+
+
+loguru==0.7.2
+
+
+pydantic==2.9.2
+pydantic-settings==2.6.0
+tqdm==4.66.6
+
+# ========== test ==========
+pytest==8.3.3
+pytest-asyncio==0.24.0
+python-dotenv

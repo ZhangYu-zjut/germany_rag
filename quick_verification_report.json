@@ -1,0 +1,91 @@
+{
+  "total_vectors": 173355,
+  "year_check": {
+    "2015": {
+      "has_data": true,
+      "sample_speaker": "Präsident Dr. Norbert Lammert",
+      "sample_date": "2015-12-03",
+      "sample_group": "None",
+      "missing_fields": []
+    },
+    "2016": {
+      "has_data": true,
+      "sample_speaker": "Peter Weiß (Emmendingen)",
+      "sample_date": "2016-12-01",
+      "sample_group": "CDU/CSU",
+      "missing_fields": []
+    },
+    "2017": {
+      "has_data": true,
+      "sample_speaker": "Vizepräsident Wolfgang Kubicki",
+      "sample_date": "2017-12-12",
+      "sample_group": "None",
+      "missing_fields": []
+    },
+    "2018": {
+      "has_data": true,
+      "sample_speaker": "Leif-Erik Holm",
+      "sample_date": "2018-10-18",
+      "sample_group": "AfD",
+      "missing_fields": []
+    },
+    "2019": {
+      "has_data": true,
+      "sample_speaker": "Vizepräsidentin Claudia Roth",
+      "sample_date": "2019-09-25",
+      "sample_group": "None",
+      "missing_fields": []
+    },
+    "2020": {
+      "has_data": true,
+      "sample_speaker": "Vizepräsident Wolfgang Kubicki",
+      "sample_date": "2020-05-15",
+      "sample_group": "None",
+      "missing_fields": []
+    },
+    "2021": {
+      "has_data": true,
+      "sample_speaker": "Martin Sichert",
+      "sample_date": "2021-11-18",
+      "sample_group": "AfD",
+      "missing_fields": []
+    },
+    "2022": {
+      "has_data": true,
+      "sample_speaker": "Johannes Schätzl",
+      "sample_date": "2022-01-27",
+      "sample_group": "SPD",
+      "missing_fields": []
+    },
+    "2023": {
+      "has_data": true,
+      "sample_speaker": "Götz Frömming",
+      "sample_date": "2023-05-11",
+      "sample_group": "AfD",
+      "missing_fields": []
+    },
+    "2024": {
+      "has_data": true,
+      "sample_speaker": "Steffen Bilger",
+      "sample_date": "2024-09-27",
+      "sample_group": "CDU/CSU",
+      "missing_fields": []
+    },
+    "2025": {
+      "has_data": true,
+      "sample_speaker": "未知",
+      "sample_date": "未知",
+      "sample_group": "未知",
+      "missing_fields": [
+        "speaker",
+        "date",
+        "group"
+      ]
+    },
+    "2025_detail": {
+      "sample_count": 3,
+      "missing_speaker_ratio": "3/10",
+      "missing_date_ratio": "3/10"
+    }
+  }
+}
