@@ -1,0 +1,660 @@
+{
+  "_metadata": {
+    "version": "2.0",
+    "description": "德国议会演讲检索知识图谱 - 扩展版（1949-2025）",
+    "created": "2024-11-26",
+    "updated": "2025-12-13",
+    "structure": "topics -> dimensions -> tags",
+    "topics_count": 9,
+    "coverage": "移民/融合/难民/安全/经济/能源/外交/社会/环境"
+  },
+
+  "topics": {
+    "Migrationspolitik": {
+      "description": "移民政策",
+      "keywords": ["Migration", "Einwanderung", "Zuwanderung", "移民", "Migranten"],
+      "dimensions": ["Abschiebung", "Familiennachzug", "Fachkräfte", "Grenzschutz"]
+    },
+    "Integrationspolitik": {
+      "description": "融合政策",
+      "keywords": ["Integration", "融合", "Eingliederung", "Teilhabe"],
+      "dimensions": ["Sprachförderung", "Arbeitsmarktintegration", "Kulturpolitik", "Bildungsintegration"]
+    },
+    "Flüchtlingspolitik": {
+      "description": "难民政策",
+      "keywords": ["Flüchtling", "Asyl", "Schutzsuchende", "难民", "Geflüchtete", "Flüchtlingspolitik"],
+      "dimensions": ["Asylverfahren", "Aufnahme", "Abschiebung", "Herkunftsländer"]
+    },
+    "Sicherheitspolitik": {
+      "description": "安全政策",
+      "keywords": ["Sicherheit", "Terrorismus", "Kriminalität", "安全", "Verteidigung"],
+      "dimensions": ["Grenzkontrollen", "Abschiebehaft", "Gefährder", "Identitätsfeststellung", "Bundeswehr", "NATO_Verteidigung"]
+    },
+    "Wirtschaftspolitik": {
+      "description": "经济政策",
+      "keywords": ["Wirtschaft", "Ökonomie", "经济", "Konjunktur", "Wachstum", "Haushalt"],
+      "dimensions": ["Steuerpolitik", "Haushaltspolitik", "Industriepolitik", "Arbeitsmarktpolitik", "Währungspolitik", "Handelspolitik"]
+    },
+    "Energiepolitik": {
+      "description": "能源政策",
+      "keywords": ["Energie", "Strom", "能源", "Energiewende", "Klimaschutz"],
+      "dimensions": ["Kernenergie", "Erneuerbare_Energien", "Energiewende", "Energiesicherheit", "Kohleausstieg"]
+    },
+    "Außenpolitik": {
+      "description": "外交政策",
+      "keywords": ["Außenpolitik", "外交", "international", "Europa", "Diplomatie"],
+      "dimensions": ["Europapolitik", "Transatlantische_Beziehungen", "Ostpolitik", "Wiedervereinigung", "Entwicklungspolitik"]
+    },
+    "Sozialpolitik": {
+      "description": "社会政策",
+      "keywords": ["Sozial", "社会", "Rente", "Gesundheit", "Pflege", "Sozialstaat"],
+      "dimensions": ["Rentenpolitik", "Gesundheitspolitik", "Pflegepolitik", "Familienpolitik", "Arbeitslosigkeit"]
+    },
+    "Umweltpolitik": {
+      "description": "环境政策",
+      "keywords": ["Umwelt", "环境", "Klima", "Naturschutz", "Nachhaltigkeit"],
+      "dimensions": ["Klimaschutz", "Naturschutz", "Emissionshandel", "Kreislaufwirtschaft", "Biodiversität"]
+    }
+  },
+
+  "dimensions": {
+    "Abschiebung": {
+      "description": "遣返政策",
+      "keywords": ["Abschiebung", "Rückführung", "Ausweisung", "遣返", "Ausreisepflicht"],
+      "parent_topics": ["Migrationspolitik", "Flüchtlingspolitik"],
+      "tags": ["Syrien", "Afghanistan", "Irak", "Georgien", "Balkan", "Wiederaufbau", "sichere_Herkunftsländer"]
+    },
+    "Familiennachzug": {
+      "description": "家庭团聚",
+      "keywords": ["Familiennachzug", "Familie", "Nachzug", "家庭团聚", "Familienzusammenführung"],
+      "parent_topics": ["Migrationspolitik"],
+      "tags": ["Obergrenze", "subsidiär_Schutzberechtigte", "Kontingent"]
+    },
+    "Fachkräfte": {
+      "description": "技术移民",
+      "keywords": ["Fachkräfte", "Fachkräfteeinwanderung", "技术移民", "Arbeitskräfte"],
+      "parent_topics": ["Migrationspolitik"],
+      "tags": ["Fachkräfteeinwanderungsgesetz", "Blue_Card", "Punktesystem"]
+    },
+    "Grenzschutz": {
+      "description": "边境保护",
+      "keywords": ["Grenze", "Grenzschutz", "Grenzkontrolle", "边境"],
+      "parent_topics": ["Migrationspolitik", "Sicherheitspolitik"],
+      "tags": ["Frontex", "Schengen", "EU_Außengrenze"]
+    },
+    "Sprachförderung": {
+      "description": "语言促进",
+      "keywords": ["Sprache", "Sprachkurs", "Deutschkurs", "语言"],
+      "parent_topics": ["Integrationspolitik"],
+      "tags": ["Integrationskurs", "Sprachniveau", "B1"]
+    },
+    "Arbeitsmarktintegration": {
+      "description": "劳动市场融合",
+      "keywords": ["Arbeitsmarkt", "Beschäftigung", "Arbeit", "就业"],
+      "parent_topics": ["Integrationspolitik"],
+      "tags": ["Ausbildung", "Praktikum", "Arbeitserlaubnis", "3plus2"]
+    },
+    "Kulturpolitik": {
+      "description": "文化政策",
+      "keywords": ["Kultur", "kulturell", "文化"],
+      "parent_topics": ["Integrationspolitik"],
+      "tags": ["Kultur_baut_Brücken", "Willkommenskultur", "Leitkultur"]
+    },
+    "Bildungsintegration": {
+      "description": "教育融合",
+      "keywords": ["Bildung", "Schule", "Ausbildung", "教育"],
+      "parent_topics": ["Integrationspolitik"],
+      "tags": ["Willkommensklassen", "Sprachförderung", "Anerkennung"]
+    },
+    "Asylverfahren": {
+      "description": "庇护程序",
+      "keywords": ["Asylverfahren", "Asylantrag", "BAMF", "庇护"],
+      "parent_topics": ["Flüchtlingspolitik"],
+      "tags": ["Ankerzentren", "Verfahrensbeschleunigung", "Dublin"]
+    },
+    "Aufnahme": {
+      "description": "接收安置",
+      "keywords": ["Aufnahme", "Unterbringung", "接收"],
+      "parent_topics": ["Flüchtlingspolitik"],
+      "tags": ["Obergrenze", "Verteilung", "Kommunen"]
+    },
+    "Herkunftsländer": {
+      "description": "来源国",
+      "keywords": ["Herkunftsland", "Herkunftsstaat", "来源国"],
+      "parent_topics": ["Flüchtlingspolitik", "Abschiebung"],
+      "tags": ["Syrien", "Afghanistan", "Irak", "Türkei", "Georgien", "Maghreb", "Balkan"]
+    },
+    "Grenzkontrollen": {
+      "description": "边境管控",
+      "keywords": ["Grenzkontrolle", "Kontrolle", "边境管控"],
+      "parent_topics": ["Sicherheitspolitik"],
+      "tags": ["Schengen", "temporäre_Kontrollen", "Binnengrenze"]
+    },
+    "Abschiebehaft": {
+      "description": "遣返拘留",
+      "keywords": ["Abschiebehaft", "Haft", "拘留"],
+      "parent_topics": ["Sicherheitspolitik"],
+      "tags": ["Ausreisegewahrsam", "Abschiebungshaft"]
+    },
+    "Gefährder": {
+      "description": "危险分子",
+      "keywords": ["Gefährder", "Terrorverdächtige", "危险分子"],
+      "parent_topics": ["Sicherheitspolitik"],
+      "tags": ["Überwachung", "Abschiebung", "Fußfessel"]
+    },
+    "Identitätsfeststellung": {
+      "description": "身份核实",
+      "keywords": ["Identität", "Identitätsfeststellung", "身份"],
+      "parent_topics": ["Sicherheitspolitik"],
+      "tags": ["Passersatz", "Mitwirkungspflicht", "Täuschung"]
+    },
+    "Bundeswehr": {
+      "description": "联邦国防军",
+      "keywords": ["Bundeswehr", "Militär", "Streitkräfte", "国防军", "Soldat"],
+      "parent_topics": ["Sicherheitspolitik"],
+      "tags": ["Auslandseinsätze", "Wehrpflicht", "Rüstung", "Zwei_Prozent_Ziel"]
+    },
+    "NATO_Verteidigung": {
+      "description": "北约防务",
+      "keywords": ["NATO", "Verteidigung", "Bündnis", "北约", "Allianz"],
+      "parent_topics": ["Sicherheitspolitik", "Außenpolitik"],
+      "tags": ["Bündnisfall", "Abschreckung", "Ostflanke", "Artikel_5"]
+    },
+    "Steuerpolitik": {
+      "description": "税收政策",
+      "keywords": ["Steuer", "税收", "Abgabe", "Einkommensteuer", "Mehrwertsteuer"],
+      "parent_topics": ["Wirtschaftspolitik"],
+      "tags": ["Steuerreform", "Steuersenkung", "Solidaritätszuschlag", "Unternehmenssteuer", "Erbschaftsteuer"]
+    },
+    "Haushaltspolitik": {
+      "description": "财政政策",
+      "keywords": ["Haushalt", "Budget", "Finanzen", "预算", "Schulden", "Defizit"],
+      "parent_topics": ["Wirtschaftspolitik"],
+      "tags": ["Schuldenbremse", "Schwarze_Null", "Bundeshaushalt", "Staatsschulden", "Sondervermögen"]
+    },
+    "Industriepolitik": {
+      "description": "产业政策",
+      "keywords": ["Industrie", "Produktion", "产业", "Standort", "Wettbewerbsfähigkeit"],
+      "parent_topics": ["Wirtschaftspolitik"],
+      "tags": ["Industrie_4_0", "Digitalisierung", "Mittelstand", "Standort_Deutschland", "Subventionen"]
+    },
+    "Arbeitsmarktpolitik": {
+      "description": "劳动市场政策",
+      "keywords": ["Arbeitsmarkt", "Beschäftigung", "就业", "Arbeitslosigkeit", "Vollbeschäftigung"],
+      "parent_topics": ["Wirtschaftspolitik", "Sozialpolitik"],
+      "tags": ["Hartz_IV", "Mindestlohn", "Kurzarbeit", "Agenda_2010", "Bürgergeld"]
+    },
+    "Währungspolitik": {
+      "description": "货币政策",
+      "keywords": ["Währung", "Euro", "货币", "D-Mark", "Geldpolitik"],
+      "parent_topics": ["Wirtschaftspolitik"],
+      "tags": ["Euro_Einführung", "Maastricht", "EZB", "Stabilitätspakt", "Eurorettung"]
+    },
+    "Handelspolitik": {
+      "description": "贸易政策",
+      "keywords": ["Handel", "Export", "贸易", "Import", "Freihandel"],
+      "parent_topics": ["Wirtschaftspolitik"],
+      "tags": ["TTIP", "CETA", "WTO", "Exportnation", "Zölle"]
+    },
+    "Kernenergie": {
+      "description": "核能政策",
+      "keywords": ["Kernenergie", "Atomkraft", "核能", "Kernkraftwerk", "AKW"],
+      "parent_topics": ["Energiepolitik"],
+      "tags": ["Atomausstieg", "Laufzeitverlängerung", "Fukushima", "Endlager", "Gorleben"]
+    },
+    "Erneuerbare_Energien": {
+      "description": "可再生能源",
+      "keywords": ["Erneuerbare", "regenerativ", "可再生能源", "Solar", "Wind"],
+      "parent_topics": ["Energiepolitik"],
+      "tags": ["EEG", "Windkraft", "Photovoltaik", "Biogas", "Offshore"]
+    },
+    "Energiewende": {
+      "description": "能源转型",
+      "keywords": ["Energiewende", "能源转型", "Transformation", "Dekarbonisierung"],
+      "parent_topics": ["Energiepolitik"],
+      "tags": ["Netzausbau", "Speicher", "Wasserstoff", "E_Mobilität", "Wärmepumpe"]
+    },
+    "Energiesicherheit": {
+      "description": "能源安全",
+      "keywords": ["Energiesicherheit", "Versorgungssicherheit", "能源安全", "Abhängigkeit"],
+      "parent_topics": ["Energiepolitik"],
+      "tags": ["Nord_Stream", "LNG", "Gasversorgung", "Diversifizierung", "Russland_Energie"]
+    },
+    "Kohleausstieg": {
+      "description": "退出煤炭",
+      "keywords": ["Kohle", "Kohleausstieg", "煤炭", "Braunkohle", "Steinkohle"],
+      "parent_topics": ["Energiepolitik"],
+      "tags": ["Strukturwandel", "Kohlekommission", "Tagebau", "Lausitz", "Reviere"]
+    },
+    "Europapolitik": {
+      "description": "欧洲政策",
+      "keywords": ["Europa", "EU", "欧洲", "europäisch", "Brüssel"],
+      "parent_topics": ["Außenpolitik"],
+      "tags": ["EU_Integration", "Maastricht", "Lissabon", "Brexit", "EU_Erweiterung", "Eurozone"]
+    },
+    "Transatlantische_Beziehungen": {
+      "description": "跨大西洋关系",
+      "keywords": ["USA", "Amerika", "美国", "transatlantisch", "Washington"],
+      "parent_topics": ["Außenpolitik"],
+      "tags": ["NATO", "Partnerschaft", "Handelsbeziehungen", "Sicherheitspartnerschaft"]
+    },
+    "Ostpolitik": {
+      "description": "东方政策",
+      "keywords": ["Ostpolitik", "东方政策", "Russland", "Sowjetunion", "Entspannung"],
+      "parent_topics": ["Außenpolitik"],
+      "tags": ["Wandel_durch_Annäherung", "Ostverträge", "Moskau", "Ukraine_Konflikt", "Sanktionen"]
+    },
+    "Wiedervereinigung": {
+      "description": "德国统一",
+      "keywords": ["Wiedervereinigung", "统一", "Einheit", "DDR", "Mauerfall"],
+      "parent_topics": ["Außenpolitik"],
+      "tags": ["Zwei_plus_Vier", "Einheitsvertrag", "Aufbau_Ost", "Solidarpakt", "Mauer"]
+    },
+    "Entwicklungspolitik": {
+      "description": "发展政策",
+      "keywords": ["Entwicklung", "发展", "Entwicklungshilfe", "Afrika", "Dritte_Welt"],
+      "parent_topics": ["Außenpolitik"],
+      "tags": ["Entwicklungszusammenarbeit", "ODA", "BMZ", "Fluchtursachen", "Nachhaltigkeit"]
+    },
+    "Rentenpolitik": {
+      "description": "养老金政策",
+      "keywords": ["Rente", "养老金", "Pension", "Altersvorsorge", "Ruhestand"],
+      "parent_topics": ["Sozialpolitik"],
+      "tags": ["Rentenreform", "Riester", "Rente_mit_67", "Grundrente", "Rentenversicherung"]
+    },
+    "Gesundheitspolitik": {
+      "description": "医疗政策",
+      "keywords": ["Gesundheit", "医疗", "Krankenversicherung", "Arzt", "Krankenhaus"],
+      "parent_topics": ["Sozialpolitik"],
+      "tags": ["Gesundheitsreform", "Bürgerversicherung", "Krankenkasse", "Pflegeversicherung", "Corona"]
+    },
+    "Pflegepolitik": {
+      "description": "护理政策",
+      "keywords": ["Pflege", "护理", "Pflegebedürftige", "Altenpflege", "Pflegekraft"],
+      "parent_topics": ["Sozialpolitik"],
+      "tags": ["Pflegeversicherung", "Pflegenotstand", "Pflegereform", "häusliche_Pflege"]
+    },
+    "Familienpolitik": {
+      "description": "家庭政策",
+      "keywords": ["Familie", "家庭", "Kind", "Eltern", "Kinderbetreuung"],
+      "parent_topics": ["Sozialpolitik"],
+      "tags": ["Kindergeld", "Elterngeld", "Kita", "Familiensplitting", "Vereinbarkeit"]
+    },
+    "Arbeitslosigkeit": {
+      "description": "失业政策",
+      "keywords": ["Arbeitslosigkeit", "失业", "arbeitslos", "Erwerbslosigkeit"],
+      "parent_topics": ["Sozialpolitik", "Wirtschaftspolitik"],
+      "tags": ["Arbeitslosengeld", "Hartz_IV", "Langzeitarbeitslosigkeit", "Jobcenter"]
+    },
+    "Klimaschutz": {
+      "description": "气候保护",
+      "keywords": ["Klima", "气候", "Klimaschutz", "Erderwärmung", "Treibhausgas"],
+      "parent_topics": ["Umweltpolitik"],
+      "tags": ["Pariser_Abkommen", "CO2", "Klimaziele", "Klimaneutralität", "Klimagesetz"]
+    },
+    "Naturschutz": {
+      "description": "自然保护",
+      "keywords": ["Naturschutz", "自然保护", "Natur", "Artenschutz", "Wald"],
+      "parent_topics": ["Umweltpolitik"],
+      "tags": ["Naturschutzgebiet", "Nationalpark", "Artenvielfalt", "Insektensterben"]
+    },
+    "Emissionshandel": {
+      "description": "碳排放交易",
+      "keywords": ["Emission", "排放", "CO2", "Zertifikat", "Handel"],
+      "parent_topics": ["Umweltpolitik"],
+      "tags": ["EU_ETS", "CO2_Preis", "Zertifikatehandel", "Klimafonds"]
+    },
+    "Kreislaufwirtschaft": {
+      "description": "循环经济",
+      "keywords": ["Kreislauf", "循环经济", "Recycling", "Abfall", "Müll"],
+      "parent_topics": ["Umweltpolitik"],
+      "tags": ["Recycling", "Plastik", "Verpackung", "Müllvermeidung", "Kreislaufwirtschaftsgesetz"]
+    },
+    "Biodiversität": {
+      "description": "生物多样性",
+      "keywords": ["Biodiversität", "生物多样性", "Artenvielfalt", "Ökosystem"],
+      "parent_topics": ["Umweltpolitik"],
+      "tags": ["Artenschutz", "Insektensterben", "Ökosystem", "Lebensraum"]
+    }
+  },
+
+  "tags": {
+    "Syrien": {
+      "description": "叙利亚",
+      "keywords": ["Syrien", "syrisch", "叙利亚", "Syrer"],
+      "parent_dimensions": ["Abschiebung", "Herkunftsländer"],
+      "related_tags": ["Wiederaufbau", "Bürgerkrieg", "Assad"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018, 2019, 2020, 2021],
+        "parties": ["CDU/CSU", "SPD", "Grüne", "AfD", "FDP", "Linke"],
+        "keywords": ["Flüchtling", "Rückführung", "Wiederaufbau"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Syrien Flüchtlinge {year}",
+        "{party} syrische Rückführung {year}",
+        "{party} Syrien Wiederaufbau {year}"
+      ]
+    },
+    "Georgien": {
+      "description": "格鲁吉亚",
+      "keywords": ["Georgien", "georgisch", "格鲁吉亚", "Georgier"],
+      "parent_dimensions": ["Abschiebung", "Herkunftsländer", "Asylverfahren"],
+      "related_tags": ["Visum", "visumfrei", "sichere_Herkunftsländer"],
+      "trigger_conditions": {
+        "years": [2017, 2018, 2019, 2020],
+        "parties": ["AfD", "CDU/CSU", "FDP"],
+        "keywords": ["Visum", "Asyl", "sicher"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Georgien Visum {year}",
+        "{party} georgische Asylbewerber {year}",
+        "{party} Georgien sichere Herkunftsländer {year}"
+      ]
+    },
+    "Steuerreform": {
+      "description": "税制改革",
+      "keywords": ["Steuerreform", "税改", "Steuersystem", "Steueränderung"],
+      "parent_dimensions": ["Steuerpolitik"],
+      "related_tags": ["Steuersenkung", "Einkommensteuer"],
+      "trigger_conditions": {
+        "years": [1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2008, 2009, 2010],
+        "parties": ["CDU/CSU", "SPD", "FDP", "Grüne"],
+        "keywords": ["Reform", "Steuer", "Entlastung"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Steuerreform {year}",
+        "{party} Steuerentlastung {year}",
+        "{party} Steuerpolitik {year}"
+      ]
+    },
+    "Schuldenbremse": {
+      "description": "债务刹车",
+      "keywords": ["Schuldenbremse", "债务刹车", "Schuldenregel", "Haushaltsdisziplin"],
+      "parent_dimensions": ["Haushaltspolitik"],
+      "related_tags": ["Schwarze_Null", "Staatsschulden"],
+      "trigger_conditions": {
+        "years": [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+        "parties": ["CDU/CSU", "FDP", "SPD", "Grüne"],
+        "keywords": ["Schulden", "Bremse", "Haushalt", "Grundgesetz"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Schuldenbremse {year}",
+        "{party} Haushaltsdisziplin {year}",
+        "{party} Staatsschulden {year}"
+      ]
+    },
+    "Hartz_IV": {
+      "description": "哈茨四号改革",
+      "keywords": ["Hartz IV", "哈茨", "Hartz-Reform", "ALG II"],
+      "parent_dimensions": ["Arbeitsmarktpolitik", "Arbeitslosigkeit"],
+      "related_tags": ["Agenda_2010", "Arbeitslosengeld", "Bürgergeld"],
+      "trigger_conditions": {
+        "years": [2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+        "parties": ["SPD", "CDU/CSU", "Grüne", "Linke", "FDP"],
+        "keywords": ["Hartz", "Reform", "Arbeitslos", "Grundsicherung"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Hartz IV {year}",
+        "{party} Arbeitsmarktreform {year}",
+        "{party} Grundsicherung {year}"
+      ]
+    },
+    "Mindestlohn": {
+      "description": "最低工资",
+      "keywords": ["Mindestlohn", "最低工资", "Lohnuntergrenze"],
+      "parent_dimensions": ["Arbeitsmarktpolitik"],
+      "related_tags": ["Hartz_IV", "Niedriglohn"],
+      "trigger_conditions": {
+        "years": [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+        "parties": ["SPD", "Linke", "Grüne", "CDU/CSU"],
+        "keywords": ["Mindestlohn", "Lohn", "Euro"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Mindestlohn {year}",
+        "{party} Lohnuntergrenze {year}",
+        "{party} Mindestlohn Erhöhung {year}"
+      ]
+    },
+    "Atomausstieg": {
+      "description": "退出核能",
+      "keywords": ["Atomausstieg", "退出核能", "Kernkraftausstieg", "AKW-Abschaltung"],
+      "parent_dimensions": ["Kernenergie"],
+      "related_tags": ["Fukushima", "Endlager", "Energiewende"],
+      "trigger_conditions": {
+        "years": [1998, 1999, 2000, 2001, 2002, 2010, 2011, 2012, 2013, 2021, 2022, 2023],
+        "parties": ["Grüne", "SPD", "CDU/CSU", "FDP", "Linke"],
+        "keywords": ["Atom", "Ausstieg", "Kernkraft", "AKW"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Atomausstieg {year}",
+        "{party} Kernkraftwerk Abschaltung {year}",
+        "{party} Nuklearenergie {year}"
+      ]
+    },
+    "EEG": {
+      "description": "可再生能源法",
+      "keywords": ["EEG", "Erneuerbare-Energien-Gesetz", "可再生能源法"],
+      "parent_dimensions": ["Erneuerbare_Energien"],
+      "related_tags": ["Windkraft", "Photovoltaik", "Einspeisevergütung"],
+      "trigger_conditions": {
+        "years": [2000, 2001, 2004, 2009, 2012, 2014, 2017, 2020, 2021, 2022, 2023],
+        "parties": ["Grüne", "SPD", "CDU/CSU", "FDP"],
+        "keywords": ["EEG", "Erneuerbare", "Förderung", "Umlage"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} EEG {year}",
+        "{party} Erneuerbare Energien Förderung {year}",
+        "{party} EEG-Umlage {year}"
+      ]
+    },
+    "Nord_Stream": {
+      "description": "北溪管道",
+      "keywords": ["Nord Stream", "北溪", "Ostsee-Pipeline", "Gaspipeline"],
+      "parent_dimensions": ["Energiesicherheit"],
+      "related_tags": ["Russland_Energie", "Gasversorgung", "Ukraine_Konflikt"],
+      "trigger_conditions": {
+        "years": [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2018, 2019, 2020, 2021, 2022],
+        "parties": ["SPD", "CDU/CSU", "Grüne", "FDP", "Linke"],
+        "keywords": ["Nord Stream", "Pipeline", "Gas", "Russland"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Nord Stream {year}",
+        "{party} Gaspipeline Russland {year}",
+        "{party} Energieabhängigkeit {year}"
+      ]
+    },
+    "EU_Integration": {
+      "description": "欧洲一体化",
+      "keywords": ["EU-Integration", "欧洲一体化", "europäische Integration", "Vertiefung"],
+      "parent_dimensions": ["Europapolitik"],
+      "related_tags": ["Maastricht", "Lissabon", "Euro_Einführung"],
+      "trigger_conditions": {
+        "years": [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2007, 2008, 2009, 2010, 2011, 2012],
+        "parties": ["CDU/CSU", "SPD", "FDP", "Grüne"],
+        "keywords": ["EU", "Europa", "Integration", "Vertrag"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} EU Integration {year}",
+        "{party} europäische Einigung {year}",
+        "{party} Europa Politik {year}"
+      ]
+    },
+    "Eurorettung": {
+      "description": "欧元救援",
+      "keywords": ["Eurorettung", "欧元救援", "Rettungsschirm", "ESM", "EFSF"],
+      "parent_dimensions": ["Währungspolitik", "Europapolitik"],
+      "related_tags": ["Griechenland", "Schuldenkrise", "Stabilitätspakt"],
+      "trigger_conditions": {
+        "years": [2010, 2011, 2012, 2013, 2014, 2015],
+        "parties": ["CDU/CSU", "SPD", "FDP", "Grüne", "Linke"],
+        "keywords": ["Euro", "Rettung", "Griechenland", "Krise"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Eurorettung {year}",
+        "{party} Rettungsschirm {year}",
+        "{party} Griechenland Hilfe {year}"
+      ]
+    },
+    "Wiedervereinigung_Tag": {
+      "description": "德国统一",
+      "keywords": ["Wiedervereinigung", "统一", "Einheit", "3. Oktober"],
+      "parent_dimensions": ["Wiedervereinigung"],
+      "related_tags": ["Mauerfall", "DDR", "Zwei_plus_Vier"],
+      "trigger_conditions": {
+        "years": [1989, 1990, 1991, 1992, 1993, 1994, 1995, 2000, 2010, 2015, 2020],
+        "parties": ["CDU/CSU", "SPD", "FDP", "Grüne", "PDS", "Linke"],
+        "keywords": ["Einheit", "Wiedervereinigung", "DDR", "Mauer"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Wiedervereinigung {year}",
+        "{party} deutsche Einheit {year}",
+        "{party} Aufbau Ost {year}"
+      ]
+    },
+    "Ukraine_Konflikt": {
+      "description": "乌克兰冲突",
+      "keywords": ["Ukraine", "乌克兰", "Krim", "Donbass", "Krieg"],
+      "parent_dimensions": ["Ostpolitik", "NATO_Verteidigung"],
+      "related_tags": ["Sanktionen", "Russland_Energie", "Zeitenwende"],
+      "trigger_conditions": {
+        "years": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+        "parties": ["CDU/CSU", "SPD", "Grüne", "FDP", "Linke", "AfD"],
+        "keywords": ["Ukraine", "Russland", "Krieg", "Sanktionen"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Ukraine {year}",
+        "{party} Russland Sanktionen {year}",
+        "{party} Waffenlieferungen Ukraine {year}"
+      ]
+    },
+    "Rentenreform": {
+      "description": "养老金改革",
+      "keywords": ["Rentenreform", "养老金改革", "Rentenversicherung"],
+      "parent_dimensions": ["Rentenpolitik"],
+      "related_tags": ["Riester", "Rente_mit_67", "Grundrente"],
+      "trigger_conditions": {
+        "years": [1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2014, 2018, 2019, 2020, 2021],
+        "parties": ["CDU/CSU", "SPD", "FDP", "Grüne", "Linke"],
+        "keywords": ["Rente", "Reform", "Altersvorsorge"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Rentenreform {year}",
+        "{party} Altersvorsorge {year}",
+        "{party} Rentenpolitik {year}"
+      ]
+    },
+    "Gesundheitsreform": {
+      "description": "医疗改革",
+      "keywords": ["Gesundheitsreform", "医疗改革", "Krankenversicherung"],
+      "parent_dimensions": ["Gesundheitspolitik"],
+      "related_tags": ["Krankenkasse", "Bürgerversicherung"],
+      "trigger_conditions": {
+        "years": [1992, 1993, 1997, 1998, 2003, 2004, 2006, 2007, 2010, 2011, 2015],
+        "parties": ["CDU/CSU", "SPD", "FDP", "Grüne"],
+        "keywords": ["Gesundheit", "Reform", "Krankenversicherung"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Gesundheitsreform {year}",
+        "{party} Krankenversicherung {year}",
+        "{party} Gesundheitspolitik {year}"
+      ]
+    },
+    "Corona": {
+      "description": "新冠疫情",
+      "keywords": ["Corona", "新冠", "COVID", "Pandemie", "Lockdown"],
+      "parent_dimensions": ["Gesundheitspolitik"],
+      "related_tags": ["Impfung", "Lockdown", "Infektionsschutz"],
+      "trigger_conditions": {
+        "years": [2020, 2021, 2022, 2023],
+        "parties": ["CDU/CSU", "SPD", "Grüne", "FDP", "Linke", "AfD"],
+        "keywords": ["Corona", "COVID", "Pandemie", "Impf"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Corona {year}",
+        "{party} Pandemie Maßnahmen {year}",
+        "{party} Impfpflicht {year}"
+      ]
+    },
+    "Pariser_Abkommen": {
+      "description": "巴黎协定",
+      "keywords": ["Pariser Abkommen", "巴黎协定", "Paris Agreement", "Klimaabkommen"],
+      "parent_dimensions": ["Klimaschutz"],
+      "related_tags": ["Klimaziele", "CO2", "Klimaneutralität"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+        "parties": ["Grüne", "SPD", "CDU/CSU", "FDP", "Linke"],
+        "keywords": ["Paris", "Klima", "Abkommen", "1,5 Grad"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Pariser Abkommen {year}",
+        "{party} Klimaschutz {year}",
+        "{party} Klimaziele {year}"
+      ]
+    },
+    "Obergrenze": {
+      "description": "难民上限",
+      "keywords": ["Obergrenze", "上限", "Begrenzung", "Kontingent"],
+      "parent_dimensions": ["Aufnahme", "Familiennachzug"],
+      "related_tags": ["CSU", "Seehofer", "200000"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018],
+        "parties": ["CDU/CSU", "AfD", "SPD"],
+        "keywords": ["Grenze", "Begrenzung", "Kontingent"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Obergrenze Flüchtlinge {year}",
+        "{party} Begrenzung Zuwanderung {year}"
+      ]
+    },
+    "Willkommenskultur": {
+      "description": "欢迎文化",
+      "keywords": ["Willkommenskultur", "欢迎文化", "Willkommen"],
+      "parent_dimensions": ["Kulturpolitik", "Aufnahme"],
+      "related_tags": ["2015", "Merkel", "Flüchtlinge"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017],
+        "parties": ["SPD", "Grüne", "Linke", "CDU/CSU"],
+        "keywords": ["Willkommen", "Aufnahme", "Solidarität"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Willkommenskultur {year}",
+        "{party} Willkommen Flüchtlinge {year}"
+      ]
+    },
+    "sichere_Herkunftsländer": {
+      "description": "安全来源国",
+      "keywords": ["sichere Herkunftsländer", "sicherer Herkunftsstaat", "安全来源国"],
+      "parent_dimensions": ["Asylverfahren", "Abschiebung"],
+      "related_tags": ["Balkan", "Maghreb", "Georgien"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018, 2019],
+        "parties": ["CDU/CSU", "AfD", "FDP", "SPD"],
+        "keywords": ["sicher", "Herkunft", "Einstufung"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} sichere Herkunftsländer {year}",
+        "{party} Einstufung sicher {year}"
+      ]
+    }
+  }
+}

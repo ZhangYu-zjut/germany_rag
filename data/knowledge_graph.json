@@ -1,0 +1,406 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "description": "德国议会演讲检索知识图谱 - 2.5层结构",
+    "created": "2024-11-26",
+    "structure": "topics -> dimensions -> tags"
+  },
+
+  "topics": {
+    "Migrationspolitik": {
+      "description": "移民政策",
+      "keywords": ["Migration", "Einwanderung", "Zuwanderung", "移民", "Migranten"],
+      "dimensions": ["Abschiebung", "Familiennachzug", "Fachkräfte", "Grenzschutz"]
+    },
+    "Integrationspolitik": {
+      "description": "融合政策",
+      "keywords": ["Integration", "融合", "Eingliederung", "Teilhabe"],
+      "dimensions": ["Sprachförderung", "Arbeitsmarktintegration", "Kulturpolitik", "Bildungsintegration"]
+    },
+    "Flüchtlingspolitik": {
+      "description": "难民政策",
+      "keywords": ["Flüchtling", "Asyl", "Schutzsuchende", "难民", "Geflüchtete", "难民政策", "Flüchtlingspolitik"],
+      "dimensions": ["Asylverfahren", "Aufnahme", "Abschiebung", "Herkunftsländer"]
+    },
+    "Sicherheitspolitik": {
+      "description": "安全政策",
+      "keywords": ["Sicherheit", "Terrorismus", "Kriminalität", "安全"],
+      "dimensions": ["Grenzkontrollen", "Abschiebehaft", "Gefährder", "Identitätsfeststellung"]
+    }
+  },
+
+  "dimensions": {
+    "Abschiebung": {
+      "description": "遣返政策",
+      "keywords": ["Abschiebung", "Rückführung", "Ausweisung", "遣返", "Ausreisepflicht"],
+      "parent_topics": ["Migrationspolitik", "Flüchtlingspolitik"],
+      "tags": ["Syrien", "Afghanistan", "Irak", "Georgien", "Balkan", "Wiederaufbau", "sichere_Herkunftsländer"]
+    },
+    "Familiennachzug": {
+      "description": "家庭团聚",
+      "keywords": ["Familiennachzug", "Familie", "Nachzug", "家庭团聚", "Familienzusammenführung"],
+      "parent_topics": ["Migrationspolitik"],
+      "tags": ["Obergrenze", "subsidiär_Schutzberechtigte", "Kontingent"]
+    },
+    "Fachkräfte": {
+      "description": "技术移民",
+      "keywords": ["Fachkräfte", "Fachkräfteeinwanderung", "技术移民", "Arbeitskräfte"],
+      "parent_topics": ["Migrationspolitik"],
+      "tags": ["Fachkräfteeinwanderungsgesetz", "Blue_Card", "Punktesystem"]
+    },
+    "Grenzschutz": {
+      "description": "边境保护",
+      "keywords": ["Grenze", "Grenzschutz", "Grenzkontrolle", "边境"],
+      "parent_topics": ["Migrationspolitik", "Sicherheitspolitik"],
+      "tags": ["Frontex", "Schengen", "EU_Außengrenze"]
+    },
+    "Sprachförderung": {
+      "description": "语言促进",
+      "keywords": ["Sprache", "Sprachkurs", "Deutschkurs", "语言"],
+      "parent_topics": ["Integrationspolitik"],
+      "tags": ["Integrationskurs", "Sprachniveau", "B1"]
+    },
+    "Arbeitsmarktintegration": {
+      "description": "劳动市场融合",
+      "keywords": ["Arbeitsmarkt", "Beschäftigung", "Arbeit", "就业"],
+      "parent_topics": ["Integrationspolitik"],
+      "tags": ["Ausbildung", "Praktikum", "Arbeitserlaubnis", "3plus2"]
+    },
+    "Kulturpolitik": {
+      "description": "文化政策",
+      "keywords": ["Kultur", "kulturell", "文化"],
+      "parent_topics": ["Integrationspolitik"],
+      "tags": ["Kultur_baut_Brücken", "Willkommenskultur", "Leitkultur"]
+    },
+    "Bildungsintegration": {
+      "description": "教育融合",
+      "keywords": ["Bildung", "Schule", "Ausbildung", "教育"],
+      "parent_topics": ["Integrationspolitik"],
+      "tags": ["Willkommensklassen", "Sprachförderung", "Anerkennung"]
+    },
+    "Asylverfahren": {
+      "description": "庇护程序",
+      "keywords": ["Asylverfahren", "Asylantrag", "BAMF", "庇护"],
+      "parent_topics": ["Flüchtlingspolitik"],
+      "tags": ["Ankerzentren", "Verfahrensbeschleunigung", "Dublin"]
+    },
+    "Aufnahme": {
+      "description": "接收安置",
+      "keywords": ["Aufnahme", "Unterbringung", "接收"],
+      "parent_topics": ["Flüchtlingspolitik"],
+      "tags": ["Obergrenze", "Verteilung", "Kommunen"]
+    },
+    "Herkunftsländer": {
+      "description": "来源国",
+      "keywords": ["Herkunftsland", "Herkunftsstaat", "来源国"],
+      "parent_topics": ["Flüchtlingspolitik", "Abschiebung"],
+      "tags": ["Syrien", "Afghanistan", "Irak", "Türkei", "Georgien", "Maghreb", "Balkan"]
+    },
+    "Grenzkontrollen": {
+      "description": "边境管控",
+      "keywords": ["Grenzkontrolle", "Kontrolle", "边境管控"],
+      "parent_topics": ["Sicherheitspolitik"],
+      "tags": ["Schengen", "temporäre_Kontrollen", "Binnengrenze"]
+    },
+    "Abschiebehaft": {
+      "description": "遣返拘留",
+      "keywords": ["Abschiebehaft", "Haft", "拘留"],
+      "parent_topics": ["Sicherheitspolitik"],
+      "tags": ["Ausreisegewahrsam", "Abschiebungshaft"]
+    },
+    "Gefährder": {
+      "description": "危险分子",
+      "keywords": ["Gefährder", "Terrorverdächtige", "危险分子"],
+      "parent_topics": ["Sicherheitspolitik"],
+      "tags": ["Überwachung", "Abschiebung", "Fußfessel"]
+    },
+    "Identitätsfeststellung": {
+      "description": "身份核实",
+      "keywords": ["Identität", "Identitätsfeststellung", "身份"],
+      "parent_topics": ["Sicherheitspolitik"],
+      "tags": ["Passersatz", "Mitwirkungspflicht", "Täuschung"]
+    }
+  },
+
+  "tags": {
+    "Syrien": {
+      "description": "叙利亚",
+      "keywords": ["Syrien", "syrisch", "叙利亚", "Syrer"],
+      "parent_dimensions": ["Abschiebung", "Herkunftsländer"],
+      "related_tags": ["Wiederaufbau", "Bürgerkrieg", "Assad"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018, 2019, 2020, 2021],
+        "parties": ["CDU/CSU", "SPD", "Grüne", "AfD", "FDP", "Linke"],
+        "keywords": ["Flüchtling", "Rückführung", "Wiederaufbau"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Syrien Flüchtlinge {year}",
+        "{party} syrische Rückführung {year}",
+        "{party} Syrien Wiederaufbau {year}"
+      ]
+    },
+    "Georgien": {
+      "description": "格鲁吉亚",
+      "keywords": ["Georgien", "georgisch", "格鲁吉亚", "Georgier"],
+      "parent_dimensions": ["Abschiebung", "Herkunftsländer", "Asylverfahren"],
+      "related_tags": ["Visum", "visumfrei", "sichere_Herkunftsländer", "Visumspflicht"],
+      "trigger_conditions": {
+        "years": [2017, 2018, 2019, 2020],
+        "parties": ["AfD", "CDU/CSU", "FDP"],
+        "keywords": ["Visum", "Asyl", "sicher", "visumspflichtig"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Georgien Visum {year}",
+        "{party} georgische Asylbewerber {year}",
+        "{party} Georgien sichere Herkunftsländer {year}",
+        "{party} Georgien visumspflichtig {year}"
+      ]
+    },
+    "Afghanistan": {
+      "description": "阿富汗",
+      "keywords": ["Afghanistan", "afghanisch", "阿富汗", "Afghane"],
+      "parent_dimensions": ["Abschiebung", "Herkunftsländer"],
+      "related_tags": ["Abschiebung", "Sicherheitslage", "Taliban"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018, 2019, 2020, 2021],
+        "parties": ["CDU/CSU", "SPD", "Grüne", "AfD", "Linke"],
+        "keywords": ["Abschiebung", "Sicherheit", "Taliban"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Afghanistan Abschiebung {year}",
+        "{party} afghanische Flüchtlinge {year}"
+      ]
+    },
+    "Türkei": {
+      "description": "土耳其",
+      "keywords": ["Türkei", "türkisch", "土耳其", "Türke"],
+      "parent_dimensions": ["Herkunftsländer", "Grenzschutz"],
+      "related_tags": ["EU_Abkommen", "Flüchtlingsdeal", "Erdogan"],
+      "trigger_conditions": {
+        "years": [2016, 2017, 2018, 2019, 2020],
+        "parties": ["CDU/CSU", "SPD", "Grüne", "AfD", "Linke"],
+        "keywords": ["Abkommen", "Grenze", "Flüchtling"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Türkei Flüchtlingsabkommen {year}",
+        "{party} türkische Grenze {year}"
+      ]
+    },
+    "Irak": {
+      "description": "伊拉克",
+      "keywords": ["Irak", "irakisch", "伊拉克", "Iraker"],
+      "parent_dimensions": ["Abschiebung", "Herkunftsländer"],
+      "related_tags": ["Abschiebung", "Jesiden"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018, 2019],
+        "parties": ["CDU/CSU", "SPD", "Grüne", "Linke"],
+        "keywords": ["Flüchtling", "Jesiden"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Irak Flüchtlinge {year}",
+        "{party} irakische Abschiebung {year}"
+      ]
+    },
+    "Balkan": {
+      "description": "巴尔干地区",
+      "keywords": ["Balkan", "Westbalkan", "巴尔干", "Albanien", "Kosovo", "Serbien"],
+      "parent_dimensions": ["Abschiebung", "Herkunftsländer"],
+      "related_tags": ["sichere_Herkunftsländer", "Asylmissbrauch"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018],
+        "parties": ["CDU/CSU", "AfD", "FDP"],
+        "keywords": ["sicher", "Asyl", "Wirtschaftsflüchtling"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Westbalkan sichere Herkunftsländer {year}",
+        "{party} Balkan Asylbewerber {year}"
+      ]
+    },
+    "Wiederaufbau": {
+      "description": "重建",
+      "keywords": ["Wiederaufbau", "Aufbau", "重建", "Rekonstruktion"],
+      "parent_dimensions": ["Abschiebung", "Herkunftsländer"],
+      "related_tags": ["Syrien", "Rückkehr", "Entwicklungshilfe"],
+      "trigger_conditions": {
+        "years": [2017, 2018, 2019, 2020],
+        "parties": ["CDU/CSU", "SPD", "FDP"],
+        "keywords": ["Syrien", "Rückkehr", "Stabilisierung"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Wiederaufbau Syrien {year}",
+        "{party} Rückkehr Wiederaufbau {year}"
+      ]
+    },
+    "Kultur_baut_Brücken": {
+      "description": "文化架桥项目",
+      "keywords": ["Kultur baut Brücken", "文化架桥"],
+      "parent_dimensions": ["Kulturpolitik"],
+      "related_tags": ["Integration", "Kulturpolitik"],
+      "trigger_conditions": {
+        "years": [2016, 2017],
+        "parties": ["CDU/CSU", "SPD"],
+        "keywords": ["Kultur", "Integration", "Brücke"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Kultur baut Brücken {year}",
+        "{party} kulturelle Integration {year}"
+      ]
+    },
+    "Obergrenze": {
+      "description": "难民上限",
+      "keywords": ["Obergrenze", "上限", "Begrenzung", "Kontingent"],
+      "parent_dimensions": ["Aufnahme", "Familiennachzug"],
+      "related_tags": ["CSU", "Seehofer", "200000"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018],
+        "parties": ["CDU/CSU", "AfD", "SPD"],
+        "keywords": ["Grenze", "Begrenzung", "Kontingent"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Obergrenze Flüchtlinge {year}",
+        "{party} Begrenzung Zuwanderung {year}"
+      ]
+    },
+    "Visum": {
+      "description": "签证",
+      "keywords": ["Visum", "visumfrei", "签证", "Visumpflicht", "Visumspflicht", "visumspflichtig"],
+      "parent_dimensions": ["Asylverfahren", "Herkunftsländer"],
+      "related_tags": ["Georgien", "Ukraine", "Westbalkan"],
+      "trigger_conditions": {
+        "years": [2017, 2018, 2019],
+        "parties": ["AfD", "CDU/CSU", "FDP"],
+        "keywords": ["Visum", "visumfrei", "Einreise", "visumspflichtig"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Visum Georgien {year}",
+        "{party} Visumpflicht {year}",
+        "{party} Georgien visumspflichtig {year}",
+        "{party} Georgien sichere Herkunftsländer visumspflichtig machen {year}",
+        "{party} weigert Georgien visumspflichtig zu machen {year}"
+      ]
+    },
+    "Ausreisegewahrsam": {
+      "description": "遣返拘留",
+      "keywords": ["Ausreisegewahrsam", "Abschiebungshaft", "Haft", "拘留", "Höchstdauer", "verlängern"],
+      "parent_dimensions": ["Abschiebehaft", "Abschiebung"],
+      "related_tags": ["Abschiebung", "Rückführung"],
+      "trigger_conditions": {
+        "years": [2017, 2018, 2019],
+        "parties": ["CDU/CSU", "AfD"],
+        "keywords": ["Haft", "Gewahrsam", "verlängern", "Höchstdauer"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Ausreisegewahrsam verlängern {year}",
+        "{party} Abschiebungshaft {year}",
+        "{party} Höchstdauer Ausreisegewahrsam {year}"
+      ]
+    },
+    "sichere_Herkunftsländer": {
+      "description": "安全来源国",
+      "keywords": ["sichere Herkunftsländer", "sicherer Herkunftsstaat", "安全来源国"],
+      "parent_dimensions": ["Asylverfahren", "Abschiebung"],
+      "related_tags": ["Balkan", "Maghreb", "Georgien"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018, 2019],
+        "parties": ["CDU/CSU", "AfD", "FDP", "SPD"],
+        "keywords": ["sicher", "Herkunft", "Einstufung"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} sichere Herkunftsländer {year}",
+        "{party} Einstufung sicher {year}"
+      ]
+    },
+    "Integrationsgesetz": {
+      "description": "融合法",
+      "keywords": ["Integrationsgesetz", "融合法"],
+      "parent_dimensions": ["Sprachförderung", "Arbeitsmarktintegration"],
+      "related_tags": ["Fördern_und_Fordern", "Wohnsitzauflage"],
+      "trigger_conditions": {
+        "years": [2016, 2017],
+        "parties": ["CDU/CSU", "SPD", "Grüne"],
+        "keywords": ["Integration", "Gesetz", "Fördern"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Integrationsgesetz {year}",
+        "{party} Integrationsgesetz Kritik {year}"
+      ]
+    },
+    "Fachkräfteeinwanderungsgesetz": {
+      "description": "技术移民法",
+      "keywords": ["Fachkräfteeinwanderungsgesetz", "技术移民法", "Fachkräftegesetz"],
+      "parent_dimensions": ["Fachkräfte"],
+      "related_tags": ["Einwanderung", "Arbeitsmarkt", "Punktesystem"],
+      "trigger_conditions": {
+        "years": [2017, 2018, 2019, 2020],
+        "parties": ["CDU/CSU", "SPD", "FDP", "Grüne"],
+        "keywords": ["Fachkräfte", "Einwanderung", "Arbeitskräfte"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Fachkräfteeinwanderungsgesetz {year}",
+        "{party} Fachkräfte Zuwanderung {year}"
+      ]
+    },
+    "Ankerzentren": {
+      "description": "锚定中心",
+      "keywords": ["Ankerzentren", "Ankerzentrum", "锚定中心", "AnkER"],
+      "parent_dimensions": ["Asylverfahren"],
+      "related_tags": ["BAMF", "Verfahrensbeschleunigung"],
+      "trigger_conditions": {
+        "years": [2018, 2019, 2020],
+        "parties": ["CDU/CSU", "AfD", "SPD"],
+        "keywords": ["Anker", "Zentrum", "Asylverfahren"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Ankerzentren {year}",
+        "{party} Asylzentrum {year}"
+      ]
+    },
+    "Leitkultur": {
+      "description": "主导文化",
+      "keywords": ["Leitkultur", "主导文化", "deutsche Kultur"],
+      "parent_dimensions": ["Kulturpolitik"],
+      "related_tags": ["Integration", "Werte", "Grundgesetz"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017, 2018],
+        "parties": ["CDU/CSU", "AfD"],
+        "keywords": ["Kultur", "Werte", "deutsch"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Leitkultur {year}",
+        "{party} deutsche Werte Integration {year}"
+      ]
+    },
+    "Willkommenskultur": {
+      "description": "欢迎文化",
+      "keywords": ["Willkommenskultur", "欢迎文化", "Willkommen"],
+      "parent_dimensions": ["Kulturpolitik", "Aufnahme"],
+      "related_tags": ["2015", "Merkel", "Flüchtlinge"],
+      "trigger_conditions": {
+        "years": [2015, 2016, 2017],
+        "parties": ["SPD", "Grüne", "Linke", "CDU/CSU"],
+        "keywords": ["Willkommen", "Aufnahme", "Solidarität"]
+      },
+      "weight": 1.0,
+      "expansion_queries": [
+        "{party} Willkommenskultur {year}",
+        "{party} Willkommen Flüchtlinge {year}"
+      ]
+    }
+  }
+}
