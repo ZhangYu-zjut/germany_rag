@@ -4,7 +4,7 @@ LLM客户端模块
 """
 
 from langchain_openai import ChatOpenAI
-from langchain.schema import SystemMessage, HumanMessage, AIMessage
+from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from typing import List, Dict, Any, Optional
 from src.config import settings
 from src.utils import logger
@@ -37,7 +37,8 @@ class GeminiLLMClient:
         """
         self.model_name = model_name or settings.third_party_model_name
         self.temperature = temperature
-        self.max_tokens = max_tokens
+        # 如果未指定max_tokens，使用配置中的默认值（防止输出截断）
+        self.max_tokens = max_tokens or settings.llm_max_tokens
         
         # 检查 API key 是否配置
         if not settings.openai_api_key:
@@ -53,7 +54,9 @@ class GeminiLLMClient:
             base_url=settings.third_party_base_url,
             temperature=self.temperature,
             max_tokens=self.max_tokens,
-            default_headers={"Accept-Encoding": "identity"}  # 禁用压缩避免zstandard问题
+            default_headers={"Accept-Encoding": "identity"},  # 禁用压缩避免zstandard问题
+            timeout=120,  # 2分钟超时，防止无限等待
+            max_retries=2  # 失败时重试2次
         )
         
         logger.info(

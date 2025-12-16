@@ -1,14 +1,15 @@
 # 德国议会RAG Streamlit UI依赖
-# 精简版本，用于云端部署
+# 版本与本地环境对齐，避免兼容性问题
 
 # ===== Streamlit框架 =====
 streamlit>=1.29.0
 
-# ===== LangChain核心 =====
-langchain>=0.1.0
-langchain-core>=0.1.0
-langchain-openai>=0.0.5
-langgraph>=0.0.40
+# ===== LangChain核心 (固定版本) =====
+langchain==0.3.7
+langchain-core==0.3.15
+langchain-openai==0.2.8
+langchain-community==0.3.5
+langgraph==0.2.45
 
 # ===== 向量数据库 =====
 pinecone-client>=3.0.0
@@ -20,12 +21,12 @@ openai>=1.6.0
 cohere>=4.40
 
 # ===== 配置管理 =====
-pydantic>=2.0.0
-pydantic-settings>=2.0.0
+pydantic==2.9.2
+pydantic-settings==2.6.0
 
 # ===== 工具库 =====
-python-dotenv>=1.0.0
-loguru>=0.7.2
+python-dotenv==1.0.1
+loguru==0.7.2
 httpx>=0.25.0
 tenacity>=8.2.0
 tiktoken>=0.5.0
