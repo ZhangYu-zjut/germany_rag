@@ -1,0 +1,53 @@
+# 德国议会RAG智能问答系统 - Streamlit Docker Compose配置
+
+version: '3.8'
+
+services:
+  streamlit-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: german-parliament-rag-streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      # LLM API配置
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - THIRD_PARTY_BASE_URL=${THIRD_PARTY_BASE_URL:-https://api.evolink.ai/v1}
+      - THIRD_PARTY_MODEL_NAME=${THIRD_PARTY_MODEL_NAME:-gemini-2.5-pro}
+
+      # Embedding API配置
+      - EMBEDDING_MODE=deepinfra
+      - DEEPINFRA_EMBEDDING_API_KEY=${DEEPINFRA_EMBEDDING_API_KEY}
+      - DEEPINFRA_EMBEDDING_BASE_URL=${DEEPINFRA_EMBEDDING_BASE_URL:-https://api.deepinfra.com/v1/openai}
+
+      # Pinecone配置
+      - PINECONE_VECTOR_DATABASE_API_KEY=${PINECONE_VECTOR_DATABASE_API_KEY}
+      - PINECONE_HOST=${PINECONE_HOST}
+      - PINECONE_REGION=${PINECONE_REGION:-us-east-1}
+
+      # Cohere
+      - COHERE_API_KEY=${COHERE_API_KEY}
+
+      # 系统配置
+      - PRODUCTION_MODE=true
+      - LOG_LEVEL=INFO
+
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+
+# 使用方法:
+# docker-compose -f docker-compose.streamlit.yml up -d

@@ -1,0 +1,74 @@
+# Render.com Streamlit部署配置
+# 此文件放在仓库根目录，Render会自动检测
+
+services:
+  - type: web
+    name: german-parliament-rag-ui
+    env: python
+    region: frankfurt  # 选择离用户最近的区域
+    plan: starter      # 【重要】starter及以上才不会休眠，free会15分钟后休眠
+
+    # Python版本
+    runtime: python-3.10.0
+
+    # 构建命令
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements-streamlit.txt
+
+    # 启动命令 - Streamlit专用
+    startCommand: streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+
+    # 健康检查路径
+    healthCheckPath: /_stcore/health
+
+    # 环境变量（在Render控制台设置敏感信息）
+    envVars:
+      # Python路径
+      - key: PYTHONPATH
+        value: /opt/render/project/src
+
+      # LLM API
+      - key: OPENAI_API_KEY
+        sync: false  # 在控制台手动设置
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: THIRD_PARTY_BASE_URL
+        value: https://api.evolink.ai/v1
+      - key: THIRD_PARTY_MODEL_NAME
+        value: gemini-2.5-pro
+
+      # Embedding API
+      - key: EMBEDDING_MODE
+        value: deepinfra
+      - key: DEEPINFRA_EMBEDDING_API_KEY
+        sync: false
+      - key: DEEPINFRA_EMBEDDING_BASE_URL
+        value: https://api.deepinfra.com/v1/openai
+
+      # Pinecone
+      - key: PINECONE_VECTOR_DATABASE_API_KEY
+        sync: false
+      - key: PINECONE_HOST
+        sync: false
+      - key: PINECONE_REGION
+        value: us-east-1
+
+      # Cohere
+      - key: COHERE_API_KEY
+        sync: false
+
+      # 系统配置
+      - key: PRODUCTION_MODE
+        value: "true"
+      - key: LOG_LEVEL
+        value: INFO
+
+      # Streamlit配置
+      - key: STREAMLIT_SERVER_HEADLESS
+        value: "true"
+      - key: STREAMLIT_BROWSER_GATHER_USAGE_STATS
+        value: "false"
+
+    # 自动部署
+    autoDeploy: true

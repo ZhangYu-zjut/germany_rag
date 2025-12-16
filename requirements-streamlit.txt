@@ -1,0 +1,31 @@
+# 德国议会RAG Streamlit UI依赖
+# 精简版本，用于云端部署
+
+# ===== Streamlit框架 =====
+streamlit>=1.29.0
+
+# ===== LangChain核心 =====
+langchain>=0.1.0
+langchain-core>=0.1.0
+langchain-openai>=0.0.5
+langgraph>=0.0.40
+
+# ===== 向量数据库 =====
+pinecone-client>=3.0.0
+
+# ===== Embedding API =====
+openai>=1.6.0
+
+# ===== ReRank =====
+cohere>=4.40
+
+# ===== 工具库 =====
+python-dotenv>=1.0.0
+loguru>=0.7.2
+httpx>=0.25.0
+tenacity>=8.2.0
+tiktoken>=0.5.0
+
+# ===== 数据处理 =====
+pandas>=2.0.0
+numpy>=1.24.0
