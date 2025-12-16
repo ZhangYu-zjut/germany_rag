@@ -19,6 +19,10 @@ openai>=1.6.0
 # ===== ReRank =====
 cohere>=4.40
 
+# ===== 配置管理 =====
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
 # ===== 工具库 =====
 python-dotenv>=1.0.0
 loguru>=0.7.2
