@@ -169,6 +169,18 @@ class Settings(BaseSettings):
         default="INFO",
         description="日志级别"
     )
+
+    # ========== 生产环境配置 ==========
+    production_mode: bool = Field(
+        default=False,
+        description="生产模式开关: True=生产模式(跳过子答案生成,直接生成最终答案), False=测试模式(生成详细子答案)"
+    )
+
+    # ========== LLM输出配置 ==========
+    llm_max_tokens: int = Field(
+        default=65536,
+        description="LLM最大输出token数。Gemini 2.5 Pro通过Evolink支持最大65.5K tokens，已验证可用"
+    )
     
     model_config = SettingsConfigDict(
         env_file=".env",
