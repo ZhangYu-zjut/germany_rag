@@ -2,14 +2,21 @@
 Pinecone数据检索节点
 从Pinecone向量数据库检索相关材料
 支持多年份分层检索策略
+
+【架构解耦优化】
+- 知识图谱扩展与问题复杂度解耦
+- 简单问题也可以触发KG扩展
+- 在Retrieve层独立判断是否需要KG扩展
 """
 
+import asyncio
 from typing import List, Dict, Optional
 from ...vectordb.pinecone_retriever import PineconeRetriever, create_pinecone_retriever
 from ...llm.embeddings import GeminiEmbeddingClient
 from ...utils.logger import logger
 from ...utils.performance_monitor import get_performance_monitor
 from ..state import GraphState, update_state
+from ..knowledge_graph import get_knowledge_graph_manager
 
 
 class PineconeRetrieveNode:
@@ -35,7 +42,9 @@ class PineconeRetrieveNode:
         top_k: int = 50,  # 提升到50,支持长时间跨度
         index_name: str = "german-bge",
         enable_multi_year_strategy: bool = True,  # 启用多年份策略
-        limit_per_year: int = 5  # 多年份策略时每年的文档数
+        limit_per_year: int = 5,  # 多年份策略时每年的文档数
+        enable_concurrent: bool = True,  # 启用并发检索
+        enable_kg_expansion: bool = True  # 【架构解耦】启用独立的KG扩展判断
     ):
         """
         初始化Pinecone检索节点
@@ -47,11 +56,15 @@ class PineconeRetrieveNode:
             index_name: Pinecone索引名称
             enable_multi_year_strategy: 是否启用多年份分层检索策略
             limit_per_year: 多年份策略时每年返回的文档数
+            enable_concurrent: 是否启用并发检索(默认True, 可提升3-4倍速度)
+            enable_kg_expansion: 是否启用独立的知识图谱扩展(用于简单问题)
         """
         self.index_name = index_name
         self.top_k = top_k
         self.enable_multi_year_strategy = enable_multi_year_strategy
         self.limit_per_year = limit_per_year
+        self.enable_concurrent = enable_concurrent
+        self.enable_kg_expansion = enable_kg_expansion
 
         # 创建或使用提供的retriever
         if retriever is None:
@@ -77,10 +90,20 @@ class PineconeRetrieveNode:
 
         self.embedding_client = embedding_client or GeminiEmbeddingClient()
 
+        # 【架构解耦】初始化知识图谱管理器
+        self.kg_manager = None
+        if enable_kg_expansion:
+            try:
+                self.kg_manager = get_knowledge_graph_manager()
+                logger.info("[PineconeRetrieveNode] 知识图谱管理器已初始化（架构解耦模式）")
+            except Exception as e:
+                logger.warning(f"[PineconeRetrieveNode] 知识图谱初始化失败: {e}，将跳过KG扩展")
+
         logger.info(
             f"[PineconeRetrieveNode] 初始化完成: "
             f"top_k={top_k}, 多年份策略={enable_multi_year_strategy}, "
-            f"每年文档数={limit_per_year}"
+            f"每年文档数={limit_per_year}, 并发检索={enable_concurrent}, "
+            f"KG扩展={enable_kg_expansion}"
         )
 
     def __call__(self, state: GraphState) -> GraphState:
@@ -100,14 +123,55 @@ class PineconeRetrieveNode:
 
         # 获取问题列表
         sub_questions = state.get("sub_questions")
+        parameters = state.get("parameters", {})
+
+        # 【深度分析模式】检测是否启用
+        deep_thinking_mode = state.get("deep_thinking_mode", False)
+        reasoning_steps = state.get("reasoning_steps", [])
+
+        if deep_thinking_mode:
+            logger.info("[PineconeRetrieveNode] 🔍 深度分析模式已启用")
+            reasoning_steps.append("1. 深度分析模式已启用，将进行全面的知识图谱扩展")
+
+        # 【架构解耦】检测是否是简单问题，并尝试KG扩展
+        kg_expansion_info = None
         if sub_questions:
             questions = sub_questions
             logger.info(f"[PineconeRetrieveNode] 检索 {len(questions)} 个子问题")
+            if deep_thinking_mode:
+                reasoning_steps.append(f"2. 问题已拆解为 {len(questions)} 个子问题")
         else:
-            questions = [state["question"]]
-            logger.info(f"[PineconeRetrieveNode] 检索原始问题")
+            # 简单问题路径：独立进行KG扩展判断
+            original_question = state["question"]
+            questions = [original_question]
+            logger.info(f"[PineconeRetrieveNode] 检索原始问题（简单问题路径）")
 
-        parameters = state.get("parameters", {})
+            # 【核心改动】对简单问题独立进行KG扩展判断
+            # 深度模式下强制启用KG扩展
+            if self.enable_kg_expansion and self.kg_manager:
+                kg_queries, kg_expansion_info = self._apply_kg_expansion_for_simple_question(
+                    question=original_question,
+                    intent=state.get("intent", "simple"),
+                    question_type=state.get("question_type", "事实查询"),
+                    parameters=parameters,
+                    force_expansion=deep_thinking_mode  # 深度模式强制扩展
+                )
+                if kg_queries:
+                    # 将KG扩展查询添加到检索任务中
+                    questions = self._merge_kg_queries_to_questions(
+                        original_question, kg_queries
+                    )
+                    logger.info(f"[PineconeRetrieveNode] KG扩展后检索 {len(questions)} 个查询")
+
+                    if deep_thinking_mode:
+                        reasoning_steps.append(
+                            f"2. 知识图谱扩展: 触发{kg_expansion_info.get('expansion_level', '')}级别，"
+                            f"生成{len(kg_queries)}个扩展查询"
+                        )
+                        if kg_expansion_info.get('matched_topics'):
+                            reasoning_steps.append(
+                                f"3. 匹配主题: {', '.join(kg_expansion_info.get('matched_topics', []))}"
+                            )
 
         # 输出内部思考过程
         thinking_process = []
@@ -116,62 +180,17 @@ class PineconeRetrieveNode:
         thinking_process.append(f"提取参数: {parameters}")
 
         try:
-            # 为每个问题检索
-            retrieval_results = []
-            no_material_found = True  # 是否找到材料
-            overall_year_distribution = {}
-
-            for i, question_item in enumerate(questions, 1):
-                # 支持字典和字符串两种格式
-                if isinstance(question_item, dict):
-                    question_text = question_item.get("question", question_item)
-                    question_metadata = question_item
-                else:
-                    question_text = question_item
-                    question_metadata = {
-                        "question": question_text,
-                        "target_year": None,
-                        "retrieval_strategy": "multi_year"
-                    }
-
-                logger.info(f"[PineconeRetrieveNode] 检索问题 {i}/{len(questions)}: {question_text}")
-                thinking_process.append(f"\n--- 子问题 {i} ---")
-                thinking_process.append(f"问题: {question_text}")
-                if question_metadata.get("target_year"):
-                    thinking_process.append(f"目标年份: {question_metadata['target_year']}")
-                    thinking_process.append(f"检索策略: {question_metadata.get('retrieval_strategy', 'single_year')}")
-
-                # 检索（传入元数据）
-                chunks, year_dist, retrieval_method = self._retrieve_for_question(
-                    question_text, parameters, thinking_process, question_metadata
+            # === 并发优化：根据配置选择串行或并发检索 ===
+            if self.enable_concurrent:
+                logger.info(f"[PineconeRetrieveNode] 🚀 使用并发模式检索 {len(questions)} 个问题")
+                retrieval_results, no_material_found, overall_year_distribution = asyncio.run(
+                    self._retrieve_all_concurrent(questions, parameters, thinking_process)
                 )
-
-                if chunks:
-                    no_material_found = False
-
-                # 记录年份分布
-                for year, count in year_dist.items():
-                    overall_year_distribution[year] = overall_year_distribution.get(year, 0) + count
-
-                retrieval_results.append({
-                    "question": question_text,
-                    "question_metadata": question_metadata,  # 保存元数据
-                    "chunks": chunks,
-                    "answer": None,  # 待填充
-                    "year_distribution": year_dist,
-                    "retrieval_method": retrieval_method,
-                    "top_similarity_score": chunks[0]['score'] if chunks else 0.0
-                })
-
-                logger.info(
-                    f"[PineconeRetrieveNode] 找到 {len(chunks)} 个相关chunks, "
-                    f"年份分布={year_dist}, 方法={retrieval_method}"
+            else:
+                logger.info(f"[PineconeRetrieveNode] 使用串行模式检索 {len(questions)} 个问题")
+                retrieval_results, no_material_found, overall_year_distribution = self._retrieve_all_sequential(
+                    questions, parameters, thinking_process
                 )
-                thinking_process.append(f"检索到文档数: {len(chunks)}")
-                thinking_process.append(f"年份分布: {year_dist}")
-                thinking_process.append(f"检索方法: {retrieval_method}")
-                if chunks:
-                    thinking_process.append(f"最高相似度: {chunks[0]['score']:.4f}")
 
             # 总结检索情况
             thinking_process.append("\n=== 检索总结 ===")
@@ -189,15 +208,38 @@ class PineconeRetrieveNode:
             # 输出思考过程
             logger.info(f"\n[内部思考过程]\n" + "\n".join(thinking_process))
 
-            return update_state(
-                state,
-                retrieval_results=retrieval_results,
-                no_material_found=no_material_found,
-                retrieval_thinking="\n".join(thinking_process),  # 保存到状态
-                overall_year_distribution=overall_year_distribution,
-                current_node="retrieve",
-                next_node="exception" if no_material_found else "rerank"
-            )
+            # 构建更新字典
+            update_dict = {
+                "retrieval_results": retrieval_results,
+                "no_material_found": no_material_found,
+                "retrieval_thinking": "\n".join(thinking_process),
+                "overall_year_distribution": overall_year_distribution,
+                "current_node": "retrieve",
+                "next_node": "exception" if no_material_found else "rerank"
+            }
+
+            # 【深度分析模式】更新推理步骤
+            if deep_thinking_mode:
+                reasoning_steps.append(
+                    f"4. 检索完成: 获取到 {sum(len(r['chunks']) for r in retrieval_results)} 个文档"
+                )
+                update_dict["reasoning_steps"] = reasoning_steps
+
+            # 【架构解耦】如果有KG扩展信息，添加到顶级字段和metadata
+            if kg_expansion_info:
+                # 添加到顶级字段（用于UI显示）
+                update_dict["kg_expansion_info"] = kg_expansion_info
+
+                # 同时添加到metadata（向后兼容）
+                existing_metadata = state.get("metadata", {}) or {}
+                update_dict["metadata"] = {
+                    **existing_metadata,
+                    "kg_expansion": kg_expansion_info,
+                    "kg_expansion_source": "retrieve_node"  # 标记KG扩展来源
+                }
+                logger.info(f"[PineconeRetrieveNode] KG扩展信息已添加到state")
+
+            return update_state(state, **update_dict)
 
         except Exception as e:
             logger.error(f"[PineconeRetrieveNode] 检索失败: {str(e)}")
@@ -328,6 +370,31 @@ class PineconeRetrieveNode:
                     )
                     thinking_process.append(f"   变体{i}召回: {len(variant_results)}个文档")
                     all_results.extend(variant_results)
+
+                # 【Phase 4 修复】降级策略：当speaker+party过滤返回0结果时，只用speaker重试
+                if len(all_results) == 0 and filters and 'speaker' in filters and 'party' in filters:
+                    logger.warning(f"[PineconeRetrieveNode] speaker+party过滤返回0结果，尝试只用speaker降级检索")
+                    thinking_process.append(f"⚠️ 降级策略: 移除party过滤，只用speaker重试")
+
+                    # 创建只有speaker的过滤条件
+                    fallback_filters = {'speaker': filters['speaker']}
+                    if 'year' in filters:
+                        fallback_filters['year'] = filters['year']
+
+                    thinking_process.append(f"降级过滤条件: {fallback_filters}")
+
+                    for i, (variant_text, variant_vector) in enumerate(query_vectors, 1):
+                        variant_results = self.retriever.search(
+                            query_vector=variant_vector,
+                            limit=20,
+                            filters=fallback_filters
+                        )
+                        thinking_process.append(f"   降级变体{i}召回: {len(variant_results)}个文档")
+                        all_results.extend(variant_results)
+
+                    if all_results:
+                        retrieval_method = f"standard_expanded_fallback(variants={len(query_vectors)})"
+                        logger.info(f"[PineconeRetrieveNode] 降级策略成功，召回 {len(all_results)} 个文档")
 
         # 去重并按相似度重新排序
         results = self._deduplicate_and_rerank(all_results, top_k=self.top_k)
@@ -604,6 +671,343 @@ class PineconeRetrieveNode:
 
         # 保留top_k个
         return unique_results[:top_k]
+
+    def _retrieve_all_sequential(
+        self,
+        questions: List,
+        parameters: Dict,
+        thinking_process: List[str]
+    ) -> tuple[List[Dict], bool, Dict[str, int]]:
+        """
+        串行模式：逐个检索问题（原有逻辑）
+
+        Args:
+            questions: 问题列表
+            parameters: 参数
+            thinking_process: 思考过程列表
+
+        Returns:
+            (检索结果列表, 是否未找到材料, 整体年份分布)
+        """
+        retrieval_results = []
+        no_material_found = True
+        overall_year_distribution = {}
+
+        for i, question_item in enumerate(questions, 1):
+            # 支持字典和字符串两种格式
+            if isinstance(question_item, dict):
+                question_text = question_item.get("question", question_item)
+                question_metadata = question_item
+            else:
+                question_text = question_item
+                question_metadata = {
+                    "question": question_text,
+                    "target_year": None,
+                    "retrieval_strategy": "multi_year"
+                }
+
+            logger.info(f"[PineconeRetrieveNode] 检索问题 {i}/{len(questions)}: {question_text}")
+            thinking_process.append(f"\n--- 子问题 {i} ---")
+            thinking_process.append(f"问题: {question_text}")
+            if question_metadata.get("target_year"):
+                thinking_process.append(f"目标年份: {question_metadata['target_year']}")
+                thinking_process.append(f"检索策略: {question_metadata.get('retrieval_strategy', 'single_year')}")
+
+            # 检索（传入元数据）
+            chunks, year_dist, retrieval_method = self._retrieve_for_question(
+                question_text, parameters, thinking_process, question_metadata
+            )
+
+            if chunks:
+                no_material_found = False
+
+            # 记录年份分布
+            for year, count in year_dist.items():
+                overall_year_distribution[year] = overall_year_distribution.get(year, 0) + count
+
+            retrieval_results.append({
+                "question": question_text,
+                "question_metadata": question_metadata,
+                "chunks": chunks,
+                "answer": None,
+                "year_distribution": year_dist,
+                "retrieval_method": retrieval_method,
+                "top_similarity_score": chunks[0]['score'] if chunks else 0.0
+            })
+
+            logger.info(
+                f"[PineconeRetrieveNode] 找到 {len(chunks)} 个相关chunks, "
+                f"年份分布={year_dist}, 方法={retrieval_method}"
+            )
+            thinking_process.append(f"检索到文档数: {len(chunks)}")
+            thinking_process.append(f"年份分布: {year_dist}")
+            thinking_process.append(f"检索方法: {retrieval_method}")
+            if chunks:
+                thinking_process.append(f"最高相似度: {chunks[0]['score']:.4f}")
+
+        return retrieval_results, no_material_found, overall_year_distribution
+
+    async def _retrieve_all_concurrent(
+        self,
+        questions: List,
+        parameters: Dict,
+        thinking_process: List[str],
+        max_retries: int = 2  # 单个查询最大重试次数
+    ) -> tuple[List[Dict], bool, Dict[str, int]]:
+        """
+        并发模式：同时检索所有问题（3-4倍速度提升），带重试机制
+
+        Args:
+            questions: 问题列表
+            parameters: 参数
+            thinking_process: 思考过程列表
+            max_retries: 单个查询失败时的最大重试次数
+
+        Returns:
+            (检索结果列表, 是否未找到材料, 整体年份分布)
+        """
+        import time as time_module
+
+        async def retrieve_single(idx: int, question_item, retry_count: int = 0):
+            """异步检索单个问题，带重试机制"""
+            # 支持字典和字符串两种格式
+            if isinstance(question_item, dict):
+                question_text = question_item.get("question", question_item)
+                question_metadata = question_item
+            else:
+                question_text = question_item
+                question_metadata = {
+                    "question": question_text,
+                    "target_year": None,
+                    "retrieval_strategy": "multi_year"
+                }
+
+            logger.debug(f"[PineconeRetrieveNode] 并发检索问题 {idx}/{len(questions)}: {question_text[:50]}...")
+
+            # 创建该问题的独立思考过程列表（避免并发写入冲突）
+            question_thinking = []
+            question_thinking.append(f"\n--- 子问题 {idx} ---")
+            question_thinking.append(f"问题: {question_text}")
+            if question_metadata.get("target_year"):
+                question_thinking.append(f"目标年份: {question_metadata['target_year']}")
+                question_thinking.append(f"检索策略: {question_metadata.get('retrieval_strategy', 'single_year')}")
+
+            try:
+                # 在executor中执行检索（因为_retrieve_for_question是同步的）
+                loop = asyncio.get_event_loop()
+                chunks, year_dist, retrieval_method = await loop.run_in_executor(
+                    None,
+                    lambda: self._retrieve_for_question(
+                        question_text, parameters, question_thinking, question_metadata
+                    )
+                )
+
+                question_thinking.append(f"检索到文档数: {len(chunks)}")
+                question_thinking.append(f"年份分布: {year_dist}")
+                question_thinking.append(f"检索方法: {retrieval_method}")
+                if chunks:
+                    question_thinking.append(f"最高相似度: {chunks[0]['score']:.4f}")
+
+                logger.info(
+                    f"[PineconeRetrieveNode] 问题{idx}检索完成: {len(chunks)} chunks, "
+                    f"年份分布={year_dist}"
+                )
+
+                return {
+                    "question": question_text,
+                    "question_metadata": question_metadata,
+                    "chunks": chunks,
+                    "answer": None,
+                    "year_distribution": year_dist,
+                    "retrieval_method": retrieval_method,
+                    "top_similarity_score": chunks[0]['score'] if chunks else 0.0,
+                    "thinking": question_thinking  # 返回思考过程
+                }
+
+            except Exception as e:
+                # 重试机制
+                if retry_count < max_retries:
+                    wait_time = min(2 ** (retry_count + 1), 8)  # 指数退避，最多等待8秒
+                    logger.warning(
+                        f"🔄 [PineconeRetrieveNode] 问题{idx}检索失败，"
+                        f"等待{wait_time}秒后重试 ({retry_count + 1}/{max_retries}): {str(e)[:100]}"
+                    )
+                    await asyncio.sleep(wait_time)
+                    return await retrieve_single(idx, question_item, retry_count + 1)
+                else:
+                    # 所有重试都失败
+                    logger.error(
+                        f"❌ [PineconeRetrieveNode] 问题{idx}检索失败，"
+                        f"已重试{max_retries}次: {str(e)}"
+                    )
+                    raise
+
+        # 创建并发任务
+        logger.info(f"[PineconeRetrieveNode] 启动 {len(questions)} 个并发检索任务...")
+        tasks = [retrieve_single(idx, q) for idx, q in enumerate(questions, 1)]
+
+        # 并发执行
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        # 处理结果
+        retrieval_results = []
+        no_material_found = True
+        overall_year_distribution = {}
+
+        for idx, result in enumerate(results, 1):
+            if isinstance(result, Exception):
+                logger.error(f"[PineconeRetrieveNode] 问题{idx}检索失败: {result}")
+                # 添加失败占位符
+                retrieval_results.append({
+                    "question": questions[idx-1] if isinstance(questions[idx-1], str) else questions[idx-1].get("question", ""),
+                    "question_metadata": {},
+                    "chunks": [],
+                    "answer": None,
+                    "year_distribution": {},
+                    "retrieval_method": "failed",
+                    "top_similarity_score": 0.0
+                })
+            else:
+                # 成功的结果
+                if result["chunks"]:
+                    no_material_found = False
+
+                # 合并年份分布
+                for year, count in result["year_distribution"].items():
+                    overall_year_distribution[year] = overall_year_distribution.get(year, 0) + count
+
+                # 合并思考过程到主列表
+                thinking_process.extend(result.pop("thinking"))
+
+                retrieval_results.append(result)
+
+        logger.info(f"[PineconeRetrieveNode] ✅ 并发检索完成，共处理 {len(retrieval_results)} 个问题")
+        return retrieval_results, no_material_found, overall_year_distribution
+
+    # ========== 【架构解耦】知识图谱扩展相关方法 ==========
+
+    def _apply_kg_expansion_for_simple_question(
+        self,
+        question: str,
+        intent: str,
+        question_type: str,
+        parameters: Dict,
+        force_expansion: bool = False  # 深度模式强制扩展
+    ) -> tuple:
+        """
+        【架构解耦】对简单问题独立应用知识图谱扩展
+
+        此方法实现了KG扩展与问题复杂度的解耦：
+        - 简单问题也可以触发KG扩展
+        - 不再依赖Decompose节点
+        - 深度分析模式下强制触发扩展
+
+        Args:
+            question: 原问题
+            intent: 问题意图
+            question_type: 问题类型
+            parameters: 问题参数
+            force_expansion: 是否强制扩展（深度分析模式）
+
+        Returns:
+            (扩展查询列表, 扩展信息字典)
+        """
+        if not self.kg_manager:
+            return [], None
+
+        try:
+            if force_expansion:
+                logger.info("[PineconeRetrieveNode] 🔍 【深度分析】强制启用KG扩展...")
+            else:
+                logger.info("[PineconeRetrieveNode] 【架构解耦】开始简单问题KG扩展判断...")
+
+            # 调用知识图谱扩展判断
+            use_kg, expansion_queries, kg_info = self.kg_manager.expand_query(
+                question=question,
+                intent=intent,
+                question_type=question_type,
+                parameters=parameters,
+                force_expansion=force_expansion  # 传递强制扩展参数
+            )
+
+            if use_kg and expansion_queries:
+                logger.info(f"[PineconeRetrieveNode] ✅ 简单问题KG扩展触发成功:")
+                logger.info(f"  - 扩展级别: {kg_info.get('expansion_level', 'unknown')}")
+                logger.info(f"  - 评分: {kg_info.get('score', 0)}")
+                logger.info(f"  - 触发原因: {kg_info.get('reasons', [])}")
+                logger.info(f"  - 扩展查询数: {len(expansion_queries)}")
+
+                # 记录前5个扩展查询
+                for i, eq in enumerate(expansion_queries[:5], 1):
+                    logger.info(f"    扩展查询{i}: {eq}")
+                if len(expansion_queries) > 5:
+                    logger.info(f"    ... 共{len(expansion_queries)}个扩展查询")
+
+                return expansion_queries, kg_info
+            else:
+                logger.info(f"[PineconeRetrieveNode] 简单问题KG扩展未触发: {kg_info.get('reasons', [])}")
+                return [], kg_info
+
+        except Exception as e:
+            logger.error(f"[PineconeRetrieveNode] 简单问题KG扩展失败: {e}")
+            return [], {"error": str(e)}
+
+    def _merge_kg_queries_to_questions(
+        self,
+        original_question: str,
+        kg_queries: List[str]
+    ) -> List[Dict]:
+        """
+        【架构解耦】将知识图谱扩展查询合并到检索问题列表中
+
+        Args:
+            original_question: 原始问题
+            kg_queries: KG扩展查询列表
+
+        Returns:
+            合并后的问题列表（Dict格式）
+        """
+        questions = []
+
+        # 1. 原始问题
+        questions.append({
+            "question": original_question,
+            "target_year": None,
+            "target_party": None,
+            "retrieval_strategy": "multi_year",
+            "source": "original"
+        })
+
+        # 2. 添加KG扩展查询（去重）
+        seen_questions = {original_question.lower().strip()}
+
+        for query in kg_queries:
+            query_normalized = query.lower().strip()
+            if query_normalized not in seen_questions:
+                questions.append({
+                    "question": query,
+                    "target_year": None,
+                    "target_party": None,
+                    "retrieval_strategy": "kg_expansion",
+                    "source": "knowledge_graph"
+                })
+                seen_questions.add(query_normalized)
+
+        # 限制总数（避免查询爆炸）
+        max_questions = 25  # 简单问题的KG扩展限制
+        if len(questions) > max_questions:
+            logger.warning(
+                f"[PineconeRetrieveNode] KG扩展查询过多({len(questions)})，"
+                f"截取前{max_questions}个"
+            )
+            questions = questions[:max_questions]
+
+        logger.info(
+            f"[PineconeRetrieveNode] KG扩展合并完成: "
+            f"原始1个 + KG扩展{len(questions)-1}个 = {len(questions)}个查询"
+        )
+
+        return questions
 
 
 if __name__ == "__main__":

@@ -1,6 +1,10 @@
 """
 增强版问题拆解节点
 使用模板化拆解策略，提高拆解质量和一致性
+
+【Day 4增强】集成知识图谱扩展
+- 支持条件触发的知识图谱扩展
+- 为Q7类问题生成额外的扩展查询
 """
 
 from typing import List, Dict, Optional
@@ -9,6 +13,7 @@ from ...llm.prompts import PromptTemplates
 from ...utils.logger import logger
 from ..state import GraphState, update_state
 from ..templates import TemplateSelector
+from ..knowledge_graph import get_knowledge_graph_manager
 
 
 class EnhancedDecomposeNode:
@@ -27,16 +32,27 @@ class EnhancedDecomposeNode:
     4. 如果模板不适用，使用LLM自由拆解
     """
     
-    def __init__(self, llm_client: GeminiLLMClient = None):
+    def __init__(self, llm_client: GeminiLLMClient = None, enable_kg_expansion: bool = True):
         """
         初始化增强版问题拆解节点
-        
+
         Args:
             llm_client: LLM客户端,如果为None则自动创建
+            enable_kg_expansion: 是否启用知识图谱扩展（默认True）
         """
         self.llm = llm_client or GeminiLLMClient()
         self.prompts = PromptTemplates()
         self.template_selector = TemplateSelector()
+
+        # 【Day 4增强】知识图谱扩展
+        self.enable_kg_expansion = enable_kg_expansion
+        self.kg_manager = None
+        if enable_kg_expansion:
+            try:
+                self.kg_manager = get_knowledge_graph_manager()
+                logger.info("[EnhancedDecomposeNode] 知识图谱管理器已初始化")
+            except Exception as e:
+                logger.warning(f"[EnhancedDecomposeNode] 知识图谱初始化失败: {e}，将跳过KG扩展")
         
     def __call__(self, state: GraphState) -> GraphState:
         """
@@ -86,14 +102,30 @@ class EnhancedDecomposeNode:
             for i, sq in enumerate(sub_questions, 1):
                 question_text = sq if isinstance(sq, str) else sq.get("question", sq)
                 logger.info(f"  子问题{i}: {question_text}")
-            
+
+            # 【Day 4增强】Step 5: 知识图谱扩展
+            kg_expansion_info = None
+            if self.enable_kg_expansion and self.kg_manager:
+                intent = state.get("intent", "complex")
+                kg_queries, kg_expansion_info = self._apply_knowledge_graph_expansion(
+                    question, intent, question_type, parameters
+                )
+                if kg_queries:
+                    # 将知识图谱扩展查询作为额外的子问题添加
+                    sub_questions = self._merge_kg_queries(sub_questions, kg_queries)
+                    logger.info(f"[EnhancedDecomposeNode] 知识图谱扩展后，总子问题数: {len(sub_questions)}")
+
             # 更新状态
             return update_state(
                 state,
                 sub_questions=sub_questions,
                 is_decomposed=True,
                 current_node="decompose",
-                next_node="retrieve"
+                next_node="retrieve",
+                metadata={
+                    **(state.get("metadata", {}) or {}),
+                    "kg_expansion": kg_expansion_info
+                } if kg_expansion_info else state.get("metadata", {})
             )
             
         except Exception as e:
@@ -374,7 +406,7 @@ class EnhancedDecomposeNode:
                 seen.add(q_normalized)
 
         # 限制子问题数量（避免检索负担过重）
-        max_sub_questions = 15  # 增加到15，因为单年检索更快
+        max_sub_questions = 40  # 【Day 3优化】从15增加到40，确保覆盖2015-2024全部年份
         if len(unique_questions) > max_sub_questions:
             logger.warning(f"[EnhancedDecomposeNode] 子问题过多({len(unique_questions)})，截取前{max_sub_questions}个")
             unique_questions = unique_questions[:max_sub_questions]
@@ -382,6 +414,111 @@ class EnhancedDecomposeNode:
         logger.info(f"[EnhancedDecomposeNode] 验证后子问题数: {len(unique_questions)}")
 
         return unique_questions
+
+    # ========== 【Day 4增强】知识图谱扩展相关方法 ==========
+
+    def _apply_knowledge_graph_expansion(
+        self,
+        question: str,
+        intent: str,
+        question_type: str,
+        parameters: Dict
+    ) -> tuple:
+        """
+        应用知识图谱扩展
+
+        Args:
+            question: 原问题
+            intent: 问题意图
+            question_type: 问题类型
+            parameters: 问题参数
+
+        Returns:
+            (扩展查询列表, 扩展信息字典)
+        """
+        if not self.kg_manager:
+            return [], None
+
+        try:
+            logger.info("[EnhancedDecomposeNode] 开始知识图谱扩展...")
+
+            # 调用知识图谱扩展
+            use_kg, expansion_queries, kg_info = self.kg_manager.expand_query(
+                question=question,
+                intent=intent,
+                question_type=question_type,
+                parameters=parameters
+            )
+
+            if use_kg and expansion_queries:
+                logger.info(f"[EnhancedDecomposeNode] 知识图谱触发成功:")
+                logger.info(f"  - 扩展级别: {kg_info.get('expansion_level', 'unknown')}")
+                logger.info(f"  - 评分: {kg_info.get('score', 0)}")
+                logger.info(f"  - 触发原因: {kg_info.get('reasons', [])}")
+                logger.info(f"  - 扩展查询数: {len(expansion_queries)}")
+
+                # 记录前5个扩展查询
+                for i, eq in enumerate(expansion_queries[:5], 1):
+                    logger.debug(f"    扩展查询{i}: {eq}")
+                if len(expansion_queries) > 5:
+                    logger.debug(f"    ... 共{len(expansion_queries)}个扩展查询")
+
+                return expansion_queries, kg_info
+            else:
+                logger.info(f"[EnhancedDecomposeNode] 知识图谱未触发: {kg_info.get('reasons', [])}")
+                return [], kg_info
+
+        except Exception as e:
+            logger.error(f"[EnhancedDecomposeNode] 知识图谱扩展失败: {e}")
+            return [], {"error": str(e)}
+
+    def _merge_kg_queries(
+        self,
+        sub_questions: List[Dict],
+        kg_queries: List[str]
+    ) -> List[Dict]:
+        """
+        将知识图谱扩展查询合并到子问题列表中
+
+        Args:
+            sub_questions: 原子问题列表
+            kg_queries: 知识图谱扩展查询列表
+
+        Returns:
+            合并后的子问题列表
+        """
+        # 去重：检查扩展查询是否已存在于子问题中
+        existing_questions = set()
+        for sq in sub_questions:
+            q_text = sq.get("question", "") if isinstance(sq, dict) else str(sq)
+            existing_questions.add(q_text.lower().strip())
+
+        # 添加不重复的扩展查询
+        new_kg_questions = []
+        for query in kg_queries:
+            if query.lower().strip() not in existing_questions:
+                new_kg_questions.append({
+                    "question": query,
+                    "target_year": None,
+                    "target_party": None,
+                    "retrieval_strategy": "kg_expansion",  # 标记为知识图谱扩展
+                    "source": "knowledge_graph"  # 标记来源
+                })
+                existing_questions.add(query.lower().strip())
+
+        # 合并：原子问题 + 知识图谱扩展查询
+        merged = sub_questions + new_kg_questions
+
+        # 限制总数（避免查询爆炸）
+        max_total = 50  # 最多50个子问题
+        if len(merged) > max_total:
+            logger.warning(f"[EnhancedDecomposeNode] 合并后子问题过多({len(merged)})，截取前{max_total}个")
+            # 优先保留原子问题，然后是知识图谱扩展
+            merged = sub_questions[:40] + new_kg_questions[:10]
+
+        logger.info(f"[EnhancedDecomposeNode] 知识图谱合并: 原{len(sub_questions)}个 + KG扩展{len(new_kg_questions)}个 = {len(merged)}个")
+
+        return merged
 
 
 # 为了保持向后兼容，创建一个别名

@@ -8,9 +8,9 @@ from langgraph.graph import StateGraph, END
 from .state import GraphState, create_initial_state
 from .nodes import (
     ClassifyNode,
-    RetrieveNode,
-    ReRankNode,
 )
+# 【修复】使用Pinecone检索节点（数据已迁移到Pinecone）
+from .nodes.retrieve_pinecone import PineconeRetrieveNode as RetrieveNode
 # 使用增强版节点
 from .nodes.intent_enhanced import EnhancedIntentNode as IntentNode
 from .nodes.exception_enhanced import EnhancedExceptionNode as ExceptionNode
@@ -76,9 +76,9 @@ class QuestionAnswerWorkflow:
             self.classify_node = ClassifyNode(llm_client=flash_client)
             self.extract_node = ExtractNode(llm_client=flash_client)
             self.decompose_node = DecomposeNode()  # 使用默认Pro模型
-            self.retrieve_node = RetrieveNode()  # 会自动创建MilvusRetriever
-            self.rerank_node = ReRankNode()  # 会自动创建CohereRerank
-            self.summarize_node = SummarizeNode()  # 使用默认Pro模型
+            self.retrieve_node = RetrieveNode()  # 【修复】使用PineconeRetrieveNode
+            # 【Phase 4】已移除ReRankNode，直接使用BGE-M3检索结果
+            self.summarize_node = SummarizeNode(llm_client=flash_client)  # 使用Flash模型加速
             self.exception_node = ExceptionNode()
             
             logger.info("[Workflow] 所有节点创建成功")
@@ -109,7 +109,7 @@ class QuestionAnswerWorkflow:
         workflow.add_node("extract", self.extract_node)
         workflow.add_node("decompose", self.decompose_node)
         workflow.add_node("retrieve", self.retrieve_node)
-        workflow.add_node("rerank", self.rerank_node)
+        # 【Phase 4】移除rerank节点，直接使用BGE-M3检索结果
         workflow.add_node("summarize", self.summarize_node)
         workflow.add_node("exception", self.exception_node)
         
@@ -170,16 +170,7 @@ class QuestionAnswerWorkflow:
                 "exception": "exception",
             }
         )
-        
-        # ReRank -> Summarize 或 Exception
-        workflow.add_conditional_edges(
-            "rerank",
-            self._route_after_rerank,
-            {
-                "summarize": "summarize",
-                "exception": "exception",
-            }
-        )
+        # 【Phase 4】移除ReRank节点条件边
         
         # Summarize -> END
         workflow.add_edge("summarize", END)

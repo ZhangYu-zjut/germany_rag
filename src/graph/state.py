@@ -40,7 +40,23 @@ class GraphState(TypedDict):
     # ========== 问题拆解 ==========
     is_decomposed: bool  # 是否需要拆解
     sub_questions: Optional[List[str]]  # 拆解后的子问题列表
-    
+
+    # ========== Query扩展（新架构） ==========
+    expanded_queries_map: Optional[Dict[str, List[str]]]  # Query扩展映射
+    # expanded_queries_map结构:
+    # {
+    #     "子问题1": ["扩展查询1", "扩展查询2", "扩展查询3", ...],
+    #     "子问题2": ["扩展查询1", "扩展查询2", ...]
+    # }
+    original_question: Optional[str]  # 原始用户问题（用于Query扩展）
+    extracted_params: Optional[Dict]  # 提取的参数（用于Query扩展）
+    # extracted_params结构:
+    # {
+    #     "year": ["2015"],
+    #     "group": ["CDU/CSU"],
+    #     "topic": ["难民政策"]
+    # }
+
     # ========== 检索和答案 ==========
     retrieval_results: Optional[List[Dict]]  # 检索结果
     # retrieval_results结构:
@@ -83,16 +99,49 @@ class GraphState(TypedDict):
     current_node: Optional[str]  # 当前节点名称
     next_node: Optional[str]  # 下一个节点名称
 
+    # ========== 深度分析模式 ==========
+    deep_thinking_mode: bool  # 是否启用深度分析模式
+    # 深度模式特性:
+    # - 强制启用知识图谱扩展（tag级别）
+    # - 生成更详细的分析报告
+    # - 显示推理过程
+    # - 预计耗时: 3-5分钟
+
+    kg_expansion_info: Optional[Dict]  # 知识图谱扩展信息
+    # kg_expansion_info结构:
+    # {
+    #     "triggered": True,
+    #     "level": "tag",
+    #     "score": 3,
+    #     "reasons": ["主题匹配: Flüchtlingspolitik"],
+    #     "expanded_queries": ["AfD Georgien Visum 2018", ...],
+    #     "matched_tags": ["Georgien", "Visum", ...]
+    # }
+
+    reasoning_steps: Optional[List[str]]  # 推理步骤（深度模式显示）
+    # reasoning_steps结构:
+    # [
+    #     "1. 识别问题类型: 单年单党派观点查询",
+    #     "2. 提取参数: 年份=2018, 党派=AfD, 主题=难民政策",
+    #     "3. 知识图谱扩展: 触发Flüchtlingspolitik主题，扩展22个查询",
+    #     "4. 检索结果: 找到150个相关文档",
+    #     "5. 重排序: 筛选出15个最相关文档"
+    # ]
+
 
 # ========== 辅助函数 ==========
 
-def create_initial_state(question: str) -> GraphState:
+def create_initial_state(question: str, deep_thinking_mode: bool = False) -> GraphState:
     """
     创建初始状态
-    
+
     Args:
         question: 用户问题
-        
+        deep_thinking_mode: 是否启用深度分析模式（默认False）
+            - 深度模式会强制启用知识图谱扩展
+            - 生成更详细的分析报告
+            - 预计耗时: 3-5分钟
+
     Returns:
         初始化的GraphState
     """
@@ -114,6 +163,10 @@ def create_initial_state(question: str) -> GraphState:
         metadata={},
         current_node="start",
         next_node=None,
+        # 深度分析模式
+        deep_thinking_mode=deep_thinking_mode,
+        kg_expansion_info=None,
+        reasoning_steps=[],
     )
 
 

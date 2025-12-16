@@ -166,7 +166,7 @@ class IncrementalSummarizeNodeV2:
 
             # 调用LLM提取
             try:
-                extracted_text = self.llm.generate(extraction_prompt)
+                extracted_text = self.llm.invoke(extraction_prompt)
 
                 # 尝试解析JSON（如果LLM返回JSON格式）
                 try:
@@ -339,7 +339,7 @@ class IncrementalSummarizeNodeV2:
         )
 
         # 调用LLM生成答案
-        final_answer = self.llm.generate(generation_prompt)
+        final_answer = self.llm.invoke(generation_prompt)
 
         return final_answer
 
@@ -401,6 +401,7 @@ class IncrementalSummarizeNodeV2:
 """
 
         # 根据问题类型添加特定要求
+        question_type = question_type or ""  # 处理None情况
         if "VERGLEICH" in question_type or "COMPARISON" in question_type:
             prompt += """   - Vergleichen Sie die Positionen der verschiedenen Parteien
    - Heben Sie Gemeinsamkeiten und Unterschiede hervor

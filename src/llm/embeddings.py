@@ -143,40 +143,98 @@ class GeminiEmbeddingClient:
                     logger.warning("  4. 确保.env文件中配置了DEEPINFRA_EMBEDDING_API_KEY和DEEPINFRA_EMBEDDING_BASE_URL")
             raise
     
-    def _call_deepinfra_api(self, input_data) -> dict:
+    def _call_deepinfra_api(
+        self,
+        input_data,
+        max_retries: int = 3,
+        base_timeout: int = 60,
+        backoff_factor: float = 1.5
+    ) -> dict:
         """
-        使用requests调用DeepInfra API（模拟curl）
-        
+        使用requests调用DeepInfra API（模拟curl），带重试机制
+
         Args:
             input_data: 输入数据（字符串或字符串列表）
-        
+            max_retries: 最大重试次数（默认3次）
+            base_timeout: 基础超时时间（秒，默认60）
+            backoff_factor: 退避因子（默认1.5，每次重试超时时间增加50%）
+
         Returns:
             API响应的JSON数据
         """
+        import time as time_module
+
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.api_key}"
         }
-        
+
         payload = {
             "input": input_data,
             "model": self.model_name,
             "encoding_format": "float"
         }
-        
-        logger.debug(f"DeepInfra API调用: {len(input_data) if isinstance(input_data, list) else 1}个输入")
-        
-        response = requests.post(
-            self.api_url,
-            headers=headers,
-            data=json.dumps(payload),
-            timeout=60  # 60秒超时
-        )
-        
-        if response.status_code != 200:
-            raise Exception(f"API调用失败: HTTP {response.status_code} - {response.text}")
-        
-        return response.json()
+
+        input_count = len(input_data) if isinstance(input_data, list) else 1
+        logger.debug(f"DeepInfra API调用: {input_count}个输入")
+
+        last_exception = None
+
+        for attempt in range(max_retries + 1):
+            try:
+                # 计算当前尝试的超时时间（指数退避）
+                current_timeout = base_timeout * (backoff_factor ** attempt)
+
+                if attempt > 0:
+                    # 重试前等待（指数退避）
+                    wait_time = min(2 ** attempt, 10)  # 最多等待10秒
+                    logger.warning(
+                        f"🔄 DeepInfra API重试 {attempt}/{max_retries}，"
+                        f"等待{wait_time}秒，超时设置{current_timeout:.0f}秒..."
+                    )
+                    time_module.sleep(wait_time)
+
+                response = requests.post(
+                    self.api_url,
+                    headers=headers,
+                    data=json.dumps(payload),
+                    timeout=current_timeout
+                )
+
+                if response.status_code == 200:
+                    if attempt > 0:
+                        logger.info(f"✅ DeepInfra API重试成功（第{attempt+1}次尝试）")
+                    return response.json()
+
+                # 处理可重试的HTTP错误
+                if response.status_code in [429, 500, 502, 503, 504]:
+                    last_exception = Exception(
+                        f"API调用失败: HTTP {response.status_code} - {response.text}"
+                    )
+                    logger.warning(f"⚠️ DeepInfra API返回 {response.status_code}，将重试...")
+                    continue
+
+                # 不可重试的错误，直接抛出
+                raise Exception(f"API调用失败: HTTP {response.status_code} - {response.text}")
+
+            except requests.exceptions.Timeout as e:
+                last_exception = e
+                logger.warning(f"⚠️ DeepInfra API超时（{current_timeout:.0f}秒），将重试...")
+                continue
+
+            except requests.exceptions.ConnectionError as e:
+                last_exception = e
+                logger.warning(f"⚠️ DeepInfra API连接错误: {str(e)[:100]}，将重试...")
+                continue
+
+            except requests.exceptions.RequestException as e:
+                last_exception = e
+                logger.warning(f"⚠️ DeepInfra API请求错误: {str(e)[:100]}，将重试...")
+                continue
+
+        # 所有重试都失败
+        logger.error(f"❌ DeepInfra API调用失败，已重试{max_retries}次: {last_exception}")
+        raise last_exception
 
     def embed_text(self, text: str) -> List[float]:
         """

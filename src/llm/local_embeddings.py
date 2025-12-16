@@ -110,10 +110,14 @@ class LocalEmbeddingClient:
                         logger.info(f"🎯 使用缓存模型路径: {actual_model_path}")
                         model_name = actual_model_path
             
+            # 【关键修复】参数名必须是 devices（复数），不是 device（单数）
+            # 如果使用错误的参数名，FlagEmbedding会使用默认的devices=None
+            # devices=None 会触发 accelerate 的 device_map="auto"，使用 meta tensors
+            # meta tensors 在某些情况下会导致 "Cannot copy out of meta tensor" 错误
             self.model = BGEM3FlagModel(
                 model_name_or_path=model_name,
-                device=device,
-                use_fp16=True if 'cuda' in device else False  # GPU 使用半精度加速
+                devices=device,  # 【注意】必须是 devices（复数），不是 device
+                use_fp16=False   # 禁用fp16，提高稳定性
             )
             self.dimensions = 1024  # BGE-M3 固定为 1024 维
             

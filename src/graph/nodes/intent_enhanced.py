@@ -228,23 +228,15 @@ class EnhancedIntentNode:
                 next_node="end"
             )
         
-        # 3. 信息不足
+        # 3. 信息不足 - 【修复】改为继续尝试检索，而不是直接结束
         elif 处理方式 == "引导补充信息":
-            # 这里需要进一步分析缺少什么信息
-            # 简化处理：直接给出通用引导
-            from ...llm.prompts_fallback import GuidanceGenerator
-            
-            message = GuidanceGenerator.generate_missing_time_guidance(question)
-            
-            return update_state(
-                state,
-                final_answer=message,
-                error="信息不足",
-                error_type="信息不足",
-                language=language,
-                current_node="intent",
-                next_node="end"
-            )
+            # 【Phase 4 修复】即使LLM判断信息不足，仍然尝试检索
+            # 因为问题中可能包含speaker名称等有效信息
+            # 如果检索结果为空，会在exception节点处理
+            logger.info(f"[EnhancedIntentNode] 问题可能信息不足，但继续尝试检索: {question[:50]}...")
+
+            # 继续进入正常的意图分类流程
+            return self._normal_intent_classification(state)
         
         # 4. 超出范围
         elif 处理方式 == "拒绝回答" and validation["数据范围"] == "超出范围":

@@ -150,18 +150,26 @@ def create_pinecone_workflow():
     from src.graph.nodes.summarize_enhanced import EnhancedSummarizeNode
     from src.graph.nodes.exception_enhanced import EnhancedExceptionNode
     from src.graph.nodes.retrieve_pinecone import PineconeRetrieveNode
+    from src.graph.nodes.query_expansion import QueryExpansionNode
 
     logger.info("[Workflow] 创建Pinecone优化版工作流...")
+
+    # 【重要】启用生产模式以触发两阶段重试机制
+    from src.config import settings
+    settings.production_mode = True
+    logger.info("[Workflow] 🔥 已启用生产模式（含两阶段重试机制）")
 
     # 创建节点
     intent_node = EnhancedIntentNode()
     classify_node = ClassifyNode()
     extract_node = EnhancedExtractNode()  # 增强版
     decompose_node = EnhancedDecomposeNode()
+    query_expansion_node = QueryExpansionNode(expansion_count=5)  # Query扩展节点
     retrieve_node = PineconeRetrieveNode(
         top_k=50,  # 提升到50
         enable_multi_year_strategy=True,
-        limit_per_year=5
+        limit_per_year=5,
+        enable_concurrent=True  # 启用并发检索，大幅提速
     )
     rerank_node = ReRankNode()
     summarize_node = EnhancedSummarizeNode()
@@ -177,6 +185,7 @@ def create_pinecone_workflow():
     workflow.add_node("classify", classify_node)
     workflow.add_node("extract", extract_node)
     workflow.add_node("decompose", decompose_node)
+    workflow.add_node("query_expansion", query_expansion_node)  # Query扩展节点
     workflow.add_node("retrieve", retrieve_node)
     # workflow.add_node("rerank", rerank_node)  # 【Phase 4】禁用ReRank：Cohere过滤了BGE-M3的最佳结果
     workflow.add_node("summarize", summarize_node)
@@ -212,7 +221,7 @@ def create_pinecone_workflow():
     def route_after_decompose(state):
         if state.get("error"):
             return "exception"
-        return "retrieve"
+        return "query_expansion"  # 先进行Query扩展，再检索
 
     def route_after_retrieve(state):
         """【Phase 4修改】直接返回summarize，跳过ReRank"""
@@ -252,8 +261,10 @@ def create_pinecone_workflow():
     workflow.add_conditional_edges(
         "decompose",
         route_after_decompose,
-        {"retrieve": "retrieve", "exception": "exception"}
+        {"query_expansion": "query_expansion", "exception": "exception"}
     )
+    # Query扩展后直接进入检索
+    workflow.add_edge("query_expansion", "retrieve")
     # 【Phase 4修改】Retrieve -> Summarize (跳过ReRank)
     # 原因：Cohere ReRank过滤掉了BGE-M3检索排名第1的目标文档
     workflow.add_conditional_edges(
