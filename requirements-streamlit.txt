@@ -1,36 +1,19 @@
 # 德国议会RAG Streamlit UI依赖
-# 版本与本地环境对齐，避免兼容性问题
+# 前后端分离版本：仅包含前端所需依赖
 
 # ===== Streamlit框架 =====
 streamlit>=1.29.0
 
-# ===== LangChain核心 (固定版本) =====
-langchain==0.3.7
-langchain-core>=0.3.17,<0.4.0
-langchain-openai==0.2.8
-langchain-community==0.3.5
-langgraph==0.2.45
-
-# ===== 向量数据库 =====
-pinecone>=5.0.0
-
-# ===== Embedding API =====
-openai>=1.6.0
-
-# ===== ReRank =====
-cohere>=4.40
+# ===== HTTP请求 =====
+requests>=2.31.0
 
 # ===== 配置管理 =====
-pydantic==2.9.2
-pydantic-settings==2.6.0
+python-dotenv>=1.0.0
 
-# ===== 工具库 =====
-python-dotenv==1.0.1
-loguru==0.7.2
-httpx>=0.25.0
-tenacity>=8.2.0
-tiktoken>=0.5.0
-
-# ===== 数据处理 =====
+# ===== 数据处理（用于展示） =====
 pandas>=2.0.0
-numpy>=1.24.0
+
+# ===== 说明 =====
+# 此为前后端分离架构的前端依赖
+# 所有RAG/LLM相关依赖在API服务端 (requirements-api.txt)
+# 前端通过HTTP请求调用API，无需本地安装这些重依赖

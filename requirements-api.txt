@@ -1,0 +1,37 @@
+# 德国议会RAG API服务依赖
+# 精简版本，用于云端部署（不包含本地模型依赖）
+
+# ===== Web框架 =====
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+
+# ===== 数据验证 =====
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# ===== LangChain核心 =====
+langchain>=0.1.0
+langchain-core>=0.1.0
+langchain-openai>=0.0.5
+langgraph>=0.0.40
+
+# ===== 向量数据库 =====
+pinecone>=3.0.0
+
+# ===== Embedding API =====
+openai>=1.6.0
+
+# ===== ReRank (可选) =====
+cohere>=4.40
+
+# ===== 工具库 =====
+python-dotenv>=1.0.0
+loguru>=0.7.2
+httpx>=0.25.0
+tenacity>=8.2.0
+tiktoken>=0.5.0
+
+# ===== 数据处理 =====
+pandas>=2.0.0
+numpy>=1.24.0

@@ -562,7 +562,81 @@ WICHTIG:
         summary_template = self.prompts.select_summary_template(question_type)
 
         # Step 7: 构建直接生成最终答案的Prompt（包含强制引用要求）
-        production_prompt = f"""
+        # 【核心修复】针对"变化类"问题使用专门的历时变化格式模板
+        if question_type == "变化类":
+            logger.info("[EnhancedSummarizeNode] 🕐 检测到变化类问题，使用历时变化专用格式")
+            production_prompt = f"""Sie sind Experte für die Analyse von Bundestagsreden.
+
+Bitte beantworten Sie die folgende Frage basierend auf den bereitgestellten Materialien.
+
+[Frage]
+{question}
+{detail_requirement}
+[Materialien]
+{context}
+
+[⚠️ KRITISCHE ANFORDERUNG - Zeitliche Strukturierung]
+
+Dies ist eine Frage zur ZEITLICHEN ENTWICKLUNG. Sie MÜSSEN die Antwort CHRONOLOGISCH strukturieren!
+
+[Pflicht-Ausgabeformat]
+
+**1. Überblick**
+
+[2-3 Sätze zur Gesamtentwicklung über den gesamten Zeitraum]
+
+**2. Zeitliche Entwicklung**
+
+Erstellen Sie für JEDES Jahr einen eigenen Abschnitt. Lassen Sie KEIN Jahr aus!
+
+• **2015**
+  - Kernposition: [Zusammenfassung der Position in diesem Jahr]
+  - Konkrete Maßnahmen/Forderungen: [Spezifische Politikvorschläge]
+  - Repräsentatives Zitat: „[Originalzitat]" ([Redner], [Datum])
+
+• **2016**
+  - Kernposition: [Zusammenfassung der Position in diesem Jahr]
+  - Konkrete Maßnahmen/Forderungen: [Spezifische Politikvorschläge]
+  - Repräsentatives Zitat: „[Originalzitat]" ([Redner], [Datum])
+
+• **2017**
+  - Kernposition: [...]
+  - Konkrete Maßnahmen/Forderungen: [...]
+  - Repräsentatives Zitat: „[...]"
+
+[... Fahren Sie fort für ALLE Jahre, für die Materialien vorliegen ...]
+
+**3. Hauptveränderungen**
+
+Identifizieren Sie die wichtigsten Wendepunkte und Positionsänderungen:
+
+1. **Von [Jahr X] zu [Jahr Y]**:
+   - Was änderte sich: [Konkrete Beschreibung der Änderung]
+   - Beispiel: „[Vorher-Position]" → „[Nachher-Position]"
+
+2. **Von [Jahr Y] zu [Jahr Z]**:
+   - Was änderte sich: [...]
+
+**4. Zusammenfassung**
+
+[Abschließende Bewertung: Wie hat sich die Position insgesamt entwickelt? Was waren die Haupttreiber der Veränderung?]
+
+**Quellen**
+
+- Material 1: [Redner] ([Partei]), [YYYY-MM-DD]
+- Material 2: [Redner] ([Partei]), [YYYY-MM-DD]
+- ...
+
+[WICHTIGE REGELN]
+1. JEDES Jahr mit verfügbaren Materialien MUSS einen eigenen Abschnitt haben
+2. Die Jahre MÜSSEN in chronologischer Reihenfolge erscheinen (2015 → 2016 → 2017 → ...)
+3. Verwenden Sie für jedes Jahr mindestens ein konkretes Zitat mit Quellenangabe
+4. Wenn für ein Jahr keine Materialien vorliegen, geben Sie dies explizit an: „Für [Jahr] liegen keine Materialien vor"
+5. Vermeiden Sie es, Informationen aus verschiedenen Jahren zu vermischen!
+"""
+        else:
+            # 其他问题类型使用通用prompt
+            production_prompt = f"""
 你是德国议会议事录专家。请根据以下检索到的议会发言材料，直接回答用户的问题。
 
 【用户问题】
@@ -575,10 +649,9 @@ WICHTIG:
 1. 直接回答问题，结构清晰
 2. 引用具体发言人和日期
 3. 使用德语回答
-4. 如果是变化类问题，按时间顺序分析
-5. 如果是对比类问题，清晰对比各方观点
-6. 如果是总结类问题，提炼核心观点
-7. **必须引用上述"重要细节"中列出的所有具体项目、政策、地名**
+4. 如果是对比类问题，清晰对比各方观点
+5. 如果是总结类问题，提炼核心观点
+6. **必须引用上述"重要细节"中列出的所有具体项目、政策、地名**
 
 【输出格式】（必须包含以下所有部分）
 1. Zusammenfassung（总结）
