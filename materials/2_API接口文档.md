@@ -244,10 +244,11 @@ curl -X POST https://germanyrag-production.up.railway.app/api/v1/ask -H "Content
   "deep_thinking_mode": false,
   "reasoning_steps": null,
   "kg_expansion_info": {
-    "triggered": true,
-    "level": "tag",
+    "use_kg": true,
+    "expansion_level": "tag",
     "score": 2,
-    "reasons": ["主题匹配知识图谱: Flüchtlingspolitik"]
+    "reasons": ["主题匹配知识图谱: Flüchtlingspolitik"],
+    "expansion_query_count": 5
   },
   "processing_time_ms": 45230,
   "error": null
@@ -307,13 +308,31 @@ curl -X POST https://germanyrag-production.up.railway.app/api/v1/ask -H "Content
 
 ```json
 {
-  "triggered": true,
-  "level": "tag",
-  "score": 2,
-  "reasons": ["触发原因列表"],
-  "expansion_queries_count": 23
+  "use_kg": true,
+  "expansion_level": "tag",
+  "score": 99,
+  "reasons": ["深度分析模式强制启用"],
+  "topics": ["Flüchtlingspolitik"],
+  "matched_topics": ["Flüchtlingspolitik"],
+  "dimensions": ["Abschiebung", "Aufnahme", "Asylverfahren"],
+  "selected_tags": ["Syrien", "Afghanistan", "Türkei"],
+  "expansion_query_count": 23,
+  "expansion_queries": ["CDU/CSU Syrien Flüchtlinge 2019", "..."]
 }
 ```
+
+| 字段 | 类型 | 描述 |
+|------|------|------|
+| `use_kg` | boolean | 是否使用知识图谱扩展 |
+| `expansion_level` | string | 扩展级别: `tag` / `dimension` / `topic` |
+| `score` | integer | 扩展评分 |
+| `reasons` | array | 触发原因列表 |
+| `topics` | array | 匹配的知识图谱主题 |
+| `matched_topics` | array | 实际匹配到的主题 |
+| `dimensions` | array | 扩展的维度 |
+| `selected_tags` | array | 选中的标签 |
+| `expansion_query_count` | integer | 扩展查询数量 |
+| `expansion_queries` | array | 扩展查询列表（前5个） |
 
 ---
 
@@ -330,17 +349,17 @@ Content-Type: application/json
 
 **curl 示例**
 
-> ⚠️ **重要**：deep接口处理时间较长（3-8分钟），必须设置超时参数，否则会报 `Error in the HTTP2 framing layer` 错误。
+> ⚠️ **重要**：deep接口处理时间较长（10-20分钟），必须设置超时参数，否则会报 `Error in the HTTP2 framing layer` 错误。
 
 ```bash
-# 推荐写法：使用 --max-time 600（10分钟超时）和 --http1.1（更稳定）
-curl --http1.1 --max-time 600 -X POST https://germanyrag-production.up.railway.app/api/v1/ask/deep -H "Content-Type: application/json" -d '{"question": "请对比2015-2018年各党派在难民家庭团聚问题上的立场变化"}'
+# 推荐写法：使用 --max-time 1800（30分钟超时）和 --http1.1（更稳定）
+curl --http1.1 --max-time 1800 -X POST https://germanyrag-production.up.railway.app/api/v1/ask/deep -H "Content-Type: application/json" -d '{"question": "请对比2015-2018年各党派在难民家庭团聚问题上的立场变化"}'
 
 # 多党派对比分析
-curl --http1.1 --max-time 600 -X POST https://germanyrag-production.up.railway.app/api/v1/ask/deep -H "Content-Type: application/json" -d '{"question": "2017年德国联邦议会中各党派对专业人才移民制度改革分别持什么立场？"}'
+curl --http1.1 --max-time 1800 -X POST https://germanyrag-production.up.railway.app/api/v1/ask/deep -H "Content-Type: application/json" -d '{"question": "2017年德国联邦议会中各党派对专业人才移民制度改革分别持什么立场？"}'
 
 # 趋势分析（德语问题）
-curl --http1.1 --max-time 600 -X POST https://germanyrag-production.up.railway.app/api/v1/ask/deep -H "Content-Type: application/json" -d '{"question": "Wie haben sich die Diskussionen über Klimaschutz zwischen 2019 und 2021 entwickelt?"}'
+curl --http1.1 --max-time 1800 -X POST https://germanyrag-production.up.railway.app/api/v1/ask/deep -H "Content-Type: application/json" -d '{"question": "Wie haben sich die Diskussionen über Klimaschutz zwischen 2019 und 2021 entwickelt?"}'
 ```
 
 **请求体**
@@ -365,8 +384,8 @@ curl --http1.1 --max-time 600 -X POST https://germanyrag-production.up.railway.a
 
 **处理时间**
 
-- 预计耗时：**3-8分钟**
-- 建议设置较长的超时时间（如600秒）
+- 预计耗时：**10-20分钟**
+- 建议设置较长的超时时间（如1800秒/30分钟）
 
 ---
 
@@ -481,10 +500,16 @@ interface AnswerResponse {
   deep_thinking_mode: boolean;
   reasoning_steps?: string[];
   kg_expansion_info?: {
-    triggered: boolean;
-    level: string;
+    use_kg: boolean;
+    expansion_level: string;
     score: number;
     reasons: string[];
+    topics?: string[];
+    matched_topics?: string[];
+    dimensions?: string[];
+    selected_tags?: string[];
+    expansion_query_count?: number;
+    expansion_queries?: string[];
   };
   processing_time_ms: number;
   error?: string;
@@ -679,7 +704,7 @@ public class BundestagApiClient {
 |----------|--------------|----------|
 | 简单问题 | 1-3分钟 | 300秒 |
 | 复杂问题 | 3-8分钟 | 600秒 |
-| 深度分析 | 5-15分钟 | 900秒 |
+| 深度分析 | 10-20分钟 | 1800秒 |
 
 ### 2. 问题格式建议
 
@@ -722,7 +747,7 @@ A: 系统需要执行多个步骤：
 3. 结果重排序
 4. LLM生成答案
 
-复杂问题可能需要5-15分钟。
+深度分析问题需要10-20分钟。
 
 ### Q2: 如何判断服务是否正常？
 
@@ -756,11 +781,11 @@ A: 使用深度分析接口 `/api/v1/ask/deep`，或设置 `deep_thinking: true`
 
 ### Q6: 调用deep接口报错 `Error in the HTTP2 framing layer`？
 
-A: 这是因为deep接口处理时间较长（3-8分钟），默认超时设置不够。解决方案：
+A: 这是因为deep接口处理时间较长（10-20分钟），默认超时设置不够。解决方案：
 
 ```bash
-# 添加超时参数和使用HTTP/1.1
-curl --http1.1 --max-time 600 -X POST https://germanyrag-production.up.railway.app/api/v1/ask/deep -H "Content-Type: application/json" -d '{"question": "你的问题"}'
+# 添加超时参数和使用HTTP/1.1（30分钟超时）
+curl --http1.1 --max-time 1800 -X POST https://germanyrag-production.up.railway.app/api/v1/ask/deep -H "Content-Type: application/json" -d '{"question": "你的问题"}'
 ```
 
 ---
