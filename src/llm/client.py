@@ -1,13 +1,47 @@
 """
 LLM客户端模块
 封装Gemini 2.5 Pro的调用
+支持速率限制保护，防止API被限流返回404
 """
 
+import time
+import threading
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from typing import List, Dict, Any, Optional
 from src.config import settings
 from src.utils import logger
+
+# 全局速率限制器（所有客户端实例共享）
+class RateLimiter:
+    """API请求速率限制器，防止触发Evolink速率限制"""
+
+    def __init__(self, min_interval: float = 1.5):
+        """
+        初始化速率限制器
+
+        Args:
+            min_interval: 请求之间的最小间隔（秒）
+        """
+        self.min_interval = min_interval
+        self.last_request_time = 0.0
+        self._lock = threading.Lock()
+
+    def wait_if_needed(self):
+        """在发送请求前调用，必要时等待以遵守速率限制"""
+        with self._lock:
+            current_time = time.time()
+            elapsed = current_time - self.last_request_time
+
+            if elapsed < self.min_interval:
+                wait_time = self.min_interval - elapsed
+                logger.debug(f"[RateLimiter] 等待 {wait_time:.2f}s 以避免速率限制")
+                time.sleep(wait_time)
+
+            self.last_request_time = time.time()
+
+# 全局单例
+_rate_limiter = RateLimiter(min_interval=1.5)  # 每1.5秒最多1个请求
 
 
 class GeminiLLMClient:
@@ -67,91 +101,147 @@ class GeminiLLMClient:
     def invoke(
         self,
         prompt: str,
-        system_prompt: Optional[str] = None
+        system_prompt: Optional[str] = None,
+        max_retries: int = 3
     ) -> str:
         """
         调用LLM获取回复（简化版，直接传字符串）
-        
+
         Args:
             prompt: 用户提示词（字符串）
             system_prompt: 系统提示词(可选)
-        
+            max_retries: 遇到速率限制时的最大重试次数
+
         Returns:
             LLM的回复文本
         """
         # 构建消息列表
         chat_messages = []
-        
+
         # 添加系统提示词
         if system_prompt:
             chat_messages.append(SystemMessage(content=system_prompt))
-        
+
         # 添加用户消息
         chat_messages.append(HumanMessage(content=prompt))
-        
-        try:
-            # 调用LLM
-            response = self.llm.invoke(chat_messages)
-            
-            # 提取回复内容
-            reply = response.content
-            
-            logger.debug(f"LLM调用成功,回复长度: {len(reply)} 字符")
-            
-            return reply
-            
-        except Exception as e:
-            logger.error(f"LLM调用失败: {e}")
-            raise
+
+        # 带重试的调用逻辑
+        last_error = None
+        for attempt in range(max_retries + 1):
+            try:
+                # 应用速率限制
+                _rate_limiter.wait_if_needed()
+
+                # 调用LLM
+                response = self.llm.invoke(chat_messages)
+
+                # 提取回复内容
+                reply = response.content
+
+                logger.debug(f"LLM调用成功,回复长度: {len(reply)} 字符")
+
+                return reply
+
+            except Exception as e:
+                last_error = e
+                error_str = str(e).lower()
+
+                # 检查是否是速率限制相关的错误（404或rate limit）
+                is_rate_limit = "404" in error_str or "rate" in error_str or "limit" in error_str
+
+                if is_rate_limit and attempt < max_retries:
+                    # 指数退避：2^attempt * 2秒
+                    wait_time = (2 ** attempt) * 2
+                    logger.warning(
+                        f"[RateLimiter] 检测到速率限制错误 (attempt {attempt + 1}/{max_retries + 1}), "
+                        f"等待 {wait_time}s 后重试: {e}"
+                    )
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    logger.error(f"LLM调用失败: {e}")
+                    raise
+
+        # 所有重试都失败
+        logger.error(f"LLM调用在 {max_retries + 1} 次尝试后仍然失败: {last_error}")
+        raise last_error
     
     def invoke_with_messages(
         self,
         messages: List[Dict[str, str]],
-        system_prompt: Optional[str] = None
+        system_prompt: Optional[str] = None,
+        max_retries: int = 3
     ) -> str:
         """
         调用LLM获取回复（多轮对话版本）
-        
+
         Args:
             messages: 消息列表,每条消息包含role和content
             system_prompt: 系统提示词(可选)
-        
+            max_retries: 遇到速率限制时的最大重试次数
+
         Returns:
             LLM的回复文本
         """
         # 构建消息列表
         chat_messages = []
-        
+
         # 添加系统提示词
         if system_prompt:
             chat_messages.append(SystemMessage(content=system_prompt))
-        
+
         # 添加用户消息
         for msg in messages:
             role = msg.get('role', 'user')
             content = msg.get('content', '')
-            
+
             if role == 'system':
                 chat_messages.append(SystemMessage(content=content))
             elif role == 'user':
                 chat_messages.append(HumanMessage(content=content))
             elif role == 'assistant':
                 chat_messages.append(AIMessage(content=content))
-        
-        try:
-            # 调用LLM
-            response = self.llm.invoke(chat_messages)
-            
-            # 提取回复内容
-            reply = response.content
-            
-            logger.debug(f"LLM调用成功,回复长度: {len(reply)} 字符")
-            
-            return reply
-            
-        except Exception as e:
-            logger.error(f"LLM调用失败: {e}")
-            raise
+
+        # 带重试的调用逻辑
+        last_error = None
+        for attempt in range(max_retries + 1):
+            try:
+                # 应用速率限制
+                _rate_limiter.wait_if_needed()
+
+                # 调用LLM
+                response = self.llm.invoke(chat_messages)
+
+                # 提取回复内容
+                reply = response.content
+
+                logger.debug(f"LLM调用成功,回复长度: {len(reply)} 字符")
+
+                return reply
+
+            except Exception as e:
+                last_error = e
+                error_str = str(e).lower()
+
+                # 检查是否是速率限制相关的错误（404或rate limit）
+                is_rate_limit = "404" in error_str or "rate" in error_str or "limit" in error_str
+
+                if is_rate_limit and attempt < max_retries:
+                    # 指数退避：2^attempt * 2秒
+                    wait_time = (2 ** attempt) * 2
+                    logger.warning(
+                        f"[RateLimiter] 检测到速率限制错误 (attempt {attempt + 1}/{max_retries + 1}), "
+                        f"等待 {wait_time}s 后重试: {e}"
+                    )
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    logger.error(f"LLM调用失败: {e}")
+                    raise
+
+        # 所有重试都失败
+        logger.error(f"LLM调用在 {max_retries + 1} 次尝试后仍然失败: {last_error}")
+        raise last_error
     
     def invoke_with_prompt(
         self,
