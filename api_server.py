@@ -331,10 +331,12 @@ async def ask_question(request: QuestionRequest):
         processing_time_ms = int((time.time() - start_time) * 1000)
 
         # 构建响应
+        # 注意：使用 or 而不是 get() 的默认值，因为 final_answer 可能是 None
+        final_answer = state.get("final_answer") or "抱歉，无法生成答案"
         response = AnswerResponse(
             success=not state.get("error"),
             question=request.question,
-            answer=state.get("final_answer", "抱歉，无法生成答案"),
+            answer=final_answer,
             intent=state.get("intent"),
             question_type=state.get("question_type"),
             parameters=state.get("parameters"),
