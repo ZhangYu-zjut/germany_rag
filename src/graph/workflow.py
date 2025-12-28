@@ -76,7 +76,7 @@ class QuestionAnswerWorkflow:
             self.classify_node = ClassifyNode(llm_client=flash_client)
             self.extract_node = ExtractNode(llm_client=flash_client)
             self.decompose_node = DecomposeNode()  # 使用默认Pro模型
-            self.retrieve_node = RetrieveNode()  # 【修复】使用PineconeRetrieveNode
+            self.retrieve_node = RetrieveNode()  # 默认启用并发模式
             # 【Phase 4】已移除ReRankNode，直接使用BGE-M3检索结果
             self.summarize_node = SummarizeNode(llm_client=flash_client)  # 使用Flash模型加速
             self.exception_node = ExceptionNode()

@@ -1,0 +1,33 @@
+{
+  "question": "Wie haben sich die Positionen der CDU/CSU zur Migrationspolitik zwischen 2017 und 2019 im Vergleich verändert?",
+  "description": "2017-2019 CDU/CSU移民政策变化",
+  "deep_mode": false,
+  "parameters": {
+    "time_range": {
+      "start_year": "2017",
+      "end_year": "2019",
+      "specific_years": [
+        "2017",
+        "2019"
+      ],
+      "time_expression": "zwischen 2017 und 2019 im Vergleich"
+    },
+    "parties": [
+      "CDU/CSU"
+    ],
+    "topics": [
+      "Migrationspolitik"
+    ],
+    "keywords": [
+      "Positionen",
+      "verändert",
+      "Vergleich"
+    ]
+  },
+  "sub_questions_count": 38,
+  "retrieval_results_count": 38,
+  "total_chunks": 924,
+  "duration_seconds": 1114.3331229686737,
+  "kg_expansion_info": null,
+  "reasoning_steps": []
+}

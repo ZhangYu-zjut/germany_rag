@@ -1,0 +1,16 @@
+{
+  "Q3": {
+    "success": true,
+    "duration": 93.1074104309082,
+    "report_dir": "outputs/full_test_20251202_151355/Q3_20251202_160706",
+    "total_chunks": 14,
+    "kg_triggered": false
+  },
+  "Q7": {
+    "success": true,
+    "duration": 143.8521385192871,
+    "report_dir": "outputs/full_test_20251202_151355/Q7_20251202_160930",
+    "total_chunks": 498,
+    "kg_triggered": false
+  }
+}

@@ -1,639 +1,324 @@
-# 德国议会智能问答RAG系统
+# 德国议会RAG智能问答系统
 
-基于LangGraph和Milvus的德国联邦议院文档智能问答系统
+基于 RAG (Retrieval-Augmented Generation) 技术的德国联邦议院演讲记录智能问答系统，支持 1949-2025 年的议会演讲数据。
 
-> 📘 **新人必读**: 查看 [`PROJECT_HANDOVER.md`](PROJECT_HANDOVER.md) 获取完整的项目交接文档  
-> 🚀 **快速参考**: 查看 [`QUICK_REFERENCE.md`](QUICK_REFERENCE.md) 获取关键信息速查
+## 项目概述
 
-## 🎯 项目简介
+本系统使用 LangGraph 实现复杂问题的多阶段处理工作流，结合知识图谱扩展技术，能够回答关于德国议会演讲的各类问题，包括事实查询、变化分析、多党派对比等。
 
-本项目实现了一个智能的德国议会文档问答系统,能够:
-- 📚 处理1949-2021年的德国联邦议院演讲记录
-- 🤖 使用Gemini 2.5 Pro进行智能问答
-- 🔍 基于Milvus向量数据库实现混合检索
-- 🌊 通过LangGraph实现复杂问题的CoA处理流程
+### 核心特性
 
-## 🏗️ 技术架构
+- **多语言支持**: 支持中文和德文问题输入
+- **复杂问题处理**: 支持跨年份、跨党派的复杂分析
+- **知识图谱扩展**: 智能扩展查询维度，提高召回率
+- **深度分析模式**: 强制启用知识图谱，生成更详细的分析报告
 
-### 核心技术栈
+## 技术栈
 
-- **LLM**: Gemini 2.5 Pro (via OpenAI API)
-- **Embedding**: Gemini Embedding (1536维)
-- **向量数据库**: Milvus (本地/云端可切换)
-- **工作流框架**: LangGraph
-- **数据处理**: LangChain
+| 组件 | 技术选型 |
+|------|----------|
+| **LLM** | Gemini 2.5 Pro/Flash (via Evolink API) |
+| **Embedding** | BGE-M3 (DeepInfra API, 1024维) |
+| **向量数据库** | Pinecone (110万+ 向量) |
+| **工作流引擎** | LangGraph |
+| **Web框架** | FastAPI (API) / Streamlit (UI) |
+| **部署平台** | Railway |
 
-### 项目结构
+## 项目结构
 
 ```
-tj_germany/
-├── src/                      # 核心代码
-│   ├── config/              # 配置管理
-│   │   └── settings.py      # 环境配置
-│   ├── utils/               # 工具模块
-│   │   └── logger.py        # 日志系统
-│   ├── data_loader/         # 数据处理
-│   │   ├── loader.py        # 数据加载
-│   │   ├── splitter.py      # 文本分块
-│   │   └── mapper.py        # 元数据映射
-│   ├── llm/                 # LLM封装
-│   │   ├── client.py        # LLM客户端
-│   │   ├── embeddings.py    # Embedding客户端
-│   │   └── prompts.py       # Prompt模板
-│   ├── vectordb/            # 向量数据库
-│   │   ├── client.py        # Milvus客户端
-│   │   ├── collection.py    # Collection管理
-│   │   └── retriever.py     # 检索器
-│   └── graph/               # LangGraph工作流
-│       ├── state.py         # 状态定义
-│       ├── nodes/           # 工作流节点
-│       │   ├── intent.py    # 意图判断
-│       │   ├── classify.py  # 问题分类
-│       │   ├── extract.py   # 参数提取
-│       │   ├── decompose.py # 问题拆解
-│       │   ├── retrieve.py  # 数据检索
-│       │   ├── summarize.py # 总结
-│       │   └── exception.py # 异常处理
-│       └── workflow.py      # 工作流编排
-├── data/                    # 数据目录
-│   └── pp_json_49-21/       # JSON数据文件
-├── docs/                    # 文档
-├── tests/                   # 测试
-├── build_index.py           # 索引构建脚本
-├── test_retrieval.py        # 检索测试脚本
-├── test_workflow.py         # 工作流测试脚本
-├── main.py                  # 主程序(交互式问答)
-├── .env                     # 环境变量
-└── requirements.txt         # 依赖包
+rag_germant/
+├── src/                          # 核心源代码
+│   ├── config/                   # 配置管理
+│   │   └── settings.py           # Pydantic配置
+│   ├── data_loader/              # 数据加载
+│   │   ├── loader.py             # JSON数据加载
+│   │   ├── splitter.py           # 文本分块
+│   │   └── mapper.py             # 元数据映射
+│   ├── graph/                    # LangGraph工作流
+│   │   ├── workflow.py           # 主工作流定义
+│   │   ├── state.py              # 状态定义
+│   │   ├── knowledge_graph.py    # 知识图谱管理器
+│   │   ├── templates/            # 问题拆解模板
+│   │   └── nodes/                # 工作流节点
+│   │       ├── intent_enhanced.py      # 意图分析
+│   │       ├── extract_enhanced.py     # 参数提取
+│   │       ├── decompose_enhanced.py   # 问题拆解
+│   │       ├── retrieve_pinecone.py    # 向量检索
+│   │       ├── rerank.py               # 重排序
+│   │       └── summarize_incremental_v2.py  # 两阶段总结
+│   ├── llm/                      # LLM相关
+│   │   ├── client.py             # LLM客户端(带速率限制)
+│   │   ├── embeddings.py         # Embedding客户端
+│   │   └── prompts*.py           # 提示词模板
+│   ├── vectordb/                 # 向量数据库
+│   │   └── pinecone_retriever.py # Pinecone检索器
+│   └── utils/                    # 工具函数
+│       └── logger.py             # 日志配置
+├── data/                         # 数据文件
+│   ├── knowledge_graph.json      # 知识图谱(德文)
+│   ├── knowledge_graph_chinese.json   # 知识图谱(中文)
+│   ├── knowledge_graph_extended.json  # 扩展知识图谱
+│   ├── party_mapping.csv         # 党派名称映射
+│   └── pp_json_49-21/            # 演讲数据(1949-2021)
+├── materials/                    # 交付材料
+│   ├── 1_七个问题测试结果_Q1-Q7_完整/  # 7个测试问题结果
+│   ├── 2_API接口文档.md          # API文档
+│   ├── 3_UI界面使用说明.md       # UI使用说明
+│   ├── 4_项目整体测试报告.md     # 测试报告
+│   └── 5_100个QA样本评估报告.md  # 评估报告
+├── pages/                        # Streamlit页面
+│   └── knowledge_graph_editor.py # 知识图谱编辑器
+├── api_server.py                 # FastAPI服务入口
+├── streamlit_app.py              # Streamlit UI入口
+├── main.py                       # 命令行交互入口
+├── build_index.py                # 构建向量索引
+└── requirements.txt              # 依赖
 ```
 
-## 🚀 快速开始
+## 工作流架构
+
+```
+用户问题
+    │
+    ▼
+┌─────────────────┐
+│   IntentNode    │  意图分析 + 合法性检查
+└────────┬────────┘
+         │
+    ┌────┴────┐
+    │         │
+ simple    complex
+    │         │
+    ▼         ▼
+┌────────┐ ┌─────────────┐
+│Extract │ │  Classify   │  问题分类
+└────┬───┘ └──────┬──────┘
+     │            │
+     │     ┌──────┴──────┐
+     │     │   Extract   │  参数提取
+     │     └──────┬──────┘
+     │            │
+     │     ┌──────┴──────┐
+     │     │  Decompose  │  问题拆解(+知识图谱扩展)
+     │     └──────┬──────┘
+     │            │
+     └──────┬─────┘
+            │
+     ┌──────┴──────┐
+     │  Retrieve   │  Pinecone向量检索
+     └──────┬──────┘
+            │
+     ┌──────┴──────┐
+     │   ReRank    │  Cohere重排序
+     └──────┬──────┘
+            │
+     ┌──────┴──────┐
+     │ Summarize   │  两阶段总结生成答案
+     └──────┬──────┘
+            │
+            ▼
+        最终答案
+```
+
+## 知识图谱
+
+知识图谱用于扩展查询维度，解决特定领域问题的召回失败问题。
+
+### 文件位置
+
+| 文件 | 说明 |
+|------|------|
+| `data/knowledge_graph.json` | 主知识图谱(德文标签) |
+| `data/knowledge_graph_chinese.json` | 中文版知识图谱 |
+| `data/knowledge_graph_extended.json` | 扩展版知识图谱 |
+| `src/graph/knowledge_graph.py` | 知识图谱管理器 |
+| `pages/knowledge_graph_editor.py` | 知识图谱编辑器(Streamlit) |
+
+### 结构
+
+```
+topics (主题)
+  └── dimensions (维度)
+        └── tags (标签)
+              └── keywords (关键词)
+```
+
+示例:
+```json
+{
+  "Flüchtlingspolitik": {
+    "dimensions": {
+      "Länder": {
+        "tags": {
+          "Syrien": {
+            "keywords": ["Syrien", "syrisch", "Assad"],
+            "weight": 1.0
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## 快速开始
 
 ### 1. 环境准备
 
-#### 安装Python依赖
-
 ```bash
+# 克隆项目
+git clone <repo_url>
+cd rag_germant
+
+# 创建虚拟环境
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
+
+# 安装依赖
 pip install -r requirements.txt
-```
-
-#### 启动Milvus服务(本地模式)
-
-```bash
-# 使用Docker启动Milvus
-docker run -d --name milvus -p 19530:19530 milvusdb/milvus:latest
 ```
 
 ### 2. 配置环境变量
 
-编辑 `.env` 文件:
+创建 `.env` 文件:
 
 ```bash
-# LLM配置
-OPENAI_API_KEY=your_api_key_here
+# LLM API (Evolink代理)
+OPENAI_API_KEY=your_evolink_api_key
 THIRD_PARTY_BASE_URL=https://api.evolink.ai/v1
-THIRD_PARTY_MODEL_NAME=gemini-2.5-pro
+THIRD_PARTY_MODEL_NAME=gemini-2.5-flash
 
-# Embedding配置
-GEMINI_EMBEDDING_MODEL=text-embedding-004
-EMBEDDING_DIMENSION=1536
+# Embedding API (DeepInfra)
+EMBEDDING_MODE=deepinfra
+DEEPINFRA_EMBEDDING_API_KEY=your_deepinfra_key
+DEEPINFRA_EMBEDDING_BASE_URL=https://api.deepinfra.com/v1/openai
 
-# Milvus配置
-MILVUS_MODE=local  # 或 cloud
-MILVUS_LOCAL_HOST=localhost
-MILVUS_LOCAL_PORT=19530
+# Pinecone
+PINECONE_VECTOR_DATABASE_API_KEY=your_pinecone_key
+PINECONE_HOST=your_pinecone_host
 
-# 数据模式
-DATA_MODE=PART  # PART: 2019-2021数据, ALL: 全部数据
-PART_DATA_YEARS=2019,2020,2021
+# Cohere ReRank (可选)
+COHERE_API_KEY=your_cohere_key
+
+# 系统配置
+PRODUCTION_MODE=true
 ```
 
-### 3. 构建索引
+### 3. 运行方式
 
+#### 命令行交互
 ```bash
-# 加载数据 -> 分块 -> Embedding -> 存储到Milvus
-python build_index.py
-```
-
-这将:
-1. 加载JSON数据(根据DATA_MODE配置)
-2. 文本分块(1000字符/chunk,200字符重叠)
-3. 生成向量(Gemini Embedding)
-4. 存储到Milvus
-
-### 4. 测试检索
-
-```bash
-# 测试向量检索和元数据过滤
-python test_retrieval.py
-```
-
-测试内容:
-- ✅ 简单向量检索
-- ✅ 按年份过滤
-- ✅ 按党派过滤
-- ✅ 复合条件过滤
-
-### 5. 运行智能问答系统
-
-#### 交互式问答
-
-```bash
-# 启动交互式问答界面
 python main.py
 ```
 
-支持的问题类型:
-- **简单查询**: "2019年德国联邦议院讨论了哪些主要议题?"
-- **变化类**: "在2015-2018年期间,不同党派在难民问题上的立场有何变化?"
-- **对比类**: "请对比CDU/CSU和SPD在2019年对数字化政策的观点"
-- **总结类**: "请总结Merkel在2019年关于欧盟一体化的主要观点"
+#### API服务
+```bash
+python api_server.py --host 0.0.0.0 --port 8000
+# 访问: http://localhost:8000/docs
+```
 
-#### 测试工作流
+#### Streamlit UI
+```bash
+streamlit run streamlit_app.py
+# 访问: http://localhost:8501
+```
+
+## API接口
+
+| 端点 | 方法 | 说明 |
+|------|------|------|
+| `/api/v1/ask` | POST | 标准问答 |
+| `/api/v1/ask/deep` | POST | 深度分析模式 |
+| `/api/v1/health` | GET | 健康检查 |
+| `/api/v1/info` | GET | 系统信息 |
+| `/api/v1/examples` | GET | 示例问题 |
+
+### 请求示例
 
 ```bash
-# 测试LangGraph工作流
-python test_workflow.py
+curl -X POST "https://germanyrag-production.up.railway.app/api/v1/ask" \
+  -H "Content-Type: application/json" \
+  -d '{"question": "2019年CDU/CSU对难民政策的立场是什么？"}'
 ```
 
-测试内容:
-- ✅ 简单问题处理
-- ✅ 复杂问题拆解
-- ✅ 对比类问题
-- ✅ 总结类问题
-- ✅ 流式模式
-- ✅ 无材料处理
-
-## 📚 使用示例
-
-### 数据加载
-
-```python
-from src.data_loader import ParliamentDataLoader
-
-# 初始化加载器
-loader = ParliamentDataLoader()
-
-# 加载数据(自动根据DATA_MODE配置)
-speeches = loader.load_data()
-print(f"加载了 {len(speeches)} 条演讲")
-
-# 获取统计信息
-stats = loader.get_statistics(speeches)
-```
-
-### 文本分块
-
-```python
-from src.data_loader import ParliamentTextSplitter
-
-# 初始化分块器
-splitter = ParliamentTextSplitter(
-    chunk_size=1000,
-    chunk_overlap=200
-)
-
-# 分块
-chunks = splitter.split_speeches(speeches)
-print(f"生成了 {len(chunks)} 个chunks")
-```
-
-### Embedding
-
-```python
-from src.llm import GeminiEmbeddingClient
-
-# 初始化客户端
-embedding_client = GeminiEmbeddingClient()
-
-# 单文本embedding
-vector = embedding_client.embed_text("德国联邦议院")
-
-# 批量embedding
-vectors = embedding_client.embed_batch(texts, batch_size=50)
-
-# Chunks embedding
-embedded_chunks = embedding_client.embed_chunks(chunks)
-```
-
-### 检索
-
-```python
-from src.vectordb import MilvusClient, MilvusCollectionManager, MilvusRetriever
-from src.llm import GeminiEmbeddingClient
-
-# 连接Milvus
-with MilvusClient() as client:
-    # 获取Collection
-    manager = MilvusCollectionManager()
-    manager.collection.load()
-    
-    # 创建检索器
-    retriever = MilvusRetriever(manager.collection, top_k=5)
-    
-    # 生成查询向量
-    embedding_client = GeminiEmbeddingClient()
-    query_vector = embedding_client.embed_text("气候政策")
-    
-    # 检索(带元数据过滤)
-    results = retriever.search_by_metadata(
-        query_vector=query_vector,
-        year="2020",
-        party="GRÜNE",
-        top_k=5
-    )
-```
-
-### LangGraph工作流
-
-```python
-from src.graph import QuestionAnswerWorkflow
-
-# 初始化工作流
-workflow = QuestionAnswerWorkflow()
-
-# 运行工作流
-question = "在2019年到2020年期间,不同党派在气候保护问题上的讨论发生了怎样的变化?"
-result = workflow.run(question, verbose=True)
-
-# 获取结果
-print(f"问题类型: {result['question_type']}")
-print(f"子问题数: {len(result.get('sub_questions', []))}")
-print(f"答案: {result['final_answer']}")
-
-# 流式模式(用于调试)
-for state in workflow.stream(question):
-    print(state['current_node'])
-```
-
-**工作流节点**:
-1. **IntentNode** - 意图判断(简单/复杂)
-2. **ClassifyNode** - 问题分类(变化类/总结类/对比类/事实查询/趋势分析)
-3. **ExtractNode** - 参数提取(时间/党派/议员/主题)
-4. **DecomposeNode** - 问题拆解(模板化/自由拆解)
-5. **RetrieveNode** - 数据检索(混合检索)
-6. **SummarizeNode** - 总结(单问题/多问题)
-7. **ExceptionNode** - 异常处理(无材料/错误)
-
-**路由规则**:
-```
-Intent → Classify (复杂问题) / Extract (简单问题)
-Classify → Extract
-Extract → Decompose (需拆解) / Retrieve (不拆解)
-Decompose → Retrieve
-Retrieve → Summarize (找到材料) / Exception (未找到)
-Summarize → END
-Exception → END
-```
-
-### LLM调用
-
-```python
-from src.llm import GeminiLLMClient
-
-# 初始化客户端
-llm = GeminiLLMClient()
-
-# 简单调用
-response = llm.invoke_with_prompt(
-    user_message="什么是LangChain?",
-    system_prompt="你是一个helpful的AI助手。"
-)
-
-# 流式输出
-for chunk in llm.stream_invoke(
-    messages=[{'role': 'user', 'content': '介绍德国议会'}]
-):
-    print(chunk, end="", flush=True)
-```
-
-## 🔧 配置说明
-
-### 数据模式切换
-
-```bash
-# 部分数据模式(用于开发测试)
-DATA_MODE=PART
-PART_DATA_YEARS=2019,2020,2021
-
-# 全量数据模式(用于生产)
-DATA_MODE=ALL
-```
-
-### Milvus模式切换
-
-```bash
-# 本地模式
-MILVUS_MODE=local
-MILVUS_LOCAL_HOST=localhost
-MILVUS_LOCAL_PORT=19530
-
-# 云端模式
-MILVUS_MODE=cloud
-MILVUS_CLOUD_URI=your_cloud_uri
-MILVUS_CLOUD_TOKEN=your_cloud_token
-```
-
-## 📊 数据说明
-
-### 数据来源
-
-- **数据范围**: 1949-2021年德国联邦议院演讲记录
-- **数据格式**: JSON
-- **数据量**: 约81万条记录(全量)
-
-### Metadata字段
-
-每条记录包含以下metadata:
-
-```python
-{
-    "year": "1983",           # 年份
-    "month": "05",            # 月份
-    "day": "05",              # 日期
-    "session": "005",         # 会议编号
-    "speaker": "Dr. Althammer",  # 发言人
-    "group": "CDU/CSU",       # 党派(德语)
-    "group_chinese": "基民盟/基社盟",  # 党派(中文)
-    "lp": "10",               # 立法期
-    "file": "pp_1983.json"    # 源文件
-}
-```
-
-## 🧪 测试
-
-### 运行所有测试
-
-```bash
-pytest tests/
-```
-
-### 单元测试
-
-```bash
-# 测试数据加载
-pytest tests/test_data_loader.py
-
-# 测试LLM
-pytest tests/test_llm.py
-
-# 测试向量数据库
-pytest tests/test_vectordb.py
-```
-
-## 📈 性能优化
-
-### 批量处理
-
-- Embedding: 批量大小50-100
-- Milvus插入: 批量插入1000条
-
-### 索引优化
-
-- 向量索引: IVF_FLAT (nlist=1024)
-- 元数据过滤: 自动使用标量索引
-
-## 🐛 常见问题
-
-### 1. Milvus连接失败
-
-**问题**: `ConnectionRefusedError`
-
-**解决**:
-```bash
-# 检查Milvus是否运行
-docker ps | grep milvus
-
-# 启动Milvus
-docker start milvus
-```
-
-### 2. Embedding API调用失败
-
-**问题**: API Key错误
-
-**解决**:
-- 检查 `.env` 中的 `OPENAI_API_KEY`
-- 确认API配额充足
-
-### 3. 内存不足
-
-**问题**: 处理大量数据时OOM
-
-**解决**:
-- 减小 `chunk_size` (默认1000)
-- 减小批量处理大小
-- 使用 `DATA_MODE=PART` 模式
-
-## 📝 开发计划
-
-- [x] Phase 1: 基础框架 (100%)
-- [x] Phase 2: 数据处理 (100%)
-- [x] Phase 3: LLM封装 (100%)
-- [x] Phase 4: 向量数据库 (100%)
-- [x] Phase 5: LangGraph工作流 (100%)
-- [ ] Phase 6: 测试与优化 (0%)
-- [ ] Phase 7: 文档与部署 (0%)
-
-详见 [`docs/开发计划.md`](docs/开发计划.md)
-
-## ✨ 核心功能
-
-### CoA (Chain of Agents) 工作流
-
-基于LangGraph实现的智能问答流程:
-
-1. **意图判断**: 自动识别问题复杂度
-2. **问题分类**: 分类为变化类/总结类/对比类等
-3. **参数提取**: 提取时间、党派、议员、主题
-4. **问题拆解**: 将复杂问题拆解为多个子问题
-5. **混合检索**: 向量检索 + 元数据过滤
-6. **智能总结**: 综合多个子答案
-7. **异常处理**: 友好的错误提示
-
-### 混合检索
-
-结合向量相似度和元数据过滤:
-- 语义检索: 基于Gemini Embedding的向量相似度
-- 精确过滤: 按年份、党派、议员等过滤
-- 复合查询: 支持多条件组合
-
-### 智能问题处理
-
-- **简单问题**: 直接检索+总结
-- **复杂问题**: 自动拆解→分别检索→综合总结
-- **变化类**: 按年份×党派拆解
-- **对比类**: 按党派×时间段拆解
-- **总结类**: 按主题×时间拆解
-
-## 🤝 贡献
-
-欢迎提交Issue和Pull Request!
-
-## 📄 许可证
-
-MIT License
-
-## 📧 联系方式
-
-如有问题,请提交Issue。
-
----
-
-**更新时间**: 2025-10-30  
-**版本**: v0.1.0
-| CDU/CSU | 基民盟/基社盟 | 123,903 |
-| SPD | 社民党 | 117,196 |
-| FDP | 自民党 | 50,415 |
-| Grüne/Bündnis 90 | 绿党 | 24,317 |
-| DIE LINKE | 左翼党 | 15,932 |
-| PDS | 民主社会主义党 | 4,915 |
-| AfD | 德国选择党 | 4,928 |
-| KPD | 德国共产党 | 2,192 |
-
-**特殊标注**:
-- `None`: 无党派或未标注 (443,291次)
-- `Fraktionslos/fraktionslos`: 无党派
-- `-Gast`: 客座议员
-- `-Hosp.`: 候补议员
-
-### 2. map.csv - 议员-党派动态映射表
-
-**文件说明**: 记录每位议员在不同年份所属的党派
-
-**列字段**:
-- `议员姓名`: 议员的全名
-- `年份`: 记录所属的年份
-- `所属党派`: 该年份该议员所属的党派
-- `备注`: 特殊情况说明（如同一年属于多个党派）
-
-**数据规模**:
-- 总记录数: 35,861条
-- 包含约9,291位不同的发言人
-
-**数据特点**:
-- 记录了议员的党派变动情况
-- 部分议员在同一年可能有多个党派标注（党派变更）
-- 包括主席、副主席等职位的发言记录
-
-### 3. summary_report.txt - 详细统计分析报告
-
-**文件说明**: 完整的数据统计分析报告
-
-**报告内容**:
-1. **党派分布统计**: 53个不同党派的详细统计
-2. **发言人分布统计**: 9,291位发言人的发言次数排名
-3. **各年份党派分布**: 1949-2021年每年的党派分布详情
-4. **议员党派变动情况**: 记录了党派变更的议员名单
-
-**发言次数前10的议员**:
-1. Vizepräsident Westphal (17,182次)
-2. Vizepräsident Dr. Jaeger (17,026次)
-3. Vizepräsident Dr. Schmitt-Vockenhausen (15,807次)
-4. Vizepräsidentin Petra Pau (15,404次)
-5. Vizepräsident Dr. Schmid (14,440次)
-... (其他详见报告文件)
-
-## 使用方法
-
-### 运行分析脚本
-
-```bash
-python analyze_metadata.py
-```
-
-### 脚本功能
-
-1. **自动扫描**: 自动读取`data/pp_json_49-21/`目录下的所有JSON文件
-2. **提取元数据**: 从每个JSON文件的transcript中提取metadata信息
-3. **统计分析**: 分析group和speaker字段的分布情况
-4. **生成映射表**: 创建党派名称映射表和议员-党派动态映射表
-5. **生成报告**: 输出详细的统计分析报告
-
-## 数据结构
-
-### JSON文件结构示例
+### 响应示例
 
 ```json
 {
-  "session": 1949,
-  "transcript": [
-    {
-      "type": "text_block",
-      "metadata": {
-        "session": "001",
-        "month": "09",
-        "group": "SPD",
-        "id": "pp_01_001_00002",
-        "year": "1949",
-        "day": "07",
-        "speaker": "Dr. Adenauer",
-        "lp": "01"
-      },
-      "speech": "..."
-    }
-  ]
+  "success": true,
+  "question": "2019年CDU/CSU对难民政策的立场是什么？",
+  "answer": "Als Expertin für die deutsche Bundespolitik...",
+  "intent": "simple",
+  "sources_count": 45,
+  "processing_time_ms": 58600
 }
 ```
 
-### 关键字段说明
+## 性能指标
 
-- `session`: 会期编号
-- `year`: 年份
-- `month`: 月份
-- `day`: 日期
-- `speaker`: 发言人姓名
-- `group`: 所属党派
-- `lp`: 立法期 (Legislaturperiode)
+| 指标 | 数值 |
+|------|------|
+| 向量数据量 | 1,109,456 |
+| 标准问题响应时间 | 60-120秒 |
+| 深度分析响应时间 | 3-5分钟 |
+| 事实准确性 | 91.5% |
+| 语义相似度 | 86.2% |
+| 完整度 | 80.4% |
 
-## 数据分析发现
+## 线上部署
 
-### 1. 党派分布特征
+- **API地址**: https://germanyrag-production.up.railway.app
+- **API文档**: https://germanyrag-production.up.railway.app/docs
 
-- **主要党派**: CDU/CSU和SPD长期占据主导地位
-- **绿党崛起**: 从1980年代开始，绿党逐渐成为重要政治力量
-- **左翼整合**: PDS演变为DIE LINKE
-- **新兴势力**: AfD在2010年代后出现
+## 支持的问题类型
 
-### 2. 数据质量
+| 类型 | 示例 |
+|------|------|
+| **事实查询** | "2019年CDU/CSU对难民政策的立场是什么？" |
+| **变化分析** | "2015-2018年各党派在难民问题上的立场变化" |
+| **对比分析** | "对比CDU/CSU和SPD在2019年的气候政策观点" |
+| **趋势分析** | "德国能源政策的演变趋势" |
+| **人物查询** | "Merkel在2017年关于欧盟一体化说了什么？" |
 
-- **缺失值**: 约54.78%的记录group字段为None（可能为非党派发言或主席发言）
-- **标注不一致**: 同一党派可能有多种写法（如绿党的不同标注）
-- **特殊标记**: 包含-Gast(客座)、-Hosp.(候补)等标记
-- **数据清洗**: 已自动清理speaker字段中的特殊字符（德语引号等）
-  - 移除了开头的德语引号„、“
-  - 统一了speaker名称格式
-  - 减少了重复记录
+## 数据说明
 
-### 3. 议员变动
+### 数据范围
+- 1949-2025年德国联邦议院演讲记录
+- 约110万个文本块
 
-- 发现多位议员有党派变动记录
-- 部分变动可能由于党派重组或合并
+### 元数据字段
+```python
+{
+    "year": "2019",           # 年份
+    "month": "03",            # 月份
+    "speaker": "Dr. Merkel",  # 发言人
+    "group": "CDU/CSU",       # 党派(德文)
+    "group_chinese": "基民盟/基社盟",  # 党派(中文)
+    "lp": "19",               # 立法期
+}
+```
 
-## 注意事项
+## 维护说明
 
-1. **编码问题**: 文件使用UTF-8编码，CSV文件使用UTF-8-BOM确保Excel正确显示中文
-2. **数据清洗**: None值表示无党派或未标注，需根据具体场景处理
-3. **党派名称**: 部分党派有多种德语表示方式，已在映射表中统一
-4. **时间跨度**: 数据覆盖1949-2021年，跨越多个政治时期
+### 添加知识图谱标签
 
-## 技术栈
+1. 编辑 `data/knowledge_graph_extended.json`
+2. 或使用 Streamlit 知识图谱编辑器
 
-- Python 3.x
-- 标准库: json, csv, glob, collections
+### 更新LLM模型
 
-## 未来改进方向
+修改 `.env` 中的 `THIRD_PARTY_MODEL_NAME`
 
-1. **爬取议员信息**: 从官方网站爬取更准确的议员-党派映射关系
-2. **数据补充**: 补充None值中可推断的党派信息
-3. **可视化分析**: 生成党派势力演变图表
-4. **文本分析**: 对speech内容进行主题分析和情感分析
-5. **关系网络**: 构建议员互动网络和党派联盟关系图
+### 速率限制
 
-## 联系方式
+LLM客户端内置速率限制(1.5秒/请求)和自动重试机制，防止API限流。
 
-如有问题或建议，欢迎提出Issue或Pull Request。
+## License
 
-## 许可证
+Private - All Rights Reserved
 
-本项目仅用于学术研究和数据分析目的。
+---
+
+**更新时间**: 2025-12-28

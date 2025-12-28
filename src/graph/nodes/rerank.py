@@ -16,34 +16,44 @@ from ...utils.performance_monitor import get_performance_monitor
 class ReRankNode:
     """
     重排序节点
-    
+
     功能:
     1. 对RetrieveNode检索到的文档进行重新排序
     2. 使用CohereRerank提高文档相关性排序
-    3. 保留原始检索结构，增强排序质量
-    
+    3. 【P2】议题关键词加权：对包含问题议题关键词的文档给予额外加分
+    4. 保留原始检索结构，增强排序质量
+
     输入: retrieval_results (检索结果)
     输出: reranked_results (重排后结果)
     """
-    
-    def __init__(self):
-        """初始化重排序节点"""
+
+    def __init__(self, enable_topic_boost: bool = True, topic_boost_weight: float = 0.15):
+        """初始化重排序节点
+
+        Args:
+            enable_topic_boost: 是否启用议题关键词加权
+            topic_boost_weight: 议题关键词加权权重 (0.0-1.0)
+        """
         logger.info("[ReRankNode] 初始化重排序节点...")
-        
+
         try:
             # 检查API密钥
             cohere_api_key = os.getenv("COHERE_API_KEY")
             if not cohere_api_key:
                 raise ValueError("COHERE_API_KEY未设置，无法初始化重排序功能")
-            
+
             # 保存API密钥和配置
             self.cohere_api_key = cohere_api_key
             self.model = "rerank-v3.5"  # 修正：使用正确的模型名
-            self.top_n = 15  # 【修复】从10增加到15，提供更多文档给总结阶段
+            self.top_n = 25  # 【优化】增加到25，配合top_k=100提供更多高质量文档
             self.api_url = "https://api.cohere.com/v2/rerank"  # 修正：使用v2 API
-            
-            logger.info("[ReRankNode] Cohere Rerank初始化成功")
-            
+
+            # 【P2】议题关键词加权配置
+            self.enable_topic_boost = enable_topic_boost
+            self.topic_boost_weight = topic_boost_weight
+
+            logger.info(f"[ReRankNode] Cohere Rerank初始化成功, topic_boost={enable_topic_boost}, weight={topic_boost_weight}")
+
         except Exception as e:
             logger.error(f"[ReRankNode] 初始化失败: {str(e)}")
             raise
@@ -124,9 +134,17 @@ class ReRankNode:
                         documents=formatted_docs,
                         top_n=min(self.top_n, len(documents))
                     )
-                    
+
                     logger.info(f"[ReRankNode] 重排序完成，从 {len(documents)} 个文档中选出 {len(reranked_result)} 个")
-                    
+
+                    # 【P2】应用议题关键词加权
+                    if self.enable_topic_boost:
+                        topic_keywords = self._extract_topic_keywords(state)
+                        if topic_keywords:
+                            reranked_result = self._apply_topic_boost(
+                                reranked_result, documents, topic_keywords
+                            )
+
                     # 转换重排序后的文档回chunks格式，并保留重排序分数
                     reranked_chunks = []
                     rerank_scores = []
@@ -268,11 +286,11 @@ class ReRankNode:
             logger.error(f"[ReRankNode] 重排序处理失败: {str(e)}")
             raise
     
-    def _log_rerank_results(self, question: str, original_docs: List[Document], 
+    def _log_rerank_results(self, question: str, original_docs: List[Document],
                            reranked_result: List[Dict]) -> None:
         """
         记录重排序结果（调试用）
-        
+
         Args:
             question: 查询问题
             original_docs: 原始文档列表
@@ -282,13 +300,135 @@ class ReRankNode:
         logger.debug(f"[ReRankNode] 查询: {question}")
         logger.debug(f"[ReRankNode] 原始文档数量: {len(original_docs)}")
         logger.debug(f"[ReRankNode] 重排序后数量: {len(reranked_result)}")
-        
+
         # 记录前3个重排序后的文档片段
         for i, result in enumerate(reranked_result[:3]):
             doc_idx = result['index']
             score = result['relevance_score']
             doc_text = original_docs[doc_idx].page_content[:100] if doc_idx < len(original_docs) else "N/A"
             logger.debug(f"[ReRankNode] Top-{i+1} (score={score:.3f}): {doc_text}...")
+
+    def _extract_topic_keywords(self, state: GraphState) -> List[str]:
+        """
+        【P2】从state中提取议题关键词
+
+        从parameters中提取topic字段，以及从question中提取德语关键词
+
+        Args:
+            state: 当前状态
+
+        Returns:
+            议题关键词列表
+        """
+        keywords = []
+
+        # 1. 从parameters中提取topic
+        parameters = state.get("parameters", {})
+        if parameters:
+            topic = parameters.get("topic", "")
+            if topic:
+                # topic可能是德语词组，添加完整topic和拆分后的词
+                keywords.append(topic.lower())
+                # 拆分topic获取单独的词
+                topic_words = topic.replace('-', ' ').replace('/', ' ').split()
+                for word in topic_words:
+                    clean_word = word.strip().lower()
+                    if len(clean_word) >= 3 and clean_word not in keywords:
+                        keywords.append(clean_word)
+
+        # 2. 从question中提取德语关键词（常见主题词）
+        question = state.get("question", "")
+        if question:
+            # 德语主题词模式（常见政策领域词汇）
+            german_topic_patterns = [
+                "integrationskurs", "integration", "flüchtling", "asyl", "migration",
+                "wohnung", "miete", "immobilien", "wohnungskrise", "finanzialisierung",
+                "stahl", "stahlkrise", "arbeitsplatz", "industrie",
+                "frauen", "frauenfragen", "gleichstellung",
+                "klima", "umwelt", "energie", "energiewende",
+                "digitalisierung", "digital", "datenschutz",
+                "gesundheit", "pflege", "rente", "sozial",
+                "bildung", "schule", "universität",
+                "verteidigung", "sicherheit", "bundeswehr",
+                "europa", "eu", "brexit",
+                "haushalt", "steuern", "finanzen", "budget"
+            ]
+
+            question_lower = question.lower()
+            for pattern in german_topic_patterns:
+                if pattern in question_lower and pattern not in keywords:
+                    keywords.append(pattern)
+
+        logger.info(f"[ReRankNode] 【P2】提取的议题关键词: {keywords}")
+        return keywords
+
+    def _apply_topic_boost(
+        self,
+        reranked_result: List[Dict],
+        documents: List[Document],
+        topic_keywords: List[str]
+    ) -> List[Dict]:
+        """
+        【P2】对包含议题关键词的文档应用加权
+
+        Args:
+            reranked_result: Cohere重排序结果
+            documents: 原始文档列表
+            topic_keywords: 议题关键词列表
+
+        Returns:
+            加权后的重排序结果（按新分数排序）
+        """
+        if not topic_keywords or not self.enable_topic_boost:
+            return reranked_result
+
+        boosted_results = []
+
+        for result in reranked_result:
+            doc_idx = result['index']
+            original_score = result['relevance_score']
+
+            # 检查文档是否包含议题关键词
+            doc_text = documents[doc_idx].page_content.lower() if doc_idx < len(documents) else ""
+
+            keyword_matches = 0
+            matched_keywords = []
+            for keyword in topic_keywords:
+                if keyword in doc_text:
+                    keyword_matches += 1
+                    matched_keywords.append(keyword)
+
+            # 计算加权后的分数
+            if keyword_matches > 0:
+                # 每匹配一个关键词，增加topic_boost_weight的加权
+                # 使用递减加权：第一个关键词权重最高，后续递减
+                boost = 0
+                for i in range(keyword_matches):
+                    boost += self.topic_boost_weight * (0.7 ** i)  # 递减权重
+
+                boosted_score = min(1.0, original_score + boost)  # 不超过1.0
+                logger.debug(f"[ReRankNode] 【P2】文档{doc_idx}匹配关键词{matched_keywords}, "
+                           f"原始分数{original_score:.4f} -> 加权分数{boosted_score:.4f}")
+            else:
+                boosted_score = original_score
+
+            boosted_results.append({
+                'index': doc_idx,
+                'relevance_score': boosted_score,
+                'original_score': original_score,
+                'topic_boost_applied': keyword_matches > 0,
+                'matched_keywords': matched_keywords
+            })
+
+        # 按加权后的分数重新排序
+        boosted_results.sort(key=lambda x: x['relevance_score'], reverse=True)
+
+        # 记录加权效果
+        boosted_count = sum(1 for r in boosted_results if r.get('topic_boost_applied', False))
+        if boosted_count > 0:
+            logger.info(f"[ReRankNode] 【P2】议题加权影响了 {boosted_count}/{len(boosted_results)} 个文档")
+
+        return boosted_results
 
 
 if __name__ == "__main__":

@@ -194,6 +194,59 @@ class IncrementalSummarizeNodeV2:
 
         return extracted_list
 
+    def _aggregate_chunks_by_speaker(self, chunks: List[Dict]) -> List[Dict]:
+        """
+        【Speaker Chunk聚合】将同一发言人的多个chunks合并
+
+        目的：确保LLM在总结时能看到同一发言人的完整上下文，
+        避免因chunks分散导致信息遗漏
+
+        Args:
+            chunks: 原始chunks列表
+
+        Returns:
+            聚合后的chunks列表，同一speaker的内容合并为一个chunk
+        """
+        from collections import defaultdict
+
+        # 按speaker分组
+        speaker_chunks = defaultdict(list)
+        speaker_metadata = {}
+
+        for chunk in chunks:
+            metadata = chunk.get("metadata", {})
+            speaker = metadata.get("speaker", "Unknown")
+            text = chunk.get("text", "")
+
+            if text.strip():
+                speaker_chunks[speaker].append(text)
+                # 保留第一个chunk的metadata
+                if speaker not in speaker_metadata:
+                    speaker_metadata[speaker] = metadata
+
+        # 合并同一speaker的chunks
+        aggregated = []
+        for speaker, texts in speaker_chunks.items():
+            # 合并所有文本，用分隔符连接
+            merged_text = "\n\n---\n\n".join(texts)
+
+            aggregated.append({
+                "text": merged_text,
+                "metadata": speaker_metadata[speaker],
+                "chunk_count": len(texts)  # 记录合并了多少个chunk
+            })
+
+        # 按chunk数量排序，优先显示内容最多的speaker
+        aggregated.sort(key=lambda x: x.get("chunk_count", 0), reverse=True)
+
+        logger.info(f"[SpeakerAggregation] 聚合前: {len(chunks)} chunks, 聚合后: {len(aggregated)} speakers")
+        for agg in aggregated[:5]:
+            speaker = agg['metadata'].get('speaker', 'Unknown')
+            count = agg.get('chunk_count', 1)
+            logger.info(f"  - {speaker}: {count} chunks 合并")
+
+        return aggregated
+
     def _build_extraction_prompt(
         self,
         sub_question: str,
@@ -207,77 +260,75 @@ class IncrementalSummarizeNodeV2:
         2. 保留原文中的关键短语和术语
         3. 提取数字、日期、法律名称
         """
-        # 构造文档文本
+        # 【新增】Speaker Chunk聚合 - 将同一发言人的chunks合并
+        aggregated_chunks = self._aggregate_chunks_by_speaker(chunks)
+
+        # 构造文档文本（使用聚合后的chunks）
         documents_text = ""
-        for i, chunk in enumerate(chunks[:15], 1):  # 最多15个文档
+        for i, chunk in enumerate(aggregated_chunks[:15], 1):  # 聚合后通常speaker数量更少
             text = chunk.get("text", "")
             metadata = chunk.get("metadata", {})
             speaker = metadata.get("speaker", "N/A")
             party = metadata.get("group_chinese", metadata.get("group", "N/A"))
             date = metadata.get("date", "N/A")
+            chunk_count = chunk.get("chunk_count", 1)
 
-            documents_text += f"\n### 文档 {i} ({speaker} - {party}, {date})\n{text}\n"
+            # 标注这是聚合内容
+            agg_note = f" [包含{chunk_count}段发言]" if chunk_count > 1 else ""
+            documents_text += f"\n### 发言人 {i}: {speaker} ({party}, {date}){agg_note}\n{text}\n"
 
-        prompt = f"""您是德国议会政治分析专家。请从以下文档中提取关键信息，回答这个问题：
+        prompt = f"""您是德国议会政治分析专家。请从以下文档中提取关键信息，直接回答问题。
 
 **问题**: {sub_question}
 
-**【核心原则】对立观点平衡提取**：
-政治立场往往包含多个维度，必须**完整提取**，避免片面化。对于每个政策主题，必须同时查找：
-- 温和/人道主义立场 AND 强硬/限制性立场
-- 支持性措施 AND 限制性措施
-- 理想目标 AND 实际执行手段
+**【核心原则】完整提取所有相关信息**：
+1. **直接回答问题所问的内容**
+2. **提取所有相关细节**，不要遗漏
 
-**要求**：
-1. 按照以下JSON结构提取信息：
+**提取要求**：
+
+1. **必须提取的内容类型**：
+   - 核心立场/观点：发言人对问题的明确态度
+   - 支持理由：为什么持这种立场
+   - 批评/反对意见：对其他方案或政策的批评
+   - **具体问题/例子**：发言人提到的具体事例、案例、现象（如虐待Mißhandlung、毒品滥用Drogenmißbrauch、自杀Selbsttötungsversuch等）
+   - **根本原因分析**：问题产生的根本原因（如过度负担Überlastung、官僚主义Bürokratie、晋升停滞Beförderungsstau等）
+   - **解决方案建议**：提出的解决方案和改进措施
+
+2. **必须保留的具体细节**（遗漏任何一项都会导致答案不完整）：
+   - **数字**: 百分比、金额、人数、年份 (如 "6%", "4.1亿马克", "10万人", "1975年")
+   - **日期**: 具体日期、生效时间 (如 "1月1日", "ab 1975")
+   - **法律/政策名称**: (如 "Umsatzsteuergesetz", "Art. 16 GG", "Asylpaket I")
+   - **专有名词**: 人名、机构名、项目名
+   - **德语原文关键短语**: 保留重要术语的德语原文
+
+3. **按以下结构提取**：
 {{
-  "党派1": {{
-    "政策主题A": {{
-      "温和立场": ["立场1（原文短语）", "立场2", ...],
-      "强硬立场": ["立场1（原文短语）", "立场2", ...],
-      "具体措施": ["措施1（数字/日期/法律名）", "措施2", ...],
-      "关键短语": ["Originalzitat 1", "Originalzitat 2", ...]
-    }},
-    "政策主题B": {{ ... }}
-  }},
-  "党派2": {{ ... }}
+  "发言人/党派": {{
+    "核心立场": "对问题的明确回答",
+    "支持理由": ["理由1", "理由2"],
+    "批评意见": ["批评1", "批评2"],
+    "具体问题例子": ["具体事例1（保留德语术语）", "具体事例2"],
+    "根本原因": ["原因1", "原因2"],
+    "解决方案": ["方案1", "方案2"],
+    "关键数据": ["6%", "1975年1月1日", "4.1亿马克"],
+    "德语关键词": ["Originalzitat 1", "Originalzitat 2"]
+  }}
 }}
 
-2. **对立观点检查清单**（必须同时查找）：
-
-   遣返政策：
-   - 温和："拒绝遣返到不安全国家" / "人道主义考量"
-   - 强硬："强制遣返" (Zwang/Abschiebung) / "加快遣返速度" / "延长拘留"
-
-   边境管控：
-   - 温和："人道主义走廊" / "接纳难民"
-   - 强硬："边境管控" (Grenzkontrollen) / "上限" (Obergrenze)
-
-   欧洲政策：
-   - 温和："gemeinsame europäische Antwort" / "团结"
-   - 强硬："各国责任" / "配额拒绝"
-
-3. **关键短语**必须保留原文（德语），例如：
-   - "Zwang durchsetzen" (强制执行)
-   - "Ausreisegewahrsam verlängern" (延长遣返拘留)
-   - "sichere Herkunftsländer" (安全来源国)
-   - "gemeinsame europäische Antwort" (共同的欧洲答案)
-
-4. **具体措施**必须包含：
-   - 数字、日期（如"2015年"、"10万人"）
-   - 法律名称（如"Asylpaket I"）
-   - 执行手段（如"Ausreisegewahrsam"、"Rückführung"）
-
-5. 如果文档中**多次提及**某个政策维度，说明它很重要，必须提取。
-
-6. 提取**所有**党派的信息（CDU/CSU、SPD、绿党、左翼党、AfD等）。
-
-**⚠️ 重要**：如果只提取了"温和立场"而未找到"强硬立场"，请**重新检查文档**，CDU/CSU等政党通常同时包含两种维度。
+4. **检查清单**（确保不遗漏）：
+   - [ ] 问题的核心答案是否已提取？
+   - [ ] 所有数字/日期是否已保留？
+   - [ ] 所有法律/政策名称是否已保留？
+   - [ ] **所有具体问题/例子是否已提取？**（如虐待、毒品滥用、自杀等）
+   - [ ] **根本原因分析是否已提取？**（如官僚主义、晋升停滞等）
+   - [ ] 批评/反对意见是否已提取？
+   - [ ] 德语关键术语是否已保留？
 
 **文档内容**：
 {documents_text}
 
-**请输出JSON格式的提取结果**："""
+**请直接输出提取结果**："""
 
         return prompt
 
@@ -353,7 +404,8 @@ class IncrementalSummarizeNodeV2:
         """
         构造基于结构化信息生成答案的prompt
         """
-        # 构造Quellen材料列表（用于引用）
+        # 构造Quellen材料列表（用于引用）- 使用集合去重
+        quellen_set = set()
         quellen_list = []
         for result in processing_results:
             for chunk in result.get("chunks", [])[:15]:
@@ -361,9 +413,13 @@ class IncrementalSummarizeNodeV2:
                 speaker = metadata.get("speaker", "N/A")
                 party = metadata.get("group", "N/A")
                 date = metadata.get("date", "N/A")
-                quellen_list.append(f"- {speaker} ({party}), {date}")
+                quellen_entry = f"- {speaker} ({party}), {date}"
+                # 只添加未出现过的引用
+                if quellen_entry not in quellen_set:
+                    quellen_set.add(quellen_entry)
+                    quellen_list.append(quellen_entry)
 
-        quellen_text = "\n".join(quellen_list[:30])  # 最多30个引用
+        quellen_text = "\n".join(quellen_list[:30])  # 最多30个去重后的引用
 
         prompt = f"""Sie sind Experte für die deutsche Bundespolitik. Bitte beantworten Sie die folgende Frage VOLLSTÄNDIG und DETAILLIERT auf Deutsch.
 
@@ -374,30 +430,39 @@ class IncrementalSummarizeNodeV2:
 
 **WICHTIGE ANFORDERUNGEN**:
 
-1. **【核心】对立观点平衡呈现**:
-   - 如果提取信息包含"温和立场"和"强硬立场"，**两者都必须在答案中呈现**
-   - 避免片面化：不能只强调人道主义而忽略执行措施
-   - 例如遣返政策：既要提"拒绝遣返到不安全国家"，也要提"强制遣返"、"延长拘留"
+1. **【P1-核心】聚焦问题核心，完整呈现相关信息**:
+   - **必须直接回答问题所问的内容**
+   - 如果问题问"什么负面后果"，答案必须明确说明具体后果
+   - 如果问题问"什么立场"，答案必须明确说明具体立场
+   - **必须包含所有具体例子**：如提取信息中有"虐待"、"毒品滥用"、"自杀未遂"等具体问题，必须在答案中呈现
+   - **必须包含根本原因分析**：如提取信息中有"过度负担"、"官僚主义"、"晋升停滞"等原因，必须在答案中呈现
+   - **必须包含解决方案建议**：如提取信息中有具体建议，必须在答案中呈现
+   - **禁止**：用其他党派或其他年份的信息替代问题所问的核心内容
+
+2. **【P0-关键】具体细节必须保留**:
+   - **所有数字必须保留**: 百分比(6%, 4%)、金额(4.1亿马克)、人数(10,000人)
+   - **所有日期必须保留**: 具体年份(1975年)、月日(1月1日)、时间段
+   - **所有法律/政策名称必须保留**: Asylpaket I, Umsatzsteuergesetz, Art. 16 GG
+   - **所有专有名词必须保留**: 人名、机构名、地名
+   - 这些细节是答案完整性的关键，遗漏任何一个都会导致答案不完整
+
+3. **对立观点平衡呈现**:
+   - 如果提取信息包含"温和立场"和"强硬立场"，两者都必须呈现
    - 体现政党立场的完整性和复杂性
 
-2. **Vollständigkeit**:
-   - Verwenden Sie ALLE extrahierten Informationen
-   - Jede Partei, die in den extrahierten Informationen erscheint, MUSS in der Antwort erwähnt werden
-   - Jede "具体措施" MUSS in der Antwort erscheinen
-   - Sowohl "温和立场" als auch "强硬立场" MÜSSEN erwähnt werden
+4. **Vollständigkeit (完整性要求 - 极其重要)**:
+   - **Verwenden Sie ALLE extrahierten Informationen** - 所有提取的信息必须使用
+   - Jede Partei, die in den extrahierten Informationen erscheint, MUSS erwähnt werden
+   - **Alle konkreten Beispiele MÜSSEN erscheinen** (z.B. Mißhandlungen, Drogenmißbrauch, Selbsttötungsversuche)
+   - **Alle Ursachenanalysen MÜSSEN erscheinen** (z.B. Überlastung, Bürokratie, Beförderungsstau)
+   - **Alle Lösungsvorschläge MÜSSEN erscheinen**
+   - 遗漏任何已提取的信息都是不可接受的
 
-3. **Originalität der Formulierungen**:
-   - Verwenden Sie die "关键短语" (Schlüsselphrasen) **wörtlich** aus dem Original
-   - Beispiel: Wenn extrahiert wurde "Zwang durchsetzen", schreiben Sie genau das
-   - Wenn extrahiert wurde "Ausreisegewahrsam verlängern", schreiben Sie genau das
-   - Wenn extrahiert wurde "gemeinsame europäische Antwort", schreiben Sie genau das
+5. **Originalität der Formulierungen**:
+   - Verwenden Sie Schlüsselphrasen **wörtlich** aus dem Original
+   - Beispiel: "Zwang durchsetzen", "Ausreisegewahrsam verlängern"
 
-4. **Konkrete Details**:
-   - Zahlen, Daten, Gesetze MÜSSEN in der Antwort erscheinen
-   - Beispiel: "2015", "Asylpaket I", "10.000 Flüchtlinge"
-   - Beispiel: "Höchstdauer des Ausreisegewahrsams verlängern"
-
-5. **Strukturierung nach Fragentyp**:
+6. **Strukturierung nach Fragentyp**:
 """
 
         # 根据问题类型添加特定要求
@@ -416,7 +481,7 @@ class IncrementalSummarizeNodeV2:
 """
 
         prompt += f"""
-5. **Quellen**:
+7. **Quellen**:
    - Am Ende der Antwort fügen Sie eine Liste "**Quellen**" hinzu
    - Format: "- Speaker (Partei), Datum"
    - Verwenden Sie die folgenden Quellen:

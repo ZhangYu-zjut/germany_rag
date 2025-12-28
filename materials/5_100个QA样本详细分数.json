@@ -1,0 +1,1307 @@
+{
+  "report_info": {
+    "title": "100个QA样本详细分数",
+    "generated_at": "2025-12-28",
+    "total_samples": 100,
+    "description": "每个样本的4项评估指标分数（已包含Truncation修复）"
+  },
+  "summary": {
+    "avg_factual_accuracy": 0.9145,
+    "avg_semantic_similarity": 0.8615,
+    "avg_completeness": 0.8038,
+    "avg_overall_score": 0.8599,
+    "samples_above_08": 81,
+    "samples_06_to_08": 15,
+    "samples_04_to_06": 2,
+    "samples_below_04": 2,
+    "truncation_affected_count": 17,
+    "note": "完整度已使用Truncation修复后的分数（metadata.text从1000扩展到4000字符）"
+  },
+  "samples": [
+    {
+      "text_id": "pp_01_127_00037",
+      "year": "1951",
+      "speaker": "Hoecker",
+      "question": "根据Hoecker在1951年的演讲，他对当时占领军征用德国住房的问题持什么立场？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "overall_score": 1.0
+      }
+    },
+    {
+      "text_id": "pp_02_056_00021",
+      "year": "1954",
+      "speaker": "Struve",
+      "question": "根据Struve在1954年的演讲，他认为当时的提案未能充分考虑到哪一类女性群体的无偿劳动贡献？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "overall_score": 1.0
+      }
+    },
+    {
+      "text_id": "pp_02_213_00169",
+      "year": "1957",
+      "speaker": "Elsner",
+      "question": "根据Elsner在1957年的演讲，他提议将Titel 571的资金用于哪两个具体目的？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "overall_score": 1.0
+      }
+    },
+    {
+      "text_id": "pp_14_094_00108",
+      "year": "2000",
+      "speaker": "Carl-Dieter Spranger",
+      "question": "根据Carl-Dieter Spranger在2000年的演讲，他引用Giscard d’Estaing的言论，对欧盟的哪项权力表达了质疑？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "overall_score": 1.0
+      }
+    },
+    {
+      "text_id": "pp_15_014_00120",
+      "year": "2002",
+      "speaker": "Andreas Storm",
+      "question": "根据Andreas Storm在2002年的演讲，他为何指责红绿联合政府在养老金缴费问题上向公众做出了虚假承诺？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "overall_score": 1.0
+      }
+    },
+    {
+      "text_id": "pp_11_024_00126",
+      "year": "1987",
+      "speaker": "Dr. Wittmann",
+      "question": "根据Dr. Wittmann在1987年关于Insolvenzrecht, Markenpiraterie, Produkthaftung等经济法议题的演讲，他/她对反对党频繁提出听证会申请，从而拖延议会工作的做法持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 1,
+        "overall_score": 1.0
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.4,
+        "new_completeness": 1,
+        "improvement": 0.6
+      }
+    },
+    {
+      "text_id": "pp_02_084_00024",
+      "year": "1955",
+      "speaker": "Kiesinger",
+      "question": "根据Kiesinger在1955年关于防御能力（Verteidigungsfähigkeit）和威慑（Abschreckung）的演讲，他/她对在集体安全体系中，建立可信的防御能力和早期威慑以确保制裁及时生效持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 1,
+        "overall_score": 1.0
+      }
+    },
+    {
+      "text_id": "pp_10_120_00218",
+      "year": "1985",
+      "speaker": "Würzbach, Parl. Staatssekretär",
+      "question": "根据Würzbach, Parl. Staatssekretär在1985年关于Soldatenvergünstigungen（士兵优惠）和Nahverkehrsappelle（地方交通呼吁）的演讲，他对于联邦政府在为义务兵争取地方交通优惠方面的努力和立场是什么？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 1,
+        "overall_score": 1.0
+      }
+    },
+    {
+      "text_id": "pp_10_209_00252",
+      "year": "1986",
+      "speaker": "Spranger, Parl. Staatssekretär",
+      "question": "根据Spranger, Parl. Staatssekretär在1986年关于寻求庇护者医疗保障（Medizinische Versorgung Asylbewerber）、医疗系统职责（Zuständigkeit Gesundheitswesen）及费用承担（Kostenübernahme As...",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 1,
+        "overall_score": 1.0
+      }
+    },
+    {
+      "text_id": "pp_13_107_00095",
+      "year": "1996",
+      "speaker": "Ottmar Schreiner",
+      "question": "根据Ottmar Schreiner在1996年关于工资增长（Lohnsteigerungen）、失业（Arbeitslosigkeit）和基本需求覆盖原则（Bedarfsdeckungsprinzip）的演讲，他对加强工资增长以解决就业问题，以及放弃基本需求覆盖原则的潜在影响持什么立场？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 1,
+        "overall_score": 1.0
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.6,
+        "new_completeness": 1,
+        "improvement": 0.4
+      }
+    },
+    {
+      "text_id": "pp_15_134_00043",
+      "year": "2004",
+      "speaker": "Dr. Barbara Hendricks, Parl. Staatssekretärin beim Bundesminister der Finanzen",
+      "question": "根据Dr. Barbara Hendricks, Parl. Staatssekretärin beim Bundesminister der Finanzen在2004年关于**Konversionsfolgen（转型后果）、Truppenabbau（军队裁减）和Föderale Aufgaben...",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "overall_score": 1.0
+      },
+      "truncation_fixed": {
+        "original_completeness": 0,
+        "new_completeness": 1.0,
+        "improvement": 1.0
+      }
+    },
+    {
+      "text_id": "pp_04_173_00206",
+      "year": "1965",
+      "speaker": "Dr. Dahlgrün, Bundesminister der Finanzen",
+      "question": "根据Dr. Dahlgrün, Bundesminister der Finanzen在1965年关于Mineralölsteuer和Kraftfahrzeugsteuer的演讲，他/她对这两种税收的征收对象及其影响实际燃料消耗的外部因素持什么观点？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.95,
+        "overall_score": 0.9833
+      }
+    },
+    {
+      "text_id": "pp_01_053_00044",
+      "year": "1950",
+      "speaker": "Dr. Reismann",
+      "question": "根据Dr. Reismann在1950年的演讲，他认为当时的农业议案在资金使用方面缺少了什么样的关键保证？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 0.9,
+        "overall_score": 0.9667
+      }
+    },
+    {
+      "text_id": "pp_02_142_00245",
+      "year": "1956",
+      "speaker": "Engell",
+      "question": "根据Engell在1956年的演讲，他认为住房建设领域在数据方面存在什么核心问题？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 0.9,
+        "overall_score": 0.9667
+      }
+    },
+    {
+      "text_id": "pp_04_071_00141",
+      "year": "1963",
+      "speaker": "Arendt (Wattenscheid)",
+      "question": "根据Arendt (Wattenscheid)在1963年的演讲，他如何评价联邦政府在回应具体能源问题质询时的表现？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 0.9,
+        "overall_score": 0.9667
+      }
+    },
+    {
+      "text_id": "pp_05_223_00141",
+      "year": "1969",
+      "speaker": "Hermsdorf",
+      "question": "根据Hermsdorf在1969年的演讲，一个组织在什么情况下会被视为危险？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 0.9,
+        "overall_score": 0.9667
+      }
+    },
+    {
+      "text_id": "pp_07_069_00391",
+      "year": "1973",
+      "speaker": "Dr. Becher (Pullach)",
+      "question": "根据Dr. Becher (Pullach)在1973年的演讲，他对向南斯拉夫人民提供帮助和合作设定了哪些前提条件？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 0.9,
+        "completeness": 1.0,
+        "overall_score": 0.9667
+      }
+    },
+    {
+      "text_id": "pp_09_064_00109",
+      "year": "1981",
+      "speaker": "Elias, Staatssekretär im Bundesministerium für das Post- und Fernmeldewesen",
+      "question": "根据Elias, Staatssekretär im Bundesministerium für das Post- und Fernmeldewesen在1981年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 1,
+        "overall_score": 0.9667
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.7,
+        "new_completeness": 1,
+        "improvement": 0.3
+      }
+    },
+    {
+      "text_id": "pp_15_155_00093",
+      "year": "2005",
+      "speaker": "Detlef Parr",
+      "question": "根据Detlef Parr在2005年关于体育的教育使命（Erziehungsauftrag des Sports）、融合力量（Integrative Kraft des Sports）和自我规管（Selbstregulierung im Sport）的演讲，面对当时如兴奋剂和裁判丑闻等问题，他/她...",
+      "scores": {
+        "semantic_similarity": 0.95,
+        "factual_accuracy": 1.0,
+        "completeness": 0.95,
+        "overall_score": 0.9667
+      }
+    },
+    {
+      "text_id": "pp_17_078_00247",
+      "year": "2010",
+      "speaker": "Jürgen Hardt",
+      "question": "根据Jürgen Hardt在2010年关于Mission im Mittelmeer、Völkerrechtliche Grundlage和Terrorismusbekämpfung的演讲，他对于德国参与地中海任务及其国际法基础的合法性持何种立场？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 1,
+        "overall_score": 0.9667
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.75,
+        "new_completeness": 1,
+        "improvement": 0.25
+      }
+    },
+    {
+      "text_id": "pp_17_111_00153",
+      "year": "2011",
+      "speaker": "Abgeordnete Silvia Schmidt",
+      "question": "根据Abgeordnete Silvia Schmidt在2011年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "overall_score": 0.9667
+      }
+    },
+    {
+      "text_id": "pp_11_116_00046",
+      "year": "1988",
+      "speaker": "Frau Oesterle-Schwerin",
+      "question": "根据Frau Oesterle-Schwerin在1988年关于**Dritter Förderungsweg (第三资助途径) 和社会保障性住房 (Sozialer Wohnungsbau)**的演讲，她对**联邦政府引入Dritter Förderungsweg而非延长现有住房约束 (Wohnu...",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 1,
+        "overall_score": 0.9667
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.6,
+        "new_completeness": 1,
+        "improvement": 0.4
+      }
+    },
+    {
+      "text_id": "pp_12_151_00079",
+      "year": "1993",
+      "speaker": "Karl Lamers",
+      "question": "根据Karl Lamers在1993年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.9,
+        "overall_score": 0.9667
+      }
+    },
+    {
+      "text_id": "pp_10_016_00386",
+      "year": "1983",
+      "speaker": "Dr. Haack",
+      "question": "根据Dr. Haack在1983年关于【德国统一与东方政策 (Deutschland- und Ostpolitik)、转折点 (Wendepunkt) 和历史成就 (Historische Leistung)】的演讲，他如何评价1960年SPD议会党团主席的演讲在【德国统一与东方政策】中作为【转折...",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.95,
+        "overall_score": 0.95
+      }
+    },
+    {
+      "text_id": "pp_02_192_00064",
+      "year": "1957",
+      "speaker": "Berendsen",
+      "question": "根据Berendsen在1957年关于军人职业生涯（Soldatenlaufbahn）中纪律处分（Disziplinarstrafen）与平等待遇（Gleichstellung）的演讲，他/她对在求职申请中不提供过往纪律处分信息的做法持什么立场？",
+      "scores": {
+        "semantic_similarity": 0.95,
+        "factual_accuracy": 1.0,
+        "completeness": 0.9,
+        "overall_score": 0.95
+      }
+    },
+    {
+      "text_id": "pp_19_044_00140",
+      "year": "2018",
+      "speaker": "Steffen Kotré",
+      "question": "根据Steffen Kotré在2018年关于E-Mobilitätsförderung的演讲，他对国家对电动汽车的推广和补贴政策持什么立场？",
+      "scores": {
+        "semantic_similarity": 0.85,
+        "factual_accuracy": 1.0,
+        "completeness": 1,
+        "overall_score": 0.95
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.7,
+        "new_completeness": 1,
+        "improvement": 0.3
+      }
+    },
+    {
+      "text_id": "pp_08_119_00034",
+      "year": "1978",
+      "speaker": "Conradi",
+      "question": "根据Conradi在1978年关于社会住房建设 (Sozialer Wohnungsbau) 和社会住房转化 (Umwandlung von Sozialwohnungen) 问题的演讲，他/她对因廉价旧房私有化流失而凸显的社会住房建设的持续必要性持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.95,
+        "factual_accuracy": 1.0,
+        "completeness": 0.9,
+        "overall_score": 0.95
+      }
+    },
+    {
+      "text_id": "pp_01_020_00054",
+      "year": "1949",
+      "speaker": "Ehren",
+      "question": "根据Ehren在1949年的演讲，他认为在处理东部被驱逐者（Ostvertriebene）问题时，首要任务是什么？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 1.0,
+        "completeness": 1,
+        "overall_score": 0.9333
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.6,
+        "new_completeness": 1,
+        "improvement": 0.4
+      }
+    },
+    {
+      "text_id": "pp_14_056_00061",
+      "year": "1999",
+      "speaker": "Manfred Kolbe",
+      "question": "根据Manfred Kolbe在1999年的演讲，他对联邦政府声称的300亿德国马克储蓄持什么立场？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 0.9,
+        "completeness": 0.9,
+        "overall_score": 0.9333
+      }
+    },
+    {
+      "text_id": "pp_14_214_00020",
+      "year": "2002",
+      "speaker": "Monika Griefahn",
+      "question": "根据Monika Griefahn在2002年的演讲，她认为与其将辩论焦点放在她所称的“修复技术”上，不如优先关注哪个方面？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 1.0,
+        "completeness": 1,
+        "overall_score": 0.9333
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.6,
+        "new_completeness": 1,
+        "improvement": 0.4
+      }
+    },
+    {
+      "text_id": "pp_18_056_00169",
+      "year": "2014",
+      "speaker": "Britta Haßelmann",
+      "question": "根据Britta Haßelmann在2014年关于BND-NSA原始数据转发（Rohdatenweiterleitung）及政府答复（Regierungsantwort）的演讲，她对政府就其原始问题所作答复的完整性和准确性持什么立场？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 1.0,
+        "completeness": 1,
+        "overall_score": 0.9333
+      }
+    },
+    {
+      "text_id": "pp_05_188_00040",
+      "year": "1968",
+      "speaker": "Dröscher",
+      "question": "根据Dröscher在1968年关于疫苗损害赔偿规定（Impfschadenregelungen）、各州预付款项（Vorleistungen der Länder）和儿童照护（Kinderversorgung）的演讲，他/她对各州在联邦新规生效前为确保儿童照护而提供预付款项的可能性持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.8,
+        "overall_score": 0.9333
+      }
+    },
+    {
+      "text_id": "pp_19_223_00373",
+      "year": "2021",
+      "speaker": "Christian Kühn (Tübingen)",
+      "question": "根据Christian Kühn (Tübingen)在2021年关于房地产市场金融化（Finanzialisierung des Immobilienmarktes）的演讲，他对德国住房危机仅靠新建住房能否解决持什么立场？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.8,
+        "overall_score": 0.9333
+      }
+    },
+    {
+      "text_id": "pp_02_062_00011",
+      "year": "1954",
+      "speaker": "Haasler",
+      "question": "根据Haasler在1954年关于自由世界 (Freie Welt)、铁幕 (Eiserner Vorhang) 和德国问题 (Deutsche Frage) 的演讲，他/她对德国人民对自由世界的立场以及自由世界对铁幕两侧德国人民的责任持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.75,
+        "overall_score": 0.9167
+      }
+    },
+    {
+      "text_id": "pp_18_138_00062",
+      "year": "2015",
+      "speaker": "Volker Beck (Köln)",
+      "question": "根据Volker Beck (Köln)在2015年关于Eigenbeteiligung Integrationskurse的演讲，他/她对难民在融入课程中承担共同支付的规定，以及他认为由此产生的Bürokratischer Aufwand持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 0.75,
+        "completeness": 1.0,
+        "overall_score": 0.9167
+      }
+    },
+    {
+      "text_id": "pp_19_123_00275",
+      "year": "2019",
+      "speaker": "Tabea Rößner",
+      "question": "根据Tabea Rößner在2019年关于公共广播电视（öffentlich-rechtlicher Rundfunk）的中立性、独立性（Rundfunkunabhängigkeit）及其对AfD的报道（AfD-Berichterstattung）的演讲，她对公共广播电视被指控违反中立原则的看法以...",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.75,
+        "overall_score": 0.9167
+      }
+    },
+    {
+      "text_id": "pp_09_030_00099",
+      "year": "1981",
+      "speaker": "Dr. Jobst",
+      "question": "根据Dr. Jobst在1981年关于运河竣工（Kanalfertigstellung）、东巴伐利亚结构优势（Ostbayerische Strukturvorteile）和联邦投资（Bundesinvestition）的演讲，他/她对加快运河建设持什么立场？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.85,
+        "overall_score": 0.9167
+      }
+    },
+    {
+      "text_id": "pp_01_232_00038",
+      "year": "1952",
+      "speaker": "Wagner",
+      "question": "根据Wagner在1952年的演讲，他为何认为律师法律地位的新规草案不符合当时的民主精神？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 1.0,
+        "completeness": 0.7,
+        "overall_score": 0.9
+      }
+    },
+    {
+      "text_id": "pp_08_160_00055",
+      "year": "1979",
+      "speaker": "Haehser Parl. Staatssekretär",
+      "question": "根据Haehser Parl. Staatssekretär在1979年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.7,
+        "factual_accuracy": 1.0,
+        "completeness": 1,
+        "overall_score": 0.9
+      }
+    },
+    {
+      "text_id": "pp_13_238_00183",
+      "year": "1998",
+      "speaker": "Monika Knoche",
+      "question": "根据Monika Knoche在1998年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.7,
+        "overall_score": 0.9
+      }
+    },
+    {
+      "text_id": "pp_17_155_00082",
+      "year": "2012",
+      "speaker": "Clemens Binninger",
+      "question": "根据Clemens Binninger在2012年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 0.9,
+        "completeness": 0.9,
+        "overall_score": 0.9
+      }
+    },
+    {
+      "text_id": "pp_03_086_00002",
+      "year": "1959",
+      "speaker": "Dr. Deist",
+      "question": "根据Dr. Deist在1959年关于Kohlenkrise、Bergarbeiterhilfen和Lastenverteilung的演讲，他/她对联邦政府承诺在煤炭危机中向矿工提供社会援助，并承认由此产生的结构性调整负担应由社区共同承担的原则持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.7,
+        "factual_accuracy": 1.0,
+        "completeness": 1,
+        "overall_score": 0.9
+      }
+    },
+    {
+      "text_id": "pp_18_199_00215",
+      "year": "2016",
+      "speaker": "Markus Tressel",
+      "question": "根据Markus Tressel在2016年关于区域产品标识、误导性区域声明及区域性标准的演讲，他/她对许多区域产品标识被滥用为“空洞的套话”，且与实际区域产品内容不符的现象持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 0.9,
+        "completeness": 1,
+        "overall_score": 0.9
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.5,
+        "new_completeness": 1,
+        "improvement": 0.5
+      }
+    },
+    {
+      "text_id": "pp_06_050_00188",
+      "year": "1970",
+      "speaker": "Berkhan, Parlamentarischer Staatssekretär beim Bundesminister der Verteidigung",
+      "question": "根据Berkhan, Parlamentarischer Staatssekretär beim Bundesminister der Verteidigung在1970年关于空军训练飞行（Übungsflüge）造成的噪音污染（Lärmbelästigung）及其对战备状态（Einsatzbere...",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 0.9,
+        "completeness": 1,
+        "overall_score": 0.9
+      }
+    },
+    {
+      "text_id": "pp_19_002_00002",
+      "year": "2017",
+      "speaker": "Michael Grosse-Brömer",
+      "question": "根据Michael Grosse-Brömer在2017年关于在政府组建（Regierungsbildung）期间设立主委员会（Hauptausschuss）以确保议会职能并处理联邦国防军授权（Bundeswehrmandate）的演讲，他/她对设立主委员会作为临时机构持什么立场？",
+      "scores": {
+        "semantic_similarity": 0.95,
+        "factual_accuracy": 0.9,
+        "completeness": 0.85,
+        "overall_score": 0.9
+      }
+    },
+    {
+      "text_id": "pp_07_054_00020",
+      "year": "1973",
+      "speaker": "Dr. Häfele",
+      "question": "根据Dr. Häfele在1973年关于Sofortprogramm（紧急计划）的实施紧迫性以及steuerliche Maßnahmen（税收措施）在Preisdämpfung（价格抑制）中的作用的演讲，他对这些议题持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.8,
+        "overall_score": 0.9
+      }
+    },
+    {
+      "text_id": "pp_07_159_00274",
+      "year": "1975",
+      "speaker": "Franke (Osnabrück)",
+      "question": "根据Franke (Osnabrück)在1975年关于养老金改革中“Babyjahr”和“Sockelbetrag”的演讲，他/她对Arendt部长关于这两个议题的陈述以及政府的“Babyjahr”提案持何种批判性立场？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.7,
+        "overall_score": 0.9
+      }
+    },
+    {
+      "text_id": "pp_02_064_00118",
+      "year": "1955",
+      "speaker": "Frau Dr. Maxsein, Berichterstatterin",
+      "question": "根据Frau Dr. Maxsein, Berichterstatterin在1955年的演讲，为解决普鲁士艺术珍品的归属问题，委员会提出的解决方案是什么？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.65,
+        "overall_score": 0.8833
+      }
+    },
+    {
+      "text_id": "pp_15_174_00105",
+      "year": "2005",
+      "speaker": "Peter Götz",
+      "question": "根据Peter Götz在2005年关于Kommunalfinanzen、Sozialbeitragszahlung和Umverteilung的演讲，他/她对红绿联邦政府通过提前收取社会保障金（Sozialbeitragszahlung）和资金再分配（Umverteilung）对地方财政（Kommu...",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.75,
+        "overall_score": 0.8833
+      }
+    },
+    {
+      "text_id": "pp_03_151_00172",
+      "year": "1961",
+      "speaker": "Strauß, Bundesminister für Verteidigung",
+      "question": "根据Strauß, Bundesminister für Verteidigung在1961年关于核均势 (Atomare Parität)、局势重新评估 (Neubewertung der Lage) 和防御政策连续性 (Verteidigungspolitik-Kontinuität) 的演讲，...",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.65,
+        "overall_score": 0.8833
+      }
+    },
+    {
+      "text_id": "pp_04_150_00021",
+      "year": "1964",
+      "speaker": "Schultz",
+      "question": "根据Schultz在1964年关于Brisante Gleichsetzung和Pressemeldung Richtigkeit的演讲，他对Pressemeldung中将军官协会与KV或CV等组织进行比较的准确性持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.75,
+        "overall_score": 0.8833
+      }
+    },
+    {
+      "text_id": "pp_07_122_00046",
+      "year": "1974",
+      "speaker": "Ronneburger",
+      "question": "根据Ronneburger在1974年关于德国Landwirtschaft、Abbau nationaler Maßnahmen以及5和4%的讨论的演讲，他对内阁决议的实际重点及其对欧洲的意义持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.75,
+        "overall_score": 0.8833
+      }
+    },
+    {
+      "text_id": "pp_03_091_00113",
+      "year": "1959",
+      "speaker": "Illerhaus, Berichterstatter",
+      "question": "根据Illerhaus, Berichterstatter在1959年的演讲，经济委员会对Drucksache 1232号法案草案提出了什么建议？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 0.8,
+        "completeness": 1,
+        "overall_score": 0.8667
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.6,
+        "new_completeness": 1,
+        "improvement": 0.4
+      }
+    },
+    {
+      "text_id": "pp_05_123_00151",
+      "year": "1967",
+      "speaker": "Raffert",
+      "question": "根据Raffert在1967年的演讲，他认为仓促讨论言论自由和新闻集中问题可能会带来什么负面后果？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.6,
+        "overall_score": 0.8667
+      }
+    },
+    {
+      "text_id": "pp_14_175_00053",
+      "year": "2001",
+      "speaker": "Eckart von Klaeden",
+      "question": "根据Eckart von Klaeden在2001年的演讲，他对国务秘书Andres的回应提出了哪些具体批评？",
+      "scores": {
+        "semantic_similarity": 0.6,
+        "factual_accuracy": 1.0,
+        "completeness": 1,
+        "overall_score": 0.8667
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.7,
+        "new_completeness": 1,
+        "improvement": 0.3
+      }
+    },
+    {
+      "text_id": "pp_09_105_00028",
+      "year": "1982",
+      "speaker": "Dr.-Ing. Oldenstädt",
+      "question": "根据Dr.-Ing. Oldenstädt在1982年关于部队中的弊端（Mißstände in der Truppe）、处理方式（Umgang mit Missständen）及领导问题（Führungsprobleme）的演讲，他/她对联邦国防部长处理部队弊端的态度和官僚化做法持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.6,
+        "overall_score": 0.8667
+      }
+    },
+    {
+      "text_id": "pp_15_139_00060",
+      "year": "2004",
+      "speaker": "Eckart von Klaeden",
+      "question": "根据Eckart von Klaeden在2004年关于Diäten、Abgeordnetenversorgung和Mandatsunabhängigkeit的演讲，他对议员薪酬（Diäten）的充足性以及议员福利（Abgeordnetenversorgung）的全面改革持什么立场？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 1,
+        "completeness": 0.6,
+        "overall_score": 0.8667
+      }
+    },
+    {
+      "text_id": "pp_10_119_00088",
+      "year": "1985",
+      "speaker": "Werner",
+      "question": "根据Werner在1985年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.7,
+        "overall_score": 0.8667
+      }
+    },
+    {
+      "text_id": "pp_16_070_00086",
+      "year": "2006",
+      "speaker": "Abgeordneter Hans-Joachim Otto",
+      "question": "根据Abgeordneter Hans-Joachim Otto在2006年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.6,
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "overall_score": 0.8667
+      }
+    },
+    {
+      "text_id": "pp_16_085_00058",
+      "year": "2007",
+      "speaker": "Dr. Christel Happach-Kasan",
+      "question": "根据Dr. Christel Happach-Kasan在2007年关于Biotechnologiepolitik（生物技术政策）中Systemunterscheidung（系统区分）的演讲，她对绿党在生物技术系统区分上的立场以及由此导致的人胰岛素（Humaninsulin）生产设施审批的长期延误持...",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.7,
+        "overall_score": 0.8667
+      }
+    },
+    {
+      "text_id": "pp_16_172_00358",
+      "year": "2008",
+      "speaker": "Mechthild Dyckmans",
+      "question": "根据Mechthild Dyckmans在2008年关于反歧视法（Antidiskriminierungsrecht）、私人自治（Privatautonomie）和象征性政治（Symbolpolitik）的演讲，她对通过国家干预和限制公民自由来推行反歧视法的做法持什么立场？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.7,
+        "overall_score": 0.8667
+      }
+    },
+    {
+      "text_id": "pp_17_217_00281",
+      "year": "2013",
+      "speaker": "Dr. Ilja Seifert",
+      "question": "根据Dr. Ilja Seifert在2013年关于针对与父母同住的残疾成年子女的儿童金截留（Kindergeldabzweigung）问题的演讲，他/她对家庭福利办公室和社会福利局不合理要求证明并截留儿童金的做法持什么立场？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.7,
+        "overall_score": 0.8667
+      }
+    },
+    {
+      "text_id": "ID203304600",
+      "year": "2022",
+      "speaker": "Andrea Lindholz",
+      "question": "根据Andrea Lindholz在2022年关于Gleichstellung der Elternschaft、Anonyme Samenspende和Mehrelternschaft的演讲，她对多父母制（Mehrelternschaft）中涉及同性伴侣与生父的情况持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 0.95,
+        "completeness": 0.75,
+        "overall_score": 0.8667
+      }
+    },
+    {
+      "text_id": "ID2015001800",
+      "year": "2024",
+      "speaker": "Gottfried Curio",
+      "question": "根据Gottfried Curio在2024年关于**打击反对派（Bekämpfung der Opposition）、德国选择党（AfD）禁令（AfD-Verbot）以及政府操控的抗议活动（Regierungsgesteuerte Proteste）**的演讲，他对**政府试图压制非左翼政治力量和...",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.7,
+        "overall_score": 0.8667
+      }
+    },
+    {
+      "text_id": "pp_16_121_00089",
+      "year": "2007",
+      "speaker": "Alexander Dobrindt",
+      "question": "根据Alexander Dobrindt在2007年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.85,
+        "factual_accuracy": 0.85,
+        "completeness": 0.85,
+        "overall_score": 0.85
+      }
+    },
+    {
+      "text_id": "pp_14_088_00020",
+      "year": "2000",
+      "speaker": "Carl-Ludwig Thiele",
+      "question": "根据Carl-Ludwig Thiele在2000年的演讲，他为什么认为红绿联盟提出的税收方案不公正？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 0.8,
+        "completeness": 0.7,
+        "overall_score": 0.8333
+      }
+    },
+    {
+      "text_id": "pp_08_044_00077",
+      "year": "1977",
+      "speaker": "Scheu",
+      "question": "根据Scheu在1977年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.6,
+        "factual_accuracy": 1.0,
+        "completeness": 0.9,
+        "overall_score": 0.8333
+      }
+    },
+    {
+      "text_id": "pp_16_173_00084",
+      "year": "2008",
+      "speaker": "Carsten Müller (Braunschweig)",
+      "question": "根据Carsten Müller (Braunschweig)在2008年关于Petitionsausschuss的演讲，他/她对Petitionsausschuss的工作持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.6,
+        "overall_score": 0.8333
+      }
+    },
+    {
+      "text_id": "pp_09_012_00022",
+      "year": "1980",
+      "speaker": "Kleinert",
+      "question": "根据Kleinert在1980年关于Sozialversicherungsbetrug、Ehegattenbetrug以及Richterliche Genehmigung的演讲，他/她对引入Richterliche Genehmigung作为防范离婚配偶社会保险欺诈的必要保障持何种观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 1.0,
+        "completeness": 0.6,
+        "overall_score": 0.8333
+      }
+    },
+    {
+      "text_id": "pp_11_139_00196",
+      "year": "1989",
+      "speaker": "Schäfer, Staatsminister",
+      "question": "根据Schäfer, Staatsminister在1989年关于**媒体素养 (Medienkompetenz)、虚构与现实 (Fiktion und Realität) 和文化理解 (Kulturelle Einordnung)**的演讲，他/她对**南非观众在观看德国电视节目时区分虚构与现实的...",
+      "scores": {
+        "semantic_similarity": 0.85,
+        "factual_accuracy": 1.0,
+        "completeness": 0.65,
+        "overall_score": 0.8333
+      }
+    },
+    {
+      "text_id": "pp_13_188_00151",
+      "year": "1997",
+      "speaker": "Rezzo Schlauch",
+      "question": "根据Rezzo Schlauch在1997年关于**内部安全工具化 (Instrumentalisierung der inneren Sicherheit)、零容忍言论 (Nulltoleranz-Rhetorik) 和社会问题忽视 (Vernachlässigung sozialer Probl...",
+      "scores": {
+        "semantic_similarity": 0.85,
+        "factual_accuracy": 1.0,
+        "completeness": 0.65,
+        "overall_score": 0.8333
+      }
+    },
+    {
+      "text_id": "pp_15_025_00075",
+      "year": "2003",
+      "speaker": "Ekin Deligöz",
+      "question": "根据Ekin Deligöz在2003年关于教育改革、弱势儿童扶助与儿童保育投资的演讲，他/她对如何通过全面的普及性教育和儿童保育投资，解决PISA研究揭示的教育问题，并为移民子女、社会弱势群体和“钥匙儿童”提供更多教育机会持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.85,
+        "factual_accuracy": 1.0,
+        "completeness": 0.6,
+        "overall_score": 0.8167
+      }
+    },
+    {
+      "text_id": "pp_01_246_00086",
+      "year": "1953",
+      "speaker": "Dannebom, Antragsteller",
+      "question": "根据Dannebom, Antragsteller在1953年的演讲，他为何要提议恢复矿工养老保险（knappschaftlichen Rentenversicherung）的统一法律？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 1.0,
+        "completeness": 0.6,
+        "overall_score": 0.8
+      }
+    },
+    {
+      "text_id": "pp_03_010_00096",
+      "year": "1958",
+      "speaker": "Brück",
+      "question": "根据Brück在1958年的演讲，他为废除短时工周票（Kurzarbeiterwochenkarte）提供了哪些理由？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 1.0,
+        "completeness": 0.6,
+        "overall_score": 0.8
+      }
+    },
+    {
+      "text_id": "pp_04_019_00192",
+      "year": "1962",
+      "speaker": "Dr. Schmidt (Wuppertal)",
+      "question": "根据Dr. Schmidt (Wuppertal)在1962年的演讲，他反对SPD提高圣诞免税额提案的主要原因是什么？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 1.0,
+        "completeness": 0.6,
+        "overall_score": 0.8
+      }
+    },
+    {
+      "text_id": "pp_07_136_00143",
+      "year": "1974",
+      "speaker": "Müller (Schweinfurt)",
+      "question": "根据Müller (Schweinfurt)在1974年的演讲，他对旨在提高农林业者增值税平均税率和预扣税统一税率的法律修正案持什么立场？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 0.6,
+        "completeness": 1,
+        "overall_score": 0.8
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.7,
+        "new_completeness": 1,
+        "improvement": 0.3
+      }
+    },
+    {
+      "text_id": "pp_13_089_00170",
+      "year": "1996",
+      "speaker": "Gerd Höfer",
+      "question": "根据Gerd Höfer在1996年关于Wehrbeauftragtenbericht的处理方式和联邦国防军的Rechtslastigkeit问题的演讲，他对联邦政府和国防部在处理该报告以及应对联邦国防军中右翼倾向问题上的立场和做法持什么观点？",
+      "scores": {
+        "semantic_similarity": 1,
+        "factual_accuracy": 0.8,
+        "completeness": 0.6,
+        "overall_score": 0.8
+      }
+    },
+    {
+      "text_id": "pp_01_164_00137",
+      "year": "1951",
+      "speaker": "Matzner",
+      "question": "根据Matzner在1951年关于Verbrechen gegen die Menschlichkeit、Fall Kroupa和Alliierte Rechtsauslegung的演讲，他/她对Kroupa案中凶手在德国境内未受惩罚的“混乱法律状况”持什么立场？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 1.0,
+        "completeness": 0.6,
+        "overall_score": 0.8
+      }
+    },
+    {
+      "text_id": "pp_08_166_00053",
+      "year": "1979",
+      "speaker": "Dr. Bötsch",
+      "question": "根据Dr. Bötsch在1979年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 1.0,
+        "completeness": 0.6,
+        "overall_score": 0.8
+      }
+    },
+    {
+      "text_id": "pp_10_093_00225",
+      "year": "1984",
+      "speaker": "Müller (Wadern)",
+      "question": "根据Müller (Wadern)在1984年关于德国钢铁危机（Stahlkrise）、就业岗位流失（Arbeitsplatzabbau）和产能过剩（Überkapazitäten）的演讲，他/她对德国钢铁危机（Stahlkrise）的成因持什么观点？",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 0.8,
+        "completeness": 0.8,
+        "overall_score": 0.8
+      }
+    },
+    {
+      "text_id": "pp_13_019_00010",
+      "year": "1995",
+      "speaker": "Maria Eichhorn",
+      "question": "根据Maria Eichhorn在1995年关于Schwangerschaftsabbrüche, Schutz des ungeborenen Lebens和Familienpolitik的演讲，她对堕胎的资助原则以及通过家庭政策保护未出生生命的策略持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.6,
+        "factual_accuracy": 1.0,
+        "completeness": 0.8,
+        "overall_score": 0.8
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.6,
+        "new_completeness": 0.8,
+        "improvement": 0.2
+      }
+    },
+    {
+      "text_id": "pp_06_174_00034",
+      "year": "1972",
+      "speaker": "Dr. Jungmann",
+      "question": "根据Dr. Jungmann在1972年的演讲，关于医院在《医院融资法》生效后的服务能力，德国联邦议院各党派达成了什么共识？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 0.7,
+        "completeness": 0.7,
+        "overall_score": 0.7667
+      }
+    },
+    {
+      "text_id": "pp_08_065_00032",
+      "year": "1978",
+      "speaker": "Dr. Diederich (Berlin)",
+      "question": "根据Dr. Diederich (Berlin)在1978年关于Koordinierung Frauenfragen (妇女事务协调)的演讲，他对于设立中央妇女事务协调机构以及任命一位Staatssekretärin für Frauenfragen (妇女事务国务秘书)的提议持何种观点？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 0.5,
+        "completeness": 0.8,
+        "overall_score": 0.7667
+      }
+    },
+    {
+      "text_id": "pp_16_220_00162",
+      "year": "2009",
+      "speaker": "Michael Leutert",
+      "question": "根据Michael Leutert在2009年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.9,
+        "factual_accuracy": 0.7,
+        "completeness": 0.7,
+        "overall_score": 0.7667
+      }
+    },
+    {
+      "text_id": "pp_06_168_00111",
+      "year": "1972",
+      "speaker": "Dr. Riedl (München)",
+      "question": "根据Dr. Riedl (München)在1972年关于欧洲专利局（Europäisches Patentamt）在慕尼黑的选址问题（Standortfrage München）以及备选地块（Grundstücksalternative）的演讲，他对于联邦政府是否应深入审查一份提交给联邦司法部长的...",
+      "scores": {
+        "semantic_similarity": 0.8,
+        "factual_accuracy": 0.9,
+        "completeness": 0.6,
+        "overall_score": 0.7667
+      }
+    },
+    {
+      "text_id": "pp_19_142_00484",
+      "year": "2020",
+      "speaker": "Sebastian Brehm",
+      "question": "根据Sebastian Brehm在2020年关于Cum/Ex-Geschäfte、Cum/Cum-Geschäfte和资本利得税（Kapitalertragsteuer）的演讲，他/她对德国政府在打击这些交易方面的措施和成效持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.7,
+        "factual_accuracy": 0.6,
+        "completeness": 1,
+        "overall_score": 0.7667
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.5,
+        "new_completeness": 1,
+        "improvement": 0.5
+      }
+    },
+    {
+      "text_id": "pp_14_038_00028",
+      "year": "1999",
+      "speaker": "Dr. Wolfgang Schäuble (CDU/CSU)",
+      "question": "根据Dr. Wolfgang Schäuble (CDU/CSU)在1999年的演讲，CDU/CSU党团对北约在科索沃冲突中的行动以及联邦国防军的参与持什么立场？",
+      "scores": {
+        "semantic_similarity": 0.75,
+        "factual_accuracy": 0.8,
+        "completeness": 0.7,
+        "overall_score": 0.75
+      }
+    },
+    {
+      "text_id": "pp_15_054_00008",
+      "year": "2003",
+      "speaker": "Siegfried Helias",
+      "question": "根据Siegfried Helias在2003年关于Handwerksordnung、个体经营者（Selbstständige）和青年（Jugendliche）的演讲，他对《手工业法》第三次修订草案持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.85,
+        "factual_accuracy": 0.7,
+        "completeness": 0.7,
+        "overall_score": 0.75
+      }
+    },
+    {
+      "text_id": "pp_08_196_00114",
+      "year": "1980",
+      "speaker": "de Terra",
+      "question": "根据de Terra在1980年关于Biwak-Plätze、Entschädigung和Britische Beteiligung的演讲，他/她对Biwak-Plätze新规定中对赔偿和英国参与的要求持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.6,
+        "factual_accuracy": 0.65,
+        "completeness": 1,
+        "overall_score": 0.75
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.25,
+        "new_completeness": 1,
+        "improvement": 0.75
+      }
+    },
+    {
+      "text_id": "ID2013608800",
+      "year": "2023",
+      "speaker": "Mathias Stein",
+      "question": "根据Mathias Stein在2023年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.75,
+        "factual_accuracy": 0.75,
+        "completeness": 0.75,
+        "overall_score": 0.75
+      }
+    },
+    {
+      "text_id": "pp_14_205_00110",
+      "year": "2001",
+      "speaker": "Josef Hollerith",
+      "question": "根据Josef Hollerith在2001年的演讲，他对削减用于生物质能（Biomasse）的资金持什么立场？",
+      "scores": {
+        "semantic_similarity": 1.0,
+        "factual_accuracy": 0.5,
+        "completeness": 0.7,
+        "overall_score": 0.7333
+      }
+    },
+    {
+      "text_id": "pp_12_126_00077",
+      "year": "1992",
+      "speaker": "Dr. Rupert Scholz",
+      "question": "根据Dr. Rupert Scholz在1992年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.6,
+        "factual_accuracy": 0.5,
+        "completeness": 1,
+        "overall_score": 0.7
+      },
+      "truncation_fixed": {
+        "original_completeness": 0.2,
+        "new_completeness": 1,
+        "improvement": 0.8
+      }
+    },
+    {
+      "text_id": "pp_12_208_00319",
+      "year": "1994",
+      "speaker": "Joachim Hörster",
+      "question": "根据Joachim Hörster在1994年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.5,
+        "factual_accuracy": 0.9,
+        "completeness": 0.65,
+        "overall_score": 0.6833
+      }
+    },
+    {
+      "text_id": "pp_13_071_00039",
+      "year": "1995",
+      "speaker": "Wolfgang Zöller",
+      "question": "根据Wolfgang Zöller在1995年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.6,
+        "factual_accuracy": 0.8,
+        "completeness": 0.6,
+        "overall_score": 0.6667
+      }
+    },
+    {
+      "text_id": "pp_01_079_00165",
+      "year": "1950",
+      "speaker": "Gengler",
+      "question": "根据Gengler在1950年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.7,
+        "factual_accuracy": 1.0,
+        "completeness": 0.3,
+        "overall_score": 0.6667
+      }
+    },
+    {
+      "text_id": "pp_05_215_00153",
+      "year": "1969",
+      "speaker": "Schwabe",
+      "question": "根据Schwabe在1969年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.6,
+        "factual_accuracy": 0.9,
+        "completeness": 0.3,
+        "overall_score": 0.6
+      }
+    },
+    {
+      "text_id": "pp_16_014_00032",
+      "year": "2006",
+      "speaker": "Ute Berg",
+      "question": "根据Ute Berg在2006年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.75,
+        "factual_accuracy": 0.8,
+        "completeness": 0.2,
+        "overall_score": 0.5833
+      }
+    },
+    {
+      "text_id": "pp_11_022_00031",
+      "year": "1987",
+      "speaker": "Mischnick",
+      "question": "根据Mischnick在1987年的议会演讲，他/她表达了什么主要观点？",
+      "scores": {
+        "semantic_similarity": 0.5,
+        "factual_accuracy": 0.9,
+        "completeness": 0.2,
+        "overall_score": 0.5333
+      }
+    },
+    {
+      "text_id": "pp_05_141_00068",
+      "year": "1967",
+      "speaker": "Genscher",
+      "question": "根据Genscher在1967年关于Finanzpolitik、Rentenreformen和Kassendefizite的演讲，他/她对政府的财政政策持什么立场，以及FDP在养老金改革和削减开支方面的具体建议是什么？",
+      "scores": {
+        "semantic_similarity": 0.0,
+        "factual_accuracy": 0.0,
+        "completeness": 0.98,
+        "overall_score": 0.3267
+      }
+    },
+    {
+      "text_id": "pp_12_012_00128",
+      "year": "1991",
+      "speaker": "Dr. Grünewald, Parl. Staatssekretär",
+      "question": "根据Dr. Grünewald, Parl. Staatssekretär在1991年关于Bundeshaushaltsordnung (BHO)中Immobilien和Grundstücksveräußerung调整的演讲，他对联邦政府以市场价15%折扣出售未开发土地的政策持什么立场/观点？",
+      "scores": {
+        "semantic_similarity": 0.3,
+        "factual_accuracy": 0.1,
+        "completeness": 0.5,
+        "overall_score": 0.3
+      }
+    }
+  ]
+}

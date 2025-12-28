@@ -1,0 +1,38 @@
+{
+  "question": "Was waren die Hauptpositionen und Forderungen der Grünen zur Migrationsfrage im Deutschen Bundestag 2015?",
+  "description": "2015年绿党移民问题立场",
+  "deep_mode": false,
+  "parameters": {
+    "time_range": {
+      "start_year": "2015",
+      "end_year": "2015",
+      "specific_years": [
+        "2015"
+      ],
+      "time_expression": "2015"
+    },
+    "parties": [
+      "Grüne/Bündnis 90"
+    ],
+    "topics": [
+      "移民问题"
+    ],
+    "keywords": [
+      "立场",
+      "要求"
+    ]
+  },
+  "sub_questions_count": 0,
+  "retrieval_results_count": 1,
+  "total_chunks": 14,
+  "duration_seconds": 93.1074104309082,
+  "kg_expansion_info": {
+    "use_kg": false,
+    "expansion_level": "none",
+    "score": 0,
+    "reasons": [
+      "评分不足，不触发知识图谱"
+    ]
+  },
+  "reasoning_steps": []
+}

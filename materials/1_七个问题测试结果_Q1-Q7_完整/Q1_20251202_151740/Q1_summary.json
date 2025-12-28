@@ -1,0 +1,40 @@
+{
+  "question": "Bitte fassen Sie die wichtigsten Veränderungen in der Flüchtlingspolitik der CDU/CSU seit 2015 zusammen.",
+  "description": "CDU/CSU难民政策变化(2015至今)",
+  "deep_mode": false,
+  "parameters": {
+    "time_range": {
+      "start_year": "2015",
+      "end_year": "2025",
+      "specific_years": [
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "time_expression": "seit 2015"
+    },
+    "parties": [
+      "CDU/CSU"
+    ],
+    "topics": [
+      "难民政策",
+      "难民"
+    ],
+    "keywords": [
+      "变化"
+    ]
+  },
+  "sub_questions_count": 41,
+  "retrieval_results_count": 41,
+  "total_chunks": 1710,
+  "duration_seconds": 220.80442881584167,
+  "kg_expansion_info": null,
+  "reasoning_steps": []
+}

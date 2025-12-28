@@ -1,0 +1,40 @@
+{
+  "Q2": {
+    "success": true,
+    "duration": 240.74672412872314,
+    "report_dir": "outputs/full_test_20251202_151355/Q2_20251202_152858",
+    "total_chunks": 460,
+    "kg_triggered": false
+  },
+  "Q3": {
+    "success": false,
+    "duration": 90.41055965423584,
+    "error": "object of type 'NoneType' has no len()"
+  },
+  "Q4": {
+    "success": true,
+    "duration": 488.83567070961,
+    "report_dir": "outputs/full_test_20251202_151355/Q4_20251202_153837",
+    "total_chunks": 771,
+    "kg_triggered": false
+  },
+  "Q5": {
+    "success": true,
+    "duration": 213.13087105751038,
+    "report_dir": "outputs/full_test_20251202_151355/Q5_20251202_154210",
+    "total_chunks": 627,
+    "kg_triggered": false
+  },
+  "Q6": {
+    "success": true,
+    "duration": 1114.3331229686737,
+    "report_dir": "outputs/full_test_20251202_151355/Q6_20251202_160044",
+    "total_chunks": 924,
+    "kg_triggered": false
+  },
+  "Q7": {
+    "success": false,
+    "duration": 134.59721183776855,
+    "error": "object of type 'NoneType' has no len()"
+  }
+}

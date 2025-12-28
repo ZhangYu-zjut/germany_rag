@@ -43,7 +43,15 @@ class PineconeRetriever:
         if not api_key:
             raise ValueError("PINECONE_VECTOR_DATABASE_API_KEY未设置")
 
-        self.pc = Pinecone(api_key=api_key)
+        # 检查代理设置
+        proxy_url = os.getenv('HTTPS_PROXY') or os.getenv('https_proxy') or os.getenv('HTTP_PROXY') or os.getenv('http_proxy')
+
+        if proxy_url:
+            self.pc = Pinecone(api_key=api_key, proxy_url=proxy_url)
+            logger.debug(f"[PineconeRetriever] 使用代理: {proxy_url}")
+        else:
+            self.pc = Pinecone(api_key=api_key)
+
         self.index = self.pc.Index(index_name)
 
         logger.info(f"[PineconeRetriever] 初始化完成: index={index_name}, default_limit={default_limit}")
@@ -351,9 +359,17 @@ class PineconeRetriever:
             else:
                 pinecone_filter['group'] = {'$eq': party_value}
 
-        # 发言人过滤
+        # 发言人过滤 - 使用模糊匹配策略
         if 'speaker' in filters:
-            pinecone_filter['speaker'] = {'$eq': filters['speaker']}
+            speaker = filters['speaker']
+            # 生成可能的名字变体
+            speaker_variants = self._generate_speaker_variants(speaker)
+            if len(speaker_variants) == 1:
+                pinecone_filter['speaker'] = {'$eq': speaker_variants[0]}
+            else:
+                # 使用$in匹配多个变体
+                pinecone_filter['speaker'] = {'$in': speaker_variants}
+                logger.info(f"[PineconeRetriever] 发言人模糊匹配: {speaker} -> {speaker_variants}")
 
         # 主题过滤 (如果有的话)
         if 'topic' in filters:
@@ -361,6 +377,60 @@ class PineconeRetriever:
             pinecone_filter['topic'] = {'$eq': filters['topic']}
 
         return pinecone_filter
+
+    def _generate_speaker_variants(self, speaker: str) -> List[str]:
+        """
+        生成发言人名字的可能变体，用于模糊匹配
+
+        解决问题：同一发言人在不同年份使用不同格式
+        - "Volker Beck (Köln)" vs "Volker Beck"
+        - "Christian Kühn (Tübingen)" vs "Christian Kühn"
+        - "Dr. Grünewald, Parl. Staatssekretär" vs "Dr. Grünewald"
+
+        Args:
+            speaker: 原始发言人名称
+
+        Returns:
+            可能的名字变体列表
+
+        Examples:
+            "Volker Beck (Köln)" -> ["Volker Beck (Köln)", "Volker Beck"]
+            "Dr. Grünewald, Parl. Staatssekretär" -> ["Dr. Grünewald, Parl. Staatssekretär", "Dr. Grünewald"]
+            "Angela Merkel" -> ["Angela Merkel"]
+        """
+        variants = [speaker]  # 原始名字始终包含
+
+        # 变体1：去除括号中的城市名
+        # "Volker Beck (Köln)" -> "Volker Beck"
+        if '(' in speaker and ')' in speaker:
+            base_name = speaker.split('(')[0].strip()
+            if base_name and base_name not in variants:
+                variants.append(base_name)
+                logger.debug(f"[PineconeRetriever] 变体(去括号): '{speaker}' -> '{base_name}'")
+
+        # 变体2：去除职位（逗号后的部分）
+        # "Dr. Grünewald, Parl. Staatssekretär" -> "Dr. Grünewald"
+        if ', ' in speaker:
+            base_name = speaker.split(', ')[0].strip()
+            if base_name and base_name not in variants:
+                variants.append(base_name)
+                logger.debug(f"[PineconeRetriever] 变体(去职位): '{speaker}' -> '{base_name}'")
+
+        # 变体3：同时去除括号和职位
+        # "Dr. Barbara Hendricks, Parl. Staatssekretärin (XYZ)" -> "Dr. Barbara Hendricks"
+        if ('(' in speaker or ', ' in speaker) and len(variants) > 1:
+            # 对已有变体再次处理
+            for v in list(variants):
+                if '(' in v:
+                    clean = v.split('(')[0].strip()
+                    if clean and clean not in variants:
+                        variants.append(clean)
+                if ', ' in v:
+                    clean = v.split(', ')[0].strip()
+                    if clean and clean not in variants:
+                        variants.append(clean)
+
+        return variants
 
     def get_stats(self) -> Dict:
         """

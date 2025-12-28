@@ -1,0 +1,34 @@
+{
+  "question": "Bitte vergleichen Sie die Positionen der Unionsparteien und der Grünen zur Integrationspolitik zwischen 2015 und 2017.",
+  "description": "2015-2017联盟党与绿党融合政策对比",
+  "deep_mode": false,
+  "parameters": {
+    "time_range": {
+      "start_year": "2015",
+      "end_year": "2017",
+      "specific_years": [
+        "2015",
+        "2016",
+        "2017"
+      ],
+      "time_expression": "zwischen 2015 und 2017"
+    },
+    "parties": [
+      "CDU/CSU",
+      "Grüne/Bündnis 90"
+    ],
+    "topics": [
+      "Integrationspolitik"
+    ],
+    "keywords": [
+      "vergleichen",
+      "Positionen"
+    ]
+  },
+  "sub_questions_count": 33,
+  "retrieval_results_count": 33,
+  "total_chunks": 627,
+  "duration_seconds": 213.13087105751038,
+  "kg_expansion_info": null,
+  "reasoning_steps": []
+}

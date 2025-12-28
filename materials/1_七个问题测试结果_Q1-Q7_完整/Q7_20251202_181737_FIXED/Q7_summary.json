@@ -1,0 +1,67 @@
+{
+  "question": "Welche wichtigen Ansichten und Vorschläge vertrat die AfD zur Flüchtlingspolitik im Jahr 2018?",
+  "description": "2018年AfD难民政策观点",
+  "deep_mode": true,
+  "parameters": {
+    "time_range": {
+      "start_year": "2018",
+      "end_year": "2018",
+      "specific_years": [
+        "2018"
+      ],
+      "time_expression": "im Jahr 2018"
+    },
+    "parties": [
+      "AfD"
+    ],
+    "topics": [
+      "Flüchtlingspolitik",
+      "Ansichten",
+      "Vorschläge"
+    ],
+    "keywords": [
+      "wichtigen"
+    ]
+  },
+  "sub_questions_count": 0,
+  "retrieval_results_count": 23,
+  "total_chunks": 498,
+  "duration_seconds": 124.08312010765076,
+  "kg_expansion_info": {
+    "use_kg": true,
+    "expansion_level": "tag",
+    "score": 99,
+    "reasons": [
+      "深度分析模式强制启用"
+    ],
+    "topics": [
+      "Flüchtlingspolitik"
+    ],
+    "matched_topics": [
+      "Flüchtlingspolitik"
+    ],
+    "dimensions": [
+      "Abschiebung",
+      "Herkunftsländer",
+      "Asylverfahren",
+      "Aufnahme"
+    ],
+    "selected_tags": [
+      "Syrien",
+      "Türkei",
+      "Irak",
+      "Afghanistan",
+      "Georgien",
+      "Balkan",
+      "sichere_Herkunftsländer",
+      "Ankerzentren",
+      "Obergrenze",
+      "Wiederaufbau"
+    ],
+    "expansion_query_count": 22
+  },
+  "georgien_mentioned": true,
+  "georgien_materials_count": 24,
+  "fix_applied": true,
+  "fix_description": "合并多个检索结果的chunks（修复前只用第一个结果）"
+}

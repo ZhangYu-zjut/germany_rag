@@ -1,0 +1,33 @@
+{
+  "question": "Welche Positionen vertraten die verschiedenen Parteien im Deutschen Bundestag 2017 zur Reform des Fachkräfteeinwanderungsgesetzes?",
+  "description": "2017年各党派专业人才移民法立场",
+  "deep_mode": false,
+  "parameters": {
+    "time_range": {
+      "start_year": "2017",
+      "end_year": "2017",
+      "specific_years": [
+        "2017"
+      ],
+      "time_expression": "2017"
+    },
+    "parties": [
+      "ALL_PARTIES"
+    ],
+    "topics": [
+      "专业人才移民法",
+      "Fachkräfteeinwanderungsgesetz",
+      "改革"
+    ],
+    "keywords": [
+      "立场",
+      "Positionen"
+    ]
+  },
+  "sub_questions_count": 21,
+  "retrieval_results_count": 21,
+  "total_chunks": 460,
+  "duration_seconds": 240.74672412872314,
+  "kg_expansion_info": null,
+  "reasoning_steps": []
+}
