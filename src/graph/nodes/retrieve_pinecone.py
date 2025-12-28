@@ -13,6 +13,7 @@ import asyncio
 from typing import List, Dict, Optional
 from ...vectordb.pinecone_retriever import PineconeRetriever, create_pinecone_retriever
 from ...llm.embeddings import GeminiEmbeddingClient
+from ...llm.client import GeminiLLMClient
 from ...utils.logger import logger
 from ...utils.performance_monitor import get_performance_monitor
 from ..state import GraphState, update_state
@@ -39,10 +40,10 @@ class PineconeRetrieveNode:
         self,
         retriever: PineconeRetriever = None,
         embedding_client: GeminiEmbeddingClient = None,
-        top_k: int = 50,  # 提升到50,支持长时间跨度
+        top_k: int = 100,  # 提升到100,进一步增加召回量
         index_name: str = "german-bge",
         enable_multi_year_strategy: bool = True,  # 启用多年份策略
-        limit_per_year: int = 5,  # 多年份策略时每年的文档数
+        limit_per_year: int = 8,  # 多年份策略时每年的文档数（从5提升到8）
         enable_concurrent: bool = True,  # 启用并发检索
         enable_kg_expansion: bool = True  # 【架构解耦】启用独立的KG扩展判断
     ):
@@ -89,6 +90,14 @@ class PineconeRetrieveNode:
             self.retriever = retriever
 
         self.embedding_client = embedding_client or GeminiEmbeddingClient()
+
+        # 【德语Query扩展】初始化Flash LLM客户端用于快速翻译
+        try:
+            self.flash_client = GeminiLLMClient(model_name="gemini-2.5-flash")
+            logger.info("[PineconeRetrieveNode] Flash LLM客户端已初始化（用于德语翻译）")
+        except Exception as e:
+            logger.warning(f"[PineconeRetrieveNode] Flash LLM初始化失败: {e}，德语扩展将被禁用")
+            self.flash_client = None
 
         # 【架构解耦】初始化知识图谱管理器
         self.kg_manager = None
@@ -146,15 +155,16 @@ class PineconeRetrieveNode:
             questions = [original_question]
             logger.info(f"[PineconeRetrieveNode] 检索原始问题（简单问题路径）")
 
-            # 【核心改动】对简单问题独立进行KG扩展判断
-            # 深度模式下强制启用KG扩展
-            if self.enable_kg_expansion and self.kg_manager:
+            # 【修复】只有在深度分析模式下才启用KG扩展
+            # 简单问题默认不进行KG扩展，除非用户主动选择深度分析
+            if deep_thinking_mode and self.enable_kg_expansion and self.kg_manager:
+                logger.info("[PineconeRetrieveNode] 🧠 深度分析模式：启用知识图谱扩展")
                 kg_queries, kg_expansion_info = self._apply_kg_expansion_for_simple_question(
                     question=original_question,
                     intent=state.get("intent", "simple"),
                     question_type=state.get("question_type", "事实查询"),
                     parameters=parameters,
-                    force_expansion=deep_thinking_mode  # 深度模式强制扩展
+                    force_expansion=True  # 深度模式强制扩展
                 )
                 if kg_queries:
                     # 将KG扩展查询添加到检索任务中
@@ -314,7 +324,7 @@ class PineconeRetrieveNode:
             for i, (variant_text, variant_vector) in enumerate(query_vectors, 1):
                 variant_results = self.retriever.search(
                     query_vector=variant_vector,
-                    limit=20,  # 每个变体召回20个，总共最多60个
+                    limit=30,  # 每个变体召回30个，增加召回量
                     filters=filters if filters else None
                 )
                 thinking_process.append(f"   变体{i}召回: {len(variant_results)}个文档")
@@ -365,36 +375,20 @@ class PineconeRetrieveNode:
                 for i, (variant_text, variant_vector) in enumerate(query_vectors, 1):
                     variant_results = self.retriever.search(
                         query_vector=variant_vector,
-                        limit=20,  # 每个变体20个
+                        limit=30,  # 每个变体30个，增加召回量
                         filters=filters if filters else None
                     )
                     thinking_process.append(f"   变体{i}召回: {len(variant_results)}个文档")
                     all_results.extend(variant_results)
 
-                # 【Phase 4 修复】降级策略：当speaker+party过滤返回0结果时，只用speaker重试
-                if len(all_results) == 0 and filters and 'speaker' in filters and 'party' in filters:
-                    logger.warning(f"[PineconeRetrieveNode] speaker+party过滤返回0结果，尝试只用speaker降级检索")
-                    thinking_process.append(f"⚠️ 降级策略: 移除party过滤，只用speaker重试")
-
-                    # 创建只有speaker的过滤条件
-                    fallback_filters = {'speaker': filters['speaker']}
-                    if 'year' in filters:
-                        fallback_filters['year'] = filters['year']
-
-                    thinking_process.append(f"降级过滤条件: {fallback_filters}")
-
-                    for i, (variant_text, variant_vector) in enumerate(query_vectors, 1):
-                        variant_results = self.retriever.search(
-                            query_vector=variant_vector,
-                            limit=20,
-                            filters=fallback_filters
-                        )
-                        thinking_process.append(f"   降级变体{i}召回: {len(variant_results)}个文档")
-                        all_results.extend(variant_results)
-
-                    if all_results:
-                        retrieval_method = f"standard_expanded_fallback(variants={len(query_vectors)})"
-                        logger.info(f"[PineconeRetrieveNode] 降级策略成功，召回 {len(all_results)} 个文档")
+                # 【P1增强】多层降级策略
+                if len(all_results) == 0 and filters:
+                    all_results, retrieval_method = self._execute_fallback_strategy(
+                        query_vectors=query_vectors,
+                        original_filters=filters,
+                        thinking_process=thinking_process,
+                        current_method=retrieval_method
+                    )
 
         # 去重并按相似度重新排序
         results = self._deduplicate_and_rerank(all_results, top_k=self.top_k)
@@ -552,6 +546,13 @@ class PineconeRetrieveNode:
         if action_query not in variants:  # 避免重复
             variants.append(action_query)
 
+        # 变体4: 【方案A】德语翻译版本（解决跨语言检索Gap）
+        german_query = self._generate_german_variant(question)
+        if german_query and german_query not in variants:
+            # 德语变体放在最前面，优先级最高
+            variants.insert(1, german_query)
+            logger.info(f"[PineconeRetrieveNode] 添加德语检索变体")
+
         return variants
 
     def _extract_keywords(self, query: str) -> str:
@@ -645,6 +646,78 @@ class PineconeRetrieveNode:
         # 如果没有匹配的关键词，返回关键词版本
         return base
 
+    def _generate_german_variant(self, question: str) -> Optional[str]:
+        """
+        【方案A】将中文问题中的关键词翻译为德语专业术语
+
+        解决跨语言语义检索Gap问题：
+        - 问题用中文表述"圣诞免税额"
+        - 文档是德文"Weihnachts-Freibetrag"
+        - BGE-M3跨语言匹配存在精度损失
+
+        示例:
+        "根据Dr. Schmidt在1962年关于圣诞免税额的演讲..."
+        → "Dr. Schmidt Weihnachts-Freibetrag SPD 1962"
+
+        Args:
+            question: 原始问题（可能含中文）
+
+        Returns:
+            德语检索查询，如果翻译失败则返回None
+        """
+        if not self.flash_client:
+            return None
+
+        # 检测是否包含中文字符
+        import re
+        has_chinese = bool(re.search(r'[\u4e00-\u9fff]', question))
+        if not has_chinese:
+            return None  # 纯德语问题不需要翻译
+
+        try:
+            prompt = f"""将以下中德混合问题转换为纯德语检索查询。
+
+**原问题**: {question}
+
+**转换规则**:
+1. 保留所有德语专有名词（人名、党派名、法案名）原样不变
+2. 将中文政策术语翻译为德语专业术语
+3. 保留年份信息
+4. 输出一个简洁的德语检索查询（40-80字符）
+5. 只输出德语查询，不要任何解释
+
+**常用术语对照**:
+- 难民政策 → Flüchtlingspolitik
+- 圣诞免税额 → Weihnachts-Freibetrag
+- 数字化 → Digitalisierung
+- 气候保护 → Klimaschutz
+- 教育政策 → Bildungspolitik
+- 外交政策 → Außenpolitik
+- 国防政策 → Verteidigungspolitik
+- 社会政策 → Sozialpolitik
+
+**德语查询**:"""
+
+            response = self.flash_client.invoke(prompt)
+            german_query = response.strip()
+
+            # 验证输出质量
+            if len(german_query) < 10 or len(german_query) > 150:
+                logger.debug(f"[PineconeRetrieveNode] 德语翻译长度不合规: {len(german_query)}")
+                return None
+
+            # 检查是否还有中文（翻译不完整）
+            if re.search(r'[\u4e00-\u9fff]', german_query):
+                logger.debug(f"[PineconeRetrieveNode] 德语翻译仍含中文，跳过")
+                return None
+
+            logger.info(f"[PineconeRetrieveNode] 🇩🇪 德语变体: {german_query[:60]}...")
+            return german_query
+
+        except Exception as e:
+            logger.warning(f"[PineconeRetrieveNode] 德语翻译失败: {e}")
+            return None
+
     def _deduplicate_and_rerank(self, results: List[Dict], top_k: int) -> List[Dict]:
         """
         去重并按相似度重新排序
@@ -671,6 +744,100 @@ class PineconeRetrieveNode:
 
         # 保留top_k个
         return unique_results[:top_k]
+
+    def _execute_fallback_strategy(
+        self,
+        query_vectors: List[tuple],
+        original_filters: Dict,
+        thinking_process: List[str],
+        current_method: str
+    ) -> tuple[List[Dict], str]:
+        """
+        【P1】多层降级检索策略
+
+        当原始过滤条件返回0结果时，逐层放宽条件重试：
+        层次1: 移除party，保留speaker+year
+        层次2: 只保留year
+        层次3: 纯向量检索（无过滤）
+
+        Args:
+            query_vectors: 查询向量列表 [(text, vector), ...]
+            original_filters: 原始过滤条件
+            thinking_process: 思考过程列表
+            current_method: 当前检索方法名
+
+        Returns:
+            (检索结果列表, 更新后的检索方法名)
+        """
+        all_results = []
+
+        # 提取原始过滤条件
+        has_speaker = 'speaker' in original_filters
+        has_year = 'year' in original_filters
+        has_party = 'party' in original_filters
+
+        logger.warning(f"[PineconeRetrieveNode] ⚠️ 原始过滤返回0结果，启动多层降级策略")
+        thinking_process.append(f"\n⚠️ 【P1降级策略】原始过滤返回0结果")
+        thinking_process.append(f"   原始过滤: {original_filters}")
+
+        # 层次1: 移除party，保留speaker+year
+        if has_party and (has_speaker or has_year):
+            fallback1_filters = {k: v for k, v in original_filters.items() if k != 'party'}
+            thinking_process.append(f"\n   层次1: 移除party过滤")
+            thinking_process.append(f"   过滤条件: {fallback1_filters}")
+
+            for i, (variant_text, variant_vector) in enumerate(query_vectors, 1):
+                results = self.retriever.search(
+                    query_vector=variant_vector,
+                    limit=20,
+                    filters=fallback1_filters
+                )
+                thinking_process.append(f"   变体{i}召回: {len(results)}个文档")
+                all_results.extend(results)
+
+            if all_results:
+                logger.info(f"[PineconeRetrieveNode] ✓ 层次1成功，召回 {len(all_results)} 个文档")
+                return all_results, f"{current_method}_fallback1_no_party"
+
+        # 层次2: 只保留year
+        if has_year and (has_speaker or has_party):
+            fallback2_filters = {'year': original_filters['year']}
+            thinking_process.append(f"\n   层次2: 只用year过滤")
+            thinking_process.append(f"   过滤条件: {fallback2_filters}")
+
+            for i, (variant_text, variant_vector) in enumerate(query_vectors, 1):
+                results = self.retriever.search(
+                    query_vector=variant_vector,
+                    limit=30,  # 增加数量，因为过滤更宽松
+                    filters=fallback2_filters
+                )
+                thinking_process.append(f"   变体{i}召回: {len(results)}个文档")
+                all_results.extend(results)
+
+            if all_results:
+                logger.info(f"[PineconeRetrieveNode] ✓ 层次2成功，召回 {len(all_results)} 个文档")
+                return all_results, f"{current_method}_fallback2_year_only"
+
+        # 层次3: 纯向量检索（无过滤）
+        thinking_process.append(f"\n   层次3: 纯向量检索（无过滤）")
+
+        for i, (variant_text, variant_vector) in enumerate(query_vectors, 1):
+            results = self.retriever.search(
+                query_vector=variant_vector,
+                limit=30,
+                filters=None  # 无过滤
+            )
+            thinking_process.append(f"   变体{i}召回: {len(results)}个文档")
+            all_results.extend(results)
+
+        if all_results:
+            logger.info(f"[PineconeRetrieveNode] ✓ 层次3成功，召回 {len(all_results)} 个文档")
+            return all_results, f"{current_method}_fallback3_no_filter"
+
+        # 所有层次都失败
+        thinking_process.append(f"\n   ❌ 所有降级层次都未找到结果")
+        logger.error(f"[PineconeRetrieveNode] ❌ 多层降级策略全部失败")
+        return [], f"{current_method}_all_fallback_failed"
 
     def _retrieve_all_sequential(
         self,
