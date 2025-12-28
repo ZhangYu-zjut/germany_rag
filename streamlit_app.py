@@ -11,7 +11,7 @@ import sys
 import time
 import json
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, Any
 
 import streamlit as st
@@ -26,6 +26,13 @@ load_dotenv(project_root / ".env", override=True)
 # 优先使用环境变量，否则使用本地默认地址
 API_URL = os.getenv("API_URL", "http://localhost:8000")
 API_TIMEOUT = int(os.getenv("API_TIMEOUT", "300"))  # 默认5分钟超时
+
+# 时区配置：UTC+8（北京时间）
+UTC_PLUS_8 = timezone(timedelta(hours=8))
+
+def get_current_time_str() -> str:
+    """获取当前UTC+8时间字符串"""
+    return datetime.now(UTC_PLUS_8).strftime("%H:%M:%S")
 
 # 设置页面配置
 st.set_page_config(
@@ -198,7 +205,7 @@ def process_question(question: str):
     st.session_state.chat_history.append({
         "role": "user",
         "content": question,
-        "timestamp": datetime.now().strftime("%H:%M:%S"),
+        "timestamp": get_current_time_str(),
         "deep_mode": deep_thinking_mode
     })
 
@@ -226,7 +233,7 @@ def process_question(question: str):
             st.session_state.chat_history.append({
                 "role": "assistant",
                 "content": f"抱歉，处理过程中出现错误：{result['error']}",
-                "timestamp": datetime.now().strftime("%H:%M:%S"),
+                "timestamp": get_current_time_str(),
                 "error": True
             })
             return
@@ -239,7 +246,7 @@ def process_question(question: str):
             st.session_state.chat_history.append({
                 "role": "assistant",
                 "content": f"抱歉，处理过程中出现错误：{api_response.get('error', '未知错误')}",
-                "timestamp": datetime.now().strftime("%H:%M:%S"),
+                "timestamp": get_current_time_str(),
                 "error": True
             })
             return
@@ -257,7 +264,7 @@ def process_question(question: str):
         st.session_state.chat_history.append({
             "role": "assistant",
             "content": final_answer,
-            "timestamp": datetime.now().strftime("%H:%M:%S"),
+            "timestamp": get_current_time_str(),
             "deep_mode": deep_thinking_mode,
             "metadata": {
                 "time": processing_time_ms / 1000,
@@ -359,12 +366,14 @@ def display_chat_history():
                         if sources:
                             st.markdown(f"**🔍 检索来源 (前{len(sources)}个):**")
                             for src in sources[:5]:
+                                score_val = src.get('score')
+                                score_str = f"{score_val:.3f}" if score_val is not None else 'N/A'
                                 st.markdown(f"""
                                 <div class="metadata-box">
                                     <b>年份:</b> {src.get('year', 'N/A')} |
                                     <b>党派:</b> {src.get('party', 'N/A')} |
                                     <b>发言人:</b> {src.get('speaker', 'N/A')}<br/>
-                                    <b>相似度:</b> {src.get('score', 0):.3f if src.get('score') else 'N/A'}
+                                    <b>相似度:</b> {score_str}
                                 </div>
                                 """, unsafe_allow_html=True)
 
@@ -452,23 +461,6 @@ def main():
         ):
             pass
 
-        st.markdown("---")
-
-        # 深度分析模式开关
-        st.markdown("**🧠 深度分析模式:**")
-        deep_mode = st.toggle(
-            "启用深度分析",
-            value=st.session_state.deep_thinking_mode,
-            key="deep_mode_toggle",
-            help="开启后将强制进行知识图谱扩展，获取更全面的检索结果。"
-        )
-        st.session_state.deep_thinking_mode = deep_mode
-
-        if deep_mode:
-            st.warning("⏱️ 深度模式预计需要 3-5 分钟")
-        else:
-            st.caption("标准模式，预计 2-3 分钟")
-
     # 检查API是否可用
     if not st.session_state.api_healthy:
         st.error(f"""
@@ -496,7 +488,7 @@ def main():
     st.markdown("---")
     st.markdown("## ❓ 输入您的问题")
 
-    col1, col2 = st.columns([5, 1])
+    col1, col2 = st.columns([4, 1])
 
     with col1:
         user_input = st.text_area(
@@ -507,7 +499,20 @@ def main():
         )
 
     with col2:
-        st.markdown("<br/>", unsafe_allow_html=True)
+        # 深度分析模式开关
+        deep_mode = st.toggle(
+            "🧠 深度分析",
+            value=st.session_state.deep_thinking_mode,
+            key="deep_mode_toggle",
+            help="启用知识图谱扩展，获取更全面的检索结果（需要3-5分钟）"
+        )
+        st.session_state.deep_thinking_mode = deep_mode
+
+        if deep_mode:
+            st.caption("⏱️ 预计 3-5 分钟")
+        else:
+            st.caption("⏱️ 预计 1-2 分钟")
+
         submit_button = st.button("🚀 提交问题", type="primary")
 
     if submit_button:
