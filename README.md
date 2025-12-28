@@ -106,11 +106,7 @@ rag_germant/
      └──────┬─────┘
             │
      ┌──────┴──────┐
-     │  Retrieve   │  Pinecone向量检索
-     └──────┬──────┘
-            │
-     ┌──────┴──────┐
-     │   ReRank    │  Cohere重排序
+     │  Retrieve   │  Pinecone向量检索 (BGE-M3)
      └──────┬──────┘
             │
      ┌──────┴──────┐
@@ -120,6 +116,8 @@ rag_germant/
             ▼
         最终答案
 ```
+
+> 注：Cohere ReRank 模块已在 Phase 4 中移除，因为测试发现其在德语议会语境下反而过滤掉了最相关文档。
 
 ## 知识图谱
 
@@ -199,8 +197,8 @@ DEEPINFRA_EMBEDDING_BASE_URL=https://api.deepinfra.com/v1/openai
 PINECONE_VECTOR_DATABASE_API_KEY=your_pinecone_key
 PINECONE_HOST=your_pinecone_host
 
-# Cohere ReRank (可选)
-COHERE_API_KEY=your_cohere_key
+# Cohere ReRank (已禁用，无需配置)
+# COHERE_API_KEY=your_cohere_key
 
 # 系统配置
 PRODUCTION_MODE=true
