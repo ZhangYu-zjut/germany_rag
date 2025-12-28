@@ -12,13 +12,13 @@
 
 | 服务 | 链接 | 说明 |
 |------|------|------|
-| **UI界面** | https://germanyrag-streamlit-production.up.railway.app | Streamlit前端界面 |
+| **UI界面** | https://miraculous-patience-production-c8e2.up.railway.app | Streamlit前端界面 |
 | **API服务** | https://germanyrag-production.up.railway.app | FastAPI后端API |
 | **API文档** | https://germanyrag-production.up.railway.app/docs | Swagger交互式文档 |
 
 ### 使用步骤
 
-1. 打开 [UI界面链接](https://germanyrag-streamlit-production.up.railway.app)
+1. 打开 [UI界面链接](https://miraculous-patience-production-c8e2.up.railway.app)
 2. 在输入框输入问题（支持德语和中文）
 3. 可选：开启右侧"🧠 深度分析"模式获取更全面结果
 4. 点击"🚀 提交问题"
@@ -26,8 +26,8 @@
 
 ### 注意事项
 
-- **标准模式**: 预计1-2分钟返回结果
-- **深度分析模式**: 预计3-5分钟，启用知识图谱扩展
+- **标准模式**: 预计1-3分钟返回结果
+- **深度分析模式**: 预计10-20分钟，启用知识图谱扩展，生成更详细的分析
 - 时间显示为北京时间（UTC+8）
 
 ---
