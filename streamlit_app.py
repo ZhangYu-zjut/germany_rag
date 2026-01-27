@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-德国议会RAG智能问答系统 - Streamlit UI演示界面
-前后端分离版本：通过API调用后端服务
+DE-SMART 1.0: Deutsche Semantic Multi-agent Architecture for RAG Technology
+Streamlit UI Demo Interface - Frontend calls backend API
 
-支持德语和中文问题输入
+Supports German and English question input
 """
 
 import os
@@ -36,7 +36,7 @@ def get_current_time_str() -> str:
 
 # 设置页面配置
 st.set_page_config(
-    page_title="德国议会RAG智能问答系统",
+    page_title="DE-SMART 1.0 | German Parliament RAG System",
     page_icon="🇩🇪",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -120,9 +120,9 @@ def check_api_health() -> Dict[str, Any]:
         else:
             return {"healthy": False, "error": f"HTTP {response.status_code}"}
     except requests.exceptions.ConnectionError:
-        return {"healthy": False, "error": "无法连接到API服务"}
+        return {"healthy": False, "error": "Cannot connect to API service"}
     except requests.exceptions.Timeout:
-        return {"healthy": False, "error": "API服务响应超时"}
+        return {"healthy": False, "error": "API service timeout"}
     except Exception as e:
         return {"healthy": False, "error": str(e)}
 
@@ -161,11 +161,11 @@ def call_api(question: str, deep_thinking: bool = False) -> Dict[str, Any]:
             }
 
     except requests.exceptions.Timeout:
-        return {"success": False, "error": "请求超时，问题可能过于复杂，请稍后重试"}
+        return {"success": False, "error": "Request timeout. The question may be too complex, please try again later."}
     except requests.exceptions.ConnectionError:
-        return {"success": False, "error": "无法连接到API服务，请检查服务是否正常运行"}
+        return {"success": False, "error": "Cannot connect to API service. Please check if the service is running."}
     except Exception as e:
-        return {"success": False, "error": f"请求失败: {str(e)}"}
+        return {"success": False, "error": f"Request failed: {str(e)}"}
 
 
 # ========== Session State 管理 ==========
@@ -196,7 +196,7 @@ def check_api_status():
 def process_question(question: str):
     """处理用户问题"""
     if not question.strip():
-        st.warning("请输入问题")
+        st.warning("Please enter a question")
         return
 
     deep_thinking_mode = st.session_state.get('deep_thinking_mode', False)
@@ -211,17 +211,17 @@ def process_question(question: str):
 
     # 根据模式显示不同的状态提示
     if deep_thinking_mode:
-        status_title = "🧠 深度分析模式 - 正在调用API..."
-        time_hint = "*（深度分析模式，预计需要 3-5 分钟）*"
+        status_title = "🧠 Deep Analysis Mode - Calling API..."
+        time_hint = "*(Deep analysis mode, estimated 3-5 minutes)*"
     else:
-        status_title = "🤔 正在调用API处理问题..."
-        time_hint = "*（预计需要 2-3 分钟）*"
+        status_title = "🤔 Processing your question..."
+        time_hint = "*(Estimated 2-3 minutes)*"
 
     # 显示处理状态
     with st.status(status_title, expanded=True) as status:
         start_time = time.time()
 
-        st.write(f"📡 正在连接API服务: `{API_URL}`")
+        st.write(f"📡 Connecting to API service: `{API_URL}`")
         st.write(time_hint)
 
         # 调用API
@@ -229,10 +229,10 @@ def process_question(question: str):
         total_time = time.time() - start_time
 
         if not result["success"]:
-            status.update(label="❌ 处理失败", state="error")
+            status.update(label="❌ Processing Failed", state="error")
             st.session_state.chat_history.append({
                 "role": "assistant",
-                "content": f"抱歉，处理过程中出现错误：{result['error']}",
+                "content": f"Sorry, an error occurred during processing: {result['error']}",
                 "timestamp": get_current_time_str(),
                 "error": True
             })
@@ -242,21 +242,21 @@ def process_question(question: str):
         api_response = result["data"]
 
         if not api_response.get("success", False):
-            status.update(label="❌ 处理失败", state="error")
+            status.update(label="❌ Processing Failed", state="error")
             st.session_state.chat_history.append({
                 "role": "assistant",
-                "content": f"抱歉，处理过程中出现错误：{api_response.get('error', '未知错误')}",
+                "content": f"Sorry, an error occurred during processing: {api_response.get('error', 'Unknown error')}",
                 "timestamp": get_current_time_str(),
                 "error": True
             })
             return
 
         # 提取结果
-        final_answer = api_response.get("answer", "未能生成答案")
+        final_answer = api_response.get("answer", "Unable to generate answer")
         processing_time_ms = api_response.get("processing_time_ms", 0)
 
         status.update(
-            label=f"✅ 完成！API处理耗时 {processing_time_ms/1000:.1f} 秒，总耗时 {total_time:.1f} 秒",
+            label=f"✅ Complete! API processing: {processing_time_ms/1000:.1f}s, Total: {total_time:.1f}s",
             state="complete"
         )
 
@@ -294,7 +294,7 @@ def display_chat_history():
             deep_mode_label = " 🧠" if msg.get("deep_mode") else ""
             st.markdown(f"""
             <div class="question-box">
-                <b>👤 用户{deep_mode_label}</b> <span style="color: #999; font-size: 0.85rem;">{timestamp}</span><br/>
+                <b>👤 User{deep_mode_label}</b> <span style="color: #999; font-size: 0.85rem;">{timestamp}</span><br/>
                 {content}
             </div>
             """, unsafe_allow_html=True)
@@ -303,15 +303,15 @@ def display_chat_history():
             if msg.get("error"):
                 st.markdown(f"""
                 <div style="background-color: #ffebee; padding: 1rem; border-radius: 10px; border-left: 5px solid #f44336; margin: 1rem 0;">
-                    <b>❌ 系统</b> <span style="color: #999; font-size: 0.85rem;">{timestamp}</span><br/>
+                    <b>❌ System</b> <span style="color: #999; font-size: 0.85rem;">{timestamp}</span><br/>
                     {content}
                 </div>
                 """, unsafe_allow_html=True)
             else:
-                deep_mode_label = " 🧠 深度分析" if msg.get("deep_mode") else ""
+                deep_mode_label = " 🧠 Deep Analysis" if msg.get("deep_mode") else ""
                 st.markdown(f"""
                 <div class="answer-box">
-                    <b>🤖 RAG系统{deep_mode_label}</b> <span style="color: #999; font-size: 0.85rem;">{timestamp}</span>
+                    <b>🤖 DE-SMART{deep_mode_label}</b> <span style="color: #999; font-size: 0.85rem;">{timestamp}</span>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -320,26 +320,26 @@ def display_chat_history():
                 # 显示元数据（可折叠）
                 metadata = msg.get("metadata", {})
                 if metadata:
-                    with st.expander("📊 查看详细信息", expanded=False):
+                    with st.expander("📊 View Details", expanded=False):
                         col1, col2, col3 = st.columns(3)
 
                         with col1:
-                            st.metric("⏱️ API处理时间", f"{metadata.get('time', 0):.1f} 秒")
+                            st.metric("⏱️ Processing Time", f"{metadata.get('time', 0):.1f}s")
                         with col2:
-                            st.metric("📄 来源文档数", metadata.get('sources_count', 0))
+                            st.metric("📄 Source Documents", metadata.get('sources_count', 0))
                         with col3:
-                            st.metric("🎯 问题类型", metadata.get('question_type', 'N/A'))
+                            st.metric("🎯 Question Type", metadata.get('question_type', 'N/A'))
 
                         # 提取参数
                         params = metadata.get('parameters')
                         if params:
-                            st.markdown("**📋 提取的查询参数:**")
+                            st.markdown("**📋 Extracted Query Parameters:**")
                             st.json(params)
 
                         # 子问题
                         sub_qs = metadata.get('sub_questions', [])
                         if sub_qs:
-                            st.markdown(f"**✂️ 问题分解 ({len(sub_qs)}个子问题):**")
+                            st.markdown(f"**✂️ Question Decomposition ({len(sub_qs)} sub-questions):**")
                             for i, sq in enumerate(sub_qs, 1):
                                 if isinstance(sq, dict):
                                     sq_text = sq.get('question', str(sq))
@@ -350,30 +350,30 @@ def display_chat_history():
                         # 深度分析推理步骤
                         reasoning_steps = metadata.get('reasoning_steps', [])
                         if reasoning_steps:
-                            st.markdown("**🧠 深度分析推理过程:**")
+                            st.markdown("**🧠 Deep Analysis Reasoning Process:**")
                             for step in reasoning_steps:
                                 st.markdown(f"- {step}")
 
                         # 知识图谱扩展信息
                         kg_info = metadata.get('kg_expansion_info')
                         if kg_info and kg_info.get('triggered'):
-                            st.markdown("**🔗 知识图谱扩展:**")
-                            st.markdown(f"- 扩展级别: `{kg_info.get('level', 'N/A')}`")
-                            st.markdown(f"- 评分: `{kg_info.get('score', 0)}`")
+                            st.markdown("**🔗 Knowledge Graph Expansion:**")
+                            st.markdown(f"- Expansion Level: `{kg_info.get('level', 'N/A')}`")
+                            st.markdown(f"- Score: `{kg_info.get('score', 0)}`")
 
                         # 来源文档
                         sources = metadata.get('sources', [])
                         if sources:
-                            st.markdown(f"**🔍 检索来源 (前{len(sources)}个):**")
+                            st.markdown(f"**🔍 Retrieved Sources (Top {len(sources)}):**")
                             for src in sources[:5]:
                                 score_val = src.get('score')
                                 score_str = f"{score_val:.3f}" if score_val is not None else 'N/A'
                                 st.markdown(f"""
                                 <div class="metadata-box">
-                                    <b>年份:</b> {src.get('year', 'N/A')} |
-                                    <b>党派:</b> {src.get('party', 'N/A')} |
-                                    <b>发言人:</b> {src.get('speaker', 'N/A')}<br/>
-                                    <b>相似度:</b> {score_str}
+                                    <b>Year:</b> {src.get('year', 'N/A')} |
+                                    <b>Party:</b> {src.get('party', 'N/A')} |
+                                    <b>Speaker:</b> {src.get('speaker', 'N/A')}<br/>
+                                    <b>Similarity:</b> {score_str}
                                 </div>
                                 """, unsafe_allow_html=True)
 
@@ -385,53 +385,53 @@ def main():
     initialize_session_state()
 
     # 标题
-    st.markdown('<div class="main-header">🇩🇪 德国议会RAG智能问答系统</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">Intelligentes Frage-Antwort-System für Deutsche Bundestagsreden (1949-2025)</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">🇩🇪 DE-SMART 1.0</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-header">Deutsche Semantic Multi-agent Architecture for RAG Technology<br/><small style="font-size: 0.9rem;">Intelligent Q&A System for German Bundestag Speeches (1949-2025)</small></div>', unsafe_allow_html=True)
 
     # 侧边栏
     with st.sidebar:
-        st.header("ℹ️ 系统信息")
+        st.header("ℹ️ System Information")
 
         # API状态检查
-        st.markdown("**🔌 API服务状态:**")
+        st.markdown("**🔌 API Service Status:**")
         health = check_api_status()
 
         if health["healthy"]:
             st.markdown(f"""
             <div class="api-status-ok">
-                ✅ API服务正常<br/>
+                ✅ API Service Online<br/>
                 <small>{API_URL}</small>
             </div>
             """, unsafe_allow_html=True)
         else:
             st.markdown(f"""
             <div class="api-status-error">
-                ❌ API服务异常<br/>
-                <small>{health.get('error', '未知错误')}</small><br/>
+                ❌ API Service Unavailable<br/>
+                <small>{health.get('error', 'Unknown error')}</small><br/>
                 <small>{API_URL}</small>
             </div>
             """, unsafe_allow_html=True)
-            st.warning("请确保API服务已启动")
+            st.warning("Please ensure the API service is running")
 
-        if st.button("🔄 刷新API状态"):
+        if st.button("🔄 Refresh Status"):
             st.rerun()
 
         st.markdown("---")
 
         st.markdown("""
-        **系统介绍:**
-        - 📚 数据范围: 1949-2025年德国联邦议院演讲
-        - 🔍 检索方式: 混合检索 (语义 + 元数据)
+        **System Overview:**
+        - 📚 Data: German Bundestag Speeches (1949-2025)
+        - 🔍 Retrieval: Hybrid Search (Semantic + Metadata)
         - 🤖 LLM: Gemini 2.5 Pro
-        - 📊 向量数据库: Pinecone
+        - 📊 Vector DB: Pinecone
 
-        **支持的问题类型:**
-        - 单年份/多年份查询
-        - 党派观点对比
-        - 政策变化分析
-        - 发言人观点总结
+        **Supported Query Types:**
+        - Single/Multi-year queries
+        - Party position comparison
+        - Policy change analysis
+        - Speaker viewpoint summary
 
-        **示例问题:**
+        **Example Questions:**
         """)
 
         # 7个测试问题（德语版）
@@ -447,7 +447,7 @@ def main():
 
         for i, eq in enumerate(example_questions, 1):
             if st.button(
-                f"示例 {i}",
+                f"Example {i}",
                 key=f"example_{i}",
                 on_click=lambda q=eq: setattr(st.session_state, 'user_input', q)
             ):
@@ -456,7 +456,7 @@ def main():
         st.markdown("---")
 
         if st.button(
-            "🗑️ 清除对话历史",
+            "🗑️ Clear History",
             on_click=lambda: setattr(st.session_state, 'chat_history', [])
         ):
             pass
@@ -464,69 +464,69 @@ def main():
     # 检查API是否可用
     if not st.session_state.api_healthy:
         st.error(f"""
-        ❌ **无法连接到API服务**
+        ❌ **Unable to connect to API service**
 
-        请确保API服务已启动：
+        Please ensure the API service is running:
         ```bash
         python api_server.py
         ```
 
-        当前配置的API地址: `{API_URL}`
+        Current API URL: `{API_URL}`
 
-        如需修改API地址，请设置环境变量 `API_URL`
+        To change the API URL, set the `API_URL` environment variable.
         """)
         return
 
     # 显示对话历史
     if st.session_state.chat_history:
-        st.markdown("## 💬 对话历史")
+        st.markdown("## 💬 Conversation History")
         display_chat_history()
     else:
-        st.info("👋 欢迎使用德国议会RAG智能问答系统！请在下方输入您的问题。")
+        st.info("👋 Welcome to DE-SMART 1.0! Please enter your question below.")
 
     # 输入区域
     st.markdown("---")
-    st.markdown("## ❓ 输入您的问题")
+    st.markdown("## ❓ Enter Your Question")
 
     col1, col2 = st.columns([4, 1])
 
     with col1:
         user_input = st.text_area(
-            "支持德语和中文输入:",
+            "Supports German and English input:",
             height=100,
-            placeholder="例如: Welche Positionen vertrat die CDU/CSU zur Flüchtlingspolitik 2015?\n或: 2015年基民盟对难民政策的立场是什么？",
+            placeholder="e.g.: Welche Positionen vertrat die CDU/CSU zur Flüchtlingspolitik 2015?\nor: What was CDU/CSU's position on refugee policy in 2015?",
             key="user_input"
         )
 
     with col2:
         # 深度分析模式开关
         deep_mode = st.toggle(
-            "🧠 深度分析",
+            "🧠 Deep Analysis",
             value=st.session_state.deep_thinking_mode,
             key="deep_mode_toggle",
-            help="启用知识图谱扩展，获取更全面的检索结果（需要3-5分钟）"
+            help="Enable knowledge graph expansion for more comprehensive retrieval (takes 3-5 minutes)"
         )
         st.session_state.deep_thinking_mode = deep_mode
 
         if deep_mode:
-            st.caption("⏱️ 预计 3-5 分钟")
+            st.caption("⏱️ Est. 3-5 min")
         else:
-            st.caption("⏱️ 预计 1-2 分钟")
+            st.caption("⏱️ Est. 1-2 min")
 
-        submit_button = st.button("🚀 提交问题", type="primary")
+        submit_button = st.button("🚀 Submit", type="primary")
 
     if submit_button:
         if user_input.strip():
             process_question(user_input)
             st.rerun()
         else:
-            st.warning("请输入问题")
+            st.warning("Please enter a question")
 
     # 页脚
     st.markdown("---")
     st.markdown(f"""
     <div style="text-align: center; color: #999; font-size: 0.85rem;">
-        © 2025 德国议会RAG智能问答系统 | Powered by LangGraph + Gemini 2.5 Pro + Pinecone<br/>
+        © 2025 DE-SMART 1.0 | Powered by LangGraph + Gemini 2.5 Pro + Pinecone<br/>
         <small>API: {API_URL}</small>
     </div>
     """, unsafe_allow_html=True)
