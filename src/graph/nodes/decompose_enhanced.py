@@ -142,48 +142,76 @@ class EnhancedDecomposeNode:
     
     def _need_decompose(self, question_type: str, parameters: Dict) -> bool:
         """
-        判断是否需要拆解
-        
+        判断是否需要拆解（增强版：基于维度分析）
+
+        核心原则：简单问题 = 单一时间 + 单一对象 + 无变化/对比
+
         Args:
             question_type: 问题类型
             parameters: 提取的参数
-            
+
         Returns:
             是否需要拆解
         """
-        # 简单的事实查询不需要拆解
-        if question_type == "事实查询":
-            time_range = parameters.get("time_range", {})
-            parties = parameters.get("parties", [])
-            
-            # 单一时间点 + 单一党派 = 不拆解
-            if not time_range.get("end_year") and len(parties) <= 1:
-                return False
-        
-        # 变化类、对比类、趋势分析一定要拆解
+        time_range = parameters.get("time_range", {})
+        parties = parameters.get("parties", [])
+        speakers = parameters.get("speakers", [])
+        specific_years = time_range.get("specific_years", [])
+        start_year = time_range.get("start_year")
+        end_year = time_range.get("end_year")
+
+        # ========== 维度分析 ==========
+
+        # 时间维度：计算年份数量
+        year_count = len(specific_years) if specific_years else 0
+        if not year_count and start_year and end_year:
+            try:
+                year_count = int(end_year) - int(start_year) + 1
+            except:
+                year_count = 1
+        elif not year_count and start_year:
+            year_count = 1
+
+        # 对象维度：计算对象数量
+        party_count = len(parties) if parties else 0
+        # "ALL_PARTIES" 算作多对象
+        if parties and "ALL_PARTIES" in parties:
+            party_count = 6  # 假设有6个主要政党
+        speaker_count = len(speakers) if speakers else 0
+        object_count = max(party_count, speaker_count, 1)
+
+        logger.info(f"[_need_decompose] 维度分析: 年份数={year_count}, 对象数={object_count}, 问题类型={question_type}")
+
+        # ========== 快速判断：简单问题不拆解 ==========
+
+        # 条件：单一时间（<=1年） + 单一对象（<=1个） + 非变化/对比类
+        is_single_time = year_count <= 1
+        is_single_object = object_count <= 1
+        is_fact_query = question_type in ["事实查询", "总结类", None, ""]
+
+        if is_single_time and is_single_object and is_fact_query:
+            logger.info(f"[_need_decompose] → 不拆解（单一时间+单一对象+事实查询）")
+            return False
+
+        # ========== 复杂问题拆解条件 ==========
+
+        # 变化类、对比类、趋势分析：始终拆解
         if question_type in ["变化类", "对比类", "趋势分析"]:
+            logger.info(f"[_need_decompose] → 需要拆解（{question_type}类问题）")
             return True
-        
-        # 总结类根据复杂度判断
-        if question_type == "总结类":
-            time_range = parameters.get("time_range", {})
-            start_year = time_range.get("start_year")
-            end_year = time_range.get("end_year")
-            
-            # 时间跨度>2年，需要拆解
-            if start_year and end_year:
-                if int(end_year) - int(start_year) > 2:
-                    return True
-            
-            # 多个党派或议员，需要拆解
-            if len(parameters.get("parties", [])) > 1 or len(parameters.get("speakers", [])) > 1:
-                return True
-            
-            # 多个主题，需要拆解
-            if len(parameters.get("topics", [])) > 1:
-                return True
-        
+
+        # 多年份（>2年）：需要拆解
+        if year_count > 2:
+            logger.info(f"[_need_decompose] → 需要拆解（年份数={year_count} > 2）")
+            return True
+
+        # 多对象（>1个）：需要拆解
+        if object_count > 1:
+            logger.info(f"[_need_decompose] → 需要拆解（对象数={object_count} > 1）")
+            return True
+
         # 默认不拆解
+        logger.info(f"[_need_decompose] → 不拆解（默认）")
         return False
     
     def _template_decompose(self, question_type: str, parameters: Dict) -> List[str]:

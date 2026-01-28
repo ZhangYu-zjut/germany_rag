@@ -334,61 +334,167 @@ class EnhancedIntentNode:
     
     def _check_simple_by_rule(self, question: str) -> Optional[str]:
         """
-        基于规则的简单问题检查（后处理兜底）
-        
-        检查条件：
-        1. 单一时间点（只有一个年份，如"2019年"、"2021年"）
-        2. 单一对象（没有"不同党派"、"多个党派"、"XX与XX"等）
-        3. 问的是"主要议题"、"主要观点"、"立场"、"说了什么"等
-        
-        如果满足条件，返回"simple"，否则返回None（让LLM判断）
-        
+        基于语义规则的简单/复杂问题检查（支持中德双语）
+
+        核心原则：简单问题 = 单一时间 + 单一对象 + 无变化/对比
+
+        检查维度：
+        1. 时间维度：单一年份 vs 多年份/时间跨度
+        2. 对象维度：单一党派/人物 vs 多个党派/人物
+        3. 分析类型：陈述事实 vs 变化/对比/趋势分析
+
         Args:
-            question: 用户问题
-            
+            question: 用户问题（中文或德文）
+
         Returns:
-            "simple" 或 None
+            "simple" - 明确是简单问题
+            "complex" - 明确是复杂问题
+            None - 不确定，让LLM判断
         """
         import re
-        
+
         # 类型检查和转换
         if not isinstance(question, str):
             logger.error(f"[_check_simple_by_rule] question不是字符串类型: {type(question)}, 值: {repr(question)}")
-            # 尝试转换为字符串
             try:
                 question = str(question)
-                logger.info(f"[_check_simple_by_rule] 成功转换为字符串: {question}")
             except Exception as e:
                 logger.error(f"[_check_simple_by_rule] 转换失败: {e}")
                 return None
-        
-        # 检查1: 时间维度
-        # 查找所有年份
-        years = re.findall(r'\d{4}年', question)
-        
-        # 如果包含时间跨度关键词，直接返回None（让LLM判断为complex）
-        if re.search(r'\d{4}.*到.*\d{4}|从.*\d{4}.*到|期间|跨度', question):
-            return None
-        
-        # 如果包含"变化"、"演变"、"趋势"，返回None（让LLM判断为complex）
-        if re.search(r'变化|演变|趋势|对比', question):
-            return None
-        
-        # 如果只有一个年份或没有年份
-        if len(years) <= 1:
-            # 检查2: 对象维度
-            # 如果包含多个对象的标识
-            if re.search(r'不同党派|多个党派|.*与.*|.*和.*对比|.*和.*差异', question):
-                return None
-            
-            # 检查3: 问题类型
-            # 如果问的是"主要议题"、"主要观点"、"立场"、"说了什么"、"讨论了什么"
-            if re.search(r'主要议题|主要观点|立场|说了什么|讨论了什么|观点是什么', question):
-                # 满足条件：单一时间点 + 单一对象 + 问主要议题/主要观点
-                logger.debug(f"[EnhancedIntentNode] 规则匹配：单一时间点+单一对象+主要议题/观点 → simple")
+
+        # ========== 维度1: 时间分析 ==========
+        # 提取所有年份（支持多种格式）
+        years_cn = re.findall(r'(\d{4})年', question)  # 中文：2019年
+        years_de = re.findall(r'(?:im Jahr(?:e)?|in|von|bis|seit)\s*(\d{4})', question, re.IGNORECASE)  # 德语
+        years_standalone = re.findall(r'\b((?:19|20)\d{2})\b', question)  # 独立年份
+
+        # 合并去重
+        all_years = list(set(years_cn + years_de + years_standalone))
+        year_count = len(all_years)
+
+        logger.debug(f"[_check_simple_by_rule] 检测到年份: {all_years} (共{year_count}个)")
+
+        # 复杂时间模式检测（中德双语）
+        complex_time_patterns = [
+            # 中文时间跨度
+            r'\d{4}.*到.*\d{4}', r'从.*\d{4}.*到', r'期间', r'跨度', r'以来',
+            # 德语时间跨度
+            r'seit\s+\d{4}', r'von\s+\d{4}\s+bis', r'zwischen\s+\d{4}\s+und',
+            r'im Zeitraum', r'in den Jahren', r'über die Jahre',
+        ]
+        has_time_span = any(re.search(p, question, re.IGNORECASE) for p in complex_time_patterns)
+
+        # ========== 维度2: 对象分析 ==========
+        # 德国主要政党识别逻辑
+        # 注意：CDU/CSU 应该被视为一个党派
+
+        mentioned_parties = set()
+
+        # 特殊处理：先检查CDU/CSU复合名称
+        has_cdu_csu_combined = bool(re.search(r'CDU\s*/\s*CSU', question, re.IGNORECASE))
+
+        if has_cdu_csu_combined:
+            # 如果有CDU/CSU，只算一个党派
+            mentioned_parties.add('CDU/CSU')
+        else:
+            # 如果没有CDU/CSU，分别检查CDU和CSU
+            if re.search(r'\bCDU\b', question, re.IGNORECASE):
+                mentioned_parties.add('CDU')
+            if re.search(r'\bCSU\b', question, re.IGNORECASE):
+                mentioned_parties.add('CSU')
+
+        # 其他党派检测
+        other_party_patterns = [
+            (r'\bSPD\b', 'SPD'),
+            (r'\bFDP\b', 'FDP'),
+            (r'Grüne|GRÜNE|Bündnis\s*90|BÜNDNIS\s*90', 'Grüne'),
+            (r'DIE\s+LINKE|\bLINKE\b', 'LINKE'),
+            (r'\bAfD\b', 'AfD'),
+            (r'基民盟|基社盟', 'CDU/CSU'),
+            (r'社民党', 'SPD'),
+            (r'绿党', 'Grüne'),
+            (r'自民党', 'FDP'),
+            (r'左翼党', 'LINKE'),
+        ]
+
+        for pattern, party_name in other_party_patterns:
+            if re.search(pattern, question, re.IGNORECASE):
+                mentioned_parties.add(party_name)
+
+        party_count = len(mentioned_parties)
+
+        logger.debug(f"[_check_simple_by_rule] 检测到党派: {mentioned_parties} (共{party_count}个)")
+
+        # 多对象模式检测（中德双语）
+        multi_object_patterns = [
+            # 中文多对象
+            r'不同党派', r'多个党派', r'各党派', r'各个党派',
+            r'.*与.*对比', r'.*和.*差异', r'.*与.*相比',
+            # 德语多对象
+            r'verschiedene[nr]?\s+Parteien', r'die Parteien', r'alle[nr]?\s+Parteien',
+            r'unterschiedliche[nr]?', r'im Vergleich zu', r'verglichen mit',
+            r'der Parteien',  # 各党派的
+        ]
+        has_multi_object = any(re.search(p, question, re.IGNORECASE) for p in multi_object_patterns)
+
+        # ========== 维度3: 分析类型 ==========
+        # 变化/对比/趋势模式（中德双语）
+        change_patterns = [
+            # 中文
+            r'变化', r'演变', r'趋势', r'发展', r'转变', r'对比', r'比较', r'差异',
+            # 德语名词
+            r'Veränderung', r'Wandel', r'Entwicklung', r'Trend',
+            r'Vergleich', r'Unterschied', r'Differenz',
+            # 德语动词（各种变位形式）
+            r'veränder',  # verändert, veränderten, verändere, etc.
+            r'gewandelt', r'entwickel',
+            r'vergleich', r'unterscheid',
+            # 德语句式
+            r'wie hat sich.*verändert', r'was hat sich.*geändert',
+            r'hat sich.*gewandelt', r'haben sich.*verändert',
+        ]
+        has_change_analysis = any(re.search(p, question, re.IGNORECASE) for p in change_patterns)
+
+        # ========== 综合判断 ==========
+
+        # 明确是复杂问题的情况
+        if has_time_span or year_count > 2:
+            logger.info(f"[_check_simple_by_rule] → COMPLEX (时间跨度: {has_time_span}, 年份数: {year_count})")
+            return "complex"
+
+        if has_multi_object or party_count > 1:
+            logger.info(f"[_check_simple_by_rule] → COMPLEX (多对象: {has_multi_object}, 党派数: {party_count})")
+            return "complex"
+
+        if has_change_analysis:
+            logger.info(f"[_check_simple_by_rule] → COMPLEX (变化/对比分析)")
+            return "complex"
+
+        # 明确是简单问题的情况：单一时间 + 单一对象 + 无变化分析
+        if year_count <= 1 and party_count <= 1 and not has_change_analysis:
+            # 额外检查：确保问的是事实/立场/观点类问题（中德双语）
+            fact_patterns = [
+                # 中文
+                r'主要议题', r'主要观点', r'立场', r'说了什么', r'讨论了什么',
+                r'观点是什么', r'什么立场', r'什么观点', r'有哪些',
+                # 德语
+                r'Position', r'Standpunkt', r'Haltung', r'Meinung', r'Ansicht',
+                r'was war', r'was waren', r'was ist', r'was sind',
+                r'welche.*Position', r'welche.*Themen', r'welche.*Punkte',
+            ]
+            is_fact_question = any(re.search(p, question, re.IGNORECASE) for p in fact_patterns)
+
+            if is_fact_question:
+                logger.info(f"[_check_simple_by_rule] → SIMPLE (单一时间+单一对象+事实查询)")
                 return "simple"
-        
+
+            # 即使没有明确的事实模式词，单一时间+单一对象也倾向于简单
+            # 但让LLM最终确认
+            logger.info(f"[_check_simple_by_rule] → 倾向SIMPLE (单一时间+单一对象)，让LLM确认")
+            return "simple"
+
         # 其他情况让LLM判断
+        logger.debug(f"[_check_simple_by_rule] → None (让LLM判断)")
         return None
     
     def _parse_intent_response(self, response: str) -> Tuple[str, str]:

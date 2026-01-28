@@ -37,7 +37,7 @@ def get_current_time_str() -> str:
 # 设置页面配置
 st.set_page_config(
     page_title="DE-SMART 1.0 | German Parliament RAG System",
-    page_icon="🇩🇪",
+    page_icon="🏛️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -385,7 +385,7 @@ def main():
     initialize_session_state()
 
     # 标题
-    st.markdown('<div class="main-header">🇩🇪 DE-SMART 1.0</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">DE-SMART 1.0</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Deutsche Semantic Multi-agent Architecture for RAG Technology<br/><small style="font-size: 0.9rem;">Intelligent Q&A System for German Bundestag Speeches (1949-2025)</small></div>', unsafe_allow_html=True)
 
     # 侧边栏
