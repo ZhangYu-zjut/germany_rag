@@ -102,43 +102,94 @@ def check_api_health() -> Dict[str, Any]:
         return {"healthy": False, "error": str(e)}
 
 
-def call_api(question: str, deep_thinking: bool = False) -> Dict[str, Any]:
+def call_api(question: str, deep_thinking: bool = False, verbose: bool = True) -> Dict[str, Any]:
     """
-    调用API进行问答（与Streamlit完全相同的调用方式）
+    调用API进行问答（使用异步轮询模式，与Streamlit完全相同）
 
     Args:
         question: 用户问题
         deep_thinking: 是否启用深度分析模式
+        verbose: 是否显示轮询进度
 
     Returns:
         API响应结果
     """
     try:
-        endpoint = f"{API_URL}/api/v1/ask"
+        # 步骤1: 提交异步任务
+        submit_endpoint = f"{API_URL}/api/v1/ask/async"
         payload = {
             "question": question,
             "deep_thinking": deep_thinking
         }
 
-        response = requests.post(
-            endpoint,
+        submit_response = requests.post(
+            submit_endpoint,
             json=payload,
-            timeout=API_TIMEOUT
+            timeout=30
         )
 
-        if response.status_code == 200:
-            return {"success": True, "data": response.json()}
-        else:
+        if submit_response.status_code != 200:
             return {
                 "success": False,
-                "error": f"API返回错误: HTTP {response.status_code}",
-                "detail": response.text
+                "error": f"提交任务失败: HTTP {submit_response.status_code}",
+                "detail": submit_response.text
             }
 
+        job_data = submit_response.json()
+        job_id = job_data.get("job_id")
+
+        if not job_id:
+            return {"success": False, "error": "服务器未返回任务ID"}
+
+        if verbose:
+            print(f"  任务已提交 (ID: {job_id})，轮询中...", end="", flush=True)
+
+        # 步骤2: 轮询任务状态
+        status_endpoint = f"{API_URL}/api/v1/jobs/{job_id}"
+        poll_interval = 3
+        max_polls = API_TIMEOUT // poll_interval
+
+        for poll_count in range(max_polls):
+            time.sleep(poll_interval)
+
+            try:
+                status_response = requests.get(status_endpoint, timeout=10)
+
+                if status_response.status_code != 200:
+                    continue
+
+                status_data = status_response.json()
+                job_status = status_data.get("status")
+
+                if verbose and poll_count % 10 == 0:
+                    print(".", end="", flush=True)
+
+                if job_status == "completed":
+                    if verbose:
+                        print(" 完成!")
+                    result = status_data.get("result")
+                    if result:
+                        return {"success": True, "data": result}
+                    else:
+                        return {"success": False, "error": "任务完成但无结果返回"}
+
+                elif job_status == "failed":
+                    if verbose:
+                        print(" 失败!")
+                    error_msg = status_data.get("error", "未知错误")
+                    return {"success": False, "error": f"任务失败: {error_msg}"}
+
+            except requests.exceptions.RequestException:
+                continue
+
+        if verbose:
+            print(" 超时!")
+        return {"success": False, "error": f"任务超时（{API_TIMEOUT}秒）"}
+
     except requests.exceptions.Timeout:
-        return {"success": False, "error": "请求超时。问题可能过于复杂，请稍后重试。"}
+        return {"success": False, "error": "提交任务超时"}
     except requests.exceptions.ConnectionError:
-        return {"success": False, "error": "无法连接到API服务。请检查服务是否正在运行。"}
+        return {"success": False, "error": "无法连接到API服务"}
     except Exception as e:
         return {"success": False, "error": f"请求失败: {str(e)}"}
 

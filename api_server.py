@@ -107,9 +107,30 @@ class SystemInfoResponse(BaseModel):
     production_mode: bool = Field(description="是否为生产模式")
     supported_languages: List[str] = Field(default=["中文", "德文"])
 
+class AsyncJobSubmitResponse(BaseModel):
+    """异步任务提交响应"""
+    job_id: str = Field(description="任务ID")
+    status: str = Field(default="pending", description="任务状态")
+    message: str = Field(default="任务已提交", description="提示信息")
+
+class AsyncJobStatusResponse(BaseModel):
+    """异步任务状态响应"""
+    job_id: str = Field(description="任务ID")
+    status: str = Field(description="任务状态: pending/processing/completed/failed")
+    progress: Optional[str] = Field(default=None, description="进度信息")
+    result: Optional[AnswerResponse] = Field(default=None, description="任务结果（完成时）")
+    error: Optional[str] = Field(default=None, description="错误信息（失败时）")
+    created_at: str = Field(description="创建时间")
+    completed_at: Optional[str] = Field(default=None, description="完成时间")
+
 # ========== 全局变量 ==========
 workflow: Optional[QuestionAnswerWorkflow] = None
 executor = ThreadPoolExecutor(max_workers=4)
+
+# 异步任务存储（生产环境应使用Redis）
+import uuid
+from datetime import datetime
+async_jobs: Dict[str, Dict[str, Any]] = {}
 
 # ========== 辅助函数 ==========
 
@@ -381,6 +402,126 @@ async def ask_question_deep(request: QuestionRequest):
     # 强制启用深度分析
     request.deep_thinking = True
     return await ask_question(request)
+
+# ========== 异步任务接口（解决长连接超时问题）==========
+
+def process_async_job(job_id: str, question: str, deep_thinking: bool):
+    """后台处理异步任务"""
+    global async_jobs
+
+    try:
+        async_jobs[job_id]["status"] = "processing"
+        async_jobs[job_id]["progress"] = "正在分析问题..."
+
+        start_time = time.time()
+        state = run_workflow_sync(question, deep_thinking)
+        processing_time_ms = int((time.time() - start_time) * 1000)
+
+        # 构建响应
+        final_answer = state.get("final_answer") or "抱歉，无法生成答案"
+        result = AnswerResponse(
+            success=not state.get("error"),
+            question=question,
+            answer=final_answer,
+            intent=state.get("intent"),
+            question_type=state.get("question_type"),
+            parameters=state.get("parameters"),
+            sub_questions=state.get("sub_questions"),
+            sub_answers=extract_sub_answers(state),
+            sources_count=count_total_sources(state),
+            sources=extract_sources_from_state(state),
+            deep_thinking_mode=state.get("deep_thinking_mode", False),
+            reasoning_steps=state.get("reasoning_steps"),
+            kg_expansion_info=state.get("kg_expansion_info"),
+            processing_time_ms=processing_time_ms,
+            error=state.get("error")
+        )
+
+        async_jobs[job_id]["status"] = "completed"
+        async_jobs[job_id]["result"] = result
+        async_jobs[job_id]["completed_at"] = datetime.now().isoformat()
+        logger.info(f"[AsyncJob] 任务 {job_id} 完成，耗时: {processing_time_ms}ms")
+
+    except Exception as e:
+        logger.error(f"[AsyncJob] 任务 {job_id} 失败: {str(e)}")
+        async_jobs[job_id]["status"] = "failed"
+        async_jobs[job_id]["error"] = str(e)
+        async_jobs[job_id]["completed_at"] = datetime.now().isoformat()
+
+@app.post("/api/v1/ask/async", response_model=AsyncJobSubmitResponse, tags=["QA-Async"])
+async def submit_async_question(request: QuestionRequest, background_tasks: BackgroundTasks):
+    """
+    异步问答接口 - 提交任务
+
+    适用于云端部署环境，避免长连接超时问题。
+
+    使用流程：
+    1. POST /api/v1/ask/async 提交问题，获取 job_id
+    2. GET /api/v1/jobs/{job_id} 轮询任务状态
+    3. 状态为 completed 时，从响应中获取结果
+
+    **推荐轮询间隔**: 3-5秒
+    """
+    if workflow is None:
+        raise HTTPException(status_code=503, detail="服务正在初始化，请稍后重试")
+
+    # 生成任务ID
+    job_id = str(uuid.uuid4())[:8]
+
+    # 记录任务
+    async_jobs[job_id] = {
+        "job_id": job_id,
+        "status": "pending",
+        "question": request.question,
+        "deep_thinking": request.deep_thinking,
+        "created_at": datetime.now().isoformat(),
+        "completed_at": None,
+        "result": None,
+        "error": None,
+        "progress": "任务已提交，等待处理..."
+    }
+
+    # 提交后台任务
+    background_tasks.add_task(
+        process_async_job,
+        job_id,
+        request.question,
+        request.deep_thinking
+    )
+
+    logger.info(f"[AsyncJob] 提交任务 {job_id}: {request.question[:50]}...")
+
+    return AsyncJobSubmitResponse(
+        job_id=job_id,
+        status="pending",
+        message="任务已提交，请使用 GET /api/v1/jobs/{job_id} 查询状态"
+    )
+
+@app.get("/api/v1/jobs/{job_id}", response_model=AsyncJobStatusResponse, tags=["QA-Async"])
+async def get_job_status(job_id: str):
+    """
+    查询异步任务状态
+
+    返回状态说明：
+    - pending: 等待处理
+    - processing: 正在处理
+    - completed: 处理完成（result 字段包含结果）
+    - failed: 处理失败（error 字段包含错误信息）
+    """
+    if job_id not in async_jobs:
+        raise HTTPException(status_code=404, detail=f"任务 {job_id} 不存在")
+
+    job = async_jobs[job_id]
+
+    return AsyncJobStatusResponse(
+        job_id=job_id,
+        status=job["status"],
+        progress=job.get("progress"),
+        result=job.get("result"),
+        error=job.get("error"),
+        created_at=job["created_at"],
+        completed_at=job.get("completed_at")
+    )
 
 # ========== 示例问题端点 ==========
 

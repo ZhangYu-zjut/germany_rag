@@ -127,41 +127,95 @@ def check_api_health() -> Dict[str, Any]:
         return {"healthy": False, "error": str(e)}
 
 
-def call_api(question: str, deep_thinking: bool = False) -> Dict[str, Any]:
+def call_api(question: str, deep_thinking: bool = False, progress_callback=None) -> Dict[str, Any]:
     """
-    调用API进行问答
+    调用API进行问答（使用异步轮询模式，避免长连接超时）
 
     Args:
         question: 用户问题
         deep_thinking: 是否启用深度分析模式
+        progress_callback: 进度回调函数
 
     Returns:
         API响应结果
     """
     try:
-        endpoint = f"{API_URL}/api/v1/ask"
+        # 步骤1: 提交异步任务
+        submit_endpoint = f"{API_URL}/api/v1/ask/async"
         payload = {
             "question": question,
             "deep_thinking": deep_thinking
         }
 
-        response = requests.post(
-            endpoint,
+        if progress_callback:
+            progress_callback("Submitting question...")
+
+        submit_response = requests.post(
+            submit_endpoint,
             json=payload,
-            timeout=API_TIMEOUT
+            timeout=30  # 提交请求应该很快
         )
 
-        if response.status_code == 200:
-            return {"success": True, "data": response.json()}
-        else:
+        if submit_response.status_code != 200:
             return {
                 "success": False,
-                "error": f"API返回错误: HTTP {response.status_code}",
-                "detail": response.text
+                "error": f"Failed to submit task: HTTP {submit_response.status_code}",
+                "detail": submit_response.text
             }
 
+        job_data = submit_response.json()
+        job_id = job_data.get("job_id")
+
+        if not job_id:
+            return {"success": False, "error": "No job ID returned from server"}
+
+        if progress_callback:
+            progress_callback(f"Task submitted (ID: {job_id}), waiting for result...")
+
+        # 步骤2: 轮询任务状态
+        status_endpoint = f"{API_URL}/api/v1/jobs/{job_id}"
+        poll_interval = 3  # 每3秒轮询一次
+        max_polls = API_TIMEOUT // poll_interval  # 最大轮询次数
+
+        for poll_count in range(max_polls):
+            time.sleep(poll_interval)
+
+            try:
+                status_response = requests.get(status_endpoint, timeout=10)
+
+                if status_response.status_code != 200:
+                    continue  # 重试
+
+                status_data = status_response.json()
+                job_status = status_data.get("status")
+
+                if progress_callback:
+                    progress_info = status_data.get("progress", "Processing...")
+                    elapsed = (poll_count + 1) * poll_interval
+                    progress_callback(f"[{elapsed}s] {progress_info}")
+
+                if job_status == "completed":
+                    result = status_data.get("result")
+                    if result:
+                        return {"success": True, "data": result}
+                    else:
+                        return {"success": False, "error": "Task completed but no result returned"}
+
+                elif job_status == "failed":
+                    error_msg = status_data.get("error", "Unknown error")
+                    return {"success": False, "error": f"Task failed: {error_msg}"}
+
+                # pending 或 processing 状态继续等待
+
+            except requests.exceptions.RequestException:
+                # 网络错误，继续重试
+                continue
+
+        # 超时
+        return {"success": False, "error": f"Task timeout after {API_TIMEOUT} seconds. Please try again."}
+
     except requests.exceptions.Timeout:
-        return {"success": False, "error": "Request timeout. The question may be too complex, please try again later."}
+        return {"success": False, "error": "Request timeout while submitting task."}
     except requests.exceptions.ConnectionError:
         return {"success": False, "error": "Cannot connect to API service. Please check if the service is running."}
     except Exception as e:
@@ -211,21 +265,28 @@ def process_question(question: str):
 
     # 根据模式显示不同的状态提示
     if deep_thinking_mode:
-        status_title = "🧠 Deep Analysis Mode - Calling API..."
+        status_title = "🧠 Deep Analysis Mode - Processing..."
         time_hint = "*(Deep analysis mode, estimated 3-5 minutes)*"
     else:
         status_title = "🤔 Processing your question..."
-        time_hint = "*(Estimated 2-3 minutes)*"
+        time_hint = "*(Estimated 1-3 minutes)*"
 
     # 显示处理状态
     with st.status(status_title, expanded=True) as status:
         start_time = time.time()
 
-        st.write(f"📡 Connecting to API service: `{API_URL}`")
+        st.write(f"📡 API service: `{API_URL}`")
         st.write(time_hint)
 
-        # 调用API
-        result = call_api(question, deep_thinking_mode)
+        # 创建进度显示区域
+        progress_placeholder = st.empty()
+
+        def update_progress(msg: str):
+            """更新进度显示"""
+            progress_placeholder.write(f"⏳ {msg}")
+
+        # 调用API（使用异步轮询模式）
+        result = call_api(question, deep_thinking_mode, progress_callback=update_progress)
         total_time = time.time() - start_time
 
         if not result["success"]:
