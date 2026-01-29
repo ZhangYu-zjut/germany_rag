@@ -2,9 +2,13 @@
 增强版增量式总结节点 V2
 核心改进：两阶段总结 - 结构化提取 → 基于结构生成
 目标：防止信息遗漏，保持原文关键短语
+
+【性能优化】支持并行提取，大幅缩短处理时间
 """
 
 import json
+import time
+import concurrent.futures
 from typing import List, Dict, Optional, Tuple
 from ...llm.client import GeminiLLMClient
 from ...utils.logger import logger
@@ -27,7 +31,10 @@ class IncrementalSummarizeNodeV2:
 
     def __init__(self, llm_client: GeminiLLMClient = None):
         """初始化增量式总结节点"""
+        # Pro模型用于最终答案生成（阶段2）
         self.llm = llm_client or GeminiLLMClient()
+        # Flash模型用于结构化提取（阶段1）- 更快速、更经济
+        self.llm_flash = GeminiLLMClient(model_name="gemini-2.5-flash")
 
     def __call__(self, state: GraphState) -> GraphState:
         """
@@ -111,8 +118,8 @@ class IncrementalSummarizeNodeV2:
         Returns:
             最终答案
         """
-        # 阶段1：结构化提取
-        logger.info("[IncrementalSummarizeV2] 阶段1: 结构化提取")
+        # 阶段1：结构化提取（使用Flash模型加速）
+        logger.info("[IncrementalSummarizeV2] 阶段1: 结构化提取（Flash模型）")
         extracted_info = self._extract_structured_info(
             question=question,
             processing_results=processing_results
@@ -120,8 +127,8 @@ class IncrementalSummarizeNodeV2:
 
         logger.info(f"[IncrementalSummarizeV2] 提取信息: {len(extracted_info)} 个子问题")
 
-        # 阶段2：基于结构化信息生成答案
-        logger.info("[IncrementalSummarizeV2] 阶段2: 基于结构生成答案")
+        # 阶段2：基于结构化信息生成答案（使用Pro模型）
+        logger.info("[IncrementalSummarizeV2] 阶段2: 基于结构生成答案（Pro模型）")
         final_answer = self._generate_from_structured(
             question=question,
             question_type=question_type,
@@ -131,13 +138,90 @@ class IncrementalSummarizeNodeV2:
 
         return final_answer
 
+    def _extract_single_subquestion(
+        self,
+        idx: int,
+        total: int,
+        sub_question: str,
+        chunks: List[Dict],
+        max_retries: int = 3
+    ) -> Dict:
+        """
+        提取单个子问题的结构化信息（支持429重试）
+
+        Args:
+            idx: 子问题索引
+            total: 总子问题数
+            sub_question: 子问题文本
+            chunks: 文档块列表
+            max_retries: 遇到429错误时的最大重试次数
+
+        Returns:
+            提取结果字典
+        """
+        # 构造提取prompt
+        extraction_prompt = self._build_extraction_prompt(
+            sub_question=sub_question,
+            chunks=chunks
+        )
+
+        # 带重试的调用
+        last_error = None
+        for attempt in range(max_retries):
+            try:
+                extracted_text = self.llm_flash.invoke(extraction_prompt)
+
+                # 尝试解析JSON
+                try:
+                    extracted_json = json.loads(extracted_text)
+                    logger.info(f"[并行提取] 子问题 {idx+1}/{total} 成功（JSON）")
+                except json.JSONDecodeError:
+                    extracted_json = {"raw_extraction": extracted_text}
+                    logger.info(f"[并行提取] 子问题 {idx+1}/{total} 成功（文本）")
+
+                return {
+                    "idx": idx,
+                    "sub_question": sub_question,
+                    "extracted_info": extracted_json,
+                    "num_chunks": len(chunks),
+                    "success": True
+                }
+
+            except Exception as e:
+                last_error = e
+                error_str = str(e).lower()
+
+                # 检查是否是429速率限制错误
+                if "429" in error_str or "rate" in error_str or "quota" in error_str:
+                    wait_time = (2 ** attempt) * 2  # 指数退避: 2, 4, 8秒
+                    logger.warning(f"[并行提取] 子问题 {idx+1} 遇到速率限制，等待 {wait_time}s 后重试 ({attempt+1}/{max_retries})")
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    # 非速率限制错误，直接失败
+                    break
+
+        # 所有重试都失败
+        logger.error(f"[并行提取] 子问题 {idx+1}/{total} 提取失败: {last_error}")
+        return {
+            "idx": idx,
+            "sub_question": sub_question,
+            "extracted_info": {"error": str(last_error)},
+            "num_chunks": len(chunks),
+            "success": False
+        }
+
     def _extract_structured_info(
         self,
         question: str,
         processing_results: List[Dict]
     ) -> List[Dict]:
         """
-        阶段1：从每个子问题的文档中提取结构化信息
+        阶段1：并行提取所有子问题的结构化信息
+
+        【性能优化】使用ThreadPoolExecutor并行处理，大幅缩短处理时间
+        - 5个子问题并行处理，从串行5分钟降到1分钟
+        - 支持429错误自动重试（指数退避）
 
         Args:
             question: 原始问题
@@ -146,51 +230,62 @@ class IncrementalSummarizeNodeV2:
         Returns:
             提取的结构化信息列表
         """
-        extracted_list = []
-
+        # 准备并行任务
+        tasks = []
         for idx, result in enumerate(processing_results):
             sub_question = result.get("question", question)
             chunks = result.get("chunks", [])
 
             if not chunks:
-                logger.warning(f"[IncrementalSummarizeV2] 子问题 {idx+1} 无文档")
+                logger.warning(f"[并行提取] 子问题 {idx+1} 无文档，跳过")
                 continue
 
-            logger.info(f"[IncrementalSummarizeV2] 提取子问题 {idx+1}/{len(processing_results)}: {len(chunks)} 个文档")
+            tasks.append((idx, sub_question, chunks))
 
-            # 构造提取prompt
-            extraction_prompt = self._build_extraction_prompt(
-                sub_question=sub_question,
-                chunks=chunks
-            )
+        if not tasks:
+            logger.warning("[并行提取] 无有效子问题")
+            return []
 
-            # 调用LLM提取
-            try:
-                extracted_text = self.llm.invoke(extraction_prompt)
+        total = len(tasks)
+        logger.info(f"[并行提取] 开始并行处理 {total} 个子问题")
 
-                # 尝试解析JSON（如果LLM返回JSON格式）
-                try:
-                    extracted_json = json.loads(extracted_text)
-                    logger.info(f"[IncrementalSummarizeV2] 子问题 {idx+1} 提取成功（JSON格式）")
-                except json.JSONDecodeError:
-                    # 如果不是JSON，保留原文
-                    extracted_json = {"raw_extraction": extracted_text}
-                    logger.info(f"[IncrementalSummarizeV2] 子问题 {idx+1} 提取成功（文本格式）")
+        # 并行执行（最大并发数=子问题数，因为Google API支持高并发）
+        max_workers = min(total, 10)  # 最多10个并发，避免过度占用资源
+        extracted_results = []
 
-                extracted_list.append({
-                    "sub_question": sub_question,
-                    "extracted_info": extracted_json,
-                    "num_chunks": len(chunks)
-                })
+        start_time = time.time()
 
-            except Exception as e:
-                logger.error(f"[IncrementalSummarizeV2] 子问题 {idx+1} 提取失败: {e}")
-                # 失败时仍然添加空结构，避免遗漏子问题
-                extracted_list.append({
-                    "sub_question": sub_question,
-                    "extracted_info": {"error": str(e)},
-                    "num_chunks": len(chunks)
-                })
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            # 提交所有任务
+            future_to_idx = {
+                executor.submit(
+                    self._extract_single_subquestion,
+                    idx, total, sub_question, chunks
+                ): idx
+                for idx, sub_question, chunks in tasks
+            }
+
+            # 收集结果
+            for future in concurrent.futures.as_completed(future_to_idx):
+                result = future.result()
+                extracted_results.append(result)
+
+        # 按原始顺序排序
+        extracted_results.sort(key=lambda x: x["idx"])
+
+        # 转换为标准格式
+        extracted_list = [
+            {
+                "sub_question": r["sub_question"],
+                "extracted_info": r["extracted_info"],
+                "num_chunks": r["num_chunks"]
+            }
+            for r in extracted_results
+        ]
+
+        elapsed = time.time() - start_time
+        success_count = sum(1 for r in extracted_results if r.get("success", False))
+        logger.info(f"[并行提取] 完成! 耗时: {elapsed:.1f}秒, 成功: {success_count}/{total}")
 
         return extracted_list
 

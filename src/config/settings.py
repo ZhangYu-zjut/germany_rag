@@ -17,7 +17,23 @@ class Settings(BaseSettings):
     """
     
     # ========== LLM配置 ==========
-    # 第三方代理API（用于聊天）
+    # LLM提供商选择: google(直连) 或 evolink(代理)
+    llm_provider: Literal["google", "evolink"] = Field(
+        default="google",
+        description="LLM提供商: google(直连,更快) / evolink(代理)"
+    )
+
+    # Google Gemini API 直连配置
+    google_api_key: str = Field(
+        default="",
+        description="Google Gemini API Key"
+    )
+    google_api_base_url: str = Field(
+        default="https://generativelanguage.googleapis.com/v1beta/openai/",
+        description="Google Gemini OpenAI兼容端点"
+    )
+
+    # 第三方代理API（Evolink，备选）
     openai_api_key: str = Field(
         default="",
         description="第三方API密钥（如果只测试embedding，可以为空）"
@@ -227,6 +243,22 @@ class Settings(BaseSettings):
                 raise ValueError("云端模式下必须设置 MILVUS_CLOUD_TOKEN")
             return self.milvus_cloud_token
         return None
+
+    @property
+    def llm_api_key(self) -> str:
+        """根据LLM提供商返回API Key"""
+        if self.llm_provider == "google":
+            return self.google_api_key
+        else:
+            return self.openai_api_key
+
+    @property
+    def llm_base_url(self) -> str:
+        """根据LLM提供商返回Base URL"""
+        if self.llm_provider == "google":
+            return self.google_api_base_url
+        else:
+            return self.third_party_base_url
 
 
 # 全局配置实例

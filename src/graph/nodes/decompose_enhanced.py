@@ -86,6 +86,7 @@ class EnhancedDecomposeNode:
             
             # Step 2: 尝试模板化拆解
             sub_questions = self._template_decompose(question_type, parameters)
+            logger.info(f"[EnhancedDecomposeNode] 模板拆解后子问题数: {len(sub_questions)}")
 
             # Step 3: 如果模板拆解失败，使用LLM拆解
             if not sub_questions or len(sub_questions) == 0:
@@ -95,8 +96,8 @@ class EnhancedDecomposeNode:
             # Step 3.5: 统一格式化子问题（支持字符串和字典两种格式）
             sub_questions = self._normalize_sub_questions(sub_questions, parameters)
 
-            # Step 4: 验证子问题质量
-            sub_questions = self._validate_sub_questions(sub_questions, question)
+            # Step 4: 验证子问题质量（传入state用于智能限制计算）
+            sub_questions = self._validate_sub_questions(sub_questions, question, state)
 
             logger.info(f"[EnhancedDecomposeNode] 拆解完成，生成 {len(sub_questions)} 个子问题")
             for i, sq in enumerate(sub_questions, 1):
@@ -104,8 +105,11 @@ class EnhancedDecomposeNode:
                 logger.info(f"  子问题{i}: {question_text}")
 
             # 【Day 4增强】Step 5: 知识图谱扩展
+            # 【优化】变化类/对比类问题模板已完整覆盖所有时间点，禁用KG扩展避免冗余
             kg_expansion_info = None
-            if self.enable_kg_expansion and self.kg_manager:
+            skip_kg_types = ["变化类", "对比类"]  # 这些类型模板已生成完整的年份×党派子问题
+
+            if self.enable_kg_expansion and self.kg_manager and question_type not in skip_kg_types:
                 intent = state.get("intent", "complex")
                 kg_queries, kg_expansion_info = self._apply_knowledge_graph_expansion(
                     question, intent, question_type, parameters
@@ -114,6 +118,8 @@ class EnhancedDecomposeNode:
                     # 将知识图谱扩展查询作为额外的子问题添加
                     sub_questions = self._merge_kg_queries(sub_questions, kg_queries)
                     logger.info(f"[EnhancedDecomposeNode] 知识图谱扩展后，总子问题数: {len(sub_questions)}")
+            elif question_type in skip_kg_types:
+                logger.info(f"[EnhancedDecomposeNode] {question_type}问题跳过KG扩展（模板已完整覆盖）")
 
             # 更新状态
             return update_state(
@@ -396,10 +402,75 @@ class EnhancedDecomposeNode:
 
         return normalized
 
+    def _calculate_max_sub_questions(
+        self,
+        question_type: str,
+        parameters: Dict
+    ) -> int:
+        """
+        根据问题类型和参数动态计算子问题上限
+
+        策略：
+        - 变化类：年份数 × 党派数 + 1（总结问题），最多30
+        - 对比类：年份数 × 党派数 + 1（对比问题），最多20
+        - 总结类/事实查询：固定5个
+        - 其他：默认10个
+
+        Args:
+            question_type: 问题类型
+            parameters: 问题参数
+
+        Returns:
+            子问题数量上限
+        """
+        time_range = parameters.get("time_range", {})
+        parties = parameters.get("parties", [])
+        specific_years = time_range.get("specific_years", [])
+
+        # 计算年份数量
+        year_count = len(specific_years) if specific_years else 1
+        if not year_count:
+            start = time_range.get("start_year")
+            end = time_range.get("end_year")
+            if start and end:
+                try:
+                    year_count = int(end) - int(start) + 1
+                except:
+                    year_count = 1
+
+        # 计算党派数量
+        party_count = len(parties) if parties else 1
+
+        # 根据问题类型动态计算
+        if question_type == "变化类":
+            # 变化类：每年每党派1个 + 1个总结问题
+            max_q = year_count * party_count + 1
+            max_q = min(max_q, 30)  # 上限30
+            logger.info(f"[_calculate_max] 变化类: {year_count}年 × {party_count}党派 + 1 = {max_q}")
+            return max_q
+
+        elif question_type == "对比类":
+            # 对比类：每年每党派1个 + 对比问题
+            max_q = year_count * party_count + year_count  # 每年一个对比问题
+            max_q = min(max_q, 20)  # 上限20
+            logger.info(f"[_calculate_max] 对比类: {year_count}年 × {party_count}党派 = {max_q}")
+            return max_q
+
+        elif question_type in ["总结类", "事实查询", ""]:
+            # 简单问题：固定5个
+            logger.info(f"[_calculate_max] {question_type or '默认'}: 固定5个")
+            return 5
+
+        else:
+            # 趋势分析等其他类型：默认10个
+            logger.info(f"[_calculate_max] {question_type}: 默认10个")
+            return 10
+
     def _validate_sub_questions(
         self,
         sub_questions: List,
-        original_question: str
+        original_question: str,
+        state: Dict = None
     ) -> List:
         """
         验证子问题质量（支持Dict格式）
@@ -433,8 +504,17 @@ class EnhancedDecomposeNode:
                 unique_questions.append(sq)
                 seen.add(q_normalized)
 
-        # 限制子问题数量（避免检索负担过重）
-        max_sub_questions = 40  # 【Day 3优化】从15增加到40，确保覆盖2015-2024全部年份
+        # 【智能限制】根据问题类型动态调整子问题上限
+        # - 变化类/对比类：按年份×党派生成，需要更多子问题
+        # - 总结类/事实查询：保持较少子问题
+        if state:
+            max_sub_questions = self._calculate_max_sub_questions(
+                state.get("question_type", ""),
+                state.get("parameters", {})
+            )
+        else:
+            max_sub_questions = 10  # 默认值
+
         if len(unique_questions) > max_sub_questions:
             logger.warning(f"[EnhancedDecomposeNode] 子问题过多({len(unique_questions)})，截取前{max_sub_questions}个")
             unique_questions = unique_questions[:max_sub_questions]
@@ -537,12 +617,18 @@ class EnhancedDecomposeNode:
         # 合并：原子问题 + 知识图谱扩展查询
         merged = sub_questions + new_kg_questions
 
-        # 限制总数（避免查询爆炸）
-        max_total = 50  # 最多50个子问题
+        # 【优化】KG扩展只用于总结类/事实查询，限制合理数量（15个）
+        # 变化类/对比类已在调用处跳过，不会进入此方法
+        max_total = 15  # 原子问题 + KG扩展的合理上限
         if len(merged) > max_total:
             logger.warning(f"[EnhancedDecomposeNode] 合并后子问题过多({len(merged)})，截取前{max_total}个")
-            # 优先保留原子问题，然后是知识图谱扩展
-            merged = sub_questions[:40] + new_kg_questions[:10]
+            # 优先保留原子问题，KG扩展作为补充
+            if len(sub_questions) >= max_total:
+                merged = sub_questions[:max_total]
+            else:
+                # 保留所有原子问题，截取部分KG扩展
+                remaining = max_total - len(sub_questions)
+                merged = sub_questions + new_kg_questions[:remaining]
 
         logger.info(f"[EnhancedDecomposeNode] 知识图谱合并: 原{len(sub_questions)}个 + KG扩展{len(new_kg_questions)}个 = {len(merged)}个")
 

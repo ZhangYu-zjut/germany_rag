@@ -1,7 +1,7 @@
 """
 LLM客户端模块
-封装Gemini 2.5 Pro的调用
-支持速率限制保护，防止API被限流返回404
+封装Gemini 2.5 Pro/Flash的调用
+支持Google直连和Evolink代理两种模式
 """
 
 import time
@@ -12,23 +12,28 @@ from typing import List, Dict, Any, Optional
 from src.config import settings
 from src.utils import logger
 
-# 全局速率限制器（所有客户端实例共享）
+# 全局速率限制器（仅Evolink代理需要）
 class RateLimiter:
     """API请求速率限制器，防止触发Evolink速率限制"""
 
-    def __init__(self, min_interval: float = 1.5):
+    def __init__(self, min_interval: float = 0.0, enabled: bool = True):
         """
         初始化速率限制器
 
         Args:
             min_interval: 请求之间的最小间隔（秒）
+            enabled: 是否启用速率限制
         """
         self.min_interval = min_interval
+        self.enabled = enabled
         self.last_request_time = 0.0
         self._lock = threading.Lock()
 
     def wait_if_needed(self):
         """在发送请求前调用，必要时等待以遵守速率限制"""
+        if not self.enabled or self.min_interval <= 0:
+            return  # Google直连不需要速率限制
+
         with self._lock:
             current_time = time.time()
             elapsed = current_time - self.last_request_time
@@ -40,8 +45,13 @@ class RateLimiter:
 
             self.last_request_time = time.time()
 
-# 全局单例
-_rate_limiter = RateLimiter(min_interval=1.5)  # 每1.5秒最多1个请求
+# 全局单例 - 根据提供商配置速率限制
+# Google直连: 无需限制（支持高并发）
+# Evolink代理: 0.5秒间隔
+_rate_limiter = RateLimiter(
+    min_interval=0.0 if settings.llm_provider == "google" else 0.5,
+    enabled=settings.llm_provider != "google"
+)
 
 
 class GeminiLLMClient:
@@ -63,7 +73,7 @@ class GeminiLLMClient:
     ):
         """
         初始化LLM客户端
-        
+
         Args:
             model_name: 模型名称,默认从配置读取
             temperature: 温度参数,控制随机性
@@ -71,31 +81,43 @@ class GeminiLLMClient:
         """
         self.model_name = model_name or settings.third_party_model_name
         self.temperature = temperature
+        self.provider = settings.llm_provider
         # 如果未指定max_tokens，使用配置中的默认值（防止输出截断）
         self.max_tokens = max_tokens or settings.llm_max_tokens
-        
+
+        # 获取API配置
+        api_key = settings.llm_api_key
+        base_url = settings.llm_base_url
+
         # 检查 API key 是否配置
-        if not settings.openai_api_key:
+        if not api_key:
+            key_name = "GOOGLE_API_KEY" if self.provider == "google" else "OPENAI_API_KEY"
             raise ValueError(
-                "OPENAI_API_KEY 未配置。请设置环境变量 OPENAI_API_KEY 或在 .env 文件中配置。\n"
+                f"{key_name} 未配置。请设置环境变量或在 .env 文件中配置。\n"
                 "注意：如果只测试 embedding，可以跳过 LLM 相关测试。"
             )
-        
+
+        # 构建请求头
+        headers = {"Accept-Encoding": "identity"}  # 禁用压缩避免zstandard问题
+        if self.provider == "google":
+            # Google API 使用 x-goog-api-key 头
+            headers["x-goog-api-key"] = api_key
+
         # 初始化ChatOpenAI(兼容Gemini API)
         self.llm = ChatOpenAI(
             model=self.model_name,
-            api_key=settings.openai_api_key,
-            base_url=settings.third_party_base_url,
+            api_key=api_key,
+            base_url=base_url,
             temperature=self.temperature,
             max_tokens=self.max_tokens,
-            default_headers={"Accept-Encoding": "identity"},  # 禁用压缩避免zstandard问题
+            default_headers=headers,
             timeout=120,  # 2分钟超时，防止无限等待
             max_retries=2  # 失败时重试2次
         )
-        
+
         logger.info(
-            f"初始化LLM客户端: model={self.model_name}, "
-            f"temperature={self.temperature}"
+            f"初始化LLM客户端: provider={self.provider}, model={self.model_name}, "
+            f"base_url={base_url[:50]}..."
         )
     
     def invoke(

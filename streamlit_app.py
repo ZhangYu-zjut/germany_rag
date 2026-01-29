@@ -25,7 +25,7 @@ load_dotenv(project_root / ".env", override=True)
 # ========== API 配置 ==========
 # 优先使用环境变量，否则使用本地默认地址
 API_URL = os.getenv("API_URL", "http://localhost:8000")
-API_TIMEOUT = int(os.getenv("API_TIMEOUT", "300"))  # 默认5分钟超时
+API_TIMEOUT = int(os.getenv("API_TIMEOUT", "1200"))  # 默认20分钟超时（复杂问题需要更长时间）
 
 # 时区配置：UTC+8（北京时间）
 UTC_PLUS_8 = timezone(timedelta(hours=8))
